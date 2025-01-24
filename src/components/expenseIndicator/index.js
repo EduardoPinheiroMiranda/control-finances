@@ -39,7 +39,7 @@ export function ExpenseIndicator ({data}){
     const size = data.size;                         // Tamanho do gráfico
     const strokeWidth = data.strokeWidth;           // Espessura do arco
     const gradientColors = ["#3CEE71", "#FF4D4D"];  // Cores do gradiente
-    const backgroundColor = colors.color_8;         // Cor do fundo do arco
+    const backgroundColor = colors.color_9;         // Cor do fundo do arco
 
 
     const radius = (size - strokeWidth) / 2;

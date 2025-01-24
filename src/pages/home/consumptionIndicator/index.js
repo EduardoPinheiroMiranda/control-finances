@@ -6,6 +6,8 @@ import { styles } from "./styles";
 
 
 import { ExpenseIndicator } from "../../../components/expenseIndicator";
+import { ConsumptionLegend } from "../../../components/consumptionLegend";
+import { DisplayMoreDetails } from "../../../components/displayMoreDetails";
 
 
 export function ConsumptionIndicator(){
@@ -19,13 +21,13 @@ export function ConsumptionIndicator(){
                 Vencimento - {expiration}
             </Text>
 
-            <View>
-                <ExpenseIndicator data={{value: 80, size: 150, strokeWidth: 10}}/>
-                <View>
-                    
+            <View style={styles.sectionConsumer}>
+                <ExpenseIndicator data={{value: 80, size: 140, strokeWidth: 10}}/>
+                <View style={styles.legends}>
+                    <ConsumptionLegend/>
+                    <DisplayMoreDetails data={{title: "Ver mais detalhes"}}/>
                 </View>
             </View>
-            
         </View>
     );
 }

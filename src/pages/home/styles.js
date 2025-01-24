@@ -19,8 +19,7 @@ export const styles = StyleSheet.create({
 
     // section main
     scrollView: {
-        borderColor: "red",
-        borderWidth: 1,
+        
     },
 
 

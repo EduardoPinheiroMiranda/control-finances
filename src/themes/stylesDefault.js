@@ -7,6 +7,6 @@ export const stylesDefault = StyleSheet.create({
         backgroundColor: colors.color_7,
         padding: 20,
         borderRadius: 10,
-        elevation: 2,
+        elevation: 1,
     }
 });
