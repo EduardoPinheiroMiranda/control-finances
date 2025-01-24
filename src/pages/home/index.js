@@ -7,6 +7,7 @@ import { styles } from "./styles";
 import { Header } from "./header";
 import { MainShortcuts } from "./mainShortcuts";
 import { ConsumptionIndicator } from "./consumptionIndicator";
+import { RecentActivity } from "./recentActivity";
 
 
 
@@ -34,7 +35,7 @@ export function Home(){
                 >
                     <MainShortcuts/>
                     <ConsumptionIndicator/>
-
+                    <RecentActivity/>
                 </ScrollView>
             </View>
         </SafeAreaView>

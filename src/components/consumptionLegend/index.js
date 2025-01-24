@@ -31,17 +31,17 @@ export function ConsumptionLegend(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        gap: 10
+        gap: 8
     },
     legend: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        gap: 10
+        gap: 5
     },
     text: {
         color: colors.color_6,
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 400
     }
 });

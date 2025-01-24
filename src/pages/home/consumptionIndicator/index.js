@@ -22,7 +22,7 @@ export function ConsumptionIndicator(){
             </Text>
 
             <View style={styles.sectionConsumer}>
-                <ExpenseIndicator data={{value: 80, size: 140, strokeWidth: 10}}/>
+                <ExpenseIndicator data={{value: 80, size: 150, strokeWidth: 10}}/>
                 <View style={styles.legends}>
                     <ConsumptionLegend/>
                     <DisplayMoreDetails data={{title: "Ver mais detalhes"}}/>
