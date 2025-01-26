@@ -33,7 +33,7 @@ function rgbToHex(r, g, b){
 }
   
 
-export function ExpenseIndicator ({data}){
+export function ExpenseIndicator({data}){
 
     const value = data.value;                       // Valor entre 0 e 100
     const size = data.size;                         // Tamanho do gráfico

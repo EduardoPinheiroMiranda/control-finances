@@ -34,7 +34,7 @@ export function Home(){
             >
                 <MainShortcuts/>
                 <ConsumptionIndicator/>
-                <RecentActivity/>
+                <RecentActivity data={[1,2,3,4,5]}/>
             </ScrollView> 
         </SafeAreaView>
     )
