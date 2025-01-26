@@ -23,7 +23,6 @@ export function MainShortcuts(){
     }
 
     return(
-       
         <View style={[stylesDefault.box, styles.container]}>
 
             <View style={styles.sectionBalance}>
@@ -76,7 +75,6 @@ export function MainShortcuts(){
                     <Text style={{fontSize: 14, color: colors.color_6}}>sacar</Text>
                 </View>
             </View>
-
         </View>
     )
 }

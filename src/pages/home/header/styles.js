@@ -9,7 +9,7 @@ const statusBarHeight = Constants.statusBarHeight;
 export const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.color_3,
-        height: 100,
+        height: 100, 
 
         paddingTop: statusBarHeight,
         paddingLeft: 20,
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
         paddingBottom: 10,
 
         justifyContent: "flex-end",
-        elevation: 20,
+        elevation: 5
     },
     header: {
         flexDirection: "row",
@@ -35,5 +35,4 @@ export const styles = StyleSheet.create({
         color: colors.color_7,
         fontSize: 16,
     }
-
 });

@@ -11,15 +11,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.color_8,
     },
-    scrollSection: {
-        flex: 1,
-        paddingRight: 20,
-        paddingLeft: 20,
-    },
-
-    // section main
     scrollView: {
-        
     },
 
 

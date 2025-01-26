@@ -3,12 +3,9 @@ import Constants from "expo-constants";
 import { colors } from "../../../themes";
 
 
-const statusBarHeight = Constants.statusBarHeight;
-
-
 export const styles = StyleSheet.create({
     container: {
-        marginTop: 30,
+        marginTop: 30
     },
     sectionBalance: {
         paddingBottom: 20,
@@ -44,6 +41,4 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     }
-
-
 });

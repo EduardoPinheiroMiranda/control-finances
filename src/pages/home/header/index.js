@@ -3,6 +3,7 @@ import { View, Text} from "react-native";
 import { styles } from "./styles";
 
 
+
 // icons
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import UserCircle from "../../../assets/svg/user-circle.svg"
@@ -24,6 +25,6 @@ export function Header(){
                     <MaterialIcons name="notifications-none" size={30} color={colors.color_7} />
                 </View>
             </View>
-        </View>
+        </View>        
     )
 }

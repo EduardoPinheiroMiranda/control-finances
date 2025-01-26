@@ -8,6 +8,7 @@ import { Header } from "./header";
 import { MainShortcuts } from "./mainShortcuts";
 import { ConsumptionIndicator } from "./consumptionIndicator";
 import { RecentActivity } from "./recentActivity";
+import { stylesDefault } from "../../themes/stylesDefault";
 
 
 
@@ -27,17 +28,14 @@ export function Home(){
         <SafeAreaView style={styles.container}>
             <StatusBar style="light" />
             <Header/>
-
-            <View style={styles.scrollSection}>
-                <ScrollView 
-                    style={styles.scrollView}
-                    showsVerticalScrollIndicator={false}
-                >
-                    <MainShortcuts/>
-                    <ConsumptionIndicator/>
-                    <RecentActivity/>
-                </ScrollView>
-            </View>
+            <ScrollView 
+                style={styles.scrollView}
+                showsVerticalScrollIndicator={false}
+            >
+                <MainShortcuts/>
+                <ConsumptionIndicator/>
+                <RecentActivity/>
+            </ScrollView> 
         </SafeAreaView>
     )
 }
