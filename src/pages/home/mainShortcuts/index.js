@@ -13,14 +13,8 @@ import Deposit from "../../../assets/svg/deposit.svg";
 import MoneySend from "../../../assets/svg/money-send.svg";
 
 
-export function MainShortcuts(){
+export function MainShortcuts(props){
 
-    const [balance, setBalance] = useState(1000);
-    const [showValue, setShowValue] = useState(true);
-    
-    function showBalance(){
-        setShowValue(!showValue)
-    }
 
     return(
         <View style={[stylesDefault.box, styles.container]}>
@@ -28,10 +22,10 @@ export function MainShortcuts(){
             <View style={styles.sectionBalance}>
                 <Text style={{fontSize: 16}}>Saldo total</Text>
                 {
-                    showValue ? 
+                    props.data.showValue ? 
                         <View style={styles.sectionValue}>
-                            <Text style={{fontSize: 24}}>R$ {balance.toFixed(2)}</Text>
-                            <Pressable onPress={showBalance}>
+                            <Text style={{fontSize: 24}}>R$ {props.data.balance.toFixed(2)}</Text>
+                            <Pressable onPress={props.show}>
                                 <EyeOpen/>
                             </Pressable>
                             
@@ -39,7 +33,7 @@ export function MainShortcuts(){
                     :
                         <View style={styles.sectionValue}>
                             <Text style={{fontSize: 24}}>R$ ****</Text>
-                            <Pressable onPress={showBalance}>
+                            <Pressable onPress={props.show}>
                                 <EyeClosed/>
                             </Pressable>
                         </View>

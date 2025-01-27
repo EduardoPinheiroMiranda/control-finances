@@ -15,7 +15,7 @@ import { stylesDefault } from "../../themes/stylesDefault";
 
 export function Home(){
 
-    const [balance, setBalance] = useState(1000);
+    const [balance, setBalance] = useState(1100);
     const [showValue, setShowValue] = useState(true);
 
     const moviments = [
@@ -107,7 +107,7 @@ export function Home(){
                 style={styles.scrollView}
                 showsVerticalScrollIndicator={false}
             >
-                <MainShortcuts/>
+                <MainShortcuts data={{balance: balance, showValue: showValue}} show={showBalance}/>
                 <ConsumptionIndicator/>
                 <RecentActivity data={moviments}/>
             </ScrollView> 
