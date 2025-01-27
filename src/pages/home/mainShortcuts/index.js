@@ -8,7 +8,7 @@ import { colors } from "../../../themes";
 import EyeOpen from "../../../assets/svg/eye-open.svg";
 import EyeClosed from "../../../assets/svg/eye-closed.svg";
 import Bag from "../../../assets/svg/bag.svg";
-import Invoid from "../../../assets/svg/invoid.svg";
+import InvoiceHome from "../../../assets/svg/invoiceHome.svg";
 import Deposit from "../../../assets/svg/deposit.svg";
 import MoneySend from "../../../assets/svg/money-send.svg";
 
@@ -58,7 +58,7 @@ export function MainShortcuts(){
                 </View>
                 <View style={styles.sectionButtonIcon}>
                     <View style={styles.buttonIcon}>
-                        <Invoid/>
+                        <InvoiceHome/>
                     </View>
                     <Text style={{fontSize: 14, color: colors.color_6}}>Extrato</Text>
                 </View>
