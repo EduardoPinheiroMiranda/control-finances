@@ -4,10 +4,14 @@ import { stylesDefault } from "../../../themes/stylesDefault";
 import { styles } from "./styles";
 import { ListMovements } from "../../../components/listMovements";
 import { DisplayMoreDetails } from "../../../components/displayMoreDetails";
+import { useNavigation } from "@react-navigation/native";
+
+
 
 
 export function RecentActivity({data}){
 
+    const navigation = useNavigation();
 
 
     return(
@@ -21,7 +25,11 @@ export function RecentActivity({data}){
                     })
                 }
             </View>
-            <DisplayMoreDetails data={{title: "Ver mais detalhes"}}/>
+            
+            <DisplayMoreDetails 
+                data={{title: "Ver mais detalhes"}} 
+                nextPage={ () => navigation.navigate("Movimentações")}
+            />
         </View>
     );
 }

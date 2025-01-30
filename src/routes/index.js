@@ -1,39 +1,72 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home } from "../pages/home";
+import { useNavigationState, getFocusedRouteNameFromRoute, useRoute, useNavigation } from "@react-navigation/native";
+import { colors } from "../themes";
+import { HomeStackRoutes } from "./homeStackRoutes";
+import { Finances } from "../pages/finances";
+import { Wallet } from "../pages/wallet";
+import { MoreOptions } from "../pages/MoreOptions";
 
 
 // icons 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Feather from '@expo/vector-icons/Feather';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { colors } from "../themes";
 
-
-const Tabs = createBottomTabNavigator();
 
 
 export function TabNavigator(){
 
+    const Tabs = createBottomTabNavigator();
+    const currentScreen = useNavigationState(
+        (state) => state?.routes[state.index]?.name
+    ) ?? "Inicio";
+
+    
+    
+
+
+
+    function hiderTabBar(route){
+
+        const screen = getFocusedRouteNameFromRoute(route) ?? "Inicio";
+
+
+        let hiderTabBar = "flex";
+
+
+        if(
+            screen === "Inicio" || screen === "Finanças" ||
+            screen === "Carteira" || screen === "Mais"
+        ){
+            hiderTabBar = "flex";
+        }else{
+            hiderTabBar = "none";
+        }
+
+
+        return hiderTabBar;
+    }
+
     return(
         <Tabs.Navigator
-            screenOptions={{
+            screenOptions={({route}) => ({
+                
                 headerShown: false,
 
                 tabBarActiveTintColor: colors.color_3,
                 tabBarInactiveTintColor: colors.color_6,
-
-               
+                
                 tabBarStyle: {
-                    height: 70,
-                    
-                    paddingTop: 10,
-                    paddingBottom: 10,
-                    paddingLeft: 20,
-                    paddingRight: 20,
                     borderTopWidth: 0,
-
-                    left: 20
+                    height: 70,
+                    display: hiderTabBar(route)
                 },
+
+                tabBarItemStyle: {
+                    paddingTop: 10,
+                    backgroundColor: colors.color_7
+                },
+
                 tabBarLabelStyle: {
                     fontSize: 14,
                     fontFamily: 'Roboto',
@@ -41,43 +74,42 @@ export function TabNavigator(){
                     height: 20,
                     width: 60,                    
                 },
-                tabBarItemStyle: {
-                    height: 55
-                },
+
                 tabBarIconStyle: {
                     height: 30,
                     width: 30,
-
                     marginTop: -5,
                     marginBottom: 3,
                 }
-
-            }}
+                
+            })}
         >
             <Tabs.Screen 
-                name="inicio" 
-                component={Home} 
-                options={{tabBarIcon: ({color, size}) => {
-                    return(<Feather name="home" size={size} color={color} />);
-                }}}
+                name="Inicio" 
+                component={HomeStackRoutes} 
+                options={{
+                    tabBarIcon: ({color, size}) => {
+                        return(<Feather name="home" size={size} color={color} />);
+                    }
+                }}
             />
             <Tabs.Screen 
                 name="Finanças" 
-                component={Home} 
+                component={Finances} 
                 options={{tabBarIcon: ({color, size}) => {
                     return(<MaterialCommunityIcons name="finance" size={size} color={color} />);
                 }}}
             />
             <Tabs.Screen 
                 name="Carteira" 
-                component={Home} 
+                component={Wallet} 
                 options={{tabBarIcon: ({color, size}) => {
                     return(<Ionicons name="wallet-outline" size={size} color={color} />);
                 }}}
             />
             <Tabs.Screen 
                 name="Mais" 
-                component={Home} 
+                component={MoreOptions} 
                 options={{tabBarIcon: ({color, size}) => {
                     return(<Feather name="menu" size={size} color={color} />);
                 }}}
