@@ -45,7 +45,12 @@ export function ListMovements({data}){
                                 </View>
                                 <View>
                                     <Text style={stylesSmall.mainText}>{data.title}</Text>
-                                    <Text style={stylesSmall.secondaryText}>{data.date}</Text>
+                                    {
+                                        data.credit === true ?
+                                            <Text style={stylesSmall.secondaryText}>{data.cardName} - {data.date}</Text>
+                                        :
+                                            <Text style={stylesSmall.secondaryText}>{data.date}</Text>
+                                    }
                                 </View>
                             </View>
 
@@ -69,7 +74,13 @@ export function ListMovements({data}){
                                 </View>
                                 <View>
                                     <Text style={stylesBig.mainText}>{data.title}</Text>
-                                    <Text style={stylesBig.secondaryText}>{data.date}</Text>
+                                    {
+                                        data.credit === true ?
+                                            <Text style={stylesBig.secondaryText}>{data.cardName} - {data.date}</Text>
+                                        :
+                                            <Text style={stylesBig.secondaryText}>{data.date}</Text> 
+                                    }
+                                    
                                 </View>
                             </View>
 

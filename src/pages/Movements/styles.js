@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
         paddingBottom: 10,
 
         fontSize: 16,
+        color: colors.color_6,
         borderColor: colors.color_3
     },
     buttonSearch: {
