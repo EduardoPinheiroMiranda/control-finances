@@ -3,7 +3,7 @@ import { View } from "react-native";
 import {Svg, Path } from "react-native-svg";
 
 
-export default function BackgroundIcon({data}){
+export function BackgroundIcon({data}){
 
     
     return(

@@ -3,14 +3,10 @@ import { StatusBar } from 'expo-status-bar';
 import { View, ScrollView, SafeAreaView } from "react-native";
 import { styles } from "./styles";
 
-
 import { Header } from "./header";
 import { MainShortcuts } from "./mainShortcuts";
 import { ConsumptionIndicator } from "./consumptionIndicator";
 import { RecentActivity } from "./recentActivity";
-import { stylesDefault } from "../../themes/stylesDefault";
-
-
 
 
 export function Home(){
