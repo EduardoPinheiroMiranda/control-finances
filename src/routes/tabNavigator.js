@@ -2,15 +2,16 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { colors } from "../themes";
 
 import { Home } from "../pages/home";
-import { Finances } from "../pages/finances";
 import { Wallet } from "../pages/wallet";
 import { MoreOptions } from "../pages/MoreOptions";
+import { FinancesDrawerNavigator } from "./finances-drawerNavigator";
 
 
 // icons 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Feather from '@expo/vector-icons/Feather';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+
 
 
 const Tabs = createBottomTabNavigator();
@@ -58,17 +59,21 @@ export function TabNavigator(){
                 name="Inicio-tab" 
                 component={Home} 
                 options={{
+                    title: "Inicio",
                     tabBarIcon: ({color, size}) => {
                         return(<Feather name="home" size={size} color={color} />);
                     }
                 }}
             />
             <Tabs.Screen 
-                name="Finanças" 
-                component={Finances} 
-                options={{tabBarIcon: ({color, size}) => {
-                    return(<MaterialCommunityIcons name="finance" size={size} color={color} />);
-                }}}
+                name="Finanças-tab" 
+                component={FinancesDrawerNavigator} 
+                options={{
+                    title: "Finanças",
+                    tabBarIcon: ({color, size}) => {
+                        return(<MaterialCommunityIcons name="finance" size={size} color={color} />);
+                    }}
+                }
             />
             <Tabs.Screen 
                 name="Carteira" 
