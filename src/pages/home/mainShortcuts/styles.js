@@ -40,5 +40,10 @@ export const styles = StyleSheet.create({
 
         justifyContent: "center",
         alignItems: "center",
+    },
+    label: {
+        fontSize: 14,
+        color: colors.color_6,
+        textAlign: "center"
     }
 });

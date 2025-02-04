@@ -8,12 +8,36 @@ import { colors } from "../../../themes";
 import { EyeOpen } from "../../../assets/svg/eyeOpen";
 import { EyeClose } from "../../../assets/svg/eyeClose";
 import { Bag } from "../../../assets/svg/bag";
-import InvoiceHome from "../../../assets/svg/invoiceHome.svg";
+import { Extract } from "../../../assets/svg/extract";
 import { Deposit } from "../../../assets/svg/deposit";
-import MoneySend from "../../../assets/svg/money-send.svg";
+import { Sacar } from "../../../assets/svg/sacar";
 
 
-const styleSvgs = {size: 30, color: colors.color_3}
+const styleSvgs = {size: 30, color: colors.color_6}
+const buttonList = [
+    { icon: <Bag data={styleSvgs}/>, label: ["Adicionar", "compras"] },
+    { icon: <Extract data={styleSvgs}/>, label: ["Extrato"] },
+    { icon: <Deposit data={styleSvgs}/>, label: ["Deposito"] },
+    { icon: <Sacar data={styleSvgs}/>, label: ["Sacar"] },
+]
+
+
+function ShortcutButton({data}){
+
+    
+    return(
+        <View style={styles.sectionButtonIcon}>
+           <View style={styles.buttonIcon}>
+                {data.icon}
+            </View>
+            <View>
+                { data.label.map((label) => {
+                    return( <Text style={styles.label}>{label}</Text> );
+                })} 
+            </View> 
+        </View>
+    );
+}
 
 
 export function MainShortcuts(props){
@@ -43,38 +67,11 @@ export function MainShortcuts(props){
             </View>
 
             <View style={styles.buttonArea}>
-
-                <View style={styles.sectionButtonIcon}>
-                    <View style={styles.buttonIcon}>
-                        <Bag data={styleSvgs}/>
-                    </View>
-                    <View>
-                        <Text style={{fontSize: 14, color: colors.color_6, textAlign: "center"}}>Adicionar</Text>
-                        <Text style={{fontSize: 14, color: colors.color_6, textAlign: "center"}}>Compra</Text>
-                    </View> 
-                </View>
-
-                <View style={styles.sectionButtonIcon}>
-                    <View style={styles.buttonIcon}>
-                        <InvoiceHome/>
-                    </View>
-                    <Text style={{fontSize: 14, color: colors.color_6}}>Extrato</Text>
-                </View>
-
-                <View style={styles.sectionButtonIcon}>
-                    <View style={styles.buttonIcon}>
-                        <Deposit data={styleSvgs}/>
-                    </View>
-                    <Text style={{fontSize: 14, color: colors.color_6}}>Deposito</Text>
-                </View>
-
-                <View style={styles.sectionButtonIcon}>
-                    <View style={styles.buttonIcon}>
-                        <MoneySend/>
-                    </View>
-                    <Text style={{fontSize: 14, color: colors.color_6}}>sacar</Text>
-                </View>
-
+                { 
+                    buttonList.map((button) => {
+                        return( <ShortcutButton data={button}/> );
+                    })
+                }
             </View>
         </View>
     )
