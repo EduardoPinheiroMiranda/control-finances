@@ -31,7 +31,7 @@ export function Home(){
             >
                 <MainShortcuts data={{balance: balance, showValue: showValue}} show={showBalance}/>
                 <ConsumptionIndicator/>
-                <RecentActivity data={moviments}/>
+                {/* <RecentActivity data={moviments}/> */}
             </ScrollView> 
         </SafeAreaView>
     )

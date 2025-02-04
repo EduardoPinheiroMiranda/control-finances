@@ -8,8 +8,8 @@ import { BackgroundIcon } from "../../assets/svg/backgroundIcon";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import SendMoney from "../../assets/svg/sendMoney";
 import ReceivedMoney from "../../assets/svg/receivedMoney";
-import Invoice from "../../assets/svg/invoice";
-import Money from "../../assets/svg/money";
+import { Invoice } from "../../assets/svg/invoice";
+import { Money } from "../../assets/svg/money";
 import { colors } from "../../themes";
 
 
@@ -17,8 +17,8 @@ export function ListMovements({data}){
 
     const [dimensions, setDimensions] = useState({width: 0, heigth: 0});
 
-    const smallIconStyles = {width: 15, height: 15, color: colors.color_6};
-    const bigIconStyles = {width: 25, height: 25, color: colors.color_6};
+    const smallIconStyles = {size: 15, color: colors.color_6};
+    const bigIconStyles = {size: 25, color: colors.color_6};
 
 
     function getDimensions(event){

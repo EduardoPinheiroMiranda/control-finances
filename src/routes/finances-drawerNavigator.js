@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { useNavigation } from "@react-navigation/native"
 import { Finances } from "../pages/finances";
 import { colors } from "../themes";
 
@@ -12,11 +13,16 @@ import { CardEdit } from "../assets/svg/cardEdit";
 const Drawer = createDrawerNavigator();
 
 
+
 export function FinancesDrawerNavigator(){
 
+    const navigation = useNavigation();
+   
 
     return(
         <Drawer.Navigator
+        id="123"
+            initialRouteName="Visão geral"
             screenOptions={{
                 headerTintColor: colors.color_7,
 
@@ -43,7 +49,7 @@ export function FinancesDrawerNavigator(){
                 }
             }}
         >
-            <Drawer.Screen 
+            <Drawer.Screen
                 name="Visão geral" 
                 component={Finances}
                 options={{

@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { Svg, Path } from "react-native-svg";
 
 
-export default function Money({data}){
+export function Money({data}){
 
 
     return(
