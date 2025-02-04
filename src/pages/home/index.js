@@ -30,8 +30,8 @@ export function Home(){
                 showsVerticalScrollIndicator={false}
             >
                 <MainShortcuts data={{balance: balance, showValue: showValue}} show={showBalance}/>
-                {/* <ConsumptionIndicator/> */}
-                {/* <RecentActivity data={moviments}/> */}
+                <ConsumptionIndicator/>
+                <RecentActivity data={moviments}/>
             </ScrollView> 
         </SafeAreaView>
     )

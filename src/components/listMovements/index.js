@@ -1,16 +1,94 @@
 import React, { useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text } from "react-native";
 import { styles, stylesSmall, stylesBig } from "./styles";
 
 
 //icons
 import { BackgroundIcon } from "../../assets/svg/backgroundIcon";
 import AntDesign from '@expo/vector-icons/AntDesign';
-import SendMoney from "../../assets/svg/sendMoney";
-import ReceivedMoney from "../../assets/svg/receivedMoney";
+import { SendMoney } from "../../assets/svg/sendMoney";
+import { ReceivedMoney } from "../../assets/svg/receivedMoney";
 import { Invoice } from "../../assets/svg/invoice";
 import { Money } from "../../assets/svg/money";
 import { colors } from "../../themes";
+
+
+
+function Movement(props){
+
+
+    return(
+        <View style={props.style.sectionMovement}>
+            <View style={props.style.sectionDescription}>
+                <View style={props.style.sectionIcon}>
+                    <BackgroundIcon data={props.backgroundIcon}/>
+                    {
+                        props.data.method === "card" && props.data.credit &&(
+                            <AntDesign 
+                                style={props.style.iconMovement} 
+                                name="creditcard" 
+                                size={props.styleIcons.size} 
+                                color={props.styleIcons.color}
+                            />
+                        )
+                    }
+                    {
+                        props.data.method === "invoice" && (
+                            <Invoice 
+                                style={props.style.iconMovement} 
+                                data={props.styleIcons}
+                            />
+                        )
+                    }
+                    {
+                        props.data.method === "sendMoney" && (
+                            <SendMoney 
+                                style={props.style.iconMovement} 
+                                data={props.styleIcons}
+                            />
+                        )
+                    }
+                    {
+                        props.data.method === "receicedMoney" && (
+                            <ReceivedMoney 
+                                style={props.style.iconMovement} 
+                                data={props.styleIcons}
+                            />
+                        )
+                    }
+                    {
+                        props.data.method === "money" && (
+                            <Money 
+                                style={props.style.iconMovement} 
+                                data={props.styleIcons}
+                            />
+                        )
+                    } 
+                </View>
+
+                <View>
+                    <Text style={props.style.mainText}>{props.data.title}</Text>
+                    {
+                        props.data.credit === true ?
+                            <Text style={props.style.secondaryText}>
+                                {props.data.cardName} - {props.data.date}
+                            </Text>
+                        :
+                            <Text style={props.style.secondaryText}>
+                                {props.data.date}
+                            </Text>
+                    }
+                </View>
+            </View>
+
+            <View style={{alignItems: "flex-end"}}>
+                <Text style={props.style.mainText}>R$ {props.data.value}</Text>
+                <Text style={props.style.secondaryText}>{props.data.installments}</Text>
+            </View> 
+        </View>
+    );
+}
+
 
 
 export function ListMovements({data}){
@@ -30,65 +108,22 @@ export function ListMovements({data}){
     return(
         <View style={ styles.container}>
             <View style={styles.cardMovement} onLayout={getDimensions}>
+                
                 {
                     dimensions.width <= 332 ? 
-                        
-                        <View style={stylesSmall.sectionMovement}>
-                            <View style={stylesSmall.sectionDescription}>
-                                <View style={stylesSmall.sectionIcon}>
-                                    <BackgroundIcon data={{width: "30", height: "50" }}/>
-                                    {data.method === "card" && data.credit &&(<AntDesign style={{position: "absolute"}} name="creditcard" size={smallIconStyles.width} color={smallIconStyles.color}/>)}
-                                    {data.method === "invoice" && (<Invoice style={stylesSmall.iconMovement} data={smallIconStyles}/>)}
-                                    {data.method === "sendMoney" && (<SendMoney style={stylesSmall.iconMovement} data={smallIconStyles}/>)}
-                                    {data.method === "receicedMoney" && (<ReceivedMoney style={stylesSmall.iconMovement} data={smallIconStyles}/>)}
-                                    {data.method === "money" && (<Money style={stylesSmall.iconMovement} data={smallIconStyles}/>)}
-                                </View>
-                                <View>
-                                    <Text style={stylesSmall.mainText}>{data.title}</Text>
-                                    {
-                                        data.credit === true ?
-                                            <Text style={stylesSmall.secondaryText}>{data.cardName} - {data.date}</Text>
-                                        :
-                                            <Text style={stylesSmall.secondaryText}>{data.date}</Text>
-                                    }
-                                </View>
-                            </View>
-
-                            <View style={{alignItems: "flex-end"}}>
-                                <Text style={stylesSmall.mainText}>R$ {data.value}</Text>
-                                <Text style={stylesSmall.secondaryText}>{data.installments}</Text>
-                            </View> 
-                        </View>
-
+                        <Movement 
+                            data={data}
+                            backgroundIcon={{width: 30, height: 50 }}
+                            style={stylesSmall} 
+                            styleIcons={smallIconStyles}
+                        />
                         :
-
-                        <View style={stylesBig.sectionMovement}>
-                            <View style={stylesBig.sectionDescription}>
-                                <View style={stylesBig.sectionIcon}>
-                                    <BackgroundIcon data={{width: "42", height: "70"}}/>
-                                    {data.method === "card" && data.credit &&(<AntDesign style={{position: "absolute"}} name="creditcard" size={bigIconStyles.width} color={bigIconStyles.color}/>)}
-                                    {data.method === "invoice" && (<Invoice data={bigIconStyles}/>)}
-                                    {data.method === "sendMoney" && (<SendMoney data={bigIconStyles}/>)}
-                                    {data.method === "receicedMoney" && (<ReceivedMoney data={bigIconStyles}/>)}
-                                    {data.method === "money" && (<Money data={bigIconStyles}/>)}
-                                </View>
-                                <View>
-                                    <Text style={stylesBig.mainText}>{data.title}</Text>
-                                    {
-                                        data.credit === true ?
-                                            <Text style={stylesBig.secondaryText}>{data.cardName} - {data.date}</Text>
-                                        :
-                                            <Text style={stylesBig.secondaryText}>{data.date}</Text> 
-                                    }
-                                    
-                                </View>
-                            </View>
-
-                            <View style={{alignItems: "flex-end"}}>
-                                <Text style={stylesBig.mainText}>R$ {data.value}</Text>
-                                <Text style={stylesBig.secondaryText}>{data.installments}</Text>
-                            </View>
-                        </View>
+                        <Movement 
+                            data={data}
+                            backgroundIcon={{width: 42, height: 70 }}
+                            style={stylesBig} 
+                            styleIcons={bigIconStyles}
+                        />
                 }
             </View>
         </View>

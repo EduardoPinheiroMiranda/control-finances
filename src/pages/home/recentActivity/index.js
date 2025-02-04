@@ -19,16 +19,14 @@ export function RecentActivity({data}){
             <View>
                 {
                     data.map((moviments) => {
-                        return(
-                        <ListMovements data={moviments} key={moviments.id}/>
-                        );
+                        return(<ListMovements data={moviments} key={moviments.id}/>);
                     })
                 }
             </View>
             
             <DisplayMoreDetails 
                 data={{title: "Ver mais detalhes"}} 
-                nextPage={ () => navigation.navigate("Movimentações")}
+                nextPage={() => navigation.navigate("Movimentações")}
             />
         </View>
     );

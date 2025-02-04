@@ -9,8 +9,8 @@ export function Money({data}){
     return(
         <View style={styles.container}>
             <Svg 
-                width={data.width}
-                height={data.height}
+                width={data.size}
+                height={data.size}
                 viewBox="0 0 25 25" 
                 fill="none" 
                 xmlns="http://www.w3.org/2000/svg"
