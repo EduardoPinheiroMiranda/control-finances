@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
         marginTop: 20,
         marginLeft: 20,
         marginRight: 20,
-        marginBottom: 5,
+        marginBottom: 10,
     },
     searchInput: {
         backgroundColor: colors.color_7,
@@ -31,8 +31,6 @@ export const styles = StyleSheet.create({
         paddingBottom: 10,
 
         fontSize: 16,
-        color: colors.color_6,
-        borderColor: colors.color_3
     },
     buttonSearch: {
         backgroundColor: colors.color_3,

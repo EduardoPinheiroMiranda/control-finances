@@ -15,10 +15,10 @@ import { Sacar } from "../../../assets/svg/sacar";
 
 const styleSvgs = {size: 30, color: colors.color_6}
 const buttonList = [
-    { icon: <Bag data={styleSvgs}/>, label: ["Adicionar", "compras"] },
-    { icon: <Extract data={styleSvgs}/>, label: ["Extrato"] },
-    { icon: <Deposit data={styleSvgs}/>, label: ["Deposito"] },
-    { icon: <Sacar data={styleSvgs}/>, label: ["Sacar"] },
+    { id: "1", icon: <Bag data={styleSvgs}/>, label: ["Adicionar", "compras"] },
+    { id: "2", icon: <Extract data={styleSvgs}/>, label: ["Extrato"] },
+    { id: "3", icon: <Deposit data={styleSvgs}/>, label: ["Deposito"] },
+    { id: "4", icon: <Sacar data={styleSvgs}/>, label: ["Sacar"] },
 ]
 
 
@@ -32,7 +32,7 @@ function ShortcutButton({data}){
             </View>
             <View>
                 { data.label.map((label) => {
-                    return( <Text style={styles.label}>{label}</Text> );
+                    return( <Text key={label} style={styles.label}>{label}</Text> );
                 })} 
             </View> 
         </View>
@@ -69,7 +69,7 @@ export function MainShortcuts(props){
             <View style={styles.buttonArea}>
                 { 
                     buttonList.map((button) => {
-                        return( <ShortcutButton data={button}/> );
+                        return( <ShortcutButton key={button.id} data={button}/> );
                     })
                 }
             </View>
