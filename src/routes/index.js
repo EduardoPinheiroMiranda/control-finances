@@ -6,6 +6,7 @@ import { Platform } from "react-native";
 import { TabNavigator } from "./tabNavigator";
 import { Movements } from "../pages/Movements";
 import { colors } from "../themes";
+import { ExpenseAnalysis } from "../pages/expenseAnalysis";
 
 
 const Stack = createNativeStackNavigator();
@@ -28,12 +29,25 @@ export function StackNavigator(){
                     fontWeight: "regular",
                   },
                 headerStyle: {
-                    backgroundColor: colors.color_3
+                    backgroundColor: colors.color_3,
                 }
             }}
         >
-            <Stack.Screen name="Inicio-stack" component={TabNavigator} options={{headerShown: false}}/>
-            <Stack.Screen name="Movimentações" component={Movements}/>
+            <Stack.Screen 
+                name="home-tab" 
+                component={TabNavigator} 
+                options={{headerShown: false}}
+            />
+            <Stack.Screen 
+                name="movements" 
+                component={Movements} 
+                options={{title: "Movimentações"}}
+            />
+            <Stack.Screen 
+                name="expenseAnalysis" 
+                component={ExpenseAnalysis} 
+                options={{title: "Análise de gastos"}}
+            />
         </Stack.Navigator>
     );
 }

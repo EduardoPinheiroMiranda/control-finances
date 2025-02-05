@@ -26,7 +26,7 @@ export function RecentActivity({data}){
             
             <DisplayMoreDetails 
                 data={{title: "Ver mais detalhes"}} 
-                nextPage={() => navigation.navigate("Movimentações")}
+                nextPage={() => navigation.navigate("movements")}
             />
         </View>
     );

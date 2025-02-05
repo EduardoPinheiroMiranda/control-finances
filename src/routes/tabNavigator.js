@@ -1,13 +1,14 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { colors } from "../themes";
 
+// Pages
 import { Home } from "../pages/home";
 import { Wallet } from "../pages/wallet";
 import { MoreOptions } from "../pages/MoreOptions";
-import { FinancesDrawerNavigator } from "./finances-drawerNavigator";
+import { Finances} from "../pages/finances";
 
 
-// icons 
+// Icons 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Feather from '@expo/vector-icons/Feather';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -23,7 +24,17 @@ export function TabNavigator(){
     return(
         <Tabs.Navigator
             screenOptions={{
-                headerShown: false,
+
+                headerStyle:{
+                    height: 80,
+                    backgroundColor: colors.color_3,
+                },
+                headerTitleStyle: {
+                    color: colors.color_7,
+                    fontSize: 20,
+                    fontWeight: "regular"
+                },
+
 
                 tabBarActiveTintColor: colors.color_3,
                 tabBarInactiveTintColor: colors.color_6,
@@ -31,7 +42,6 @@ export function TabNavigator(){
                 tabBarStyle: {
                     borderTopWidth: 0,
                     height: 70,
-                    // display: hiderTabBar(route)
                 },
 
                 tabBarItemStyle: {
@@ -56,9 +66,10 @@ export function TabNavigator(){
             }}
         >
             <Tabs.Screen 
-                name="Inicio-tab" 
+                name="home" 
                 component={Home} 
                 options={{
+                    headerShown: false,
                     title: "Inicio",
                     tabBarIcon: ({color, size}) => {
                         return(<Feather name="home" size={size} color={color} />);
@@ -66,9 +77,10 @@ export function TabNavigator(){
                 }}
             />
             <Tabs.Screen 
-                name="Finanças-tab" 
-                component={FinancesDrawerNavigator} 
+                name="finances" 
+                component={Finances} 
                 options={{
+                    headerTitle: "Gerenciar finanças",
                     title: "Finanças",
                     tabBarIcon: ({color, size}) => {
                         return(<MaterialCommunityIcons name="finance" size={size} color={color} />);
@@ -76,18 +88,24 @@ export function TabNavigator(){
                 }
             />
             <Tabs.Screen 
-                name="Carteira" 
+                name="wallet" 
                 component={Wallet} 
-                options={{tabBarIcon: ({color, size}) => {
-                    return(<Ionicons name="wallet-outline" size={size} color={color} />);
-                }}}
+                options={{
+                    title: "Carteira",
+                    tabBarIcon: ({color, size}) => {
+                        return(<Ionicons name="wallet-outline" size={size} color={color} />);
+                    }}
+                }
             />
             <Tabs.Screen 
-                name="Mais" 
+                name="more" 
                 component={MoreOptions} 
-                options={{tabBarIcon: ({color, size}) => {
-                    return(<Feather name="menu" size={size} color={color} />);
-                }}}
+                options={{
+                    title: "Mais",
+                    tabBarIcon: ({color, size}) => {
+                        return(<Feather name="menu" size={size} color={color} />);
+                    }}
+                }
             />
             
         </Tabs.Navigator>
