@@ -7,6 +7,12 @@ import { TabNavigator } from "./tabNavigator";
 import { Movements } from "../pages/Movements";
 import { colors } from "../themes";
 import { ExpenseAnalysis } from "../pages/expenseAnalysis";
+import { PayInvoice } from "../pages/payInvoice";
+import { InvoiceSummaray } from "../pages/invoiceSummary";
+import { AddPurchase } from "../pages/addPurchase";
+import { ManageExpenses } from "../pages/manageExpenses";
+import { ControlLimit } from "../pages/controlLimit";
+import { ManageCards } from "../pages/manageCards";
 
 
 const Stack = createNativeStackNavigator();
@@ -30,6 +36,7 @@ export function StackNavigator(){
                   },
                 headerStyle: {
                     backgroundColor: colors.color_3,
+                    height: 80
                 }
             }}
         >
@@ -47,6 +54,36 @@ export function StackNavigator(){
                 name="expenseAnalysis" 
                 component={ExpenseAnalysis} 
                 options={{title: "Análise de gastos"}}
+            />
+            <Stack.Screen 
+                name="payInvoice" 
+                component={PayInvoice} 
+                options={{title: "Pagar fatura"}}
+            />
+            <Stack.Screen 
+                name="invoiceSummary" 
+                component={InvoiceSummaray} 
+                options={{title: "Resumo de faturas"}}
+            />
+            <Stack.Screen 
+                name="addPurchase" 
+                component={AddPurchase} 
+                options={{title: "Adicionar compra"}}
+            />
+            <Stack.Screen 
+                name="manageExpenses" 
+                component={ManageExpenses} 
+                options={{title: "Gerenciar despesas"}}
+            />
+            <Stack.Screen 
+                name="controlLimit" 
+                component={ControlLimit} 
+                options={{title: "controlar limite"}}
+            />
+            <Stack.Screen 
+                name="manageCards"
+                component={ManageCards} 
+                options={{title: "Gerenciar cartões"}}
             />
         </Stack.Navigator>
     );

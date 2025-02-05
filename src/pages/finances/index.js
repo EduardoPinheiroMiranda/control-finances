@@ -48,37 +48,37 @@ export function Finances(){
             id: "2",
             icon: <Invoice2 data={styleIcon}/>,
             label: "Pagar fatura",
-            nextPage: () => navigator.navigate("expenseAnalysis")
+            nextPage: () => navigator.navigate("payInvoice")
         },
         {
             id: "3",
             icon: <Grafic data={styleIcon}/>,
             label: "Resumo de faturas",
-            nextPage: () => navigator.navigate("expenseAnalysis")
+            nextPage: () => navigator.navigate("invoiceSummary")
         },
         {
             id: "4",
             icon: <Bag data={styleIcon}/>,
             label: "Adicionar compra",
-            nextPage: () => navigator.navigate("expenseAnalysis")
+            nextPage: () => navigator.navigate("addPurchase")
         },
         {
             id: "5",
             icon: <TagValue data={styleIcon}/>,
             label: "Gerenciar despesas",
-            nextPage: () => navigator.navigate("expenseAnalysis")
+            nextPage: () => navigator.navigate("manageExpenses")
         },
         {
             id: "6",
             icon: <SettingsLimit data={styleIcon}/>,
             label: "Controlar limite",
-            nextPage: () => navigator.navigate("expenseAnalysis")
+            nextPage: () => navigator.navigate("controlLimit")
         },
         {
             id: "7",
             icon: <CardEdit data={styleIcon}/>,
             label: "Gerenciar cartões",
-            nextPage: () => navigator.navigate("expenseAnalysis")
+            nextPage: () => navigator.navigate("manageCards")
         },
     ]
 
