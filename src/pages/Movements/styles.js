@@ -5,7 +5,7 @@ import { colors } from "../../themes";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.color_7
+        backgroundColor: colors.color_7,
     },
     searchSection: {
         flexDirection: "row",
@@ -18,12 +18,13 @@ export const styles = StyleSheet.create({
         marginBottom: 10,
     },
     searchInput: {
-        backgroundColor: colors.color_7,
+    
         height: 40,
         width: 300,
 
         borderRadius: 10,
-        elevation: 15,
+        borderColor: colors.color_9,
+        borderWidth: 2,
 
         paddingRight: 10,
         paddingLeft: 15,
@@ -42,6 +43,5 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         
         borderRadius: "50%",
-
     }
 });

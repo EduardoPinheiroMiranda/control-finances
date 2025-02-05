@@ -5,7 +5,7 @@ import { styles, stylesSmall, stylesBig } from "./styles";
 
 //icons
 import { BackgroundIcon } from "../../assets/svg/backgroundIcon";
-import AntDesign from '@expo/vector-icons/AntDesign';
+import { Card } from "../../assets/svg/card";
 import { SendMoney } from "../../assets/svg/sendMoney";
 import { ReceivedMoney } from "../../assets/svg/receivedMoney";
 import { Invoice } from "../../assets/svg/invoice";
@@ -24,11 +24,9 @@ function Movement(props){
                     <BackgroundIcon data={props.backgroundIcon}/>
                     {
                         props.data.method === "card" && props.data.credit &&(
-                            <AntDesign 
-                                style={props.style.iconMovement} 
-                                name="creditcard" 
-                                size={props.styleIcons.size} 
-                                color={props.styleIcons.color}
+                            <Card 
+                                style={props.style.iconMovement}
+                                data={props.styleIcons}
                             />
                         )
                     }

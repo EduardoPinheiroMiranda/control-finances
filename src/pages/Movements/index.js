@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, TextInput, TouchableOpacity, SafeAreaView } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { View, Text, FlatList, TextInput, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
 import { ListMovements } from "../../components/listMovements";
 import { styles } from "./styles";
 import { colors } from "../../themes";
@@ -22,7 +23,8 @@ export function Movements(){
 
     return(
         <SafeAreaView style={styles.container}>
-            <View>
+            <StatusBar style="light" />
+            <View style={{flex: 1}}>
                 <View style={styles.searchSection}>
                     <TextInput
                         style={styles.searchInput}
@@ -41,12 +43,13 @@ export function Movements(){
                     
                 </View>
 
-                <View>
+                <View style={{flex: 1}}>
                     <FlatList
                         data={listMovements}
                         renderItem={({item}) => <ListMovements data={item}/>}
+                        keyExtractor={(item) => item.id}
+                        horizontal={false}
                         showsVerticalScrollIndicator={false}
-                        key={({item}) => item.id}
                     />
                 </View> 
             </View>
