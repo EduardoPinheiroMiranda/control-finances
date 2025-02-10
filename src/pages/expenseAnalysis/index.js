@@ -5,13 +5,14 @@ import { styles } from "./style"
 
 
 import { ConsumptionIndicator } from "../../components/consumptionIndicator";
+import { Summary } from "./summary";
 
 
 export function ExpenseAnalysis(){
 
     const chartValues = {
         chart: {
-            value: 30,
+            value: 90,
             size: 300,
             strokeWidth: 20
         },
@@ -20,16 +21,27 @@ export function ExpenseAnalysis(){
             used: "1500,00",
             available: "200,00"
         }
+    };
+
+    const summary = {
+        cards: "4000,00",
+        fixedExpenses: "4000,00",
+        extraExpenses: "3000,00"
     }
 
     return(
         <SafeAreaView style={styles.container}>
             <StatusBar style="light" />
-            <ScrollView>
+            <ScrollView style={styles.scroll}>
 
-                <View>
-                    <Text>Indicador de consumo</Text>
+                <View style={styles.highlight}>
+                    <Text style={styles.title}>Indicador de consumo</Text>
                     <ConsumptionIndicator data={chartValues}/>
+                </View>
+
+                <View style={styles.highlight}>
+                    <Text style={styles.title}>Resumo do mês</Text>
+                    <Summary data={summary}/>
                 </View>
 
             </ScrollView>

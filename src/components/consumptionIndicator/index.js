@@ -44,7 +44,7 @@ function Indicator(props){
                             <View style={props.styles.sectionButton}>
                                 <DisplayMoreDetails 
                                     data={{title: "Ver mais detalhes"}} 
-                                    nextPage={() => navigation.navigate("movements")}
+                                    nextPage={() => navigation.navigate("expenseAnalysis")}
                                 />
                             </View>
                         :

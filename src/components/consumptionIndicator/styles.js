@@ -8,7 +8,7 @@ export const smallStyle = StyleSheet.create({
     },
     title: {
         fontSize: 16, 
-        color: colors.color_4,
+        color: colors.color_6,
         fontWeight: "medium"
     },
     sectionConsumer: {
@@ -44,7 +44,7 @@ export const bigStyle = StyleSheet.create({
     title: {
         fontSize: 20, 
         color: colors.color_4,
-        fontWeight: "medium"
+        fontWeight: 500
     },
     sectionConsumer: {
         marginTop: 20,

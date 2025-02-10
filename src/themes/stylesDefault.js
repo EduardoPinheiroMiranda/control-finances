@@ -10,7 +10,8 @@ export const stylesDefault = StyleSheet.create({
         padding: 20,
         borderRadius: 10,
 
-        margin: "auto",
+        marginLeft: 20, 
+        marginRight: 20,
         marginBottom: 20,
         
         elevation: 5

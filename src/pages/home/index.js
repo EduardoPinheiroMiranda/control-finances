@@ -19,7 +19,7 @@ export function Home(){
         chart: {
             value: 30,
             size: 150,
-            strokeWidth: 15
+            strokeWidth: 10
         },
         legend:{
             limit: "4000,00",
