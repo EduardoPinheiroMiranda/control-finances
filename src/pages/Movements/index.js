@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, Text, FlatList, TextInput, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
+import { View, FlatList, TextInput, TouchableOpacity, SafeAreaView } from "react-native";
 import { ListMovements } from "../../components/listMovements";
 import { styles } from "./styles";
 import { colors } from "../../themes";

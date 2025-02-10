@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, SafeAreaView, FlatList, ScrollView, Pressable } from "react-native";
+import { View, Text, SafeAreaView, FlatList, Pressable } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./style";
 import { colors } from "../../themes";
@@ -84,7 +85,7 @@ export function Finances(){
 
     return(
         <SafeAreaView style={styles.container}>
-
+            <StatusBar style="light" />
             <View style={styles.scrollSection}>
                 <FlatList
                     data={listOptions}
@@ -93,7 +94,6 @@ export function Finances(){
                     showsVerticalScrollIndicator={false}
                 />
             </View>
-
         </SafeAreaView>
     );
 }

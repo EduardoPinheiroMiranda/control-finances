@@ -50,7 +50,7 @@ export function ExpenseIndicator({data}){
 
     return (
         <View style={[styles.container, { width: size, height: size / 2 }]}>
-            <Svg 
+            <Svg
                 width={size} 
                 height={size / 2} 
                 viewBox={`0 0 ${size} ${size / 2}`}
@@ -76,8 +76,7 @@ export function ExpenseIndicator({data}){
                     />
                 {/* Progresso */}
                 <Path
-                    d={`M ${size / 2 - radius}, ${size / 2}
-                        A ${radius} ${radius} 0 0 1 ${size / 2 + radius}, ${size / 2}`}
+                    d={`M ${size / 2 - radius}, ${size / 2} A ${radius} ${radius} 0 0 1 ${size / 2 + radius}, ${size / 2}`}
                     stroke="url(#gradient)"
                     strokeWidth={strokeWidth}
                     strokeLinecap="round"
@@ -86,7 +85,15 @@ export function ExpenseIndicator({data}){
                 />
             </Svg>
 
-            <Text style={[styles.text, {color: solidColor}]}>
+            <Text 
+                style={[
+                    {
+                        fontSize: data.size <= 150 ? 40 : 64,
+                        fontWeight: "bold",
+                        marginTop: data.size <= 150 ? -50 : -100
+                    }, 
+                    {color: solidColor}
+                ]}>
                 {Math.round(value)}%
             </Text>
         </View>
