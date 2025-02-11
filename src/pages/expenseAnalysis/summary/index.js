@@ -12,7 +12,7 @@ import { Money } from "../../../assets/svg/money";
 
 
 
-export function Summary(props){
+export function Summary({data}){
 
 
     return(
@@ -24,7 +24,7 @@ export function Summary(props){
                 
                 <View style={styles.label}>
                     <Text style={styles.text}>Cartões:</Text>
-                    <Text style={styles.text}>R$ {props.data.cards}</Text>
+                    <Text style={styles.text}>R$ {data.cards}</Text>
                 </View>
             </View>
 
@@ -35,7 +35,7 @@ export function Summary(props){
                 
                 <View style={styles.label}>
                     <Text style={styles.text}>Despesas fixas:</Text>
-                    <Text style={styles.text}>R$ {props.data.fixedExpenses}</Text>
+                    <Text style={styles.text}>R$ {data.fixedExpenses}</Text>
                 </View>
             </View>
 
@@ -46,7 +46,7 @@ export function Summary(props){
                 
                 <View style={styles.label}>
                     <Text style={styles.text}>Gastos extras:</Text>
-                    <Text style={styles.text}>R$ {props.data.extraExpenses}</Text>
+                    <Text style={styles.text}>R$ {data.extraExpenses}</Text>
                 </View>
             </View>
         </View>

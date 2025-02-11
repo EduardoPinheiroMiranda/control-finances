@@ -30,9 +30,6 @@ export const stylesSmall = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
-    iconMovement: {
-        position: "absolute",
-    },
     mainText: {
         color: colors.color_6,
         fontSize: 14

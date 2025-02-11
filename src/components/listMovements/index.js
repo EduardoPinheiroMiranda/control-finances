@@ -24,41 +24,31 @@ function Movement(props){
                     <BackgroundIcon data={props.backgroundIcon}/>
                     {
                         props.data.method === "card" && props.data.credit &&(
-                            <Card 
-                                style={props.style.iconMovement}
-                                data={props.styleIcons}
+                            <Card data={props.styleIcons}
                             />
                         )
                     }
                     {
                         props.data.method === "invoice" && (
-                            <Invoice 
-                                style={props.style.iconMovement} 
-                                data={props.styleIcons}
+                            <Invoice data={props.styleIcons}
                             />
                         )
                     }
                     {
                         props.data.method === "sendMoney" && (
-                            <SendMoney 
-                                style={props.style.iconMovement} 
-                                data={props.styleIcons}
+                            <SendMoney data={props.styleIcons}
                             />
                         )
                     }
                     {
                         props.data.method === "receicedMoney" && (
-                            <ReceivedMoney 
-                                style={props.style.iconMovement} 
-                                data={props.styleIcons}
+                            <ReceivedMoney data={props.styleIcons}
                             />
                         )
                     }
                     {
                         props.data.method === "money" && (
-                            <Money 
-                                style={props.style.iconMovement} 
-                                data={props.styleIcons}
+                            <Money data={props.styleIcons}
                             />
                         )
                     } 

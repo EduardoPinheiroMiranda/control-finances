@@ -6,6 +6,8 @@ import { styles } from "./style"
 
 import { ConsumptionIndicator } from "../../components/consumptionIndicator";
 import { Summary } from "./summary";
+import { InvoiceSummary } from "../../components/invoiceSummary";
+import { stylesDefault } from "../../themes/stylesDefault";
 
 
 export function ExpenseAnalysis(){
@@ -17,16 +19,16 @@ export function ExpenseAnalysis(){
             strokeWidth: 20
         },
         legend:{
-            limit: "4000,00",
-            used: "1500,00",
-            available: "200,00"
+            limit: 4000,
+            used: 1500,
+            available: 200
         }
     };
 
     const summary = {
-        cards: "4000,00",
-        fixedExpenses: "4000,00",
-        extraExpenses: "3000,00"
+        cards: 4000,
+        fixedExpenses: 4000,
+        extraExpenses: 3000
     }
 
     return(
@@ -42,6 +44,13 @@ export function ExpenseAnalysis(){
                 <View style={styles.highlight}>
                     <Text style={styles.title}>Resumo do mês</Text>
                     <Summary data={summary}/>
+                </View>
+
+                <View style={styles.highlight}>
+                    <Text style={styles.title}>Resumo de fatura</Text>
+                    <View style={stylesDefault.box}>
+                        <InvoiceSummary data={summary}/>
+                    </View>
                 </View>
 
             </ScrollView>
