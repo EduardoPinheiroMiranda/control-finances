@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Pressable, View, Text } from "react-native";
 
 import { stylesDefault } from "../../../themes/stylesDefault";
@@ -12,22 +12,25 @@ import { Extract } from "../../../assets/svg/extract";
 import { Deposit } from "../../../assets/svg/deposit";
 import { Sacar } from "../../../assets/svg/sacar";
 import { formatCurrency } from "../../../utils/formatCurrency";
+import { useNavigation } from "@react-navigation/native";
 
 
 const styleSvgs = {size: 30, color: colors.color_6}
 const buttonList = [
-    { id: "1", icon: <Bag data={styleSvgs}/>, label: ["Adicionar", "compras"] },
-    { id: "2", icon: <Extract data={styleSvgs}/>, label: ["Extrato"] },
-    { id: "3", icon: <Deposit data={styleSvgs}/>, label: ["Deposito"] },
-    { id: "4", icon: <Sacar data={styleSvgs}/>, label: ["Sacar"] },
+    { id: "1", icon: <Bag data={styleSvgs}/>, label: ["Adicionar", "compras"], nextPage: "addPurchase" },
+    { id: "2", icon: <Extract data={styleSvgs}/>, label: ["Extrato"], nextPage: "finances" },
+    { id: "3", icon: <Deposit data={styleSvgs}/>, label: ["Deposito"], nextPage: "finances" },
+    { id: "4", icon: <Sacar data={styleSvgs}/>, label: ["Sacar"], nextPage: "finances" },
 ]
 
 
 function ShortcutButton({data}){
 
+    const navigation = useNavigation();
+
     
     return(
-        <View style={styles.sectionButtonIcon}>
+        <Pressable style={styles.sectionButtonIcon} onPress={() => navigation.navigate(data.nextPage)}>
            <View style={styles.buttonIcon}>
                 {data.icon}
             </View>
@@ -36,7 +39,7 @@ function ShortcutButton({data}){
                     return( <Text key={label} style={styles.label}>{label}</Text> );
                 })} 
             </View> 
-        </View>
+        </Pressable>
     );
 }
 
