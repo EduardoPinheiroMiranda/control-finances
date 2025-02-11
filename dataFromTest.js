@@ -158,84 +158,97 @@ export const summary = [
         type: "card",
         name: "Nubank",
         value: 1000,
-        expired: "12/04"
+        expired: "12/04",
+        pay: false
     },
     {
         id: "2",
         type: "card",
         name: "Mercado pago",
         value: 1000,
-        expired: "12/04"
+        expired: "12/04",
+        pay: false
     },
     {
         id: "3",
         type: "card",
         name: "Pick pay",
         value: 1000,
-        expired: "12/04"
+        expired: "12/04",
+        pay: false
     },
     {
         id: "4",
         type: "fixedExpense",
         name: "Plano de telefone",
         value: 100.12,
-        expired: "12/04"
+        expired: "12/04",
+        pay: false
     },
     {
         id: "5",
         type: "fixedExpense",
         name: "Internet - wifi",
         value: 50.78,
-        expired: "12/04"
+        expired: "12/04",
+        pay: false
     },
     {
         id: "6",
         type: "fixedExpense",
         name: "Netflix",
         value: 300,
-        expired: "12/04"
+        expired: "12/04",
+        pay: false
     },
     {
         id: "7",
         type: "fixedExpense",
         name: "Conta de luz",
         value: 100,
-        expired: "12/04"
+        expired: "12/04",
+        pay: false
     },
     {
         id: "8",
         type: "extraExpense",
         name: "Parque",
         value: 1400,
-        expired: "12/04"
+        expired: "12/04",
+        pay: false
     },
     {
         id: "9",
         type: "extraExpense",
         name: "Roupas",
         value: 100,
-        expired: "12/04"
+        expired: "12/04",
+        pay: false
     },
     {
         id: "10",
         type: "extraExpense",
         name: "Tapetes",
         value: 1000.67,
-        expired: "12/04"
+        expired: "12/04",
+        pay: false
     },
     {
         id: "11",
         type: "extraExpense",
         name: "Doc. Moto",
-        value: 10.50,
-        expired: "12/04"
+        value: 10.5,
+        expired: "12/04",
+        pay: false
     },
     {
         id: "12",
         type: "extraExpense",
         name: "Lanche",
-        value: 350.20,
-        expired: "12/04"
+        value: 350.2,
+        expired: "12/04",
+        pay: false
     }
 ]
+
 

@@ -5,6 +5,7 @@ import { colors } from "../../themes";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: colors.color_8
     },
     scroll: {
         flex: 1,
