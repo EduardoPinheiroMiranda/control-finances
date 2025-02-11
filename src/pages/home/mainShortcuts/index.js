@@ -11,6 +11,7 @@ import { Bag } from "../../../assets/svg/bag";
 import { Extract } from "../../../assets/svg/extract";
 import { Deposit } from "../../../assets/svg/deposit";
 import { Sacar } from "../../../assets/svg/sacar";
+import { formatCurrency } from "../../../utils/formatCurrency";
 
 
 const styleSvgs = {size: 30, color: colors.color_6}
@@ -51,7 +52,7 @@ export function MainShortcuts(props){
                 {
                     props.data.showValue ? 
                         <View style={styles.sectionValue}>
-                            <Text style={{fontSize: 24}}>R$ {props.data.balance.toFixed(2)}</Text>
+                            <Text style={{fontSize: 24}}>{formatCurrency(props.data.balance)}</Text>
                             <Pressable onPress={props.show}>
                                 <EyeOpen data={styleSvgs}/>
                             </Pressable>

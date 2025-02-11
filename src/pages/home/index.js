@@ -22,9 +22,9 @@ export function Home(){
             strokeWidth: 10
         },
         legend:{
-            limit: "4000,00",
-            used: "1500,00",
-            available: "200,00"
+            limit: 4000,
+            used: 1500,
+            available: 200
         }
     }
 

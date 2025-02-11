@@ -7,6 +7,7 @@ import { smallStyle, bigStyle } from "./styles";
 
 import { ExpenseIndicator } from "../../components/expenseIndicator";
 import { DisplayMoreDetails } from "../../components/displayMoreDetails";
+import { formatCurrency } from "../../utils/formatCurrency";
 
 
 function Indicator(props){
@@ -17,7 +18,7 @@ function Indicator(props){
     return(
         <View style={[stylesDefault.box, props.styles.container]}>
             
-            <Text style={props.styles.title}>Vencimento - 12/03</Text>
+            <Text style={props.styles.title}>Vencimento - {props.data.expired}</Text>
 
             <View style={props.styles.sectionConsumer}>
 
@@ -26,17 +27,17 @@ function Indicator(props){
                 <View style={props.styles.legends}>
                     <View style={props.styles.legendsOfValue}>
                         <Text style={props.styles.valueText}>Limite:</Text>
-                        <Text style={props.styles.valueText}>R$ {props.data.legend.limit}</Text>
+                        <Text style={props.styles.valueText}>{formatCurrency(props.data.legend.limit)}</Text>
                     </View>
         
                     <View style={props.styles.legendsOfValue}>
                         <Text style={props.styles.valueText}>Utilizado:</Text>
-                        <Text style={props.styles.valueText}>R$ {props.data.legend.used}</Text>
+                        <Text style={props.styles.valueText}>{formatCurrency(props.data.legend.used)}</Text>
                     </View>
         
                     <View style={props.styles.legendsOfValue}>
                         <Text style={props.styles.valueText}>Disponível:</Text>
-                        <Text style={props.styles.valueText}>R$ {props.data.legend.available}</Text>
+                        <Text style={props.styles.valueText}>{formatCurrency(props.data.legend.available)}</Text>
                     </View>
 
                     {

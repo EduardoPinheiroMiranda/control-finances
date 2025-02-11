@@ -11,6 +11,7 @@ import { ReceivedMoney } from "../../assets/svg/receivedMoney";
 import { Invoice } from "../../assets/svg/invoice";
 import { Money } from "../../assets/svg/money";
 import { colors } from "../../themes";
+import { formatCurrency } from "../../utils/formatCurrency";
 
 
 
@@ -70,7 +71,7 @@ function Movement(props){
             </View>
 
             <View style={{alignItems: "flex-end"}}>
-                <Text style={props.style.mainText}>R$ {props.data.value}</Text>
+                <Text style={props.style.mainText}>{formatCurrency(props.data.value)}</Text>
                 <Text style={props.style.secondaryText}>{props.data.installments}</Text>
             </View> 
         </View>

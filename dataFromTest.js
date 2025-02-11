@@ -1,5 +1,3 @@
-
-
 export const moviments = [
     {
         id: "1",
@@ -8,7 +6,7 @@ export const moviments = [
         cardName: "Mercado pago",
         title: "Roupas",
         date: "12/04/2001",
-        value: "150,00",
+        value:  150,
         installments: "3x"
     },
     {
@@ -18,7 +16,7 @@ export const moviments = [
         cardName: "Mercado pago",
         title: "Conta de água",
         date: "12/04/2001",
-        value: "300,00",
+        value:  300,
         installments: ""
     },
     {
@@ -28,7 +26,7 @@ export const moviments = [
         cardName: "Mercado pago",
         title: "Internet",
         date: "12/04/2001",
-        value: "250,00",
+        value:  250,
         installments: ""
     },
     {
@@ -38,7 +36,7 @@ export const moviments = [
         cardName: "Nubanck",
         title: "Farmacia",
         date: "12/04/2001",
-        value: "100,00",
+        value:  100,
         installments: "2x"
     },
     {
@@ -48,7 +46,7 @@ export const moviments = [
         cardName: "Mercado pago",
         title: "IPTU",
         date: "12/04/2001",
-        value: "800,00",
+        value:  800,
         installments: ""
     },
     {
@@ -58,7 +56,7 @@ export const moviments = [
         cardName: "Mercado pago",
         title: "Uber",
         date: "12/04/2001",
-        value: "50,00",
+        value: 50,
         installments: ""
     },
     {
@@ -68,7 +66,7 @@ export const moviments = [
         cardName: "Mercado pago",
         title: "Barbeiro",
         date: "12/04/2001",
-        value: "500,00",
+        value:  500,
         installments: ""
     },
     {
@@ -78,7 +76,7 @@ export const moviments = [
         cardName: "Mercado pago",
         title: "Conta de luz",
         date: "12/04/2001",
-        value: "50,00",
+        value: 50,
         installments: ""
     },
     {
@@ -88,7 +86,7 @@ export const moviments = [
         cardName: "Mercado pago",
         title: "Uber",
         date: "12/04/2001",
-        value: "50,00",
+        value: 50,
         installments: ""
     },
     {
@@ -98,7 +96,7 @@ export const moviments = [
         cardName: "Mercado pago",
         title: "Barbeiro",
         date: "12/04/2001",
-        value: "500,00",
+        value:  500,
         installments: ""
     },
     {
@@ -108,7 +106,7 @@ export const moviments = [
         cardName: "Mercado pago",
         title: "Conta de luz",
         date: "12/04/2001",
-        value: "50,00",
+        value: 50,
         installments: ""
     },
     {
@@ -118,7 +116,7 @@ export const moviments = [
         cardName: "Banco do brasil",
         title: "Conta de água",
         date: "12/04/2001",
-        value: "300,00",
+        value:  300,
         installments: ""
     },
     {
@@ -128,7 +126,7 @@ export const moviments = [
         cardName: "Nubanck",
         title: "Internet",
         date: "12/04/2001",
-        value: "250,00",
+        value:  250,
         installments: ""
     },
     {
@@ -138,7 +136,7 @@ export const moviments = [
         cardName: "Mercado pago",
         title: "Farmacia",
         date: "12/04/2001",
-        value: "100,00",
+        value:  100,
         installments: "2x"
     },
     {
@@ -148,7 +146,7 @@ export const moviments = [
         cardName: "Mercado pago",
         title: "IPTU",
         date: "12/04/2001",
-        value: "800,00",
+        value:  800,
         installments: ""
     },     
 ]

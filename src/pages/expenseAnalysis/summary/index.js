@@ -9,6 +9,7 @@ const styleIcons = {size: 30, color: colors.color_6};
 import { Card } from "../../../assets/svg/card";
 import { Invoice } from "../../../assets/svg/invoice";
 import { Money } from "../../../assets/svg/money";
+import { formatCurrency } from "../../../utils/formatCurrency";
 
 
 
@@ -24,7 +25,7 @@ export function Summary({data}){
                 
                 <View style={styles.label}>
                     <Text style={styles.text}>Cartões:</Text>
-                    <Text style={styles.text}>R$ {data.cards}</Text>
+                    <Text style={styles.text}>{formatCurrency(data.cards)}</Text>
                 </View>
             </View>
 
@@ -35,7 +36,7 @@ export function Summary({data}){
                 
                 <View style={styles.label}>
                     <Text style={styles.text}>Despesas fixas:</Text>
-                    <Text style={styles.text}>R$ {data.fixedExpenses}</Text>
+                    <Text style={styles.text}>{formatCurrency(data.fixedExpenses)}</Text>
                 </View>
             </View>
 
@@ -46,7 +47,7 @@ export function Summary({data}){
                 
                 <View style={styles.label}>
                     <Text style={styles.text}>Gastos extras:</Text>
-                    <Text style={styles.text}>R$ {data.extraExpenses}</Text>
+                    <Text style={styles.text}>{formatCurrency(data.extraExpenses)}</Text>
                 </View>
             </View>
         </View>
