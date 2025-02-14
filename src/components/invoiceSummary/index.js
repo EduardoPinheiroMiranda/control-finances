@@ -57,10 +57,10 @@ function Movement(props){
 }
 
 
-export function InvoiceSummary({data}){
+export function InvoiceSummary(){
 
     const navigation = useNavigation();
-
+    
 
     const card = summary.filter((movement) => {
         if(movement.type === "card"){
@@ -84,21 +84,6 @@ export function InvoiceSummary({data}){
     return(
         <View style={styles.container}>
 
-            <View style={styles.header}>
-                <View>
-                    <Text style={styles.text}>Limite</Text>
-                    <Text style={styles.text}>R$ 4000,00</Text>
-                </View>
-                <View>
-                    <Text style={styles.text}>Utilizado</Text>
-                    <Text style={styles.text}>R$ 4000,00</Text>
-                </View>
-                <View>
-                    <Text style={styles.text}>Disponível</Text>
-                    <Text style={styles.text}>R$ 4000,00</Text>
-                </View>
-            </View>
-
             <View>
                 <Movement 
                     data={card} 
@@ -108,7 +93,7 @@ export function InvoiceSummary({data}){
                 <Movement
                     data={fixedExpenses}
                     key="fixedExpenses"
-                    title="Gastos fixos"
+                    title="Despesas fixas"
                 />
                 <Movement
                     data={extraExpenses}
@@ -116,8 +101,6 @@ export function InvoiceSummary({data}){
                     title="Gastos extras"
                 />
             </View>
-
-            <DisplayMoreDetails data={{title: "Ver mais detalhes"}} nextPage={() => navigation.navigate("invoiceSummary")}/>
 
         </View>
     );

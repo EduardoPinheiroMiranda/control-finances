@@ -5,17 +5,9 @@ import { colors } from "../../themes";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        gap: 20
+        gap: 20,
     },
-    header: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-    },
-    text: {
-        textAlign: "center",
-        fontSize: 14
-    },
+
     title: {
         backgroundColor: colors.color_8,
         height: 30,

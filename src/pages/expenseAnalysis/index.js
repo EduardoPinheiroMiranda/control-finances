@@ -8,9 +8,13 @@ import { ConsumptionIndicator } from "../../components/consumptionIndicator";
 import { Summary } from "./summary";
 import { InvoiceSummary } from "../../components/invoiceSummary";
 import { stylesDefault } from "../../themes/stylesDefault";
+import { DisplayMoreDetails } from "../../components/displayMoreDetails";
+import { useNavigation } from "@react-navigation/native";
 
 
 export function ExpenseAnalysis(){
+
+    const navigation = useNavigation();
 
     const chartValues = {
         chart: {
@@ -35,7 +39,10 @@ export function ExpenseAnalysis(){
     return(
         <SafeAreaView style={styles.container}>
             <StatusBar style="light" />
-            <ScrollView style={styles.scroll}>
+            <ScrollView 
+                style={styles.scroll}
+                showsVerticalScrollIndicator={false}
+            >
 
                 <View style={styles.highlight}>
                     <Text style={styles.title}>Indicador de consumo</Text>
@@ -49,14 +56,30 @@ export function ExpenseAnalysis(){
 
                 <View style={styles.highlight}>
                     <Text style={styles.title}>Resumo de fatura</Text>
-                    <View style={stylesDefault.box}>
-                        <InvoiceSummary data={summary}/>
+
+                    <View style={[stylesDefault.box,{gap: 30}]}>
+                        <View style={styles.header}>
+                            <View>
+                                <Text style={styles.text}>Limite</Text>
+                                <Text style={styles.text}>R$ 4000,00</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.text}>Utilizado</Text>
+                                <Text style={styles.text}>R$ 4000,00</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.text}>Disponível</Text>
+                                <Text style={styles.text}>R$ 4000,00</Text>
+                            </View>
+                        </View>
+
+                        <InvoiceSummary/>
+                        
+                        <DisplayMoreDetails data={{title: "Ver mais detalhes"}} nextPage={() => navigation.navigate("invoiceSummary")}/>
                     </View>
                 </View>
 
             </ScrollView>
-            
         </SafeAreaView>
-        
     );
 }

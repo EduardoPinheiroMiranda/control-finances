@@ -21,5 +21,15 @@ export const styles = StyleSheet.create({
         marginRight: 20,
         marginLeft: 20,
         marginBottom: 20
-    }
+    },
+
+    header: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    text: {
+        textAlign: "center",
+        fontSize: 14
+    },
 });

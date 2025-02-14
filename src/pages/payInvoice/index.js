@@ -105,7 +105,7 @@ export function PayInvoice(){
                 <Movement data={movementsCard} title="Cartões" function={confirmedPayment}/>
                 <Movement data={movementsFixedExpense} title="Despesas fixas" function={confirmedPayment}/>
                 <Movement data={movementsExtraExpense} title="Gastos extras" function={confirmedPayment}/>
-                <View style={{height: 120}}></View>
+                <View style={{height: 120}}/>
             </ScrollView>
 
             <TouchableOpacity style={styles.button}>
