@@ -4,10 +4,10 @@ import { colors } from "../../../themes";
 
 export const styles = StyleSheet.create({
     container: {
-        alignSelf: "center"
+        alignSelf: "center",
     },
     summaryOfValues: {
-        width: 372,
+        width: 350,
         borderRadius: 10,
         padding: 20,
         gap: 20,

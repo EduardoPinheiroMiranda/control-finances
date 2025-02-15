@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, Pressable } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, Pressable } from "react-native";
 import { styles } from "./styles";
 import { colors } from "../../../themes";
 
@@ -29,24 +29,11 @@ export function SelectionInvoice(props){
             color = colors.color_11;
         }
     }
-    
-    
+
+
     return(
-        <Pressable 
-            onPress={
-                () => props.getInvoice(color, props.data.expired, props.index)
-            }
-        >
-            <Text 
-                style={[
-                    styles.expired, 
-                    {
-                        color: color,
-                        marginLeft: props.index === 0 ? props.distance.x: 0,
-                        marginRight: props.lastIndex === props.index ? props.distance.x: 0
-                    }
-                ]}
-            >
+        <Pressable onPress={() => props.getInvoice(color, props.data.expired, props.index)}>
+            <Text style={[styles.expired, {color: color}]}>
                 {props.data.expired}
             </Text>
         </Pressable>

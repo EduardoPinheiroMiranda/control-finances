@@ -1,12 +1,12 @@
 import { StyleSheet} from "react-native";
-import { colors } from "../../../themes";
 
 
 export const styles = StyleSheet.create({
     expired: {
+        width: 85,
+        textAlign: "center",
         fontSize: 16,
         fontWeight: "medium",
-        paddingRight: 12.5,
-        paddingLeft: 12.5
+        marginHorizontal: 12.5,
     },
 });

@@ -12,14 +12,14 @@ export const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 20,
         alignItems: "center"
+        
     },
     indicator: {
         backgroundColor: colors.color_9,
         height: 3,
-        width: 70,
-
+        width: 85,
         marginTop: 5,
-        borderRadius: 5
+        borderRadius: 5,
     },
     
     scroll: {
