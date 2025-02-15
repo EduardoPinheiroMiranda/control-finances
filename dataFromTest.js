@@ -258,7 +258,7 @@ export const invoices = [
         expired: "OUT/2024",
         pay: true,
         values: {
-            invoiceValue: 25000,
+            invoiceValue: 2500,
             limit: 4000,
             available: 1500
         },

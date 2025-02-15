@@ -10,7 +10,16 @@ export const styles = StyleSheet.create({
 
     sectionSelectInvoice: {
         marginTop: 20,
-        marginBottom: 20
+        marginBottom: 20,
+        alignItems: "center"
+    },
+    indicator: {
+        backgroundColor: colors.color_9,
+        height: 3,
+        width: 70,
+
+        marginTop: 5,
+        borderRadius: 5
     },
     
     scroll: {

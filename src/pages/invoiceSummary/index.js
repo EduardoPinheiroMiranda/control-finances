@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text, SafeAreaView, FlatList, ScrollView, Pressable } from "react-native";
 import { styles } from "./styles";
 import { invoices } from "../../../dataFromTest";
@@ -19,6 +19,8 @@ export function InvoiceSummaray(){
     const [listInvoices, setListInvoices] = useState([]);
     const [invoice, setInvoice] = useState({});
     const [accentColor, setAccentColor] = useState(colors.color_3);
+    const flatListRef = useRef(null);
+    const indicatorRef = useRef(null);
 
 
     useEffect(() => {
@@ -28,9 +30,15 @@ export function InvoiceSummaray(){
     }, []);
 
 
-    function selectInvoice(color, expired){
+    function selectInvoice(color, expired, index){
         setAccentColor(color);
         setInvoice(listInvoices.find((invoice) => invoice.expired === expired));
+
+        flatListRef.current?.scrollToIndex({
+            index: index,
+            animated: true,
+            viewPosition: 0.5,
+        });
     }
 
     
@@ -39,12 +47,30 @@ export function InvoiceSummaray(){
 
             <View style={styles.sectionSelectInvoice}>
                 <FlatList
+                    ref={flatListRef}
                     data={listInvoices}
-                    renderItem={({item}) => <SelectionInvoice data={item} getInvoice={selectInvoice}/>}
+                    renderItem={({item, index}) => {
+                        return(
+                            <SelectionInvoice 
+                                data={item} 
+                                index={index}
+                                lastIndex={listInvoices.length - 1}
+                                distance={
+                                    () => {
+                                        indicatorRef.current?.measureInWindow((x, y, width, height) => {
+                                            console.log(x)
+                                        })
+                                    }
+                                }
+                                getInvoice={selectInvoice}
+                            />
+                        );
+                    }}
                     keyExtractor={(item) => item.id}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                 />
+                <View ref={indicatorRef} style={styles.indicator}/>
             </View>
 
             <CardOfValues data={invoice} backgroundColor={accentColor}/>
