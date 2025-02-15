@@ -149,7 +149,7 @@ export const moviments = [
         value:  800,
         installments: ""
     },     
-]
+];
 
 
 export const summary = [
@@ -249,6 +249,100 @@ export const summary = [
         expired: "12/04",
         pay: false
     }
+];
+
+
+export const invoices = [
+    {
+        id: "1",
+        expired: "OUT/2024",
+        pay: true,
+        values: {
+            invoiceValue: 25000,
+            limit: 4000,
+            available: 1500
+        },
+        movements: summary
+    },
+    {
+        id: "2",
+        expired: "NOV/2024",
+        pay: true,
+        values: {
+            invoiceValue: 2600,
+            limit: 4000,
+            available: 1400
+        },
+        movements: summary
+    },
+    {
+        id: "3",
+        expired: "DEZ/2024",
+        pay: true,
+        values: {
+            invoiceValue: 2700,
+            limit: 4000,
+            available: 1300
+        },
+        movements: summary
+    },
+    {
+        id: "4",
+        expired: "JAN/2025",
+        pay: true,
+        values: {
+            invoiceValue: 2800,
+            limit: 4000,
+            available: 1200
+        },
+        movements: summary
+    },
+    {
+        id: "5",
+        expired: "FEV/2025",
+        pay: false,
+        values: {
+            invoiceValue: 2900,
+            limit: 4000,
+            available: 1100
+        },
+        movements: summary
+    },
+    {
+        id: "6",
+        expired: "MAR/2025",
+        pay: false,
+        values: {
+            invoiceValue: 3000,
+            limit: 4000,
+            available: 1000
+        },
+        movements: summary
+    },
+    {
+        id: "7",
+        expired: "ABR/2025",
+        pay: false,
+        values: {
+            invoiceValue: 1550,
+            limit: 4000,
+            available: 1450
+        },
+        movements: summary
+    },
+    {
+        id: "8",
+        expired: "MAIO/2025",
+        pay: false,
+        values: {
+            invoiceValue: 2740,
+            limit: 4000,
+            available: 1260
+        },
+        movements: summary
+    },
+    
+    
 ]
 
 
