@@ -7,6 +7,7 @@ import { defaultPageStyle } from "../../themes/stylesDefault";
 import { styles } from "./styles";
 import { InputText } from "../../components/inputText";
 import { InputPassword } from "../../components/inputPassword";
+import { Button } from "../../components/button";
 
 
 export function SignIn(){
@@ -40,8 +41,9 @@ export function SignIn(){
                         <Text style={styles.textResetPassword}>Esqueci a senha</Text>
                     </Pressable>
                 </View>
-                
             </View>
+
+            <Button title="Entrar"/>
         </KeyboardAvoidingView>
     );
 }
