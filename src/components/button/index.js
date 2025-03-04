@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { colorPattern } from "../../themes";
+import { defaultPageStyle } from "../../themes/stylesDefault";
 
 
 export function Button(props){
@@ -18,6 +19,7 @@ export function Button(props){
         >
             <Text 
                 style={[
+                    defaultPageStyle.text,
                     styles.text,
                     {
                         color: props.color ? props.color : colorPattern.white_800

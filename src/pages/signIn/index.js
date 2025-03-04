@@ -41,7 +41,9 @@ export function SignIn(){
                             onChangeText={setPassword}
                         />
                         <Pressable onPress={() => alert("Função indisponível temporariamente.")}>
-                            <Text style={styles.textResetPassword}>Esqueci a senha</Text>
+                            <Text style={[defaultPageStyle.text, styles.textResetPassword]}>
+                                Esqueci a senha
+                            </Text>
                         </Pressable>
                     </View>
                 </View>
@@ -50,7 +52,9 @@ export function SignIn(){
                     <Button title="Entrar"/>
 
                     <Pressable>
-                        <Text style={styles.textCreatAccount}>Criar uma conta</Text>
+                        <Text style={[defaultPageStyle.text, styles.textCreatAccount]}>
+                            Criar uma conta
+                        </Text>
                     </Pressable>
                 </View>
             </ScrollView>

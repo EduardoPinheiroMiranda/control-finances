@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { colorPattern } from "../../themes";
+import { defaultPageStyle } from "../../themes/stylesDefault";
 
 
 export function InputText(props){
@@ -8,7 +9,9 @@ export function InputText(props){
 
     return(
         <View>
-            <Text style={styles.text}>{props.label}</Text>
+            <Text style={[defaultPageStyle.text, styles.text]}>
+                {props.label}
+            </Text>
             <TextInput
                 style={styles.input}
                 placeholder={props.placeholder}

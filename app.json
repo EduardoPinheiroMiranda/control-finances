@@ -23,6 +23,16 @@
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "node_modules/@expo-google-fonts/inter/Roboto_900Black.ttf"
+          ]
+        }
+      ]
+    ]
   }
 }

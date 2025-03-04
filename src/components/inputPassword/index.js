@@ -5,6 +5,7 @@ import { colorPattern } from "../../themes";
 // icon
 import { EyeClose } from "../../assets/svg/eyeClose";
 import { EyeOpen } from "../../assets/svg/eyeOpen";
+import { defaultPageStyle } from "../../themes/stylesDefault";
 
 const iconStyles = {size: 30, color: colorPattern.blaCK_900};
 
@@ -16,7 +17,9 @@ export function InputPassword(props){
 
     return(
         <View>
-            <Text style={styles.text}>{props.label}</Text>
+            <Text style={[defaultPageStyle.text, styles.text]}>
+                {props.label}
+            </Text>
             <View>
                 <TextInput
                     style={styles.input}

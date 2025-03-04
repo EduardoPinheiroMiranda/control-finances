@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { colorPattern } from "../../themes";
 import { statusBarHeight } from "../../themes/stylesDefault";
 
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
 
     textResetPassword: {
         fontSize: 14,
-        fontWeight: "regular",
+        fontWeight: "regular",  
         color: colorPattern.blue_300,
         marginTop: 15,
         textAlign: "right"
