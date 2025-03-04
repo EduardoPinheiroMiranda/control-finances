@@ -1,6 +1,8 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SignIn } from "../pages/signIn";
+import { SignUp } from "../pages/signUp";
+import { Platform } from "react-native";
 
 
 export function AuthRoutes(){
@@ -11,13 +13,14 @@ export function AuthRoutes(){
     return(
         <Stack.Navigator
             screenOptions={{
-                headerShown: false
+                headerShown: false,
+                animationTypeForReplace: "push",
+                animation: Platform.OS === "ios" ? "simple_push" : "slide_from_right",
             }}
+            
         >
-            <Stack.Screen
-                name="signIn"
-                component={SignIn}
-            />
+            <Stack.Screen name="signIn" component={SignIn}/>
+            <Stack.Screen name="signUp" component={SignUp}/>
         </Stack.Navigator>
     );
 }
