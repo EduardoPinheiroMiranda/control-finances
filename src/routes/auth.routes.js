@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { SignIn } from "../pages/signIn/styles";
+import { SignIn } from "../pages/signIn";
 
 
 export function AuthRoutes(){
@@ -9,7 +9,11 @@ export function AuthRoutes(){
 
 
     return(
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={{
+                headerShown: false
+            }}
+        >
             <Stack.Screen
                 name="signIn"
                 component={SignIn}

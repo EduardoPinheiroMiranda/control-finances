@@ -1,15 +1,21 @@
-export const colors = {
-    color_1: "#3D89D4",
-    color_2: "#4D7CAA",
-    color_3: "#1F8FFF",
-    color_4: "#4F6780",
-    color_5: "#434C55",
-    color_6: "#2B2F33",
-    color_7: "#FAFAFA",
-    color_8: "#F1F1F1",
-    color_9: "#D9D9D9",
-    color_10: "#18A91D",
-    color_11: "#E28D00",
+export const colorPattern = {
+    blue_900: "#4D7CAA",
+    blue_600: "#3D89D4",
+    blue_300: "#1F8FFF",
+
+    gray_900: "#4F6780",
+    gray_600: "#434C55",
+    gray_400: "#D9D9D9",
+    gray_300: "#D4D4D4",
+
+    blaCK_900: "#2B2F33",
+
+    white_900: "#F1F1F1",
+    white_800: "#FAFAFA",
+
+    green_900: "#18A91D",
+    
+    orange_600: "#E28D00",
 };
 
 

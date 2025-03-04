@@ -1,12 +1,12 @@
 import React from "react";
 import { View } from "react-native";
-import { SignIn } from "../pages/signIn/styles";
+import { AuthRoutes } from "../routes/auth.routes";
 
 
 export function Routes(){
 
 
     return(
-        <SignIn/>
+        <AuthRoutes/>
     );
 }

@@ -1,19 +1,12 @@
 import { StyleSheet } from "react-native";
-import { colors } from ".";
+import Constants from "expo-constants";
 
 
-export const stylesDefault = StyleSheet.create({
-    box: {
-        backgroundColor: colors.color_7,
-        width: "90%",
+export const statusBarHeight = Constants.statusBarHeight;
 
-        padding: 20,
-        borderRadius: 10,
 
-        marginLeft: 20, 
-        marginRight: 20,
-        marginBottom: 20,
-        
-        elevation: 5
+export const defaultPageStyle = StyleSheet.create({
+    page: {
+        flex: 1,
     }
 });
