@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, KeyboardAvoidingView, Text, Pressable } from "react-native";
+import { View, KeyboardAvoidingView, Text, Pressable, ScrollView } from "react-native";
 
 // icons
 import SignInIcon from "../../assets/svg/signInIcon.svg"
@@ -17,33 +17,43 @@ export function SignIn(){
     
 
     return(
-        <KeyboardAvoidingView style={[defaultPageStyle.page, styles.container]}>
-            <View style={styles.sectionicon}>
-                <SignInIcon/>
-            </View>
+        <KeyboardAvoidingView style={[defaultPageStyle.page]}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+            >
+                <View style={styles.sectionIcon}>
+                    <SignInIcon/>
+                </View>
 
-            <View style={styles.form}>
-                <InputText 
-                    label="informe seu e-mail"
-                    placeholder="E-mail"
-                    value={email}
-                    onChangeText={setEmail}
-                />
-
-                <View>
-                    <InputPassword
-                        label="informe sua senha"
-                        placeholder="senha"
-                        value={password}
-                        onChangeText={setPassword}
+                <View style={styles.form}>
+                    <InputText 
+                        label="informe seu e-mail"
+                        placeholder="E-mail"
+                        value={email}
+                        onChangeText={setEmail}
                     />
-                    <Pressable onPress={() => alert("Função indisponível temporariamente.")}>
-                        <Text style={styles.textResetPassword}>Esqueci a senha</Text>
+
+                    <View>
+                        <InputPassword
+                            label="informe sua senha"
+                            placeholder="senha"
+                            value={password}
+                            onChangeText={setPassword}
+                        />
+                        <Pressable onPress={() => alert("Função indisponível temporariamente.")}>
+                            <Text style={styles.textResetPassword}>Esqueci a senha</Text>
+                        </Pressable>
+                    </View>
+                </View>
+
+                <View style={styles.sectionButton}>
+                    <Button title="Entrar"/>
+
+                    <Pressable>
+                        <Text style={styles.textCreatAccount}>Criar uma conta</Text>
                     </Pressable>
                 </View>
-            </View>
-
-            <Button title="Entrar"/>
+            </ScrollView>
         </KeyboardAvoidingView>
     );
 }

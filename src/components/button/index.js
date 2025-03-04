@@ -14,6 +14,7 @@ export function Button(props){
                     backgroundColor: props.background ? props.background : colorPattern.blue_300
                 }
             ]}
+            activeOpacity={0.7}
         >
             <Text 
                 style={[

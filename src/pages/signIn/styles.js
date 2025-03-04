@@ -4,7 +4,7 @@ import { statusBarHeight } from "../../themes/stylesDefault";
 
 
 export const styles = StyleSheet.create({
-    sectionicon: {
+    sectionIcon: {
         height: 400,
         width: "100%",
         backgroundColor: colorPattern.blue_300,
@@ -13,7 +13,8 @@ export const styles = StyleSheet.create({
         borderBottomStartRadius: 150,
 
         paddingTop: statusBarHeight,
-        alignItems: "center"
+        alignItems: "center",
+        marginBottom: 50
     },
 
     form: {
@@ -27,6 +28,21 @@ export const styles = StyleSheet.create({
         color: colorPattern.blue_300,
         marginTop: 15,
         textAlign: "right"
+    },
+
+    sectionButton: {
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 20,
+        marginTop: 50
+    },
+    textCreatAccount: {
+        fontSize: 16,
+        fontWeight: "regular",
+        color: colorPattern.blue_300,
+        marginTop: 15,
+        textAlign: "right",
+        marginBottom: 30
     }
 
 });
