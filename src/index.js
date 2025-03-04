@@ -1,11 +1,13 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { StackNavigator } from './routes';
+import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar"
+import { Routes } from "./routes";
 
 
 export default function App() {
   return (
     <NavigationContainer>
-      <StackNavigator/>
+      <StatusBar style="auto"/>
+      <Routes/>
     </NavigationContainer>
   );
 }
