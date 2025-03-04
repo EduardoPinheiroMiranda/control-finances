@@ -4,6 +4,9 @@ import { statusBarHeight } from "../../themes/stylesDefault";
 
 
 export const styles = StyleSheet.create({
+    container: {
+        backgroundColor: colorPattern.white_800,
+    },
     sectionIcon: {
         height: 250,
         width: "100%",

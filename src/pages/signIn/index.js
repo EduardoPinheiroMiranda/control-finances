@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, KeyboardAvoidingView, Text, Pressable, ScrollView, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { View, KeyboardAvoidingView, Text, Pressable, ScrollView, TouchableWithoutFeedback, Keyboard, Platform } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
 import { defaultPageStyle } from "../../themes/stylesDefault";
@@ -23,7 +23,11 @@ export function SignIn(){
 
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <KeyboardAvoidingView style={[defaultPageStyle.page]}>
+            <KeyboardAvoidingView 
+                style={[defaultPageStyle.page, styles.container]}
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                enabled
+            >
                 <StatusBar hidden={true}/>
                 <ScrollView
                     showsVerticalScrollIndicator={false}

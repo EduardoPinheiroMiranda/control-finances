@@ -14,7 +14,6 @@ export function AuthRoutes(){
         <Stack.Navigator
             screenOptions={{
                 headerShown: false,
-                animationTypeForReplace: "push",
                 animation: Platform.OS === "ios" ? "simple_push" : "slide_from_right",
             }}
             

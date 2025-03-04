@@ -26,7 +26,7 @@ export function SignUp(){
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <KeyboardAvoidingView 
-                style={[defaultPageStyle.page]}
+                style={[defaultPageStyle.page, styles.container]}
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
                 enabled
             >
