@@ -6,6 +6,10 @@ import { defaultPageStyle } from "../../themes/stylesDefault";
 
 export function Button(props){
 
+    async function handlerAction(){
+        props.action();
+    } 
+
 
     return(
         <TouchableOpacity 
@@ -16,6 +20,7 @@ export function Button(props){
                 }
             ]}
             activeOpacity={0.7}
+            onPress={handlerAction}
         >
             <Text 
                 style={[

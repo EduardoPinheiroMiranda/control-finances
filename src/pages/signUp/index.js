@@ -4,6 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native"; 
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { styles } from "./styles";
+import { registerUser } from "../../services/request/registerUser";
 
 // icons
 import SignUpIcon from "../../assets/svg/signUpIcon.svg"
@@ -22,6 +23,20 @@ export function SignUp(){
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     
+
+    async function handlerForms(){
+
+        if(!name || !email || !password || !confirmPassword){
+            alert("É necessário preencher todos os campos.");
+        }
+
+        if(password !== confirmPassword){
+            alert("As senhas devem ser iguais.");
+        }
+
+        
+        await registerUser({name, email, password});
+    }
 
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -67,7 +82,10 @@ export function SignUp(){
                     </View>
 
                     <View style={styles.sectionButton}>
-                        <Button title="Cadastrar"/>
+                        <Button 
+                            title="Cadastrar"
+                            action={handlerForms}
+                        />
 
                         <Pressable onPress={() => navigation.goBack()}>
                             <Text style={[defaultPageStyle.text, styles.text]}>
