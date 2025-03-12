@@ -4,7 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native"; 
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { styles } from "./styles";
-import { registerUser } from "../../services/request/registerUser";
+import { registerUser } from "../../services/requests/registerUser";
 
 // icons
 import SignUpIcon from "../../assets/svg/signUpIcon.svg"
@@ -28,10 +28,12 @@ export function SignUp(){
 
         if(!name || !email || !password || !confirmPassword){
             alert("É necessário preencher todos os campos.");
+            return;
         }
 
         if(password !== confirmPassword){
             alert("As senhas devem ser iguais.");
+            return;
         }
 
         
