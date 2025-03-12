@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar"
 import { Routes } from "./routes";
+import { AuthProvider } from "./contexts/auth";
 
 
 SplashScreen.preventAutoHideAsync();
@@ -31,8 +32,10 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <StatusBar style="light"/>
-      <Routes/>
+      <AuthProvider>
+        <StatusBar style="light"/>
+        <Routes/>
+      </AuthProvider>
     </NavigationContainer>
   );
 }

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, KeyboardAvoidingView, Text, Pressable, ScrollView, Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native"; 
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { styles } from "./styles";
-import { registerUser } from "../../services/requests/registerUser";
+import { AuthContext } from "../../contexts/auth";
 
 // icons
 import SignUpIcon from "../../assets/svg/signUpIcon.svg"
@@ -18,6 +18,7 @@ import { Button } from "../../components/button";
 export function SignUp(){
 
     const navigation = useNavigation();
+    const { signUp } = useContext(AuthContext);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -36,8 +37,8 @@ export function SignUp(){
             return;
         }
 
+        signUp({name, email, password})
         
-        await registerUser({name, email, password});
     }
 
     return(
