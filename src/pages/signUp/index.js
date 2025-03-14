@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, KeyboardAvoidingView, Text, Pressable, ScrollView, Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { View, KeyboardAvoidingView, Text, Pressable, ScrollView, Platform, TouchableWithoutFeedback, Keyboard, Modal } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native"; 
 import { defaultPageStyle } from "../../themes/stylesDefault";
@@ -13,6 +13,7 @@ import SignUpIcon from "../../assets/svg/signUpIcon.svg"
 import { InputText } from "../../components/inputText";
 import { InputPassword } from "../../components/inputPassword";
 import { Button } from "../../components/button";
+import { PopUp } from "../../components/popUp";
 
 
 export function SignUp(){
@@ -23,7 +24,9 @@ export function SignUp(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    
+
+    const [showModal, setShowModal] = useState(true);
+
 
     async function handlerForms(){
 
@@ -97,6 +100,14 @@ export function SignUp(){
                         </Pressable>
                     </View>
                 </ScrollView>
+
+                <Modal 
+                    transparent={true}
+                    animationType="slide"
+                    visible={showModal}
+                >
+                    <PopUp/>
+                </Modal>
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
     );
