@@ -16,6 +16,8 @@ export const colorPattern = {
     green_900: "#18A91D",
     
     orange_600: "#E28D00",
+
+    red_900: "#FF4D4D"
 };
 
 

@@ -24,8 +24,19 @@ export const styles = StyleSheet.create({
         elevation: 5
         
     },
+    icon: {
+        width: "100%",
+        alignItems: "flex-end"
+    },
+
+    title: {
+        fontSize: 24,
+        color: colorPattern.red_900,
+        fontWeight: "bold"
+    },
+
     description: {
-        fontSize: 20,
+        fontSize: 16,
 
         marginTop: 25,
         marginBottom: 50,

@@ -13,7 +13,7 @@ import SignUpIcon from "../../assets/svg/signUpIcon.svg"
 import { InputText } from "../../components/inputText";
 import { InputPassword } from "../../components/inputPassword";
 import { Button } from "../../components/button";
-import { PopUp } from "../../components/popUp";
+import { Alert } from "../../components/alert";
 
 
 export function SignUp(){
@@ -25,18 +25,25 @@ export function SignUp(){
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const [showModal, setShowModal] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const [popUp, setPopUp] = useState({});
 
 
     async function handlerForms(){
 
         if(!name || !email || !password || !confirmPassword){
-            alert("É necessário preencher todos os campos.");
+            setPopUp({
+                description: "É necessário preencher todos os campos.",
+            })
+            setShowModal(true);
             return;
         }
 
         if(password !== confirmPassword){
-            alert("As senhas devem ser iguais.");
+            setPopUp({
+                description: "As senhas devem ser iguais.",
+            })
+            setShowModal(true);
             return;
         }
 
@@ -103,10 +110,15 @@ export function SignUp(){
 
                 <Modal 
                     transparent={true}
-                    animationType="slide"
+                    animationType="none"
                     visible={showModal}
                 >
-                    <PopUp/>
+                    <Alert 
+                        close={() => setShowModal(false)} 
+                        title={true}
+                        description={popUp.description}
+                        buttonTitle={false}
+                    />
                 </Modal>
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
