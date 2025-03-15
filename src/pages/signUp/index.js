@@ -124,7 +124,7 @@ export function SignUp(){
 
                 <Modal 
                     transparent={true}
-                    animationType="none"
+                    animationType="slide"
                     visible={showModal}
                 >
                     <Alert

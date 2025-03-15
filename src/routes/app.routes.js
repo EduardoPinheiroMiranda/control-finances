@@ -3,22 +3,23 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Platform } from "react-native";
 
 
-import { TabNavigator } from "./tabNavigator";
-import { Movements } from "../pages/Movements";
-import { colors } from "../themes";
-import { ExpenseAnalysis } from "../pages/expenseAnalysis";
-import { PayInvoice } from "../pages/payInvoice";
-import { InvoiceSummaray } from "../pages/invoiceSummary";
-import { AddPurchase } from "../pages/addPurchase";
-import { ManageExpenses } from "../pages/manageExpenses";
-import { ControlLimit } from "../pages/controlLimit";
-import { ManageCards } from "../pages/manageCards";
+import { Home } from "../pages/home";
+// import { TabNavigator } from "./tabNavigator";
+// import { Movements } from "../pages/Movements";
+import { colorPattern } from "../themes";
+// import { ExpenseAnalysis } from "../pages/expenseAnalysis";
+// import { PayInvoice } from "../pages/payInvoice";
+// import { InvoiceSummaray } from "../pages/invoiceSummary";
+// import { AddPurchase } from "../pages/addPurchase";
+// import { ManageExpenses } from "../pages/manageExpenses";
+// import { ControlLimit } from "../pages/controlLimit";
+// import { ManageCards } from "../pages/manageCards";
 
 
 const Stack = createNativeStackNavigator();
 
 
-export function StackNavigator(){
+export function AppRoutes(){
 
 
     return(
@@ -29,23 +30,23 @@ export function StackNavigator(){
                 animation: Platform.OS === "ios" ? "simple_push" : "slide_from_right",
                 
                
-                headerTintColor: colors.color_8,
+                headerTintColor: colorPattern.white_800,
                 headerTitleStyle: {
                     fontSize: 20,
                     fontWeight: "regular",
                   },
                 headerStyle: {
-                    backgroundColor: colors.color_3,
+                    backgroundColor: colorPattern.blue_900,
                     height: 80
                 }
             }}
         >
             <Stack.Screen 
-                name="home-tab" 
-                component={TabNavigator} 
+                name="home" 
+                component={Home} 
                 options={{headerShown: false}}
             />
-            <Stack.Screen 
+            {/* <Stack.Screen 
                 name="movements" 
                 component={Movements} 
                 options={{title: "Movimentações"}}
@@ -84,7 +85,7 @@ export function StackNavigator(){
                 name="manageCards"
                 component={ManageCards} 
                 options={{title: "Gerenciar cartões"}}
-            />
+            /> */}
         </Stack.Navigator>
     );
 }

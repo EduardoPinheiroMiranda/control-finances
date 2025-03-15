@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
 import { API_URL } from "@env";
-import { useNavigation } from "@react-navigation/native";
 
 
 export const AuthContext = createContext({});
@@ -8,22 +7,23 @@ export const AuthContext = createContext({});
 
 export function AuthProvider({children}){
 
-    const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
+    const [signed, setSigned] = useState(false);
 
 
     async function signUp(data){
 
-        setLoading(true);
-
         try{
+
+            setLoading(true);
+
 
             const request = await fetch(
                 `${API_URL}/user/userRegister`,
                 {
-                    method: 'POST',
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json",
                     },
                     body: JSON.stringify(data),
                 }
@@ -47,8 +47,54 @@ export function AuthProvider({children}){
     }
 
 
+    async function signIn(data){
+
+        try{
+
+            setLoading(true);
+
+
+            const request = await fetch(
+                `${API_URL}/user/authenticate`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                }
+            )
+
+            const response = await request.json();
+
+            if(request.status !== 200){
+                setLoading(false);
+                return {
+                    statusCode: request.status,
+                    msg: response.msg
+                };
+            }
+
+            setSigned(true);
+            setLoading(false);
+            return {
+                statusCode: request.status,
+                msg: response.msg
+            };
+
+        }catch(err){
+            console.log(err);
+            setLoading(false);
+            return {
+                statusCode: 500,
+                msg: "Desculpe-nos, tivemos um erro inesperado. Tente novamente mais tarde."
+            };
+        }
+    }
+
+
     return(
-        <AuthContext.Provider value={{signUp, loading}}>
+        <AuthContext.Provider value={{signUp, signIn, loading, signed}}>
             {children}
         </AuthContext.Provider>
     );

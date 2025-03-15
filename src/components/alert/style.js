@@ -7,8 +7,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-
-        backgroundColor: "#00000015"
     },
     modal: {
         backgroundColor: colorPattern.white_800,
@@ -38,8 +36,8 @@ export const styles = StyleSheet.create({
     description: {
         fontSize: 16,
 
-        marginTop: 25,
-        marginBottom: 50,
+        marginTop: 20,
+        marginBottom: 30,
 
     }
 });
