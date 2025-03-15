@@ -19,12 +19,11 @@ import { Alert } from "../../components/alert";
 export function SignUp(){
 
     const navigation = useNavigation();
-    const { signUp } = useContext(AuthContext);
+    const { signUp, loading } = useContext(AuthContext);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-
     const [showModal, setShowModal] = useState(false);
     const [popUp, setPopUp] = useState({});
 
@@ -33,7 +32,10 @@ export function SignUp(){
 
         if(!name || !email || !password || !confirmPassword){
             setPopUp({
+                close: () => setShowModal(false),
+                title: true,
                 description: "É necessário preencher todos os campos.",
+                success: false
             })
             setShowModal(true);
             return;
@@ -41,14 +43,26 @@ export function SignUp(){
 
         if(password !== confirmPassword){
             setPopUp({
+                close: () => setShowModal(false),
+                title: true,
                 description: "As senhas devem ser iguais.",
+                success: false
             })
             setShowModal(true);
             return;
         }
 
-        signUp({name, email, password})
+
+
+        setShowModal(true);
+        const response = await signUp({name, email, password})
         
+        setPopUp({
+            close: response.statusCode !== 201 ? () => setShowModal(false) : () => navigation.goBack(),
+            title: response.statusCode !== 201 ? true : false,
+            description: response.msg,
+            success: response.statusCode !== 201 ? false : true
+        });
     }
 
     return(
@@ -113,11 +127,13 @@ export function SignUp(){
                     animationType="none"
                     visible={showModal}
                 >
-                    <Alert 
-                        close={() => setShowModal(false)} 
-                        title={true}
+                    <Alert
+                        loading={loading} 
+                        close={popUp.close} 
+                        title={popUp.title}
                         description={popUp.description}
                         buttonTitle={false}
+                        success={popUp.success}
                     />
                 </Modal>
             </KeyboardAvoidingView>

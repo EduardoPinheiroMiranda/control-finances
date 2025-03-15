@@ -16,27 +16,39 @@ export function AuthProvider({children}){
 
         setLoading(true);
 
-        fetch(
-            `${API_URL}/user/userRegister`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
+        try{
+
+            const request = await fetch(
+                `${API_URL}/user/userRegister`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                }
+            )
+
+            const response = await request.json();
+            setLoading(false);
+
+            return {
+                statusCode: request.status,
+                msg: request.status !== 500 ? response.msg : "Desculpe-nos, tivemos um erro inesperado. Tente novamente mais tarde."
             }
-        )
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err));
-        
-        setLoading(false);
-        navigation.goBack();
+
+        }catch(err){
+            setLoading(false);
+            return {
+                statusCode: 500,
+                msg: "Desculpe-nos, tivemos um erro inesperado. Tente novamente mais tarde."
+            }
+        }
     }
 
 
     return(
-        <AuthContext.Provider value={{signUp}}>
+        <AuthContext.Provider value={{signUp, loading}}>
             {children}
         </AuthContext.Provider>
     );

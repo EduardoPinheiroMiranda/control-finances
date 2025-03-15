@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, ActivityIndicator } from "react-native";
 import { styles } from "./style";
 import { useNavigation } from "@react-navigation/native";
 import { colorPattern } from "../../themes";
@@ -7,8 +7,8 @@ import { defaultPageStyle } from "../../themes/stylesDefault";
 
 
 // icon
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import AntDesign from '@expo/vector-icons/AntDesign';
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Fontisto from  "@expo/vector-icons/Fontisto";
 
 // components
 import { Button } from "../button";
@@ -16,14 +16,18 @@ import { Button } from "../button";
 
 export function Alert(props){
 
-    // title
-    // description
-    // button
-    // alert
-    // funçãO DO BUTTOM
-
     const navigation = useNavigation();
     
+
+    if(props.loading){
+        return(
+            <View style={styles.container}>
+                <View style={styles.modal}>
+                    <ActivityIndicator size={64} color={colorPattern.blue_900}/>
+                </View>
+            </View>
+        );
+    }
 
     return(
         <View style={styles.container}>
@@ -35,6 +39,13 @@ export function Alert(props){
                     </Pressable>
                 </View>
                 
+                <View style={{marginTop: 20}}>
+                    {
+                        props.success && (
+                            <Fontisto name="check" size={24} color={colorPattern.green_900}/>
+                        )
+                    }
+                </View>
 
                 <View>
                     {
