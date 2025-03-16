@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_URL } from "@env";
 
 
@@ -9,6 +10,39 @@ export function AuthProvider({children}){
 
     const [loading, setLoading] = useState(false);
     const [signed, setSigned] = useState(false);
+    const [user, setUser] = useState({});
+
+
+    useEffect(() => {
+
+        async function automaticLogin(){
+
+            setLoading(true);
+
+            const token = await AsyncStorage.getItem("userToken");
+
+            const request = await fetch(
+                `${API_URL}/user/getUserByToken`,
+                {
+                    headers: {
+                        "authorization": `Bearer ${token}`
+                    }
+                }
+            );
+            const response = await request.json();
+
+            if(request.status === 200){
+                setUser(response);
+                setSigned(true);
+            }else{
+                await AsyncStorage.removeItem("userToken");
+            }
+
+            setLoading(false);
+        }
+
+        automaticLogin();
+    }, []);
 
 
     async function signUp(data){
@@ -74,6 +108,10 @@ export function AuthProvider({children}){
                     msg: response.msg
                 };
             }
+            
+
+            await AsyncStorage.setItem("userToken", response.token);
+
 
             setSigned(true);
             setLoading(false);
@@ -85,6 +123,7 @@ export function AuthProvider({children}){
         }catch(err){
             console.log(err);
             setLoading(false);
+
             return {
                 statusCode: 500,
                 msg: "Desculpe-nos, tivemos um erro inesperado. Tente novamente mais tarde."
