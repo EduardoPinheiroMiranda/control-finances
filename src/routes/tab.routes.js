@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { colors } from "../themes";
+import { colorPattern } from "../themes";
 
 // Pages
 import { Home } from "../pages/home";
@@ -18,7 +18,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 const Tabs = createBottomTabNavigator();
 
 
-export function TabNavigator(){
+export function TabRoutes(){
 
    
     return(
@@ -27,17 +27,17 @@ export function TabNavigator(){
 
                 headerStyle:{
                     height: 80,
-                    backgroundColor: colors.color_3,
+                    backgroundColor: colorPattern.blue_300,
                 },
                 headerTitleStyle: {
-                    color: colors.color_7,
+                    color: colorPattern.white_800,
                     fontSize: 20,
                     fontWeight: "regular"
                 },
 
 
-                tabBarActiveTintColor: colors.color_3,
-                tabBarInactiveTintColor: colors.color_6,
+                tabBarActiveTintColor: colorPattern.blue_300,
+                tabBarInactiveTintColor: colorPattern.black_900,
                 
                 tabBarStyle: {
                     borderTopWidth: 0,
@@ -46,7 +46,7 @@ export function TabNavigator(){
 
                 tabBarItemStyle: {
                     paddingTop: 10,
-                    backgroundColor: colors.color_7
+                    backgroundColor: colorPattern.white_900
                 },
 
                 tabBarLabelStyle: {

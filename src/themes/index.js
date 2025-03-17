@@ -8,7 +8,7 @@ export const colorPattern = {
     gray_400: "#D9D9D9",
     gray_300: "#D4D4D4",
 
-    blaCK_900: "#2B2F33",
+    black_900: "#2B2F33",
 
     white_900: "#F1F1F1",
     white_800: "#FAFAFA",

@@ -13,7 +13,11 @@ export function Routes(){
 
     if(loading){
         return(
-            <View>
+            <View style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
                 <ActivityIndicator size={64} color={colorPattern.blue_900}/>
             </View>
         );

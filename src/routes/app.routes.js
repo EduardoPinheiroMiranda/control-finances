@@ -7,6 +7,7 @@ import { Home } from "../pages/home";
 // import { TabNavigator } from "./tabNavigator";
 // import { Movements } from "../pages/Movements";
 import { colorPattern } from "../themes";
+import { TabRoutes } from "./tab.routes";
 // import { ExpenseAnalysis } from "../pages/expenseAnalysis";
 // import { PayInvoice } from "../pages/payInvoice";
 // import { InvoiceSummaray } from "../pages/invoiceSummary";
@@ -42,8 +43,8 @@ export function AppRoutes(){
             }}
         >
             <Stack.Screen 
-                name="home" 
-                component={Home} 
+                name="tabNavigation" 
+                component={TabRoutes} 
                 options={{headerShown: false}}
             />
             {/* <Stack.Screen 
