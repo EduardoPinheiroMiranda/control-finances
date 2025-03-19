@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { colorPattern } from "../themes";
+import { Platform } from "react-native";
 
 // Pages
 import { Home } from "../pages/home";
@@ -7,11 +8,11 @@ import { Wallet } from "../pages/wallet";
 import { MoreOptions } from "../pages/MoreOptions";
 import { Finances} from "../pages/finances";
 
-
 // Icons 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Feather from '@expo/vector-icons/Feather';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+
 
 
 
@@ -24,6 +25,17 @@ export function TabRoutes(){
     return(
         <Tabs.Navigator
             screenOptions={{
+
+                statusBarStyle: "light",
+                
+                animation: "shift",
+                transitionSpec:{
+                    animation: "timing",
+                    config: {
+                        duration: 150
+                    }
+                    
+                },
 
                 headerStyle:{
                     height: 80,

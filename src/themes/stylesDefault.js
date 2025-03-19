@@ -1,5 +1,6 @@
 import { Platform, StyleSheet } from "react-native";
 import Constants from "expo-constants";
+import { colorPattern } from ".";
 
 
 export const statusBarHeight = Constants.statusBarHeight;
@@ -16,5 +17,17 @@ export const defaultPageStyle = StyleSheet.create({
                 ios: "Roboto"
             }
         ),
+    },
+    box: {
+        backgroundColor: colorPattern.white_800,
+        width: "90%",
+
+        borderRadius: 10,
+        paddingHorizontal: 20,
+        paddingVertical: 20,
+        elevation: 3,
+
+        margin: "auto",
+        marginBottom: 20
     }
 });

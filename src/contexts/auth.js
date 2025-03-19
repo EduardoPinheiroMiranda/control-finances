@@ -8,37 +8,44 @@ export const AuthContext = createContext({});
 
 export function AuthProvider({children}){
 
+    const [loadingPage, setLoadingPage] = useState(false);
     const [loading, setLoading] = useState(false);
     const [signed, setSigned] = useState(false);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null);
 
 
     useEffect(() => {
 
         async function automaticLogin(){
 
-            setLoading(true);
+            try{
 
-            const token = await AsyncStorage.getItem("userToken");
+                setLoadingPage(true);
 
-            const request = await fetch(
-                `${API_URL}/user/getUserByToken`,
-                {
-                    headers: {
-                        "authorization": `Bearer ${token}`
+                const token = await AsyncStorage.getItem("userToken");
+
+                const request = await fetch(
+                    `${API_URL}/user/getUserByToken`,
+                    {
+                        headers: {
+                            "authorization": `Bearer ${token}`
+                        }
                     }
+                );
+                const response = await request.json();
+                
+                if(request.status === 200){
+                    setUser(response);
+                    setSigned(true);
+                }else{
+                    await AsyncStorage.removeItem("userToken");
                 }
-            );
-            const response = await request.json();
 
-            if(request.status === 200){
-                setUser(response);
-                setSigned(true);
-            }else{
-                await AsyncStorage.removeItem("userToken");
+                setLoadingPage(false);
+
+            }catch(err){
+                setLoadingPage(false);
             }
-
-            setLoading(false);
         }
 
         automaticLogin();
@@ -103,27 +110,26 @@ export function AuthProvider({children}){
 
             if(request.status !== 200){
                 setLoading(false);
+
                 return {
                     statusCode: request.status,
                     msg: response.msg
                 };
             }
-            
-
-            await AsyncStorage.setItem("userToken", response.token);
-
-
+        
+            setUser(response);
             setSigned(true);
             setLoading(false);
+            await AsyncStorage.setItem("userToken", response.token);
+        
+            
             return {
-                statusCode: request.status,
-                msg: response.msg
+                statusCode: 200,
+                msg: ""
             };
 
         }catch(err){
-            console.log(err);
             setLoading(false);
-
             return {
                 statusCode: 500,
                 msg: "Desculpe-nos, tivemos um erro inesperado. Tente novamente mais tarde."
@@ -133,7 +139,14 @@ export function AuthProvider({children}){
 
 
     return(
-        <AuthContext.Provider value={{signUp, signIn, loading, signed}}>
+        <AuthContext.Provider value={{
+            signUp, 
+            signIn, 
+            loading,
+            loadingPage,
+            signed, 
+            user
+        }}>
             {children}
         </AuthContext.Provider>
     );

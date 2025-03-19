@@ -7,7 +7,7 @@ import { EyeClose } from "../../assets/svg/eyeClose";
 import { EyeOpen } from "../../assets/svg/eyeOpen";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 
-const iconStyles = {size: 30, color: colorPattern.blaCK_900};
+const iconStyles = {size: 30, color: colorPattern.black_900};
 
 
 export function InputPassword(props){
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     input: {
         height: 60,
 
-        color: colorPattern.blaCK_900,
+        color: colorPattern.black_900,
 
         borderWidth: 1,
         borderColor: colorPattern.gray_300,

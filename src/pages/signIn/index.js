@@ -54,6 +54,8 @@ export function SignIn(){
         }else{
             setShowModal(false);
         }
+
+        return;
     }
 
 

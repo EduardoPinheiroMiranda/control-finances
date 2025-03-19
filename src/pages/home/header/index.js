@@ -7,6 +7,7 @@ import { styles } from "./styles";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { UserCircle } from "../../../assets/svg/userCircle"
 import { colorPattern } from "../../../themes";
+import { defaultPageStyle } from "../../../themes/stylesDefault";
 
 
 export function Header(){
@@ -18,7 +19,7 @@ export function Header(){
             <View style={styles.header}>
                 <View style={styles.sectionUser}>
                     <UserCircle data={{color: colorPattern.white_800, size: 50}}/>
-                    <Text style={styles.userName}>{userName}</Text>
+                    <Text style={[defaultPageStyle.text, styles.userName]}>{userName}</Text>
                 </View>
                 <View>
                     <MaterialIcons name="notifications-none" size={30} color={colorPattern.white_800}/>

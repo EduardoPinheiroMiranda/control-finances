@@ -8,7 +8,10 @@ const statusBarHeight = Constants.statusBarHeight;
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: colorPattern.white_900,
+    },
+    scrollView: {
+        flex: 1,
+        paddingTop: 30
     }
 });

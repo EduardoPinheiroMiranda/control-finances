@@ -8,10 +8,10 @@ import { colorPattern } from "../themes";
 
 export function Routes(){
 
-    const { signed, loading } = useContext(AuthContext);
+    const { signed, loadingPage } = useContext(AuthContext);
 
 
-    if(loading){
+    if(loadingPage){
         return(
             <View style={{
                 flex: 1,

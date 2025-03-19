@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Pressable, ActivityIndicator } from "react-native";
-import { styles } from "./style";
+import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { colorPattern } from "../../themes";
 import { defaultPageStyle } from "../../themes/stylesDefault";

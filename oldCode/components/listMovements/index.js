@@ -10,8 +10,8 @@ import { SendMoney } from "../../assets/svg/sendMoney";
 import { ReceivedMoney } from "../../assets/svg/receivedMoney";
 import { Invoice } from "../../assets/svg/invoice";
 import { Money } from "../../assets/svg/money";
-import { colors } from "../../themes";
-import { formatCurrency } from "../../utils/formatCurrency";
+import { colors } from "../../../src/themes";
+import { formatCurrency } from "../../../src/utils/formatCurrency";
 
 
 

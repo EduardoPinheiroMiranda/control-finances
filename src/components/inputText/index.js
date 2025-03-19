@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     input: {
         height: 60,
 
-        color: colorPattern.blaCK_900,
+        color: colorPattern.black_900,
 
         borderWidth: 1,
         borderColor: colorPattern.gray_300,

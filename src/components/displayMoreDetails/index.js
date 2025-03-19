@@ -2,7 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { colors } from "../../themes";
+import { colorPattern, colors } from "../../themes";
+import { defaultPageStyle } from "../../themes/stylesDefault";
 
 
 export function DisplayMoreDetails(props){
@@ -16,8 +17,21 @@ export function DisplayMoreDetails(props){
                 style={styles.button}
                 onPress={props.nextPage}
             >
-                <Text style={{color: colors.color_1, fontSize:14}}>{title}</Text>
-                <AntDesign name="arrowright" size={20} color={colors.color_1}/>
+                <Text style={[
+                    defaultPageStyle.text,
+                    {
+                        color: colorPattern.blue_300, 
+                        fontSize:14
+                    }
+                ]}>
+                    {title}
+                </Text>
+                
+                <AntDesign 
+                    name="arrowright" 
+                    size={20} 
+                    color={colorPattern.blue_300}
+                />
             </TouchableOpacity>
         </View>
     );

@@ -1,13 +1,14 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { colorPattern } from "../themes";
 import { Platform } from "react-native";
 
 
-import { Home } from "../pages/home";
-// import { TabNavigator } from "./tabNavigator";
-// import { Movements } from "../pages/Movements";
-import { colorPattern } from "../themes";
+// pages
 import { TabRoutes } from "./tab.routes";
+
+
+// import { Movements } from "../pages/Movements";
 // import { ExpenseAnalysis } from "../pages/expenseAnalysis";
 // import { PayInvoice } from "../pages/payInvoice";
 // import { InvoiceSummaray } from "../pages/invoiceSummary";

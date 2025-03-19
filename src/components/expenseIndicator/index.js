@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import Svg, { Circle, Path, Defs, LinearGradient, Stop } from "react-native-svg";
-import { colors } from "../../themes"
+import { colorPattern, colors } from "../../themes"
 
 
 function interpolateColor(value, color1, color2){
@@ -39,7 +39,7 @@ export function ExpenseIndicator({data}){
     const size = data.size;                         // Tamanho do gráfico
     const strokeWidth = data.strokeWidth;           // Espessura do arco
     const gradientColors = ["#3CEE71", "#FF4D4D"];  // Cores do gradiente
-    const backgroundColor = colors.color_9;         // Cor do fundo do arco
+    const backgroundColor = colorPattern.gray_300;         // Cor do fundo do arco
 
 
     const radius = (size - strokeWidth) / 2;

@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, SafeAreaView, FlatList, Pressable } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
-import { styles } from "./style";
+import { styles } from "./styles";
 import { colorPattern, colors } from "../../themes";
 
 
