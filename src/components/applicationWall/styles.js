@@ -19,7 +19,8 @@ export const styles = StyleSheet.create({
     },
     textValue: {
         fontSize: 28,
-        fontWeight:  "regular"
+        fontWeight:  "regular",
+        color: colorPattern.black_900
     },
 
     sectionButtons: {

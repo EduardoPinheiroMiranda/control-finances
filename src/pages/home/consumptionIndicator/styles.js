@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     title: {
         fontSize: 16,
         fontWeight: "medium",
-        color: colorPattern.gray_900
+        color: colorPattern.black_900
     },
     sectionConsumption: {
         flexDirection: "row",
@@ -18,6 +18,4 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         gap: 15,
     },
-    
-
 })

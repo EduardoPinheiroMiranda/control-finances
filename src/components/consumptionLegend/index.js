@@ -8,7 +8,7 @@ import { DisplayMoreDetails } from "../displayMoreDetails";
 import { colorPattern } from "../../themes";
 
 
-export function ConsumptionLegend(){
+export function ConsumptionLegend(props){
 
 
     return(
@@ -30,7 +30,12 @@ export function ConsumptionLegend(){
                 </View>
             </View>
 
-            <DisplayMoreDetails data={{title: "Ver mais detalhes"}}/>
+            {
+                props.displayMoreDatails && (
+                    <DisplayMoreDetails data={{title: props.displayMoreDatails}}/>
+                )
+            }
+            
         </View>
     );
 }

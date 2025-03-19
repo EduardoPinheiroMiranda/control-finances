@@ -24,7 +24,7 @@ export function ConsumptionIndicator(){
                     strokeWidth: 10
                 }}/>
 
-                <ConsumptionLegend/>
+                <ConsumptionLegend displayMoreDatails="Ver mais detalhes"/>
             </View>
 
         </View>
