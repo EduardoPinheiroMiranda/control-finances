@@ -6,9 +6,12 @@ import { styles } from "./styles";
 // componets
 import { ExpenseIndicator } from "../../../components/expenseIndicator";
 import { ConsumptionLegend } from "../../../components/consumptionLegend";
+import { useNavigation } from "@react-navigation/native";
 
 
 export function ConsumptionIndicator(){
+
+    const navigation = useNavigation();
 
 
     return(
@@ -24,7 +27,10 @@ export function ConsumptionIndicator(){
                     strokeWidth: 10
                 }}/>
 
-                <ConsumptionLegend displayMoreDatails="Ver mais detalhes"/>
+                <ConsumptionLegend 
+                    displayMoreDatails="Ver mais detalhes" 
+                    nextPage={() => navigation.navigate("finances")}
+                />
             </View>
 
         </View>

@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     },
     title: {
         fontSize: 16,
-        fontWeight: "medium",
+        fontWeight: "regular",
         color: colorPattern.black_900
     },
     sectionConsumption: {

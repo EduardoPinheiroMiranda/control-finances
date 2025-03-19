@@ -8,8 +8,6 @@ import { defaultPageStyle } from "../../themes/stylesDefault";
 
 export function DisplayMoreDetails(props){
 
-    const { title } = props.data;
-
 
     return(
         <View style={styles.container}>
@@ -24,7 +22,7 @@ export function DisplayMoreDetails(props){
                         fontSize:14
                     }
                 ]}>
-                    {title}
+                    {props.title}
                 </Text>
                 
                 <AntDesign 

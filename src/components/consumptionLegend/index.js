@@ -32,7 +32,10 @@ export function ConsumptionLegend(props){
 
             {
                 props.displayMoreDatails && (
-                    <DisplayMoreDetails data={{title: props.displayMoreDatails}}/>
+                    <DisplayMoreDetails 
+                        title={props.displayMoreDatails} 
+                        nextPage={props.nextPage}
+                    />
                 )
             }
             
