@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { styles, stylesSmall, stylesBig } from "./styles";
-
+import { colorPattern, colors } from "../../../src/themes";
+import { formatCurrency } from "../../../src/utils/formatCurrency";
 
 //icons
 import { BackgroundIcon } from "../../assets/svg/backgroundIcon";
@@ -10,8 +11,6 @@ import { SendMoney } from "../../assets/svg/sendMoney";
 import { ReceivedMoney } from "../../assets/svg/receivedMoney";
 import { Invoice } from "../../assets/svg/invoice";
 import { Money } from "../../assets/svg/money";
-import { colors } from "../../../src/themes";
-import { formatCurrency } from "../../../src/utils/formatCurrency";
 
 
 
@@ -84,8 +83,8 @@ export function ListMovements({data}){
 
     const [dimensions, setDimensions] = useState({width: 0, heigth: 0});
 
-    const smallIconStyles = {size: 15, color: colors.color_6};
-    const bigIconStyles = {size: 25, color: colors.color_6};
+    const smallIconStyles = {size: 15, color: colorPattern.black_900};
+    const bigIconStyles = {size: 25, color: colorPattern.black_900};
 
 
     function getDimensions(event){
