@@ -14,6 +14,7 @@ export function DisplayMoreDetails(props){
             <TouchableOpacity 
                 style={styles.button}
                 onPress={props.nextPage}
+                activeOpacity={0.4}
             >
                 <Text style={[
                     defaultPageStyle.text,

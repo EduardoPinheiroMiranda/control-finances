@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, SafeAreaView } from "react-native";
+import { ScrollView, SafeAreaView, View } from "react-native";
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 
@@ -8,6 +8,7 @@ import { defaultPageStyle } from "../../themes/stylesDefault";
 import { Header } from "./header";
 import { ApplicationWall } from  "../../components/applicationWall";
 import { ConsumptionIndicator } from "./consumptionIndicator";
+import { DisplayCards } from "./displayCards";
 // import { MainShortcuts } from "./mainShortcuts";
 // import { ConsumptionIndicator } from "../../components/consumptionIndicator";
 // import { RecentActivity } from "./recentActivity";
@@ -41,9 +42,14 @@ export function Home(){
                 />
 
                 <ConsumptionIndicator/>
+                <DisplayCards/>
+                
+                
                 {/* <MainShortcuts data={{balance: balance, showValue: showValue}} show={showBalance}/>
                 <ConsumptionIndicator data={chartValues}/>
                 <RecentActivity data={moviments}/> */}
+
+                <View style={{height: 530}}/>
             </ScrollView> 
         </SafeAreaView>
     )
