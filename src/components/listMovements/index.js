@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { styles, stylesSmall, stylesBig } from "./styles";
-import { colorPattern, colors } from "../../../src/themes";
+import { colorPattern } from "../../../src/themes";
 import { formatCurrency } from "../../../src/utils/formatCurrency";
 
 //icons

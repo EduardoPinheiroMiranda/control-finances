@@ -9,10 +9,8 @@ import { Header } from "./header";
 import { ApplicationWall } from  "../../components/applicationWall";
 import { ConsumptionIndicator } from "./consumptionIndicator";
 import { DisplayCards } from "./displayCards";
-// import { MainShortcuts } from "./mainShortcuts";
-// import { ConsumptionIndicator } from "../../components/consumptionIndicator";
-// import { RecentActivity } from "./recentActivity";
-// import { moviments } from "../../../dataFromTest";
+import { RecentActivity } from "./recentActivity";
+import { moviments } from "../../../dataFromTest";
 
 
 export function Home(){
@@ -43,13 +41,9 @@ export function Home(){
 
                 <ConsumptionIndicator/>
                 <DisplayCards/>
-                
-                
-                {/* <MainShortcuts data={{balance: balance, showValue: showValue}} show={showBalance}/>
-                <ConsumptionIndicator data={chartValues}/>
-                <RecentActivity data={moviments}/> */}
+                <RecentActivity data={moviments}/>
 
-                <View style={{height: 530}}/>
+                <View style={{height: 30}}/>
             </ScrollView> 
         </SafeAreaView>
     )

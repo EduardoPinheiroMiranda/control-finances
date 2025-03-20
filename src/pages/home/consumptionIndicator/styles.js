@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     title: {
         fontSize: 16,
         fontWeight: "regular",
-        color: colorPattern.black_900
+        color: colorPattern.gray_900
     },
     sectionConsumption: {
         flexDirection: "row",

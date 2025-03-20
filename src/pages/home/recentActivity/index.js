@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
-import { stylesDefault } from "../../../themes/stylesDefault";
+import { defaultPageStyle, stylesDefault } from "../../../themes/stylesDefault";
 import { styles } from "./styles";
 import { ListMovements } from "../../../components/listMovements";
 import { DisplayMoreDetails } from "../../../components/displayMoreDetails";
@@ -15,7 +15,12 @@ export function RecentActivity({data}){
 
 
     return(
-        <View style={[stylesDefault.box, styles.container]}>
+        <View style={[defaultPageStyle.box, styles.container]}>
+
+            <Text style={[defaultPageStyle.text, styles.title]}>
+                Atividades recentes
+            </Text>
+
             <View>
                 {
                     data.map((moviments) => {
@@ -25,7 +30,7 @@ export function RecentActivity({data}){
             </View>
             
             <DisplayMoreDetails 
-                data={{title: "Ver mais detalhes"}} 
+                title="Ver mais detalhes"
                 nextPage={() => navigation.navigate("movements")}
             />
         </View>

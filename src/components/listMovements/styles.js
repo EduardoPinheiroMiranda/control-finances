@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../../../src/themes";
+import { colorPattern } from "../../../src/themes";
 
 
 export const styles = StyleSheet.create({
@@ -31,11 +31,11 @@ export const stylesSmall = StyleSheet.create({
         alignItems: "center"
     },
     mainText: {
-        color: colors.color_6,
+        color: colorPattern.black_900,
         fontSize: 14
     },
     secondaryText: {
-        color: colors.color_6,
+        color: colorPattern.black_900,
         fontSize: 10
     }
 });
@@ -65,11 +65,11 @@ export const stylesBig = StyleSheet.create({
         position: "absolute",
     },
     mainText: {
-        color: colors.color_6,
+        color: colorPattern.black_900,
         fontSize: 16
     },
     secondaryText: {
-        color: colors.color_6,
+        color: colorPattern.black_900,
         fontSize: 12
     }
 });
