@@ -25,7 +25,7 @@ export const defaultPageStyle = StyleSheet.create({
         borderRadius: 10,
         paddingHorizontal: 20,
         paddingVertical: 20,
-        elevation: 5,
+        elevation: 3,
 
         margin: "auto",
         marginBottom: 20

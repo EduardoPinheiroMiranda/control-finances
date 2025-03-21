@@ -8,7 +8,7 @@ import { formatCurrency } from "../../utils/formatCurrency";
 import  ChipSmall from "../../assets/svg/chipSmall.svg"
 
 
-export function CardSmall(){
+export function CardSmall(props){
 
     const colorFont = "#FAFAFA";
     const colorBackground = "#539EE1";
@@ -44,9 +44,18 @@ export function CardSmall(){
                         <Text style={[defaultPageStyle.text, styles.text, {color: colorFont}]}>
                             {expired}
                         </Text>
-                        <Text style={[defaultPageStyle.text, styles.text, {color: colorFont}]}>
-                            {formatCurrency(valueUsed)}
-                        </Text>
+
+                        {
+                            props.showValue ? 
+                            <Text style={[defaultPageStyle.text, styles.text, {color: colorFont}]}>
+                                {formatCurrency(valueUsed)}
+                            </Text>
+                            :
+                            <Text style={[defaultPageStyle.text, styles.text, {color: colorFont}]}>
+                                ****
+                            </Text>
+                        }
+
                     </View>
                 </View>
             </View>

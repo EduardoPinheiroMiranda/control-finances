@@ -39,8 +39,8 @@ export function Home(){
                     activeButtons={false}
                 />
 
-                <ConsumptionIndicator/>
-                <DisplayCards/>
+                <ConsumptionIndicator showValue={showValue}/>
+                <DisplayCards showValue={showValue}/>
                 <RecentActivity data={moviments}/>
 
                 <View style={{height: 30}}/>

@@ -16,17 +16,32 @@ export function ConsumptionLegend(props){
             <View>
                 <View style={styles.sectionLegends}>
                     <Text style={[defaultPageStyle.text, styles.legend]}>Limite:</Text>
-                    <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(4500)}</Text>
+                    {
+                        props.showValue ?
+                            <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(4500)}</Text>
+                        :
+                            <Text style={[defaultPageStyle.text, styles.legend]}>****</Text>
+                    }
                 </View>
 
                 <View style={styles.sectionLegends}>
                     <Text style={[defaultPageStyle.text, styles.legend]}>Utilizado:</Text>
-                    <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(3600)}</Text>
+                    {
+                        props.showValue ?
+                            <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(4500)}</Text>
+                        :
+                            <Text style={[defaultPageStyle.text, styles.legend]}>****</Text>
+                    }
                 </View>
 
                 <View style={styles.sectionLegends}>
                     <Text style={[defaultPageStyle.text, styles.legend]}>Disponível:</Text>
-                    <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(3600)}</Text>
+                    {
+                        props.showValue ?
+                            <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(4500)}</Text>
+                        :
+                            <Text style={[defaultPageStyle.text, styles.legend]}>****</Text>
+                    }
                 </View>
             </View>
 

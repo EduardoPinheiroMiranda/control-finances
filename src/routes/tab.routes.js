@@ -58,7 +58,7 @@ export function TabRoutes(){
 
                 tabBarItemStyle: {
                     paddingTop: 10,
-                    backgroundColor: colorPattern.white_900
+                    backgroundColor: colorPattern.white_800
                 },
 
                 tabBarLabelStyle: {
