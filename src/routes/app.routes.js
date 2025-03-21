@@ -6,9 +6,7 @@ import { Platform } from "react-native";
 
 // pages
 import { TabRoutes } from "./tab.routes";
-
-
-// import { Movements } from "../pages/Movements";
+import { Movements } from "../pages/Movements";
 // import { ExpenseAnalysis } from "../pages/expenseAnalysis";
 // import { PayInvoice } from "../pages/payInvoice";
 // import { InvoiceSummaray } from "../pages/invoiceSummary";
@@ -38,7 +36,7 @@ export function AppRoutes(){
                     fontWeight: "regular",
                   },
                 headerStyle: {
-                    backgroundColor: colorPattern.blue_900,
+                    backgroundColor: colorPattern.blue_300,
                     height: 80
                 }
             }}
@@ -48,12 +46,12 @@ export function AppRoutes(){
                 component={TabRoutes} 
                 options={{headerShown: false}}
             />
-            {/* <Stack.Screen 
+             <Stack.Screen 
                 name="movements" 
                 component={Movements} 
                 options={{title: "Movimentações"}}
             />
-            <Stack.Screen 
+            {/*<Stack.Screen 
                 name="expenseAnalysis" 
                 component={ExpenseAnalysis} 
                 options={{title: "Análise de gastos"}}

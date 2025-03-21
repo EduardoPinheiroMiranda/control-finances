@@ -26,7 +26,6 @@ export function Home(){
 
     return(
         <SafeAreaView style={[defaultPageStyle.page, styles.container]}>
-            <StatusBar style="light" />
             <Header/>
             <ScrollView 
                 style={styles.scrollView}

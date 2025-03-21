@@ -85,7 +85,6 @@ export function Finances(){
 
     return(
         <SafeAreaView style={styles.container}>
-            <StatusBar style="light" />
             <View style={styles.scrollSection}>
                 <FlatList
                     data={listOptions}
