@@ -48,5 +48,6 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         
         borderRadius: 20,
+        zIndex: 2
     }
 });

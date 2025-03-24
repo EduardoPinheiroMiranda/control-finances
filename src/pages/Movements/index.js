@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import { View, FlatList, TextInput, TouchableOpacity, SafeAreaView, Modal } from "react-native";
+import { StatusBar, View, FlatList, TextInput, TouchableOpacity, SafeAreaView, Modal } from "react-native";
 import { ListMovements } from "../../components/listMovements";
 import { styles } from "./styles";
 import { colorPattern } from "../../themes";
+
+// pages
 import { moviments } from "../../../dataFromTest";
 
 // icon
@@ -77,7 +78,7 @@ export function Movements(){
                 visible={openFilter}
                 animationType="slide"
             >
-                <Filter/>
+                <Filter openFilter={() => setOpenFilter(!openFilter)}/>
             </Modal>
         </SafeAreaView>
     );
