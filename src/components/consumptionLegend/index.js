@@ -18,7 +18,7 @@ export function ConsumptionLegend(props){
                     <Text style={[defaultPageStyle.text, styles.legend]}>Limite:</Text>
                     {
                         props.showValue ?
-                            <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(4500)}</Text>
+                            <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(props.data.limit)}</Text>
                         :
                             <Text style={[defaultPageStyle.text, styles.legend]}>****</Text>
                     }
@@ -28,7 +28,7 @@ export function ConsumptionLegend(props){
                     <Text style={[defaultPageStyle.text, styles.legend]}>Utilizado:</Text>
                     {
                         props.showValue ?
-                            <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(4500)}</Text>
+                            <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(props.data.amount)}</Text>
                         :
                             <Text style={[defaultPageStyle.text, styles.legend]}>****</Text>
                     }
@@ -38,7 +38,7 @@ export function ConsumptionLegend(props){
                     <Text style={[defaultPageStyle.text, styles.legend]}>Disponível:</Text>
                     {
                         props.showValue ?
-                            <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(4500)}</Text>
+                            <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(props.data.available)}</Text>
                         :
                             <Text style={[defaultPageStyle.text, styles.legend]}>****</Text>
                     }

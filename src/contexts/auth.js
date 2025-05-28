@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { API_URL } from "@env";
 import { ExternalCalls } from "../services/externalCalls";
 
 
@@ -48,7 +47,6 @@ export function AuthProvider({children}){
         automaticLogin();
     }, []);
 
-
     async function signUp(data){
 
         setLoading(true);
@@ -61,7 +59,6 @@ export function AuthProvider({children}){
             msg: response.msg
         }
     }
-
 
     async function signIn(data){
 

@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar"
 import { Routes } from "./routes";
 import { AuthProvider } from "./contexts/auth";
+import { FinancialSummaryProvaider } from "./contexts/financialSummary";
 
 
 SplashScreen.preventAutoHideAsync();
@@ -33,8 +34,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <AuthProvider>
-        <StatusBar style="light"/>
-        <Routes/>
+        <FinancialSummaryProvaider>
+          <StatusBar style="light"/>
+          <Routes/>
+        </FinancialSummaryProvaider>
       </AuthProvider>
     </NavigationContainer>
   );
