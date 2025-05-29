@@ -5,21 +5,20 @@ import { useNavigation } from "@react-navigation/native";
 import { colorPattern } from "../../themes";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 
-
 // icon
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Fontisto from  "@expo/vector-icons/Fontisto";
 
 // components
-import { Button } from "../button";
+import { Button } from "../Button";
 
 
-export function Alert(props){
+export function Alert({loading, success, close, title, description, buttonTitle, buttonFunction}){
 
     const navigation = useNavigation();
     
 
-    if(props.loading){
+    if(loading){
         return(
             <View style={styles.container}>
                 <View style={styles.modal}>
@@ -34,14 +33,14 @@ export function Alert(props){
             <View style={styles.modal}>
 
                 <View style={styles.icon}>
-                    <Pressable onPress={() => props.close()}>
+                    <Pressable onPress={() => close()}>
                         <MaterialCommunityIcons name="close" size={20} color={colorPattern.red_900}/>
                     </Pressable>
                 </View>
                 
                 <View style={{marginTop: 20}}>
                     {
-                        props.success && (
+                        success && (
                             <Fontisto name="check" size={24} color={colorPattern.green_900}/>
                         )
                     }
@@ -49,7 +48,7 @@ export function Alert(props){
 
                 <View>
                     {
-                        props.title && (
+                        title && (
                             <Text style={[defaultPageStyle.text, styles.title]}>
                                 Atenção
                             </Text>
@@ -59,16 +58,16 @@ export function Alert(props){
 
 
                 <Text style={[defaultPageStyle.text, styles.description]}>
-                    {props.description}
+                    {description}
                 </Text>
                 
 
                 {
-                    props.buttonTitle && (
+                    buttonTitle && (
                         <Button 
-                            title={props.buttonTitle} 
+                            title={buttonTitle} 
                             background={colorPattern.red_900}
-                            action={props.buttonFunction}
+                            action={buttonFunction}
                         />
                     )
                 }

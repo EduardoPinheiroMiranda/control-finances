@@ -20,33 +20,36 @@ export function FinancialSummaryProvider({children}){
 
     useEffect(() => {
 
-        async function getData(){
-
-            setLoadData(true);
-
-            const token = await AsyncStorage.getItem("userToken");
-            const response = await externalCalls.GET("/user/generalSummary", token, null);
-            
-
-            if(response.statusCode === 401){
-                await signOut();
-            }
-
-
-            setApplications(response.response.applications || {});
-            setInvoice(response.response.invoice || {});
-            setCards(response.response.cards || []);
-            setMovements(response.response.movements || []);
-
-            setLoadData(false);
-
-        }
-        getData();
-
+        async function startData(){ await getData(); };
+        startData();
+        
     }, []);
+
+
+    async function getData(){
+
+        setLoadData(true);
+
+        const token = await AsyncStorage.getItem("userToken");
+        const response = await externalCalls.GET("/user/generalSummary", token, null);
+        
+
+        if(response.statusCode === 401){
+            await signOut();
+        }
+
+
+        setApplications(response.response.applications || {});
+        setInvoice(response.response.invoice || {});
+        setCards(response.response.cards || []);
+        setMovements(response.response.movements || []);
+
+        setLoadData(false);
+    }
 
     return(
         <FinancialSummaryContext.Provider value={{
+            getData,
             applications,
             invoice,
             cards,

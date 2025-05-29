@@ -5,8 +5,8 @@ import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
 // components
-import { CardSmall } from "../../../components/cardSmall";
-import { DisplayMoreDetails } from "../../../components/displayMoreDetails";
+import { CardSmall } from "../../../components/CardSmall";
+import { DisplayMoreDetails } from "../../../components/DisplayMoreDetails";
 
 
 export function DisplayCards({cards, showValue}){

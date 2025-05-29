@@ -1,18 +1,26 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
-import { defaultPageStyle, stylesDefault } from "../../../themes/stylesDefault";
+import { defaultPageStyle } from "../../../themes/stylesDefault";
 import { styles } from "./styles";
-import { ListMovements } from "../../../components/listMovements";
-import { DisplayMoreDetails } from "../../../components/displayMoreDetails";
 import { useNavigation } from "@react-navigation/native";
 
-
+// components
+import { ListMovements } from "../../../components/ListMovements";
+import { DisplayMoreDetails } from "../../../components/DisplayMoreDetails";
 
 
 export function RecentActivity({data}){
 
     const navigation = useNavigation();
 
+    const displayMovements = [];
+    const amountOfMovements = data.length > 10 ? 10 : data.length;
+
+    for(let i=0; i<amountOfMovements; i++){
+        displayMovements.push(
+            <ListMovements data={data[i]} key={data[i].id}/>
+        )
+    }
 
     return(
         <View style={[defaultPageStyle.box, styles.container]}>
@@ -22,11 +30,7 @@ export function RecentActivity({data}){
             </Text>
 
             <View>
-                {
-                    data.map((movements) => {
-                        return(<ListMovements data={movements} key={movements.id}/>);
-                    })
-                }
+                {displayMovements}
             </View>
             
             <DisplayMoreDetails 

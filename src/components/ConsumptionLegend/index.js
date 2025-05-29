@@ -4,7 +4,7 @@ import { defaultPageStyle } from "../../themes/stylesDefault";
 import { formatCurrency } from "../../utils/formatCurrency";
 
 // componets
-import { DisplayMoreDetails } from "../displayMoreDetails";
+import { DisplayMoreDetails } from "../DisplayMoreDetails";
 import { colorPattern } from "../../themes";
 
 

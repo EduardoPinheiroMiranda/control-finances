@@ -10,10 +10,10 @@ import { AuthContext } from "../../contexts/auth";
 import SignInIcon from "../../assets/svg/signInIcon.svg"
 
 // components
-import { InputText } from "../../components/inputText";
-import { InputPassword } from "../../components/inputPassword";
-import { Button } from "../../components/button";
-import { Alert } from "../../components/alert";
+import { InputText } from "../../components/InputText";
+import { InputPassword } from "../../components/InputPassword";
+import { Button } from "../../components/Button";
+import { Alert } from "../../components/Alert";
 
 
 export function SignIn(){

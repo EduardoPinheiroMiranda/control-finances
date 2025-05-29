@@ -3,11 +3,11 @@ import { View, Text } from "react-native";
 import { defaultPageStyle } from "../../../themes/stylesDefault";
 import { styles } from "./styles";
 import { format } from "date-fns";
+import { useNavigation } from "@react-navigation/native";
 
 // componets
-import { ExpenseIndicator } from "../../../components/expenseIndicator";
-import { ConsumptionLegend } from "../../../components/consumptionLegend";
-import { useNavigation } from "@react-navigation/native";
+import { ExpenseIndicator } from "../../../components/ExpenseIndicator";
+import { ConsumptionLegend } from "../../../components/ConsumptionLegend";
 
 
 export function ConsumptionIndicator({data, showValue}){
