@@ -3,6 +3,7 @@ import { ScrollView, SafeAreaView, View, ActivityIndicator } from "react-native"
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { colorPattern } from "../../themes";
+import { FinancialSummaryContext } from "../../contexts/financialSummary";
 
 // components
 import { Header } from "./header";
@@ -10,37 +11,17 @@ import { ApplicationWall } from  "../../components/applicationWall";
 import { ConsumptionIndicator } from "./consumptionIndicator";
 import { DisplayCards } from "./displayCards";
 import { RecentActivity } from "./recentActivity";
-import { moviments } from "../../../dataFromTest";
-import { FinancialSummaryContext } from "../../contexts/financialSummary";
 
 
 export function Home(){
 
-    const { getGeneralSummary, loadData } = useContext(FinancialSummaryContext);
+    const { applications, invoice, cards, movements, loadData } = useContext(FinancialSummaryContext);
     const [balance, setBalance] = useState(0);
-    const [invoice, setInvoice] = useState({});
-    const [cards, setCards] = useState({});
-    const [movements, setMovements] = useState({});
     const [showValue, setShowValue] = useState(true);
     
 
     useEffect(() => {
-        
-        async function getInitialValues(){
-
-           const summary = await getGeneralSummary();
-
-            if(summary.invoice.limit){
-                setBalance(Number(summary.applications.value));
-                setInvoice(summary.invoice);
-                setCards(summary.cards);
-                setMovements(summary.movements);
-            }
-            
-        }
-
-        getInitialValues();
-
+        setBalance(Number(applications.value));
     }, [])
 
 
@@ -64,8 +45,8 @@ export function Home(){
                 />
 
                 <ConsumptionIndicator showValue={showValue} data={invoice}/>
-                <DisplayCards showValue={showValue}/>
-                <RecentActivity data={moviments}/>
+                <DisplayCards showValue={showValue} cards={cards}/>
+                <RecentActivity data={movements}/>
 
                 <View style={{height: 30}}/>
             </View>

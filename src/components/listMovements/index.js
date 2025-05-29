@@ -3,75 +3,55 @@ import { View, Text } from "react-native";
 import { styles, stylesSmall, stylesBig } from "./styles";
 import { colorPattern } from "../../../src/themes";
 import { formatCurrency } from "../../../src/utils/formatCurrency";
+import { format } from "date-fns";
 
 //icons
 import { BackgroundIcon } from "../../assets/svg/backgroundIcon";
 import { Card } from "../../assets/svg/card";
-import { SendMoney } from "../../assets/svg/sendMoney";
-import { ReceivedMoney } from "../../assets/svg/receivedMoney";
 import { Invoice } from "../../assets/svg/invoice";
 import { Money } from "../../assets/svg/money";
 
 
 
-function Movement(props){
+function Movement({data, style, styleIcons, backgroundIcon}){
 
 
     return(
-        <View style={props.style.sectionMovement}>
-            <View style={props.style.sectionDescription}>
-                <View style={props.style.sectionIcon}>
-                    <BackgroundIcon data={props.backgroundIcon}/>
+        <View style={style.sectionMovement}>
+            <View style={style.sectionDescription}>
+                <View style={style.sectionIcon}>
+                    <BackgroundIcon data={backgroundIcon}/>
                     {
-                        props.data.method === "card" && props.data.credit &&(
-                            <Card data={props.styleIcons}
+                        data.payment_method === "card" && (
+                            <Card data={styleIcons}
                             />
                         )
                     }
                     {
-                        props.data.method === "invoice" && (
-                            <Invoice data={props.styleIcons}
+                        data.payment_method === "invoice" && (
+                            <Invoice data={styleIcons}
                             />
                         )
                     }
                     {
-                        props.data.method === "sendMoney" && (
-                            <SendMoney data={props.styleIcons}
-                            />
-                        )
-                    }
-                    {
-                        props.data.method === "receicedMoney" && (
-                            <ReceivedMoney data={props.styleIcons}
-                            />
-                        )
-                    }
-                    {
-                        props.data.method === "money" && (
-                            <Money data={props.styleIcons}
+                        data.payment_method === "money" && (
+                            <Money data={styleIcons}
                             />
                         )
                     } 
                 </View>
 
                 <View>
-                    <Text style={props.style.mainText}>{props.data.title}</Text>
-                    {
-                        props.data.credit === true ?
-                            <Text style={props.style.secondaryText}>
-                                {props.data.cardName} - {props.data.date}
-                            </Text>
-                        :
-                            <Text style={props.style.secondaryText}>
-                                {props.data.date}
-                            </Text>
-                    }
+                    <Text style={style.mainText}>{data.name}</Text>
+                    <Text style={style.secondaryText}>
+                        {format(new Date(data.created_at), "dd/MM/yyyy")}
+                    </Text>
                 </View>
             </View>
 
             <View style={{alignItems: "flex-end"}}>
-                <Text style={props.style.mainText}>{formatCurrency(props.data.value)}</Text>
-                <Text style={props.style.secondaryText}>{props.data.installments}</Text>
+                <Text style={style.mainText}>{formatCurrency(Number(data.value))}</Text>
+                <Text style={style.secondaryText}>{data.total_installments}x</Text>
             </View> 
         </View>
     );

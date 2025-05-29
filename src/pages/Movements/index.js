@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StatusBar, View, FlatList, TextInput, TouchableOpacity, SafeAreaView, Modal } from "react-native";
+import { View, FlatList, TextInput, TouchableOpacity, SafeAreaView, Modal } from "react-native";
 import { ListMovements } from "../../components/listMovements";
 import { styles } from "./styles";
 import { colorPattern } from "../../themes";

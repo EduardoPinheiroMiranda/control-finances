@@ -23,8 +23,8 @@ export function RecentActivity({data}){
 
             <View>
                 {
-                    data.map((moviments) => {
-                        return(<ListMovements data={moviments} key={moviments.id}/>);
+                    data.map((movements) => {
+                        return(<ListMovements data={movements} key={movements.id}/>);
                     })
                 }
             </View>

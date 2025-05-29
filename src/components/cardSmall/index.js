@@ -3,17 +3,18 @@ import { View, Text } from "react-native";
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { formatCurrency } from "../../utils/formatCurrency";
+import { format } from "date-fns";
 
 // icon
 import  ChipSmall from "../../assets/svg/chipSmall.svg"
 
 
-export function CardSmall(props){
+export function CardSmall({data, showValue}){
 
-    const colorFont = "#FAFAFA";
-    const colorBackground = "#539EE1";
-    const cardName = "Mercado Pago";
-    const expired = "05/02";
+    const colorFont = data.color_font;
+    const colorBackground = data.color_card;
+    const cardName = data.name;
+    const expired = `${data.due_day}/${new Date().getMonth() + 1}`;
     const valueUsed = 1000;
 
 
@@ -46,7 +47,7 @@ export function CardSmall(props){
                         </Text>
 
                         {
-                            props.showValue ? 
+                            showValue ? 
                             <Text style={[defaultPageStyle.text, styles.text, {color: colorFont}]}>
                                 {formatCurrency(valueUsed)}
                             </Text>

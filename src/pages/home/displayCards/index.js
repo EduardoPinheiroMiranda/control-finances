@@ -9,7 +9,7 @@ import { CardSmall } from "../../../components/cardSmall";
 import { DisplayMoreDetails } from "../../../components/displayMoreDetails";
 
 
-export function DisplayCards(props){
+export function DisplayCards({cards, showValue}){
 
     const navigation = useNavigation();
 
@@ -23,9 +23,9 @@ export function DisplayCards(props){
 
             <FlatList
                 style={styles.flatList}
-                data={[1,2,3,4,5]}
-                renderItem={({item}) => <CardSmall showValue={props.showValue}/>}
-                keyExtractor={(item) => item}
+                data={cards}
+                renderItem={({item}) => <CardSmall data={item} showValue={showValue}/>}
+                keyExtractor={(item) => item.id}
                 showsHorizontalScrollIndicator={false}
                 horizontal={true}
                 ListHeaderComponent={<View style={{width: 30}}/>}

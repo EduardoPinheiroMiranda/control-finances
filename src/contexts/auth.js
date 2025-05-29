@@ -87,11 +87,18 @@ export function AuthProvider({children}){
         };
     }
 
+    async function signOut(){
+        await AsyncStorage.clear();
+        setUser(null);
+        setSigned(false);
+    }
+
 
     return(
         <AuthContext.Provider value={{
             signUp, 
-            signIn, 
+            signIn,
+            signOut,
             loading,
             loadingPage,
             signed, 
