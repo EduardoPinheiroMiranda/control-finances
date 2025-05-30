@@ -35,7 +35,7 @@ export default function App() {
     <NavigationContainer>
       <AuthProvider>
         <FinancialSummaryProvider>
-          <StatusBar style="light"/>
+          <StatusBar style="auto"/>
           <Routes/>
         </FinancialSummaryProvider>
       </AuthProvider>
