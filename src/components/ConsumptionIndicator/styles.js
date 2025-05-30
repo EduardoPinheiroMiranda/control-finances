@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../../themes";
+import { colorPattern } from "../../themes";
 
 
 export const smallStyle = StyleSheet.create({
@@ -8,7 +8,7 @@ export const smallStyle = StyleSheet.create({
     },
     title: {
         fontSize: 16, 
-        color: colors.color_6,
+        color: colorPattern.black_900,
         fontWeight: "medium"
     },
     sectionConsumer: {
@@ -28,7 +28,7 @@ export const smallStyle = StyleSheet.create({
         gap: 10
     },
     valueText: {
-        color: colors.color_6,
+        color: colorPattern.black_900,
         fontSize: 14,
         fontWeight: 400
     }, 
@@ -43,7 +43,7 @@ export const bigStyle = StyleSheet.create({
     },
     title: {
         fontSize: 20, 
-        color: colors.color_4,
+        color: colorPattern.gray_900,
         fontWeight: 500
     },
     sectionConsumer: {
@@ -64,7 +64,7 @@ export const bigStyle = StyleSheet.create({
         gap: 5
     },
     valueText: {
-        color: colors.color_6,
+        color: colorPattern.black_900,
         fontSize: 16,
         fontWeight: 400
     },
@@ -72,7 +72,7 @@ export const bigStyle = StyleSheet.create({
         marginTop: 50,
     },
     button: {
-        backgroundColor: colors.color_3,
+        backgroundColor: colorPattern.blue_300,
         height: 50,
         borderRadius: 10,
 
@@ -80,7 +80,7 @@ export const bigStyle = StyleSheet.create({
         alignItems: "center"
     },
     textButton: {
-        color: colors.color_7,
+        color: colorPattern.white_800,
         fontSize: 20
     }
 });

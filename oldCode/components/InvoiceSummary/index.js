@@ -2,17 +2,16 @@ import React from "react";
 import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./style";
-import { colors } from "../../themes";
+import { colorPattern } from "../../themes";
 import { summary } from "../../../dataFromTest";
 
 //icon
-const styleIcons = {size: 15, color: colors.color_6};
+const styleIcons = {size: 15, color: colorPattern.black_900};
 import { BackgroundIcon } from "../../assets/svg/backgroundIcon";
 import { Card } from "../../assets/svg/card";
 import { Invoice } from "../../assets/svg/invoice";
 import { Money } from "../../assets/svg/money";
 import { formatCurrency } from "../../utils/formatCurrency";
-import { DisplayMoreDetails } from "../displayMoreDetails";
 
 
 function Movement(props){

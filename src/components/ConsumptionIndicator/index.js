@@ -1,13 +1,13 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { stylesDefault } from "../../themes/stylesDefault";
+import { defaultPageStyle } from "../../themes/stylesDefault";
 import { smallStyle, bigStyle } from "./styles";
-
-
-import { ExpenseIndicator } from "../../components/expenseIndicator";
-import { DisplayMoreDetails } from "../../components/displayMoreDetails";
 import { formatCurrency } from "../../utils/formatCurrency";
+
+// components
+import { ExpenseIndicator } from "../../components/ExpenseIndicator";
+import { DisplayMoreDetails } from "../../components/DisplayMoreDetails";
 
 
 function Indicator(props){
@@ -16,7 +16,7 @@ function Indicator(props){
 
 
     return(
-        <View style={[stylesDefault.box, props.styles.container]}>
+        <View style={[defaultPageStyle.box, props.styles.container]}>
             
             <Text style={props.styles.title}>Vencimento - {props.data.expired}</Text>
 
@@ -79,6 +79,5 @@ export function ConsumptionIndicator({data}){
                     <Indicator data={data} styles={bigStyle}/>
             }
         </View>
-        // 
     );
 }

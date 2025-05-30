@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../../themes";
+import { colorPattern } from "../../themes";
 
 
 export const styles = StyleSheet.create({
@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     },
 
     title: {
-        backgroundColor: colors.color_8,
+        backgroundColor: colorPattern.white_900,
         height: 30,
 
         flexDirection: "row",
@@ -40,10 +40,10 @@ export const styles = StyleSheet.create({
     },
     movementName: {
         fontSize: 14,
-        color: colors.color_6
+        color: colorPattern.black_900
     },
     movementExpired: {
         fontSize: 10,
-        color: colors.color_6
+        color: colorPattern.black_900
     }
 });

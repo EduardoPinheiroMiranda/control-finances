@@ -23,7 +23,7 @@ export function Home(){
 
     useEffect(() => {
         applications.value && setBalance(Number(applications.value));
-    }, [applications])
+    }, [applications, invoice])
 
 
     const components = [

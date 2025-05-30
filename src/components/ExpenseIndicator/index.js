@@ -88,7 +88,7 @@ export function ExpenseIndicator({data}){
             <Text 
                 style={[
                     {
-                        fontSize: data.size <= 150 ? 36 : 64,
+                        fontSize: data.size <= 150 ? 32 : 64,
                         fontWeight: "bold",
                         marginTop: data.size <= 150 ? -40 : -100
                     }, 
