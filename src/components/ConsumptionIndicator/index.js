@@ -1,82 +1,119 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { smallStyle, bigStyle } from "./styles";
 import { formatCurrency } from "../../utils/formatCurrency";
+import { format } from "date-fns";
 
 // components
-import { ExpenseIndicator } from "../../components/ExpenseIndicator";
-import { DisplayMoreDetails } from "../../components/DisplayMoreDetails";
+import { ExpenseIndicator } from "../ExpenseIndicator";
+import { DisplayMoreDetails } from "../DisplayMoreDetails";
+import { useNavigation } from "@react-navigation/native";
+import { Button } from "../Button";
 
 
-function Indicator(props){
+export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
 
     const navigation = useNavigation();
 
+    const [dueDate, setDueDate] = useState("");
+    const [styles, setStyles] = useState({});
+    const [chartData, setChartData] = useState({value: 0, size: 130, strokeWidth: 10});
 
-    return(
-        <View style={[defaultPageStyle.box, props.styles.container]}>
+    const [limit, SetLimit] = useState(0);
+    const [amount, SetAmount] = useState(0);
+    const [available, SetAvailable] = useState(0);
+
+
+    useEffect(() => {
+        
+        styleBig ? setStyles(bigStyle) : setStyles(smallStyle);
+
+
+        if(data.percentegeSpent){
+
+            setDueDate(format(new Date(data.due_date), "dd/MM"));
+            SetLimit(data.limit);
+            SetAmount(data.amount);
+            SetAvailable(data.available)
             
-            <Text style={props.styles.title}>Vencimento - {props.data.expired}</Text>
+            if(styleBig){
+                setChartData({value: data.percentegeSpent, size: 300, strokeWidth: 20})
+            }else{
+                setChartData({value: data.percentegeSpent, size: 130, strokeWidth: 10})
+            }
+        }
 
-            <View style={props.styles.sectionConsumer}>
+    }, [data])
+    
 
-                <ExpenseIndicator data={props.data.chart}/>
-
-                <View style={props.styles.legends}>
-                    <View style={props.styles.legendsOfValue}>
-                        <Text style={props.styles.valueText}>Limite:</Text>
-                        <Text style={props.styles.valueText}>{formatCurrency(props.data.legend.limit)}</Text>
-                    </View>
-        
-                    <View style={props.styles.legendsOfValue}>
-                        <Text style={props.styles.valueText}>Utilizado:</Text>
-                        <Text style={props.styles.valueText}>{formatCurrency(props.data.legend.used)}</Text>
-                    </View>
-        
-                    <View style={props.styles.legendsOfValue}>
-                        <Text style={props.styles.valueText}>Disponível:</Text>
-                        <Text style={props.styles.valueText}>{formatCurrency(props.data.legend.available)}</Text>
-                    </View>
-
-                    {
-                        props.data.chart.size <= 150 ? 
-                            <View style={props.styles.sectionButton}>
-                                <DisplayMoreDetails 
-                                    data={{title: "Ver mais detalhes"}} 
-                                    nextPage={() => navigation.navigate("expenseAnalysis")}
-                                />
-                            </View>
-                        :
-                            <View style={props.styles.sectionButton}>
-                                <TouchableOpacity 
-                                    style={props.styles.button}
-                                    onPress={() => navigation.navigate("payInvoice")}
-                                >
-                                    <Text style={props.styles.textButton}>Pagar fatura</Text>
-                                </TouchableOpacity>
-                            </View>
-                    }
-                    
+    function ShowLegends(){
+        return(
+            <View style={styles.legends}>
+                <View style={styles.legendsOfValue}>
+                    <Text style={[defaultPageStyle.text, styles.valueText]}>Limite:</Text>
+                    <Text style={[defaultPageStyle.text, styles.valueText]}>{formatCurrency(limit)}</Text>
                 </View>
 
+                <View style={styles.legendsOfValue}>
+                    <Text style={[defaultPageStyle.text, styles.valueText]}>Utilizado:</Text>
+                    <Text style={[defaultPageStyle.text, styles.valueText]}>{formatCurrency(amount)}</Text>
+                </View>
+
+                <View style={styles.legendsOfValue}>
+                    <Text style={[defaultPageStyle.text, styles.valueText]}>Disponivel:</Text>
+                    <Text style={[defaultPageStyle.text, styles.valueText]}>{formatCurrency(available)}</Text>
+                </View>
             </View>
-        </View>
-    );
-}
+        );
+    }
 
+    function HideLegends(){
+        return(
+            <View style={styles.legends}>
+                <View style={styles.legendsOfValue}>
+                    <Text style={[defaultPageStyle.text, styles.valueText]}>Limite:</Text>
+                    <Text style={[defaultPageStyle.text, styles.valueText]}>****</Text>
+                </View>
 
-export function ConsumptionIndicator({data}){
+                <View style={styles.legendsOfValue}>
+                    <Text style={[defaultPageStyle.text, styles.valueText]}>Utilizado:</Text>
+                    <Text style={[defaultPageStyle.text, styles.valueText]}>****</Text>
+                </View>
 
+                <View style={styles.legendsOfValue}>
+                    <Text style={[defaultPageStyle.text, styles.valueText]}>Disponivel:</Text>
+                    <Text style={[defaultPageStyle.text, styles.valueText]}>****</Text>
+                </View>
+            </View>
+        );
+    }
 
+   
     return(
-        <View>
-            {
-                data.chart.size <= 150 ?
-                    <Indicator data={data} styles={smallStyle}/>
-                :
-                    <Indicator data={data} styles={bigStyle}/>
+        <View style={[defaultPageStyle.box]}>
+            
+            <Text style={styles.title}>Vencimento - {dueDate}</Text>
+
+            <View style={styles.sectionConsumer}>
+                <ExpenseIndicator data={chartData}/>
+                {showValue ? <ShowLegends/> : <HideLegends/>}
+            </View>
+
+            {showButton && 
+                <DisplayMoreDetails 
+                    title="Ver mais detalhes" 
+                    nextPage={() => navigation.navigate("expenseAnalysis")}
+                />
+            }
+
+            {!showButton && 
+                <View style={styles.sectionButton}>
+                    <Button 
+                        title="Pagar fatura" 
+                        action={() => navigation.navigate("expenseAnalysis")}
+                    />
+                </View>
             }
         </View>
     );

@@ -6,14 +6,14 @@ import { colorPattern, colors } from "../../themes";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 
 
-export function DisplayMoreDetails(props){
+export function DisplayMoreDetails({nextPage, title}){
 
 
     return(
         <View style={styles.container}>
             <TouchableOpacity 
                 style={styles.button}
-                onPress={props.nextPage}
+                onPress={nextPage}
                 activeOpacity={0.4}
             >
                 <Text style={[
@@ -23,7 +23,7 @@ export function DisplayMoreDetails(props){
                         fontSize:14
                     }
                 ]}>
-                    {props.title}
+                    {title}
                 </Text>
                 
                 <AntDesign 
@@ -39,7 +39,7 @@ export function DisplayMoreDetails(props){
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        
     },
     button: {
         flexDirection: "row",

@@ -3,51 +3,28 @@ import { ScrollView, View, Text, SafeAreaView } from "react-native";
 import { styles } from "./style";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { useNavigation } from "@react-navigation/native";
-import { AuthContext } from "../../contexts/auth";
+import { FinancialSummaryContext } from "../../contexts/financialSummary";
 
 // components
 import { ConsumptionIndicator } from "../../components/ConsumptionIndicator";
-import { Summary } from "./Summary";
-import { InvoiceSummary } from "../../components/InvoiceSummary"
-import { DisplayMoreDetails } from "../../components/DisplayMoreDetails";
-import { format } from "date-fns";
+import { Button } from "../../components/Button";
+// import { Summary } from "./Summary";
+// import { InvoiceSummary } from "../../components/InvoiceSummary"
+// import { DisplayMoreDetails } from "../../components/DisplayMoreDetails";
 
 
 export function ExpenseAnalysis(){
 
-    const { invoice } = useContext(AuthContext);
-    const [invoiceDatails, setInvoiceDatails] = useState({});
-
+    const { invoice } = useContext(FinancialSummaryContext);
     const navigation = useNavigation();
 
-
-    useEffect(() => {
-
-        setInvoiceDatails({
-            chart: {
-                value: invoice.percentegeSpent,
-                size: 300,
-                strokeWidth: 20
-            },
-            legend:{
-                limit: invoice.limit,
-                used: invoice.amount,
-                available: invoice.available
-            },
-            expired: format(new Date(invoice.due_date), "dd/MM")
-        });
-
-        // const summary = {
-        //     cards: 4000,
-        //     fixedExpenses: 4000,
-        //     extraExpenses: 3000
-        // }
-
-    } , [invoice])
 
 
     return(
         <SafeAreaView style={[defaultPageStyle.page, styles.container]}>
+
+            
+
             <ScrollView 
                 style={styles.scroll}
                 showsVerticalScrollIndicator={false}
@@ -55,8 +32,14 @@ export function ExpenseAnalysis(){
 
                 <View style={styles.highlight}>
                     <Text style={styles.title}>Indicador de consumo</Text>
-                    <ConsumptionIndicator data={invoiceDatails}/>
+                    <ConsumptionIndicator 
+                        data={invoice}
+                        styleBig={true}
+                        showValue={true}
+                        showButton={false}
+                    />
                 </View>
+
 
                 {/* <View style={styles.highlight}>
                     <Text style={styles.title}>Resumo do mês</Text>

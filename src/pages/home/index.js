@@ -8,7 +8,7 @@ import { FinancialSummaryContext } from "../../contexts/financialSummary";
 // components
 import { Header } from "./header";
 import { ApplicationWall } from  "../../components/ApplicationWall";
-import { ConsumptionIndicator } from "./consumptionIndicator";
+import { ConsumptionIndicator } from "../../components/ConsumptionIndicator";
 import { DisplayCards } from "./displayCards";
 import { RecentActivity } from "./recentActivity";
 import { Spinner } from "../../components/Spinner";
@@ -33,7 +33,12 @@ export function Home(){
             visible={() => setShowValue(!showValue)}
             activeButtons={false}
         />,
-        <ConsumptionIndicator showValue={showValue} data={invoice}/>,
+        <ConsumptionIndicator 
+            showValue={showValue}
+            data={invoice}
+            styleBig={false}
+            showButton={true}
+        />,
         <DisplayCards showValue={showValue} cards={cards}/>,
         <RecentActivity data={movements}/>
     ]

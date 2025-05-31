@@ -3,48 +3,44 @@ import { colorPattern } from "../../themes";
 
 
 export const smallStyle = StyleSheet.create({
-    container: {
-        flex: 1
-    },
     title: {
         fontSize: 16, 
-        color: colorPattern.black_900,
-        fontWeight: "medium"
+        color: colorPattern.gray_900,
+        fontWeight: "600"
     },
     sectionConsumer: {
         marginTop: 20,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        marginBottom: 10
     },
     legends: {
         justifyContent: "space-between",
-        gap: 8,
+        width: 180,
+        gap: 5,
     },
     legendsOfValue: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        gap: 10
+        gap: 5
     },
     valueText: {
         color: colorPattern.black_900,
-        fontSize: 14,
-        fontWeight: 400
+        fontSize: 16,
+        fontWeight: "400"
     }, 
     sectionButton: {
-        marginTop: 14
+        display: "none"
     }
 });
 
 export const bigStyle = StyleSheet.create({
-    container: {
-        flex: 1
-    },
     title: {
         fontSize: 20, 
-        color: colorPattern.gray_900,
-        fontWeight: 500
+        color: colorPattern.black_900,
+        fontWeight: "400"
     },
     sectionConsumer: {
         marginTop: 20,
@@ -66,21 +62,10 @@ export const bigStyle = StyleSheet.create({
     valueText: {
         color: colorPattern.black_900,
         fontSize: 16,
-        fontWeight: 400
     },
     sectionButton: {
         marginTop: 50,
-    },
-    button: {
-        backgroundColor: colorPattern.blue_300,
-        height: 50,
-        borderRadius: 10,
-
         justifyContent: "center",
         alignItems: "center"
-    },
-    textButton: {
-        color: colorPattern.white_800,
-        fontSize: 20
     }
 });

@@ -29,14 +29,15 @@ export class ExternalCalls{
 
 
             const response = await request.json();
-
+            
             return {
                 statusCode: request.status,
                 response,
-                msg: response.msg
+                msg: response.error ? response.error.msg : ""
             }
 
         }catch(err){
+            console.log(err)
             return {
                 statusCode: 500,
                 response: null,

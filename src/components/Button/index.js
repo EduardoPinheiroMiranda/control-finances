@@ -4,10 +4,10 @@ import { colorPattern } from "../../themes";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 
 
-export function Button(props){
+export function Button({background, action, color, title}){
 
     async function handlerAction(){
-        props.action();
+        action();
     } 
 
 
@@ -16,7 +16,7 @@ export function Button(props){
             style={[
                 styles.button,
                 {
-                    backgroundColor: props.background ? props.background : colorPattern.blue_300
+                    backgroundColor: background ? background : colorPattern.blue_300
                 }
             ]}
             activeOpacity={0.7}
@@ -27,11 +27,11 @@ export function Button(props){
                     defaultPageStyle.text,
                     styles.text,
                     {
-                        color: props.color ? props.color : colorPattern.white_800
+                        color: color ? color : colorPattern.white_800
                     }
                 ]}
             >
-                {props.title}
+                {title}
             </Text>
         </TouchableOpacity>
     );
