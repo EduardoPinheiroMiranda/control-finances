@@ -5,13 +5,13 @@ import { colorPattern } from "../../../themes";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        gap: 15
+        gap: 12
     },
+
     description: {
         flexDirection: "row",
         alignItems: "center",
         gap: 8
-
     },
     icon: {
         position: "relative",
@@ -26,6 +26,6 @@ export const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
-        color: colorPattern.gray_300
+        color: colorPattern.black_900
     }
 });

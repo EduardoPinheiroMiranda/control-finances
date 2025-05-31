@@ -114,7 +114,7 @@ export function Movements(){
                 </View>
             </View>
 
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, paddingHorizontal: 20}}>
 
                 {
                     loadPage ?

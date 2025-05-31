@@ -11,13 +11,13 @@ export const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 20
     },
-    highlight: {
-        marginBottom: 40,
+    sections: {
+        marginBottom: 25,
     },
     title: {
         color: colorPattern.gray_900,
         fontSize: 20,
-        fontWeight: 600,
+        fontWeight: "600",
         marginRight: 20,
         marginLeft: 20,
         marginBottom: 20
