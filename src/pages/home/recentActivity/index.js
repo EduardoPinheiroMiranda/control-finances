@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, FlatList } from "react-native";
+import { View } from "react-native";
 import { defaultPageStyle } from "../../../themes/stylesDefault";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 // components
 import { ListMovements } from "../../../components/ListMovements";
 import { DisplayMoreDetails } from "../../../components/DisplayMoreDetails";
+import { CustomText } from "../../../components/CustomText";
 
 
 export function RecentActivity({data}){
@@ -32,9 +33,9 @@ export function RecentActivity({data}){
     return(
         <View style={[defaultPageStyle.box, styles.container]}>
 
-            <Text style={[defaultPageStyle.text, styles.title]}>
+            <CustomText style={[defaultPageStyle.text, styles.title]}>
                 Atividades recentes
-            </Text>
+            </CustomText>
 
             <View>
                 {displayMovements}

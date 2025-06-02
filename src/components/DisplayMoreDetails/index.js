@@ -1,9 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-
-import AntDesign from '@expo/vector-icons/AntDesign';
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { colorPattern, colors } from "../../themes";
 import { defaultPageStyle } from "../../themes/stylesDefault";
+
+// icon 
+import AntDesign from '@expo/vector-icons/AntDesign';
+
+// components
+import { CustomText } from "../CustomText";
 
 
 export function DisplayMoreDetails({nextPage, title}){
@@ -16,7 +20,7 @@ export function DisplayMoreDetails({nextPage, title}){
                 onPress={nextPage}
                 activeOpacity={0.4}
             >
-                <Text style={[
+                <CustomText style={[
                     defaultPageStyle.text,
                     {
                         color: colorPattern.blue_300, 
@@ -24,7 +28,7 @@ export function DisplayMoreDetails({nextPage, title}){
                     }
                 ]}>
                     {title}
-                </Text>
+                </CustomText>
                 
                 <AntDesign 
                     name="arrowright" 

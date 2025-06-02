@@ -1,11 +1,14 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { formatCurrency } from "../../utils/formatCurrency";
 
 // icon
-import  ChipSmall from "../../assets/svg/chipSmall.svg"
+import  ChipSmall from "../../assets/svg/chipSmall.svg";
+
+// components
+import { CustomText } from "../CustomText";
 
 
 export function CardSmall({data, showValue}){
@@ -24,14 +27,13 @@ export function CardSmall({data, showValue}){
                 
                 <View style={styles.header}>
                     <ChipSmall/>
-                    <Text style={[defaultPageStyle.text, {color: colorFont}]}>
+                    <CustomText style={[{color: colorFont}]}>
                         {cardName}
-                    </Text>
+                    </CustomText>
                 </View>
                 
                 <View style={styles.footer}>
-                    <Text  style={[
-                        defaultPageStyle.text, 
+                    <CustomText  style={[
                         {
                             color: colorFont,
                             fontSize: 10,
@@ -39,21 +41,21 @@ export function CardSmall({data, showValue}){
                         }
                     ]}>
                         Vencimento
-                    </Text>
+                    </CustomText>
                     <View style={styles.sectionText}>
-                        <Text style={[defaultPageStyle.text, styles.text, {color: colorFont}]}>
+                        <CustomText style={[ styles.text, {color: colorFont}]}>
                             {expired}
-                        </Text>
+                        </CustomText>
 
                         {
                             showValue ? 
-                            <Text style={[defaultPageStyle.text, styles.text, {color: colorFont}]}>
+                            <CustomText style={[styles.text, {color: colorFont}]}>
                                 {formatCurrency(valueUsed)}
-                            </Text>
+                            </CustomText>
                             :
-                            <Text style={[defaultPageStyle.text, styles.text, {color: colorFont}]}>
+                            <CustomText style={[styles.text, {color: colorFont}]}>
                                 ****
-                            </Text>
+                            </CustomText>
                         }
 
                     </View>

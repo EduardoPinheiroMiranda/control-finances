@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { styles } from "./style";
 import { defaultPageStyle } from "../../../themes/stylesDefault";
 import { colorPattern } from "../../../themes";
@@ -10,6 +10,7 @@ import { Card } from "../../../assets/svg/card";
 import { Invoice } from "../../../assets/svg/invoice";
 import { Money } from "../../../assets/svg/money";
 import { formatCurrency } from "../../../utils/formatCurrency";
+import { CustomText } from "../../../components/CustomText";
 
 
 export function Summary({data}){
@@ -23,8 +24,8 @@ export function Summary({data}){
                 </View>
                 
                 <View style={styles.label}>
-                    <Text style={styles.text}>Cartões:</Text>
-                    <Text style={styles.text}>{formatCurrency(data.card)}</Text>
+                    <CustomText style={styles.text}>Cartões:</CustomText>
+                    <CustomText style={styles.text}>{formatCurrency(data.card)}</CustomText>
                 </View>
             </View>
 
@@ -34,8 +35,8 @@ export function Summary({data}){
                 </View>
                 
                 <View style={styles.label}>
-                    <Text style={styles.text}>Boletos:</Text>
-                    <Text style={styles.text}>{formatCurrency(data.invoice)}</Text>
+                    <CustomText style={styles.text}>Boletos:</CustomText>
+                    <CustomText style={styles.text}>{formatCurrency(data.invoice)}</CustomText>
                 </View>
             </View>
 
@@ -45,8 +46,8 @@ export function Summary({data}){
                 </View>
                 
                 <View style={styles.label}>
-                    <Text style={styles.text}>Dinheiro:</Text>
-                    <Text style={styles.text}>{formatCurrency(data.money)}</Text>
+                    <CustomText style={styles.text}>Dinheiro:</CustomText>
+                    <CustomText style={styles.text}>{formatCurrency(data.money)}</CustomText>
                 </View>
             </View>
         </View>

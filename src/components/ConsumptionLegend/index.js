@@ -1,11 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { formatCurrency } from "../../utils/formatCurrency";
 
 // componets
 import { DisplayMoreDetails } from "../DisplayMoreDetails";
 import { colorPattern } from "../../themes";
+import { CustomText } from "../CustomText";
 
 
 export function ConsumptionLegend(props){
@@ -15,32 +16,32 @@ export function ConsumptionLegend(props){
         <View style={styles.container}>
             <View>
                 <View style={styles.sectionLegends}>
-                    <Text style={[defaultPageStyle.text, styles.legend]}>Limite:</Text>
+                    <CustomText style={[defaultPageStyle.text, styles.legend]}>Limite:</CustomText>
                     {
                         props.showValue ?
-                            <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(props.data.limit)}</Text>
+                            <CustomText style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(props.data.limit)}</CustomText>
                         :
-                            <Text style={[defaultPageStyle.text, styles.legend]}>****</Text>
+                            <CustomText style={[defaultPageStyle.text, styles.legend]}>****</CustomText>
                     }
                 </View>
 
                 <View style={styles.sectionLegends}>
-                    <Text style={[defaultPageStyle.text, styles.legend]}>Utilizado:</Text>
+                    <CustomText style={[defaultPageStyle.text, styles.legend]}>Utilizado:</CustomText>
                     {
                         props.showValue ?
-                            <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(props.data.amount)}</Text>
+                            <CustomText style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(props.data.amount)}</CustomText>
                         :
-                            <Text style={[defaultPageStyle.text, styles.legend]}>****</Text>
+                            <CustomText style={[defaultPageStyle.text, styles.legend]}>****</CustomText>
                     }
                 </View>
 
                 <View style={styles.sectionLegends}>
-                    <Text style={[defaultPageStyle.text, styles.legend]}>Disponível:</Text>
+                    <CustomText style={[defaultPageStyle.text, styles.legend]}>Disponível:</CustomText>
                     {
                         props.showValue ?
-                            <Text style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(props.data.available)}</Text>
+                            <CustomText style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(props.data.available)}</CustomText>
                         :
-                            <Text style={[defaultPageStyle.text, styles.legend]}>****</Text>
+                            <CustomText style={[defaultPageStyle.text, styles.legend]}>****</CustomText>
                     }
                 </View>
             </View>

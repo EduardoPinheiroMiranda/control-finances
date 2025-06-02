@@ -1,5 +1,8 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+
+// components
+import { CustomText } from "../../components/CustomText";
 
 
 export function MoreOptions(){
@@ -7,7 +10,7 @@ export function MoreOptions(){
 
     return(
         <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-            <Text>Mais</Text>
+            <CustomText>Mais</CustomText>
         </View>
     );
 }

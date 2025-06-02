@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, KeyboardAvoidingView, Text, Pressable, ScrollView, Platform, TouchableWithoutFeedback, Keyboard, Modal } from "react-native";
+import { View, KeyboardAvoidingView, Pressable, ScrollView, Platform, TouchableWithoutFeedback, Keyboard, Modal } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native"; 
 import { defaultPageStyle } from "../../themes/stylesDefault";
@@ -14,6 +14,7 @@ import { InputText } from "../../components/InputText";
 import { InputPassword } from "../../components/InputPassword";
 import { Button } from "../../components/Button";
 import { Alert } from "../../components/Alert";
+import { CustomText } from "../../components/CustomText";
 
 
 export function SignUp(){
@@ -115,9 +116,9 @@ export function SignUp(){
                         />
 
                         <Pressable onPress={() => navigation.goBack()}>
-                            <Text style={[defaultPageStyle.text, styles.text]}>
+                            <CustomText style={[defaultPageStyle.text, styles.text]}>
                                 Já tenho uma conta
-                            </Text>
+                            </CustomText>
                         </Pressable>
                     </View>
                 </ScrollView>

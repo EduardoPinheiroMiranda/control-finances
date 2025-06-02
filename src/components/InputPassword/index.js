@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
+import { View, TextInput, StyleSheet, Pressable } from "react-native";
 import { colorPattern } from "../../themes";
-
-// icon
-import { EyeClose } from "../../assets/svg/eyeClose";
-import { EyeOpen } from "../../assets/svg/eyeOpen";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 
+// icon
 const iconStyles = {size: 30, color: colorPattern.black_900};
+import { EyeClose } from "../../assets/svg/eyeClose";
+import { EyeOpen } from "../../assets/svg/eyeOpen";
+
+// components
+import { CustomText } from "../CustomText";
 
 
 export function InputPassword(props){
@@ -17,9 +19,9 @@ export function InputPassword(props){
 
     return(
         <View>
-            <Text style={[defaultPageStyle.text, styles.text]}>
+            <CustomText style={[defaultPageStyle.text, styles.text]}>
                 {props.label}
-            </Text>
+            </CustomText>
             <View>
                 <TextInput
                     style={styles.input}

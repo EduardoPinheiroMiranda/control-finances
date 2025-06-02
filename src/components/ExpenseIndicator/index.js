@@ -1,7 +1,8 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Svg, { Circle, Path, Defs, LinearGradient, Stop } from "react-native-svg";
-import { colorPattern, colors } from "../../themes"
+import { colorPattern } from "../../themes"
+import { CustomText } from "../CustomText";
 
 
 function interpolateColor(value, color1, color2){
@@ -85,7 +86,7 @@ export function ExpenseIndicator({data}){
                 />
             </Svg>
 
-            <Text 
+            <CustomText 
                 style={[
                     {
                         fontSize: data.size <= 150 ? 32 : 64,
@@ -95,7 +96,7 @@ export function ExpenseIndicator({data}){
                     {color: solidColor}
                 ]}>
                 {Math.round(value)}%
-            </Text>
+            </CustomText>
         </View>
     );
 };

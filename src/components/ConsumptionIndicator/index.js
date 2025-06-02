@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { smallStyle, bigStyle } from "./styles";
 import { formatCurrency } from "../../utils/formatCurrency";
@@ -10,6 +10,7 @@ import { ExpenseIndicator } from "../ExpenseIndicator";
 import { DisplayMoreDetails } from "../DisplayMoreDetails";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "../Button";
+import { CustomText } from "../CustomText";
 
 
 export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
@@ -51,18 +52,18 @@ export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
         return(
             <View style={styles.legends}>
                 <View style={styles.legendsOfValue}>
-                    <Text style={[defaultPageStyle.text, styles.valueText]}>Limite:</Text>
-                    <Text style={[defaultPageStyle.text, styles.valueText]}>{formatCurrency(limit)}</Text>
+                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>Limite:</CustomText>
+                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>{formatCurrency(limit)}</CustomText>
                 </View>
 
                 <View style={styles.legendsOfValue}>
-                    <Text style={[defaultPageStyle.text, styles.valueText]}>Utilizado:</Text>
-                    <Text style={[defaultPageStyle.text, styles.valueText]}>{formatCurrency(amount)}</Text>
+                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>Utilizado:</CustomText>
+                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>{formatCurrency(amount)}</CustomText>
                 </View>
 
                 <View style={styles.legendsOfValue}>
-                    <Text style={[defaultPageStyle.text, styles.valueText]}>Disponivel:</Text>
-                    <Text style={[defaultPageStyle.text, styles.valueText]}>{formatCurrency(available)}</Text>
+                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>Disponivel:</CustomText>
+                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>{formatCurrency(available)}</CustomText>
                 </View>
             </View>
         );
@@ -72,18 +73,18 @@ export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
         return(
             <View style={styles.legends}>
                 <View style={styles.legendsOfValue}>
-                    <Text style={[defaultPageStyle.text, styles.valueText]}>Limite:</Text>
-                    <Text style={[defaultPageStyle.text, styles.valueText]}>****</Text>
+                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>Limite:</CustomText>
+                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>****</CustomText>
                 </View>
 
                 <View style={styles.legendsOfValue}>
-                    <Text style={[defaultPageStyle.text, styles.valueText]}>Utilizado:</Text>
-                    <Text style={[defaultPageStyle.text, styles.valueText]}>****</Text>
+                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>Utilizado:</CustomText>
+                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>****</CustomText>
                 </View>
 
                 <View style={styles.legendsOfValue}>
-                    <Text style={[defaultPageStyle.text, styles.valueText]}>Disponivel:</Text>
-                    <Text style={[defaultPageStyle.text, styles.valueText]}>****</Text>
+                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>Disponivel:</CustomText>
+                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>****</CustomText>
                 </View>
             </View>
         );
@@ -93,7 +94,7 @@ export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
     return(
         <View style={[defaultPageStyle.box]}>
             
-            <Text style={styles.title}>Vencimento - {dueDate}</Text>
+            <CustomText style={styles.title}>Vencimento - {dueDate}</CustomText>
 
             <View style={styles.sectionConsumer}>
                 <ExpenseIndicator data={chartData}/>

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { colorPattern } from "../../themes";
 import { defaultPageStyle } from "../../themes/stylesDefault";
+
+// components
+import { CustomText } from "../CustomText";
 
 
 export function Button({background, action, color, title}){
@@ -22,9 +24,8 @@ export function Button({background, action, color, title}){
             activeOpacity={0.7}
             onPress={handlerAction}
         >
-            <Text 
+            <CustomText 
                 style={[
-                    defaultPageStyle.text,
                     styles.text,
                     {
                         color: color ? color : colorPattern.white_800
@@ -32,7 +33,7 @@ export function Button({background, action, color, title}){
                 ]}
             >
                 {title}
-            </Text>
+            </CustomText>
         </TouchableOpacity>
     );
 }

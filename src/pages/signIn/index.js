@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, KeyboardAvoidingView, Text, Pressable, ScrollView, TouchableWithoutFeedback, Keyboard, Platform, Modal } from "react-native";
+import { View, KeyboardAvoidingView, Pressable, ScrollView, TouchableWithoutFeedback, Keyboard, Platform, Modal } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
 import { defaultPageStyle } from "../../themes/stylesDefault";
@@ -14,6 +14,7 @@ import { InputText } from "../../components/InputText";
 import { InputPassword } from "../../components/InputPassword";
 import { Button } from "../../components/Button";
 import { Alert } from "../../components/Alert";
+import { CustomText } from "../../components/CustomText";
 
 
 export function SignIn(){
@@ -90,9 +91,9 @@ export function SignIn(){
                                 onChangeText={setPassword}
                             />
                             <Pressable onPress={() => alert("Função indisponível temporariamente.")}>
-                                <Text style={[defaultPageStyle.text, styles.textResetPassword]}>
+                                <CustomText style={[defaultPageStyle.text, styles.textResetPassword]}>
                                     Esqueci a senha
-                                </Text>
+                                </CustomText>
                             </Pressable>
                         </View>
                     </View>
@@ -101,9 +102,9 @@ export function SignIn(){
                         <Button title="Entrar" action={handlerForms}/>
 
                         <Pressable onPress={() => navigation.navigate("signUp")}>
-                            <Text style={[defaultPageStyle.text, styles.textCreatAccount]}>
+                            <CustomText style={[defaultPageStyle.text, styles.textCreatAccount]}>
                                 Criar uma conta
-                            </Text>
+                            </CustomText>
                         </Pressable>
                     </View>
                 </ScrollView>

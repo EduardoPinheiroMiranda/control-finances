@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 import { defaultPageStyle } from "../../../themes/stylesDefault";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 // components
 import { CardSmall } from "../../../components/CardSmall";
 import { DisplayMoreDetails } from "../../../components/DisplayMoreDetails";
+import { CustomText } from "../../../components/CustomText";
 
 
 export function DisplayCards({cards, showValue}){
@@ -17,9 +18,9 @@ export function DisplayCards({cards, showValue}){
     return(
         <View style={[defaultPageStyle.box, styles.container]}>
 
-            <Text style={[defaultPageStyle.text, styles.title]}>
+            <CustomText style={[defaultPageStyle.text, styles.title]}>
                 Cartões
-            </Text>
+            </CustomText>
 
             <FlatList
                 style={styles.flatList}

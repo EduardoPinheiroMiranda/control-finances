@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, SafeAreaView, FlatList, Pressable } from "react-native";
+import { View, SafeAreaView, FlatList, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./styles";
 import { colorPattern } from "../../themes";
@@ -15,6 +15,7 @@ import { Bag } from "../../assets/svg/bag";
 import { TagValue } from "../../assets/svg/tagValue";
 import { SettingsLimit } from "../../assets/svg/settingsLimit";
 import { CardEdit } from "../../assets/svg/cardEdit";
+import { CustomText } from "../../components/CustomText";
 
 
 function MenuOption({data}){
@@ -24,7 +25,7 @@ function MenuOption({data}){
         <Pressable style={styles.buttonArea} onPress={data.nextPage}>
             <View style={styles.description}>
                 {data.icon}
-                <Text style={styles.label}>{data.label}</Text>
+                <CustomText style={styles.label}>{data.label}</CustomText>
             </View>
             <RightArrow data={styleIcon}/>
         </Pressable>

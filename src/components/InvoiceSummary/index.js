@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { styles } from "./styles";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { defaultPageStyle } from "../../themes/stylesDefault";
@@ -7,6 +7,7 @@ import { defaultPageStyle } from "../../themes/stylesDefault";
 // components
 import { ListMovements } from "../../components/ListMovements";
 import { DisplayMoreDetails } from "../DisplayMoreDetails";
+import { CustomText } from "../CustomText";
 
 
 function ListItems({data, title, total}){
@@ -15,8 +16,8 @@ function ListItems({data, title, total}){
     return(
         <View>
             <View style={styles.header}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.title}>{formatCurrency(total)}</Text>
+                <CustomText style={styles.title}>{title}</CustomText>
+                <CustomText style={styles.title}>{formatCurrency(total)}</CustomText>
             </View>
 
             {

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { styles } from "./styles";
 import { formatCurrency } from "../../utils/formatCurrency";
@@ -12,37 +12,40 @@ import { colorPattern } from "../../themes";
 import { Extract } from "../../assets/svg/extract";
 import Cifrao from "../../assets/svg/cifrao.svg";
 
+// components
+import { CustomText } from "../CustomText";
+
 
 // props: showValues, balance, visible(), activeButtons
-export function ApplicationWall(props){
+export function ApplicationWall({showValue, balance, visible, activeButtons}){
 
 
     return(
         <View style={[defaultPageStyle.box]}>
 
-            <Text style={[defaultPageStyle.text, styles.title]}>
+            <CustomText style={[styles.title]}>
                 Saldo aplicado
-            </Text>
+            </CustomText>
 
             <View>
                 {
-                    props.showValue ? 
+                    showValue ? 
                         <View style={styles.sectionValue}>
-                            <Text style={[defaultPageStyle.text, styles.textValue]}>
-                                {formatCurrency(props.balance)}
-                            </Text>
+                            <CustomText style={[styles.textValue]}>
+                                {formatCurrency(balance)}
+                            </CustomText>
 
-                            <Pressable onPress={() => props.visible()}>
+                            <Pressable onPress={() => visible()}>
                                 <EyeOpen data={styleIcon}/>
                             </Pressable>
                         </View>
                     : 
                         <View style={styles.sectionValue}>
-                            <Text style={[defaultPageStyle.text, styles.textValue]}>
+                            <CustomText style={[styles.textValue]}>
                                 R$ ****
-                            </Text>
+                            </CustomText>
 
-                            <Pressable onPress={() => props.visible()}>
+                            <Pressable onPress={() => visible()}>
                                 <EyeClose data={styleIcon}/>
                             </Pressable>
                         </View>
@@ -50,7 +53,7 @@ export function ApplicationWall(props){
             </View>
 
             {
-                props.activeButtons && (
+                activeButtons && (
                     <View style={styles.sectionButtons}>
                         <View>
                             <Pressable style={styles.button}>
@@ -59,12 +62,12 @@ export function ApplicationWall(props){
                                 </View>
 
                                 <View>
-                                    <Text style={[defaultPageStyle.text, styles.text]}>
+                                    <CustomText style={[styles.text]}>
                                         Criar
-                                    </Text>
-                                    <Text style={[defaultPageStyle.text, styles.text]}>
+                                    </CustomText>
+                                    <CustomText style={[styles.text]}>
                                         aplicação
-                                    </Text>
+                                    </CustomText>
                                 </View>
                             </Pressable>
                         </View>
@@ -76,9 +79,9 @@ export function ApplicationWall(props){
                                 </View>
 
                                 <View>
-                                    <Text style={[defaultPageStyle.text, styles.text]}>
+                                    <CustomText style={[styles.text]}>
                                         Extrato
-                                    </Text>
+                                    </CustomText>
                                 </View>
                             </Pressable>
                         </View>

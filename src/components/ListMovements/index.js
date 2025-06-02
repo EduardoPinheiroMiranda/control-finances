@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { View, Text } from "react-native";
-import { styles, stylesSmall, stylesBig } from "./styles";
+import { View } from "react-native";
+import { styles } from "./styles";
 import { colorPattern } from "../../../src/themes";
 import { formatCurrency } from "../../../src/utils/formatCurrency";
 import { format } from "date-fns";
@@ -10,6 +9,9 @@ import { BackgroundIcon } from "../../assets/svg/backgroundIcon";
 import { Card } from "../../assets/svg/card";
 import { Invoice } from "../../assets/svg/invoice";
 import { Money } from "../../assets/svg/money";
+
+// components
+import { CustomText } from "../CustomText";
 
 
 export function ListMovements({data}){
@@ -37,15 +39,15 @@ export function ListMovements({data}){
             <View style={styles.movement}>
 
                 <View style={styles.description}>
-                    <Text style={styles.name} numberOfLines={1}>{data.name}</Text>
-                    <Text style={styles.dueDate}>
+                    <CustomText style={styles.name} numberOfLines={1}>{data.name}</CustomText>
+                    <CustomText style={styles.dueDate}>
                         {format(new Date(data.purchase_date), "dd/MM/yyyy")}
-                    </Text>
+                    </CustomText>
                 </View>
 
                 <View style={styles.values}>
-                    <Text style={styles.name}>{formatCurrency(data.value)}</Text>
-                    <Text style={styles.dueDate}>{data.installment}</Text>
+                    <CustomText style={styles.name}>{formatCurrency(data.value)}</CustomText>
+                    <CustomText style={styles.dueDate}>{data.installment}</CustomText>
                 </View>
 
             </View>

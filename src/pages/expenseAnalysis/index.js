@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ScrollView, View, Text, SafeAreaView } from "react-native";
+import { ScrollView, View, SafeAreaView } from "react-native";
 import { styles } from "./style";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { FinancialSummaryContext } from "../../contexts/financialSummary";
@@ -8,6 +8,7 @@ import { FinancialSummaryContext } from "../../contexts/financialSummary";
 import { ConsumptionIndicator } from "../../components/ConsumptionIndicator";
 import { Summary } from "./Summary";
 import { InvoiceSummary } from "../../components/InvoiceSummary"
+import { CustomText } from "../../components/CustomText";
 
 
 export function ExpenseAnalysis(){
@@ -36,7 +37,7 @@ export function ExpenseAnalysis(){
             >
 
                 <View style={styles.sections}>
-                    <Text style={styles.title}>Indicador de consumo</Text>
+                    <CustomText style={styles.title}>Indicador de consumo</CustomText>
                     <ConsumptionIndicator 
                         data={invoice}
                         styleBig={true}
@@ -47,13 +48,13 @@ export function ExpenseAnalysis(){
 
 
                 <View style={styles.sections}>
-                    <Text style={styles.title}>Resumo do mês</Text>
+                    <CustomText style={styles.title}>Resumo do mês</CustomText>
                     <Summary data={summary}/>
                 </View>
 
 
                 <View style={styles.sections}>
-                    <Text style={styles.title}>Resumo de fatura</Text>
+                    <CustomText style={styles.title}>Resumo de fatura</CustomText>
                     <InvoiceSummary 
                         data={{
                             ...invoice.installments,

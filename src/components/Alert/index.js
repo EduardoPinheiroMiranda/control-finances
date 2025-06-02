@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Pressable, ActivityIndicator } from "react-native";
+import { View, Pressable, ActivityIndicator } from "react-native";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { colorPattern } from "../../themes";
@@ -11,6 +11,7 @@ import Fontisto from  "@expo/vector-icons/Fontisto";
 
 // components
 import { Button } from "../Button";
+import { CustomText } from "../CustomText";
 
 
 export function Alert({loading, success, close, title, description, buttonTitle, buttonFunction}){
@@ -49,17 +50,17 @@ export function Alert({loading, success, close, title, description, buttonTitle,
                 <View>
                     {
                         title && (
-                            <Text style={[defaultPageStyle.text, styles.title]}>
+                            <CustomText style={[styles.title]}>
                                 Atenção
-                            </Text>
+                            </CustomText>
                         )
                     }
                 </View>
 
 
-                <Text style={[defaultPageStyle.text, styles.description]}>
+                <CustomText style={[styles.description]}>
                     {description}
-                </Text>
+                </CustomText>
                 
 
                 {
