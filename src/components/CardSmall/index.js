@@ -3,7 +3,6 @@ import { View, Text } from "react-native";
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { formatCurrency } from "../../utils/formatCurrency";
-import { format } from "date-fns";
 
 // icon
 import  ChipSmall from "../../assets/svg/chipSmall.svg"

@@ -1,9 +1,8 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { styles } from "./style";
+import { styles } from "./styles";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { defaultPageStyle } from "../../themes/stylesDefault";
-import { useNavigation } from "@react-navigation/native";
 
 // components
 import { ListMovements } from "../../components/ListMovements";
@@ -23,6 +22,7 @@ function ListItems({data, title, total}){
             {
                 data.map((movement) => {
                     return <ListMovements
+                        key={movement.installment_id}
                         data={{
                             ...movement,
                             installment: `${movement.installment_number}/${movement.total_installments}`,
@@ -33,19 +33,26 @@ function ListItems({data, title, total}){
             }
             
         </View>
-    );
+    ); 
 }
 
 
 export function InvoiceSummary({data, nextPage}){
 
-   const navigation = useNavigation();
-
 
     return(
         <View style={[defaultPageStyle.box ,styles.container]}>
-            <ListItems title="Gastos fixos" data={data.fixed_expense} total={data.totalFixedExpense}/>
-            <ListItems title="Gastos extras" data={data.extra_expense} total={data.totalExtraExpense}/>
+            <ListItems
+                title="Gastos fixos"
+                data={data.fixed_expense}
+                total={data.totalFixedExpense}
+            />
+            
+            <ListItems
+                title="Gastos extras"
+                data={data.extra_expense}
+                total={data.totalExtraExpense}
+            />
 
             <DisplayMoreDetails 
                 title="Ver mais detalhes"

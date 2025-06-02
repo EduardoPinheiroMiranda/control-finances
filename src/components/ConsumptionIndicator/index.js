@@ -111,7 +111,7 @@ export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
                 <View style={styles.sectionButton}>
                     <Button 
                         title="Pagar fatura" 
-                        action={() => navigation.navigate("expenseAnalysis")}
+                        action={() => console.log("adicionar navegação")}
                     />
                 </View>
             }

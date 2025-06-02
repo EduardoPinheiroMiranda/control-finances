@@ -8,6 +8,7 @@ import { Platform } from "react-native";
 import { TabRoutes } from "./tab.routes";
 import { Movements } from "../pages/Movements";
 import { ExpenseAnalysis } from "../pages/expenseAnalysis";
+import { Profile } from "../pages/profile";
 // import { PayInvoice } from "../pages/payInvoice";
 // import { InvoiceSummaray } from "../pages/invoiceSummary";
 // import { AddPurchase } from "../pages/addPurchase";
@@ -55,6 +56,11 @@ export function AppRoutes(){
                 name="expenseAnalysis" 
                 component={ExpenseAnalysis} 
                 options={{title: "Análise de gastos"}}
+            />
+            <Stack.Screen 
+                name="profile" 
+                component={Profile} 
+                options={{title: "Perfil"}}
             />
             {/* <Stack.Screen 
                 name="payInvoice" 

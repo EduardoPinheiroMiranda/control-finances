@@ -2,20 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import { ScrollView, View, Text, SafeAreaView } from "react-native";
 import { styles } from "./style";
 import { defaultPageStyle } from "../../themes/stylesDefault";
-import { useNavigation } from "@react-navigation/native";
 import { FinancialSummaryContext } from "../../contexts/financialSummary";
 
 // components
 import { ConsumptionIndicator } from "../../components/ConsumptionIndicator";
 import { Summary } from "./Summary";
 import { InvoiceSummary } from "../../components/InvoiceSummary"
-import { DisplayMoreDetails } from "../../components/DisplayMoreDetails";
 
 
 export function ExpenseAnalysis(){
 
     const { invoice } = useContext(FinancialSummaryContext);
-    const navigation = useNavigation();
     const [summary, setSummary] = useState({card: 0, invoice: 0, money: 0});
 
 
