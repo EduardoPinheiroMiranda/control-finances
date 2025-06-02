@@ -8,6 +8,17 @@ export const styles = StyleSheet.create({
     },
 
     header: {
-        
+        width: "100%",
+        height: 30,
+        backgroundColor: colorPattern.white_900,
+
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingHorizontal: 20,
     },
+    title: {
+        fontSize: 16,
+        color: colorPattern.black_900
+    }
 });

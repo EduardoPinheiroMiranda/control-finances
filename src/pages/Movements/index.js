@@ -122,7 +122,11 @@ export function Movements(){
                             :
                         <FlatList
                             data={listMovements}
-                            renderItem={({item}) => <ListMovements data={item}/>}
+                            renderItem={({item}) => <ListMovements data={{
+                                ...item,
+                                installment: `${item.total_installments}x`,
+                                purchase_date: item.created_at
+                            }}/>}
                             keyExtractor={(item) => item.id}
                             horizontal={false}
                             showsVerticalScrollIndicator={false}

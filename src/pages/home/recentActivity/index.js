@@ -18,7 +18,14 @@ export function RecentActivity({data}){
 
     for(let i=0; i<amountOfMovements; i++){
         displayMovements.push(
-            <ListMovements data={data[i]} key={data[i].id}/>
+            <ListMovements 
+                data={{
+                    ...data[i], 
+                    installment: `${data[i].total_installments}x`,
+                    purchase_date: data[i].created_at
+                }} 
+                key={data[i].id}
+            />
         )
     }
 

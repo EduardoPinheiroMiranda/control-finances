@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
     },
 
     description: {
-        flex: 3,
+        flex: 2,
         justifyContent: "center",
     },
     name: {

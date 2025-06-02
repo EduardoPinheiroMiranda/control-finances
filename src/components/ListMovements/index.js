@@ -39,13 +39,13 @@ export function ListMovements({data}){
                 <View style={styles.description}>
                     <Text style={styles.name} numberOfLines={1}>{data.name}</Text>
                     <Text style={styles.dueDate}>
-                        {format(new Date(data.created_at), "dd/MM/yyyy")}
+                        {format(new Date(data.purchase_date), "dd/MM/yyyy")}
                     </Text>
                 </View>
 
                 <View style={styles.values}>
                     <Text style={styles.name}>{formatCurrency(data.value)}</Text>
-                    <Text style={styles.dueDate}>1x</Text>
+                    <Text style={styles.dueDate}>{data.installment}</Text>
                 </View>
 
             </View>

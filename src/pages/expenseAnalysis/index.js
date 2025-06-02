@@ -9,15 +9,15 @@ import { FinancialSummaryContext } from "../../contexts/financialSummary";
 import { ConsumptionIndicator } from "../../components/ConsumptionIndicator";
 import { Summary } from "./Summary";
 import { InvoiceSummary } from "../../components/InvoiceSummary"
-// import { DisplayMoreDetails } from "../../components/DisplayMoreDetails";
+import { DisplayMoreDetails } from "../../components/DisplayMoreDetails";
 
 
 export function ExpenseAnalysis(){
 
     const { invoice } = useContext(FinancialSummaryContext);
     const navigation = useNavigation();
-
     const [summary, setSummary] = useState({card: 0, invoice: 0, money: 0});
+
 
     useEffect(() => {
 
@@ -55,44 +55,17 @@ export function ExpenseAnalysis(){
                 </View>
 
 
-                 <View style={styles.sections}>
+                <View style={styles.sections}>
                     <Text style={styles.title}>Resumo de fatura</Text>
-                    
-                    <View style={[defaultPageStyle.box,{gap: 30}]}>
-                        {/* <View style={styles.header}>
-                            <View>
-                                <Text style={styles.text}>Limite</Text>
-                                <Text style={styles.text}>R$ 4000,00</Text>
-                            </View>
-                            <View>
-                                <Text style={styles.text}>Utilizado</Text>
-                                <Text style={styles.text}>R$ 4000,00</Text>
-                            </View>
-                            <View>
-                                <Text style={styles.text}>Disponível</Text>
-                                <Text style={styles.text}>R$ 4000,00</Text>
-                            </View>
-                        </View> */}
-
-                        <InvoiceSummary/>
-                        
-                        {/* <DisplayMoreDetails data={{title: "Ver mais detalhes"}} nextPage={() => navigation.navigate("invoiceSummary")}/> */}
-                    </View>
-
+                    <InvoiceSummary 
+                        data={{
+                            ...invoice.installments,
+                            totalFixedExpense: invoice.total_fixed_expense,
+                            totalExtraExpense: invoice.total_extra_expense
+                        }}
+                        nextPage={() => console.log("adicionar navegação")}
+                    />
                 </View>
-
-                
-
-                {/* <View style={styles.highlight}>
-                    <Text style={styles.title}>Resumo do mês</Text>
-                    <Summary data={summary}/>
-                </View>
-
-                <View style={styles.highlight}>
-                    <Text style={styles.title}>Resumo de fatura</Text>
-
-                    
-                </View> */}
 
             </ScrollView>
         </SafeAreaView>
