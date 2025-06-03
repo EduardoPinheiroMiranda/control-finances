@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import { View, Text, TouchableWithoutFeedback} from "react-native";
 import { styles } from "./styles";
+import { AuthContext } from "../../../contexts/auth";
 
 // icons
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { UserCircle } from "../../../assets/svg/userCircle"
 import { colorPattern } from "../../../themes";
 import { defaultPageStyle } from "../../../themes/stylesDefault";
-import { AuthContext } from "../../../contexts/auth";
 import { useNavigation } from "@react-navigation/native";
 
 // components
@@ -15,9 +15,9 @@ import { CustomText } from "../../../components/CustomText";
 
 
 export function Header(){
-
-    const { user } = useContext(AuthContext);
+    
     const navigation = useNavigation();
+    const { user } = useContext(AuthContext);
 
 
     return(

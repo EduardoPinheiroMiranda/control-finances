@@ -18,12 +18,12 @@ export function FinancialSummaryProvider({children}){
     const [loadData, setLoadData] = useState(false);
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        async function startData(){ await getData(); };
-        startData();
+    //     async function startData(){ await getData(); };
+    //     startData();
         
-    }, []);
+    // }, []);
 
 
     async function getData(){

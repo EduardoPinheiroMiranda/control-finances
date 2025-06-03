@@ -20,10 +20,19 @@ export function Home(){
     const [showValue, setShowValue] = useState(true);
     const [loadData, setLoadData] = useState(false);
     
+    // console.log(applications)
 
     useEffect(() => {
-        applications.value && setBalance(Number(applications.value));
-    }, [applications, invoice])
+        
+        async function getStartData() {
+            setLoadData(true);
+                await getData();
+                applications.value && setBalance(Number(applications.value));
+            setLoadData(false);
+        }
+        getStartData();
+        
+    }, []);
 
 
     const components = [

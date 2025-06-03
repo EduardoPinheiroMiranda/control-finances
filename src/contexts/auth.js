@@ -75,7 +75,7 @@ export function AuthProvider({children}){
             };
         }
     
-        setUser(response);
+        setUser(response.response);
         setSigned(true);
         setLoading(false);
         await AsyncStorage.setItem("userToken", response.response.token);

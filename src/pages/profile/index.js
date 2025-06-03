@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, SafeAreaView, TouchableOpacity, Alert } from "react-native";
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { colorPattern } from "../../themes";
@@ -18,7 +18,7 @@ import { CustomText } from "../../components/CustomText";
 
 export function Profile(){
 
-    const { user } = useContext(AuthContext);
+    const { user, signOut } = useContext(AuthContext);
 
 
     function SectionData(){
@@ -44,6 +44,23 @@ export function Profile(){
         );
     }
 
+    async function logout() {
+        Alert.alert(
+            "Atenção",
+            "Deseja deslogar do aplicativo ?",
+            [
+                {
+                    text: "Cancelar",
+                    style: "cancel"
+                },
+                {
+                    text: "Confirmar",
+                    onPress: async () => await signOut()
+                }
+            ]
+        )
+    }
+
     return(
         <SafeAreaView style={[defaultPageStyle.page, styles.container]}>
             <View >
@@ -65,12 +82,19 @@ export function Profile(){
 
 
                 <View style={styles.sectionButton}>
-                    <TouchableOpacity activeOpacity={0.4} style={[styles.buttonDefault, {backgroundColor: colorPattern.blue_300}]}>
+                    <TouchableOpacity
+                        activeOpacity={0.4}
+                        style={[styles.buttonDefault, {backgroundColor: colorPattern.blue_300}]}
+                    >
                         <LockPassword/>
                         <CustomText style={styles.textButton}>Redefinir senha</CustomText>
                     </TouchableOpacity>
 
-                    <TouchableOpacity activeOpacity={0.4} style={[styles.buttonDefault, {backgroundColor: colorPattern.red_900}]}>
+                    <TouchableOpacity
+                        onPressOut={logout}
+                        activeOpacity={0.4}
+                        style={[styles.buttonDefault, {backgroundColor: colorPattern.red_900}]}
+                    >
                         <Ionicons name="exit-outline" size={25} color={colorPattern.white_800}/>
                         <CustomText style={styles.textButton}>Sair</CustomText>
                     </TouchableOpacity>
