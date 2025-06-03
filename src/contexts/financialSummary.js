@@ -17,15 +17,7 @@ export function FinancialSummaryProvider({children}){
     const [movements, setMovements] = useState([]);
     const [loadData, setLoadData] = useState(false);
 
-
-    // useEffect(() => {
-
-    //     async function startData(){ await getData(); };
-    //     startData();
-        
-    // }, []);
-
-
+    
     async function getData(){
 
         setLoadData(true);

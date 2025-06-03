@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { View, SafeAreaView, TouchableOpacity, Alert } from "react-native";
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
@@ -14,11 +14,17 @@ import LockPassword from "../../assets/svg/lock-password.svg";
 
 // components
 import { CustomText } from "../../components/CustomText";
+import { PopUp } from "../../components/PopUp";
 
 
 export function Profile(){
 
     const { user, signOut } = useContext(AuthContext);
+    const [visible, setVisible] = useState(false);
+    const [title, setTitle] = useState("");
+    const [type, setType] = useState("");
+    const [description, setDescription] = useState("");
+    const [buttons, setButtons] = useState([]);
 
 
     function SectionData(){
@@ -45,20 +51,19 @@ export function Profile(){
     }
 
     async function logout() {
-        Alert.alert(
-            "Atenção",
-            "Deseja deslogar do aplicativo ?",
-            [
-                {
-                    text: "Cancelar",
-                    style: "cancel"
-                },
-                {
-                    text: "Confirmar",
-                    onPress: async () => await signOut()
-                }
-            ]
-        )
+        setTitle("Atenção");
+        setDescription("Você quer deslogar desta conta ?");
+        setButtons([
+            {
+                title: "Cancelar",
+                action: () => setVisible(false)
+            },
+            {
+                title: "Confirmar",
+                action: async () =>  await signOut()
+            }
+        ]);
+        setVisible(true);
     }
 
     return(
@@ -101,6 +106,14 @@ export function Profile(){
                 </View>
             
             </View>
+
+            <PopUp 
+                openModal={visible}
+                title={title}
+                type={type}
+                description={description}
+                buttons={buttons}
+            />
         </SafeAreaView>
         
     );

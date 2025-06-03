@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     },
 
     sectionButton: {
-        marginTop: 30,
+        marginTop: 50,
         gap: 20,
     },
 

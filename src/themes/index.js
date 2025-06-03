@@ -5,8 +5,10 @@ export const colorPattern = {
 
     gray_900: "#4F6780",
     gray_600: "#434C55",
+    gray_500: "#DEDEDE",
     gray_400: "#D9D9D9",
     gray_300: "#D4D4D4",
+    gray_200: "#D1D1D1",
 
     black_900: "#2B2F33",
 
