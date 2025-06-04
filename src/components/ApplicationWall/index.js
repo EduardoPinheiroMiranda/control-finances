@@ -16,7 +16,6 @@ import Cifrao from "../../assets/svg/cifrao.svg";
 import { CustomText } from "../CustomText";
 
 
-// props: showValues, balance, visible(), activeButtons
 export function ApplicationWall({showValue, balance, visible, activeButtons}){
 
 

@@ -118,7 +118,7 @@ export function Movements(){
 
                 {
                     loadPage ?
-                        <Spinner size={38} color={colorPattern.black_900}/>
+                        <Spinner size={38}/>
                             :
                         <FlatList
                             data={listMovements}

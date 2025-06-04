@@ -13,50 +13,46 @@ import SignInIcon from "../../assets/svg/signInIcon.svg"
 import { InputText } from "../../components/InputText";
 import { InputPassword } from "../../components/InputPassword";
 import { Button } from "../../components/Button";
-import { Alert } from "../../components/Alert";
 import { CustomText } from "../../components/CustomText";
+import { PopUp } from "../../components/PopUp";
+import { Spinner } from "../../components/Spinner";
 
 
 export function SignIn(){
 
-    const { signIn, loading } = useContext(AuthContext);
+    const { signIn } = useContext(AuthContext);
     const navigation = useNavigation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [showModal, setShowModal] = useState(false);
-    const [popUp, setPopUp] = useState({});
+    const [visible, setVisible] = useState(false);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [openModal, setOpenModal] = useState(false);
 
 
     async function handlerForms(){
 
         if(!email || !password){
-            setPopUp({
-                close: () => setShowModal(false),
-                title: true,
-                description: "É necessário preencher todos os campos.",
-                buttonTitle: false
-            });
-            setShowModal(true);
+            setTitle("Dados invalidos");
+            setDescription("É necessário preencher todos os campos.");
+            setVisible(true);
             return;
         }
 
 
-        setShowModal(true);
-
+        setOpenModal(true);
         const response = await signIn({email, password});
-
+        
+        
         if(response.statusCode !== 200){
-            setPopUp({
-                close: () => setShowModal(false),
-                title: true,
-                description: response.msg,
-                buttonTitle: false
-            });
-        }else{
-            setShowModal(false);
+            setOpenModal(false);
+
+            setTitle("Erro no login");
+            setDescription(response.msg);
+            setVisible(true);
         }
 
-        return;
+        setOpenModal(false);
     }
 
 
@@ -91,7 +87,7 @@ export function SignIn(){
                                 onChangeText={setPassword}
                             />
                             <Pressable onPress={() => alert("Função indisponível temporariamente.")}>
-                                <CustomText style={[defaultPageStyle.text, styles.textResetPassword]}>
+                                <CustomText style={[styles.textResetPassword]}>
                                     Esqueci a senha
                                 </CustomText>
                             </Pressable>
@@ -102,27 +98,28 @@ export function SignIn(){
                         <Button title="Entrar" action={handlerForms}/>
 
                         <Pressable onPress={() => navigation.navigate("signUp")}>
-                            <CustomText style={[defaultPageStyle.text, styles.textCreatAccount]}>
+                            <CustomText style={[styles.textCreatAccount]}>
                                 Criar uma conta
                             </CustomText>
                         </Pressable>
                     </View>
                 </ScrollView>
 
-                <Modal
-                    transparent={true}
-                    animationType="slide"
-                    visible={showModal}
-                >
-                    <Alert
-                        loading={loading}
-                        close={popUp.close}
-                        title={popUp.title}
-                        description={popUp.description}
-                        buttonTitle={popUp.buttonTitle}
-                        success={popUp.success}
-                    />
+                <PopUp 
+                    openModal={visible}
+                    title={title}
+                    type={""}
+                    description={description}
+                    buttons={[{
+                        title: "Ok",
+                        action: () => setVisible(false)
+                    }]}
+                />
+
+                <Modal transparent={true} animationType="fade" visible={openModal}>
+                    <Spinner size={40}/>
                 </Modal>
+
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
     );

@@ -17,38 +17,37 @@ import { CustomText } from "../../components/CustomText";
 import { PopUp } from "../../components/PopUp";
 
 
+function SectionData({data}){
+
+    const userData = [
+        {fieldName: "Name", data: data.name},
+        {fieldName: "E-mail", data: data.email},
+    ];
+
+    return(
+        <View style={styles.sectionData}>
+            {
+                userData.map((data) => {
+                    return (
+                        <View key={data.fieldName}>
+                            <CustomText style={styles.fieldName}>{data.fieldName}</CustomText>
+                            <CustomText style={styles.data}>{data.data}</CustomText>
+                        </View>
+                    );
+                })
+            }
+        </View>
+    );
+}
+
 export function Profile(){
 
     const { user, signOut } = useContext(AuthContext);
     const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState("");
-    const [type, setType] = useState("");
     const [description, setDescription] = useState("");
     const [buttons, setButtons] = useState([]);
 
-
-    function SectionData(){
-
-        const userData = [
-            {fieldName: "Name", data: user.name},
-            {fieldName: "E-mail", data: user.email},
-        ];
-
-        return(
-            <View style={styles.sectionData}>
-                {
-                    userData.map((data) => {
-                        return (
-                            <View key={data.fieldName}>
-                                <CustomText style={styles.fieldName}>{data.fieldName}</CustomText>
-                                <CustomText style={styles.data}>{data.data}</CustomText>
-                            </View>
-                        );
-                    })
-                }
-            </View>
-        );
-    }
 
     async function logout() {
         setTitle("Atenção");
@@ -82,7 +81,7 @@ export function Profile(){
                         <FontAwesome6 name="edit" size={18} color={colorPattern.black_900}/>
                     </View>
 
-                    <SectionData/>
+                    <SectionData data={user}/>
                 </View>
 
 
@@ -110,7 +109,7 @@ export function Profile(){
             <PopUp 
                 openModal={visible}
                 title={title}
-                type={type}
+                type={""}
                 description={description}
                 buttons={buttons}
             />

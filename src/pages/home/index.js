@@ -20,7 +20,6 @@ export function Home(){
     const [showValue, setShowValue] = useState(true);
     const [loadData, setLoadData] = useState(false);
     
-    // console.log(applications)
 
     useEffect(() => {
         
@@ -58,7 +57,7 @@ export function Home(){
             <Header/>
 
             {loadData ? 
-                <Spinner size={38} color={colorPattern.blue_900}/>
+                <Spinner size={38}/>
                     :
                 <FlatList
                     data={components}

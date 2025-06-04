@@ -13,57 +13,60 @@ import SignUpIcon from "../../assets/svg/signUpIcon.svg"
 import { InputText } from "../../components/InputText";
 import { InputPassword } from "../../components/InputPassword";
 import { Button } from "../../components/Button";
-import { Alert } from "../../components/Alert";
 import { CustomText } from "../../components/CustomText";
+import { PopUp } from "../../components/PopUp";
+import { Spinner } from "../../components/Spinner";
 
 
 export function SignUp(){
 
     const navigation = useNavigation();
-    const { signUp, loading } = useContext(AuthContext);
+    const { signUp } = useContext(AuthContext);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [showModal, setShowModal] = useState(false);
-    const [popUp, setPopUp] = useState({});
-
+    const [visible, setVisible] = useState(false);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [openModal, setOpenModal] = useState(false);
+    
 
     async function handlerForms(){
 
         if(!name || !email || !password || !confirmPassword){
-            setPopUp({
-                close: () => setShowModal(false),
-                title: true,
-                description: "É necessário preencher todos os campos.",
-                success: false
-            })
-            setShowModal(true);
+            setTitle("Dados invalidos");
+            setDescription("É necessário preencher todos os campos.");
+            setVisible(true);
             return;
         }
 
         if(password !== confirmPassword){
-            setPopUp({
-                close: () => setShowModal(false),
-                title: true,
-                description: "As senhas devem ser iguais.",
-                success: false
-            })
-            setShowModal(true);
+            setTitle("Dados invalidos");
+            setDescription("As senhas devem ser iguais.");
+            setVisible(true);
             return;
         }
 
 
 
-        setShowModal(true);
-        const response = await signUp({name, email, password})
-        
-        setPopUp({
-            close: response.statusCode !== 201 ? () => setShowModal(false) : () => navigation.goBack(),
-            title: response.statusCode !== 201 ? true : false,
-            description: response.msg,
-            success: response.statusCode !== 201 ? false : true
-        });
+        setOpenModal(true);
+        const response = await signUp({name, email, password});
+
+
+        if(response.statusCode !== 201){
+            setOpenModal(false);
+
+            setTitle("Erro no cadastro");
+            setDescription(response.msg);
+            setVisible(true);
+        }
+
+        setOpenModal(false);
+
+        setTitle("Sucesso !");
+        setDescription("Usuário cadastrado com sucesso!!");
+        setVisible(true);
     }
 
     return(
@@ -123,19 +126,19 @@ export function SignUp(){
                     </View>
                 </ScrollView>
 
-                <Modal 
-                    transparent={true}
-                    animationType="slide"
-                    visible={showModal}
-                >
-                    <Alert
-                        loading={loading} 
-                        close={popUp.close} 
-                        title={popUp.title}
-                        description={popUp.description}
-                        buttonTitle={false}
-                        success={popUp.success}
-                    />
+                <PopUp 
+                    openModal={visible}
+                    title={title}
+                    type={""}
+                    description={description}
+                    buttons={[{
+                        title: "Ok",
+                        action: () => setVisible(false)
+                    }]}
+                />
+
+                <Modal transparent={true} animationType="fade" visible={openModal}>
+                    <Spinner size={40}/>
                 </Modal>
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>

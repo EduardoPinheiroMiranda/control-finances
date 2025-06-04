@@ -12,6 +12,48 @@ import { useNavigation } from "@react-navigation/native";
 import { Button } from "../Button";
 import { CustomText } from "../CustomText";
 
+function ShowLegends({data, styles}){
+    return(
+        <View style={styles.legends}>
+            <View style={styles.legendsOfValue}>
+                <CustomText style={styles.valueText}>Limite:</CustomText>
+                <CustomText style={styles.valueText}>{formatCurrency(data.limit)}</CustomText>
+            </View>
+
+            <View style={styles.legendsOfValue}>
+                <CustomText style={styles.valueText}>Utilizado:</CustomText>
+                <CustomText style={styles.valueText}>{formatCurrency(data.amount)}</CustomText>
+            </View>
+
+            <View style={styles.legendsOfValue}>
+                <CustomText style={styles.valueText}>Disponivel:</CustomText>
+                <CustomText style={styles.valueText}>{formatCurrency(data.available)}</CustomText>
+            </View>
+        </View>
+    );
+}
+
+function HideLegends({styles}){
+    return(
+        <View style={styles.legends}>
+            <View style={styles.legendsOfValue}>
+                <CustomText style={styles.valueText}>Limite:</CustomText>
+                <CustomText style={styles.valueText}>****</CustomText>
+            </View>
+
+            <View style={styles.legendsOfValue}>
+                <CustomText style={styles.valueText}>Utilizado:</CustomText>
+                <CustomText style={styles.valueText}>****</CustomText>
+            </View>
+
+            <View style={styles.legendsOfValue}>
+                <CustomText style={styles.valueText}>Disponivel:</CustomText>
+                <CustomText style={styles.valueText}>****</CustomText>
+            </View>
+        </View>
+    );
+}
+
 
 export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
 
@@ -46,49 +88,6 @@ export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
         }
 
     }, [data])
-    
-
-    function ShowLegends(){
-        return(
-            <View style={styles.legends}>
-                <View style={styles.legendsOfValue}>
-                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>Limite:</CustomText>
-                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>{formatCurrency(limit)}</CustomText>
-                </View>
-
-                <View style={styles.legendsOfValue}>
-                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>Utilizado:</CustomText>
-                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>{formatCurrency(amount)}</CustomText>
-                </View>
-
-                <View style={styles.legendsOfValue}>
-                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>Disponivel:</CustomText>
-                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>{formatCurrency(available)}</CustomText>
-                </View>
-            </View>
-        );
-    }
-
-    function HideLegends(){
-        return(
-            <View style={styles.legends}>
-                <View style={styles.legendsOfValue}>
-                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>Limite:</CustomText>
-                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>****</CustomText>
-                </View>
-
-                <View style={styles.legendsOfValue}>
-                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>Utilizado:</CustomText>
-                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>****</CustomText>
-                </View>
-
-                <View style={styles.legendsOfValue}>
-                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>Disponivel:</CustomText>
-                    <CustomText style={[defaultPageStyle.text, styles.valueText]}>****</CustomText>
-                </View>
-            </View>
-        );
-    }
 
    
     return(
@@ -98,7 +97,14 @@ export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
 
             <View style={styles.sectionConsumer}>
                 <ExpenseIndicator data={chartData}/>
-                {showValue ? <ShowLegends/> : <HideLegends/>}
+                {showValue ? 
+                    <ShowLegends 
+                        styles={styles} 
+                        data={{limit, available, amount}}
+                    /> 
+                    : 
+                    <HideLegends styles={styles}/>
+                }
             </View>
 
             {showButton && 

@@ -57,6 +57,7 @@ function Button({data}){
                             activeOpacity={0.4}
                             style={buttonStyles}
                             onPress={button.action}
+                            key={index}
                         >
                             <CustomText style={styles.buttonText}>
                                 {button.title}
