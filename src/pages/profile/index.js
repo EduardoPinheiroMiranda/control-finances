@@ -6,7 +6,6 @@ import { colorPattern } from "../../themes";
 import { AuthContext } from "../../contexts/auth";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ExternalCalls } from "../../services/externalCalls";
 
 // icon
@@ -18,7 +17,6 @@ import LockPassword from "../../assets/svg/lock-password.svg";
 // components
 import { CustomText } from "../../components/CustomText";
 import { PopUp } from "../../components/PopUp";
-import { FinancialSummaryContext } from "../../contexts/financialSummary";
 
 
 function SectionData({data}){
@@ -45,14 +43,28 @@ function SectionData({data}){
 }
 
 export function Profile(){
-
+    
+    const externalCalls = new ExternalCalls();
     const { user, signOut, getUser } = useContext(AuthContext);
-
+    const [image, setImage] = useState(null);
     const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
-    const externalCalls = new ExternalCalls();
+
+    useEffect(() => {
+
+        async function checkImage(){
+
+            const imageExist = await FileSystem.getInfoAsync(user.avatar);
+
+            if(imageExist.exists){
+                setImage(user.avatar);
+            }
+        }
+        checkImage();
+
+    }, [user])
 
 
     async function logout() {
@@ -86,6 +98,7 @@ export function Profile(){
             const fileName = uri.split("/").pop();
             const newPath = FileSystem.documentDirectory + fileName;
             
+            
             try{
 
                 const { msg, statusCode } = await externalCalls.PUT(
@@ -94,17 +107,29 @@ export function Profile(){
                     {avatar: newPath}
                 )
 
+
+                if(statusCode === 401){
+                    setLoadData(false);
+                    setTitle("Sessão expirada");
+                    setDescription("Por segurança, refaça seu login para usar a aplicação novamente.");
+                    setVisible(true);
+                    await signOut();
+                }
+
                 if(statusCode !== 200){
                     setTitle("Ops....");
                     setDescription(msg);
                     setVisible(true);
                 }
 
+
                 const imageExist = await FileSystem.getInfoAsync(user.avatar);
+
                 if(imageExist.exists){
                     await FileSystem.deleteAsync(user.avatar);
                 }
                 
+
                 await FileSystem.copyAsync({
                     from: uri,
                     to: newPath
@@ -129,12 +154,11 @@ export function Profile(){
                     onPress={selectPhoto}
                     style={styles.sectionImage}
                 >
-                    {/* {!user.avatar ?
+                    {!image ?
                         <NoPhoto/> 
                             :
-                        <Image source={{uri: user.avatar}} style={styles.image}/>
-                    } */}
-                    <Image source={{uri: user.avatar}} style={styles.image}/>
+                        <Image source={{uri: image}} style={styles.image}/>
+                    }
                 </TouchableOpacity>
                 
 
