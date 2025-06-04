@@ -50,6 +50,7 @@ export function Profile(){
     const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [buttons, setButtons] = useState([]);
 
 
     useEffect(() => {
@@ -112,6 +113,10 @@ export function Profile(){
                     setLoadData(false);
                     setTitle("Sessão expirada");
                     setDescription("Por segurança, refaça seu login para usar a aplicação novamente.");
+                    setButtons([{
+                        title: "ok",
+                        action: () => setVisible(false)
+                    }]);
                     setVisible(true);
                     await signOut();
                 }
@@ -119,6 +124,10 @@ export function Profile(){
                 if(statusCode !== 200){
                     setTitle("Ops....");
                     setDescription(msg);
+                    setButtons([{
+                        title: "ok",
+                        action: () => setVisible(false)
+                    }]);
                     setVisible(true);
                 }
 
@@ -141,6 +150,10 @@ export function Profile(){
                 console.log(err);
                 setTitle("Ops....");
                 setDescription("Houve um pequeno problema para salvar sua imagem, tente novamente.");
+                setButtons([{
+                    title: "ok",
+                    action: () => setVisible(false)
+                }]);
                 setVisible(true);
             }
         }
@@ -199,12 +212,7 @@ export function Profile(){
                 title={title}
                 type={""}
                 description={description}
-                buttons={[
-                    {
-                        title: "ok",
-                        action: () => setVisible(false)
-                    }
-                ]}
+                buttons={buttons}
             />
         </SafeAreaView>
         
