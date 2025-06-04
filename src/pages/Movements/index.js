@@ -4,7 +4,6 @@ import { ListMovements } from "../../components/ListMovements";
 import { styles } from "./styles";
 import { colorPattern } from "../../themes";
 import { FinancialSummaryContext } from "../../contexts/financialSummary";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // icon
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -13,6 +12,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { Spinner } from "../../components/Spinner";
 import { ExternalCalls } from "../../services/externalCalls";
 import { AuthContext } from "../../contexts/auth";
+import { PopUp } from "../../components/PopUp";
 
 
 export function Movements(){
@@ -24,7 +24,10 @@ export function Movements(){
     const [name, setName] = useState(null);
     const [loadData, setLoadData] = useState(false);
     const [loadPage, setLoadPage] = useState(false);
-
+    const [visible, setVisible] = useState(false);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    
 
     useEffect(() => {
         setLoadPage(true);
@@ -35,12 +38,14 @@ export function Movements(){
 
     async function searchMovements(body){
 
-        const token = await AsyncStorage.getItem("userToken");
-        const response = await externalCalls.POST("/user/getAllMovements", token, body);
+        const response = await externalCalls.POST("/user/getAllMovements", true, body);
         
         
         if(response.statusCode === 401){
             setLoadData(false);
+            setTitle("Sessão expirada");
+            setDescription("Por segurança, refaça seu login para usar a aplicação novamente.");
+            setVisible(true);
             await signOut();
         }
 
@@ -137,6 +142,19 @@ export function Movements(){
                     
             </View> 
 
+
+            <PopUp 
+                openModal={visible}
+                title={title}
+                type={""}
+                description={description}
+                buttons={[
+                    {
+                        title: "ok",
+                        action: () => setVisible(false)
+                    }
+                ]}
+            />
         </SafeAreaView>
     );
 }

@@ -20,6 +20,12 @@ export const styles = StyleSheet.create({
         marginVertical: 30
     },
 
+    image: {
+        width: 120,
+        height: 120,
+        borderRadius: 100
+    },
+
     header: {
         flexDirection: "row",
         justifyContent: "space-between"

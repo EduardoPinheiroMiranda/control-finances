@@ -1,5 +1,4 @@
-import React, { createContext, useMemo, useState, useContext, useEffect } from "react";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { createContext, useState, useContext } from "react";
 import { ExternalCalls } from "../services/externalCalls";
 import { AuthContext } from "./auth";
 
@@ -17,13 +16,12 @@ export function FinancialSummaryProvider({children}){
     const [movements, setMovements] = useState([]);
     const [loadData, setLoadData] = useState(false);
 
-    
+
     async function getData(){
 
         setLoadData(true);
 
-        const token = await AsyncStorage.getItem("userToken");
-        const response = await externalCalls.GET("/user/generalSummary", token, null);
+        const response = await externalCalls.GET("/user/generalSummary", true, null);
         
 
         if(response.statusCode === 401){

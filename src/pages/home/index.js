@@ -16,7 +16,6 @@ import { Spinner } from "../../components/Spinner";
 export function Home(){
 
     const { getData, applications, invoice, cards, movements } = useContext(FinancialSummaryContext);
-    const [balance, setBalance] = useState(0);
     const [showValue, setShowValue] = useState(true);
     const [loadData, setLoadData] = useState(false);
     
@@ -26,7 +25,6 @@ export function Home(){
         async function getStartData() {
             setLoadData(true);
                 await getData();
-                applications.value && setBalance(Number(applications.value));
             setLoadData(false);
         }
         getStartData();
@@ -37,7 +35,7 @@ export function Home(){
     const components = [
         <ApplicationWall 
             showValue={showValue} 
-            balance={balance} 
+            applications={applications} 
             visible={() => setShowValue(!showValue)}
             activeButtons={false}
         />,

@@ -16,9 +16,15 @@ import Cifrao from "../../assets/svg/cifrao.svg";
 import { CustomText } from "../CustomText";
 
 
-export function ApplicationWall({showValue, balance, visible, activeButtons}){
+export function ApplicationWall({showValue, applications, visible, activeButtons}){
 
+    let value = 0;
 
+    if(applications.value){
+        value = Number(applications.value);
+    }
+
+    
     return(
         <View style={[defaultPageStyle.box]}>
 
@@ -31,7 +37,7 @@ export function ApplicationWall({showValue, balance, visible, activeButtons}){
                     showValue ? 
                         <View style={styles.sectionValue}>
                             <CustomText style={[styles.textValue]}>
-                                {formatCurrency(balance)}
+                                {formatCurrency(value)}
                             </CustomText>
 
                             <Pressable onPress={() => visible()}>

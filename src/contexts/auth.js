@@ -28,29 +28,32 @@ export function AuthProvider({children}){
                 return;
             }
 
-
-            const response = await externalCalls.GET("/user/getUserByToken", token, null);
+            await getUser();
             
-            
-            if(response.statusCode === 200){
-                setUser(response.response);
-                setSigned(true);
-                setLoadingPage(false);
-                return;
-            }
-
-            
-            await AsyncStorage.removeItem("userToken");
             setLoadingPage(false);
         }
 
         automaticLogin();
     }, []);
 
+    async function getUser(){
+
+        const response = await externalCalls.GET("/user/getUserByToken", true, null);
+            
+        if(response.statusCode === 200){
+            setUser(response.response);
+            setSigned(true);
+            setLoadingPage(false);
+            return;
+        }
+        
+        await AsyncStorage.removeItem("userToken");
+    }
+
     async function signUp(data){
 
         setLoading(true);
-        const response = await externalCalls.POST("/user/userRegister", null, data);
+        const response = await externalCalls.POST("/user/userRegister", false, data);
         setLoading(false);
 
 
@@ -63,7 +66,7 @@ export function AuthProvider({children}){
     async function signIn(data){
 
         setLoading(true);
-        const response = await externalCalls.POST("/user/authenticate", null, data);
+        const response = await externalCalls.POST("/user/authenticate", false, data);
 
 
         if(response.statusCode !== 200){
@@ -99,6 +102,7 @@ export function AuthProvider({children}){
             signUp, 
             signIn,
             signOut,
+            getUser,
             loading,
             loadingPage,
             signed, 

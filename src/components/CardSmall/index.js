@@ -9,6 +9,7 @@ import  ChipSmall from "../../assets/svg/chipSmall.svg";
 
 // components
 import { CustomText } from "../CustomText";
+import { format } from "date-fns";
 
 
 export function CardSmall({data, showValue}){
@@ -16,7 +17,7 @@ export function CardSmall({data, showValue}){
     const colorFont = data.color_font;
     const colorBackground = data.color_card;
     const cardName = data.name;
-    const expired = `${data.due_day}/${new Date().getMonth() + 1}`;
+    const expired = format(new Date().setDate(data.due_day), "dd/MM");
     const valueUsed = 1000;
 
 

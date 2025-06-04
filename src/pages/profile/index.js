@@ -1,20 +1,24 @@
-import React, { useContext, useState } from "react";
-import { View, SafeAreaView, TouchableOpacity, Alert } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { View, SafeAreaView, TouchableOpacity, Image } from "react-native";
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { colorPattern } from "../../themes";
 import { AuthContext } from "../../contexts/auth";
+import * as ImagePicker from "expo-image-picker";
+import * as FileSystem from "expo-file-system";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ExternalCalls } from "../../services/externalCalls";
 
 // icon
-import NoPhoto from "../../assets/profile/noPhoto.svg";
+import NoPhoto from "../../assets/svg/noPhoto.svg";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import LockPassword from "../../assets/svg/lock-password.svg";
 
-
 // components
 import { CustomText } from "../../components/CustomText";
 import { PopUp } from "../../components/PopUp";
+import { FinancialSummaryContext } from "../../contexts/financialSummary";
 
 
 function SectionData({data}){
@@ -42,11 +46,13 @@ function SectionData({data}){
 
 export function Profile(){
 
-    const { user, signOut } = useContext(AuthContext);
+    const { user, signOut, getUser } = useContext(AuthContext);
+
     const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [buttons, setButtons] = useState([]);
+
+    const externalCalls = new ExternalCalls();
 
 
     async function logout() {
@@ -65,13 +71,71 @@ export function Profile(){
         setVisible(true);
     }
 
+    async function selectPhoto(){
+
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ["images"],
+            selectionLimit: 1,
+            quality: 1,
+        });
+
+        
+        if(!result.canceled){
+            
+            const uri = result.assets[0].uri;
+            const fileName = uri.split("/").pop();
+            const newPath = FileSystem.documentDirectory + fileName;
+            
+            try{
+
+                const { msg, statusCode } = await externalCalls.PUT(
+                    "/user/updateAvatar",
+                    true,
+                    {avatar: newPath}
+                )
+
+                if(statusCode !== 200){
+                    setTitle("Ops....");
+                    setDescription(msg);
+                    setVisible(true);
+                }
+
+                const imageExist = await FileSystem.getInfoAsync(user.avatar);
+                if(imageExist.exists){
+                    await FileSystem.deleteAsync(user.avatar);
+                }
+                
+                await FileSystem.copyAsync({
+                    from: uri,
+                    to: newPath
+                })
+                
+                await getUser();
+
+            }catch(err){
+                console.log(err);
+                setTitle("Ops....");
+                setDescription("Houve um pequeno problema para salvar sua imagem, tente novamente.");
+                setVisible(true);
+            }
+        }
+    }
+
     return(
         <SafeAreaView style={[defaultPageStyle.page, styles.container]}>
             <View >
             
-                <View style={styles.sectionImage}>
-                    <NoPhoto/>
-                </View>
+                <TouchableOpacity
+                    onPress={selectPhoto}
+                    style={styles.sectionImage}
+                >
+                    {/* {!user.avatar ?
+                        <NoPhoto/> 
+                            :
+                        <Image source={{uri: user.avatar}} style={styles.image}/>
+                    } */}
+                    <Image source={{uri: user.avatar}} style={styles.image}/>
+                </TouchableOpacity>
                 
 
                 <View style={[defaultPageStyle.box]}>
@@ -111,7 +175,12 @@ export function Profile(){
                 title={title}
                 type={""}
                 description={description}
-                buttons={buttons}
+                buttons={[
+                    {
+                        title: "ok",
+                        action: () => setVisible(false)
+                    }
+                ]}
             />
         </SafeAreaView>
         

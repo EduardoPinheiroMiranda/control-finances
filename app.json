@@ -25,14 +25,15 @@
       "favicon": "./src/assets/images/favicon.png"
     },
     "plugins": [
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "node_modules/@expo-google-fonts/inter/Roboto_900Black.ttf"
-          ]
-        }
-      ]
+      ["expo-font", {
+        "fonts": [
+          "node_modules/@expo-google-fonts/inter/Roboto_900Black.ttf"
+        ]
+      }],
+
+      ["expo-image-picker", {
+        "photosPermission": "Este aplicativo precisa de acesso à sua galeria para acessar suas fotos."
+      }]
     ]
   }
 }

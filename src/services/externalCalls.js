@@ -1,4 +1,5 @@
 import { API_URL } from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export class ExternalCalls{
@@ -6,8 +7,15 @@ export class ExternalCalls{
     constructor(){}
 
 
-    async request(method, url, token, body){
+    async request(method, url, useToken, body){
 
+        let token = null;
+
+        if(useToken){
+            token = await AsyncStorage.getItem("userToken")
+        }
+
+        
         try{
 
             const request = await fetch(
@@ -46,9 +54,9 @@ export class ExternalCalls{
         }
     }
 
-    async POST(url, token, body){
+    async POST(url, useToken, body){
 
-        const { response, statusCode, msg} = await this.request("POST", url, token, body);
+        const { response, statusCode, msg} = await this.request("POST", url, useToken, body);
 
         return {
             response,
@@ -57,14 +65,25 @@ export class ExternalCalls{
         }
     }
 
-    async GET(url, token, params){
+    async GET(url, useToken, params){
 
         if(params !== null){
             const queryParams = new URLSearchParams(params).toString();
             url = `${url}/${queryParams}`;
         }
     
-        const { response, statusCode, msg} = await this.request("GET", url, token, null);
+        const { response, statusCode, msg} = await this.request("GET", url, useToken, null);
+
+        return {
+            response,
+            statusCode,
+            msg
+        }
+    }
+
+    async PUT(url, useToken, body){
+    
+        const { response, statusCode, msg} = await this.request("PUT", url, useToken, body);
 
         return {
             response,
