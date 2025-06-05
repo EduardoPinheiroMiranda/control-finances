@@ -76,7 +76,7 @@ export function SignIn(){
                             label="informe seu e-mail"
                             placeholder="E-mail"
                             value={email}
-                            onChangeText={setEmail}
+                            action={setEmail}
                         />
 
                         <View>
@@ -84,7 +84,7 @@ export function SignIn(){
                                 label="informe sua senha"
                                 placeholder="senha"
                                 value={password}
-                                onChangeText={setPassword}
+                                action={setPassword}
                             />
                             <Pressable onPress={() => alert("Função indisponível temporariamente.")}>
                                 <CustomText style={[styles.textResetPassword]}>

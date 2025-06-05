@@ -89,26 +89,26 @@ export function SignUp(){
                             label="Nome completo"
                             placeholder="João da Silva"
                             value={name}
-                            onChangeText={setName}
+                            action={setName}
                         />
 
                         <InputText 
                             label="E-mail"
                             placeholder="joaoSilva@exemplo.com"
                             value={email}
-                            onChangeText={setEmail}
+                            action={setEmail}
                         />
 
                         <InputPassword
                             label="Senha"
                             value={password}
-                            onChangeText={setPassword}
+                            action={setPassword}
                         />
 
                         <InputPassword
                             label="Confirmar senha"
                             value={confirmPassword}
-                            onChangeText={setConfirmPassword}
+                            action={setConfirmPassword}
                         />
                     </View>
 

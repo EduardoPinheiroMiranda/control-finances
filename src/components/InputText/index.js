@@ -5,20 +5,21 @@ import { defaultPageStyle } from "../../themes/stylesDefault";
 import { CustomText } from "../CustomText";
 
 
-export function InputText(props){
+export function InputText({label, placeholder, value, action}){
 
 
     return(
         <View>
             <CustomText style={[defaultPageStyle.text, styles.text]}>
-                {props.label}
+                {label}
             </CustomText>
+            
             <TextInput
                 style={styles.input}
-                placeholder={props.placeholder}
+                placeholder={placeholder}
                 placeholderTextColor={colorPattern.gray_300}
-                value={props.value}
-                onChangeText={(value) => props.onChangeText(value)}
+                value={value}
+                onChangeText={(value) => action(value)}
             />
         </View>
     );

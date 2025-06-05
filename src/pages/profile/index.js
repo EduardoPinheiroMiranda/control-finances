@@ -17,6 +17,7 @@ import LockPassword from "../../assets/svg/lock-password.svg";
 // components
 import { CustomText } from "../../components/CustomText";
 import { PopUp } from "../../components/PopUp";
+import { useNavigation } from "@react-navigation/native";
 
 
 function SectionData({data}){
@@ -45,6 +46,8 @@ function SectionData({data}){
 export function Profile(){
     
     const externalCalls = new ExternalCalls();
+    const navigation = useNavigation();
+
     const { user, signOut, getUser } = useContext(AuthContext);
     const [image, setImage] = useState(null);
     const [visible, setVisible] = useState(false);
@@ -179,7 +182,13 @@ export function Profile(){
 
                     <View style={styles.header}>
                         <CustomText style={styles.title}>Dados pessoais</CustomText>
-                        <FontAwesome6 name="edit" size={18} color={colorPattern.black_900}/>
+                        <TouchableOpacity
+                            activeOpacity={0.4}
+                            onPress={() => navigation.navigate("updateProfile")}
+                        >
+                            <FontAwesome6 name="edit" size={18} color={colorPattern.black_900}/>
+                        </TouchableOpacity>
+                        
                     </View>
 
                     <SectionData data={user}/>

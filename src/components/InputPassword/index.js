@@ -12,7 +12,7 @@ import { EyeOpen } from "../../assets/svg/eyeOpen";
 import { CustomText } from "../CustomText";
 
 
-export function InputPassword(props){
+export function InputPassword({label, placeholder, value, action}){
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -20,17 +20,19 @@ export function InputPassword(props){
     return(
         <View>
             <CustomText style={[defaultPageStyle.text, styles.text]}>
-                {props.label}
+                {label}
             </CustomText>
+
             <View>
                 <TextInput
                     style={styles.input}
-                    placeholder={props.placeholder}
+                    placeholder={placeholder}
                     placeholderTextColor={colorPattern.gray_300}
-                    value={props.value}
-                    onChangeText={(value) => props.onChangeText(value)}
+                    value={value}
+                    onChangeText={(value) => action(value)}
                     secureTextEntry={!showPassword}
                 />
+
                 <View style={styles.icon}>
                     <Pressable onPress={() => setShowPassword(!showPassword)}>
                         {
@@ -40,11 +42,8 @@ export function InputPassword(props){
                                 <EyeClose data={iconStyles}/>
                         }
                     </Pressable>
-                    
                 </View>
-                
             </View>
-            
         </View>
     );
 }

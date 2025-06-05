@@ -9,6 +9,7 @@ import { TabRoutes } from "./tab.routes";
 import { Movements } from "../pages/Movements";
 import { ExpenseAnalysis } from "../pages/expenseAnalysis";
 import { Profile } from "../pages/profile";
+import { UpdateProfile } from "../pages/UpdateProfile";
 // import { PayInvoice } from "../pages/payInvoice";
 // import { InvoiceSummaray } from "../pages/invoiceSummary";
 // import { AddPurchase } from "../pages/addPurchase";
@@ -61,6 +62,11 @@ export function AppRoutes(){
                 name="profile" 
                 component={Profile} 
                 options={{title: "Perfil"}}
+            />
+            <Stack.Screen 
+                name="updateProfile" 
+                component={UpdateProfile} 
+                options={{title: "Atualizar perfil"}}
             />
             {/* <Stack.Screen 
                 name="payInvoice" 
