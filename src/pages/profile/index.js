@@ -198,6 +198,7 @@ export function Profile(){
                 <View style={styles.sectionButton}>
                     <TouchableOpacity
                         activeOpacity={0.4}
+                        onPress={() => navigation.navigate("updatePassword")}
                         style={[styles.buttonDefault, {backgroundColor: colorPattern.blue_300}]}
                     >
                         <LockPassword/>
