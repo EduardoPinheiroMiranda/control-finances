@@ -11,9 +11,9 @@ import { ExpenseAnalysis } from "../pages/expenseAnalysis";
 import { Profile } from "../pages/profile";
 import { UpdateProfile } from "../pages/UpdateProfile";
 import { UpdatePassword } from "../pages/UpdatePassword";
+import { AddPurchase } from "../pages/addPurchase";
 // import { PayInvoice } from "../pages/payInvoice";
 // import { InvoiceSummaray } from "../pages/invoiceSummary";
-// import { AddPurchase } from "../pages/addPurchase";
 // import { ManageExpenses } from "../pages/manageExpenses";
 // import { ControlLimit } from "../pages/controlLimit";
 // import { ManageCards } from "../pages/manageCards";
@@ -74,6 +74,11 @@ export function AppRoutes(){
                 component={UpdatePassword} 
                 options={{title: "Redefinir senha"}}
             />
+            <Stack.Screen 
+                name="addPurchase" 
+                component={AddPurchase} 
+                options={{title: "Adicionar compra"}}
+            />
             {/* <Stack.Screen 
                 name="payInvoice" 
                 component={PayInvoice} 
@@ -84,11 +89,7 @@ export function AppRoutes(){
                 component={InvoiceSummaray} 
                 options={{title: "Resumo de faturas"}}
             />
-            <Stack.Screen 
-                name="addPurchase" 
-                component={AddPurchase} 
-                options={{title: "Adicionar compra"}}
-            />
+            
             <Stack.Screen 
                 name="manageExpenses" 
                 component={ManageExpenses} 

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
-import { colorPattern } from "../../themes";
 import { FinancialSummaryContext } from "../../contexts/financialSummary";
 
 // components
@@ -17,18 +16,18 @@ export function Home(){
 
     const { getData, applications, invoice, cards, movements } = useContext(FinancialSummaryContext);
     const [showValue, setShowValue] = useState(true);
-    const [loadData, setLoadData] = useState(false);
+    const [loadData, setLoadData] = useState(true);
     
 
     useEffect(() => {
+        setLoadData(true);
         
-        async function getStartData() {
-            setLoadData(true);
-                await getData();
-            setLoadData(false);
-        }
-        getStartData();
-        
+            async function getStartData() {
+                    await getData();
+            }
+            getStartData();
+
+        setLoadData(false);
     }, []);
 
 

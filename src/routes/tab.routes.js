@@ -28,7 +28,7 @@ export function TabRoutes(){
 
                 statusBarStyle: "light",
                 
-                animation: "fade",
+                animation: "shift",
                 transitionSpec:{
                     animation: "timing",
                     config: {
