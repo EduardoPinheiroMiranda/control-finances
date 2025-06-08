@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
@@ -14,9 +14,22 @@ import { Spinner } from "../../components/Spinner";
 
 export function Home(){
 
-    const { getData, applications, invoice, cards, movements, loadData } = useContext(FinancialSummaryContext);
+    const { getData, applications, invoice, cards, movements } = useContext(FinancialSummaryContext);
     const [showValue, setShowValue] = useState(true);
-   
+    const [loadData, setLoadData] = useState(true);
+    
+
+    useEffect(() => {
+        setLoadData(true);
+        
+            async function getStartData() {
+                await getData();
+            }
+            getStartData();
+
+        setLoadData(false);
+    }, []);
+
 
     const components = [
         <ApplicationWall 

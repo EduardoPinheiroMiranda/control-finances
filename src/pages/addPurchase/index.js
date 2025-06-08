@@ -4,6 +4,7 @@ import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { listItems, listMethodPayment, listPurchaseTypes } from "./selectableItems";
 import { FinancialSummaryContext } from "../../contexts/financialSummary";
+import { format, formatDate } from "date-fns";
 
 // components
 import { InputText } from "../../components/InputText";
@@ -30,7 +31,7 @@ export function AddPurchase(){
 
 
     async function handlerForm(){
-        console.log("enviar dados");
+        console.log(datePurchase);
     }
     
     
@@ -120,7 +121,11 @@ export function AddPurchase(){
                                     onPress={() => setVisible(true)}
                                 >
                                     <CustomText style={!datePurchase? styles.textExample : styles.text}>
-                                        {!datePurchase ? "Ex.: 01/01/2025" : datePurchase}
+                                        {!datePurchase ? 
+                                            "Ex.: 01/01/2025" 
+                                            : 
+                                            formatDate(new Date(datePurchase), "dd/MM/yyyy")
+                                        }
                                     </CustomText>
                                 </TouchableOpacity>
                             </View>
@@ -140,7 +145,12 @@ export function AddPurchase(){
 
                         </View>
                     </ScrollView>
-                    <CalendarModal visible={visible} action={() => setVisible(false)}/>
+
+                    <CalendarModal 
+                        visible={visible} 
+                        action={setDatePurchase}
+                        hiderCalendar={() => setVisible(false)}
+                    />
                 </KeyboardAvoidingView>
             </SafeAreaView>
         </TouchableWithoutFeedback>
