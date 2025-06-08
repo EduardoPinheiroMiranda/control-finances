@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, KeyboardAvoidingView, Pressable, ScrollView, Platform, TouchableWithoutFeedback, Keyboard, Modal } from "react-native";
+import { View, KeyboardAvoidingView, Pressable, ScrollView, Platform, TouchableWithoutFeedback, Keyboard, Modal, SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native"; 
 import { defaultPageStyle } from "../../themes/stylesDefault";
@@ -70,15 +70,15 @@ export function SignUp(){
     }
 
     return(
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <SafeAreaView style={[defaultPageStyle.page, styles.container]}>
             <KeyboardAvoidingView 
-                style={[defaultPageStyle.page, styles.container]}
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
                 enabled
             >
-                <StatusBar hidden={true}/>
                 <ScrollView
                     showsVerticalScrollIndicator={false}
+                    horizontal={false}
+                    keyboardShouldPersistTaps="handled"
                 >
                     <View style={styles.sectionIcon}>
                         <SignUpIcon/>
@@ -141,6 +141,6 @@ export function SignUp(){
                     <Spinner size={40}/>
                 </Modal>
             </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
+        </SafeAreaView>
     );
 }

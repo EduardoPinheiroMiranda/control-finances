@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     },
 
     close: {
-        height: "45%",
+        height: "50%",
     },
 
     sectionCalendar: {
@@ -20,9 +20,4 @@ export const styles = StyleSheet.create({
         borderTopRightRadius: 15,
         elevation: 5
     },
-
-    calendar: {
-        // backgroundColor: colorPattern.white_800,
-        // color: "red"
-    }
 })

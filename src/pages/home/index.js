@@ -32,18 +32,8 @@ export function Home(){
 
 
     const components = [
-        <ApplicationWall 
-            showValue={showValue} 
-            applications={applications} 
-            visible={() => setShowValue(!showValue)}
-            activeButtons={false}
-        />,
-        <ConsumptionIndicator 
-            showValue={showValue}
-            data={invoice}
-            styleBig={false}
-            showButton={true}
-        />,
+        <ApplicationWall showValue={showValue}  applications={applications} visible={() => setShowValue(!showValue)} activeButtons={false}/>,
+        <ConsumptionIndicator showValue={showValue} data={invoice} styleBig={false} showButton={true}/>,
         <DisplayCards showValue={showValue} cards={cards}/>,
         <RecentActivity data={movements}/>
     ]

@@ -5,11 +5,11 @@ import { colorPattern } from "../../themes";
 export const styles = StyleSheet.create({
     container: {
         backgroundColor: colorPattern.white_800,
-        paddingHorizontal: 20,
+        paddingHorizontal: 20
     },
-    
-    form: {
-        marginTop: 30,
+
+    scrollView: {
+        paddingTop: 30,
         gap: 30
     },
 
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         gap: 20
     },
-
+    
     label: {
         color: colorPattern.gray_900,
         fontSize: 14,

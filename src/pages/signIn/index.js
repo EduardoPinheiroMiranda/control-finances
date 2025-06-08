@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, KeyboardAvoidingView, Pressable, ScrollView, TouchableWithoutFeedback, Keyboard, Platform, Modal } from "react-native";
+import { View, KeyboardAvoidingView, Pressable, ScrollView, TouchableWithoutFeedback, Keyboard, Platform, Modal, SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
 import { defaultPageStyle } from "../../themes/stylesDefault";
@@ -57,15 +57,15 @@ export function SignIn(){
 
 
     return(
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <KeyboardAvoidingView 
-                style={[defaultPageStyle.page, styles.container]}
+        <SafeAreaView style={[defaultPageStyle.page, styles.container]}>
+            <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
                 enabled
             >
-                <StatusBar hidden={true}/>
                 <ScrollView
                     showsVerticalScrollIndicator={false}
+                    horizontal={false}
+                    keyboardShouldPersistTaps="handled"
                 >
                     <View style={styles.sectionIcon}>
                         <SignInIcon/>
@@ -73,7 +73,7 @@ export function SignIn(){
 
                     <View style={styles.form}>
                         <InputText 
-                            label="informe seu e-mail"
+                            label="Informe seu e-mail"
                             placeholder="E-mail"
                             value={email}
                             action={setEmail}
@@ -81,7 +81,7 @@ export function SignIn(){
 
                         <View>
                             <InputPassword
-                                label="informe sua senha"
+                                label="Informe sua senha"
                                 placeholder="senha"
                                 value={password}
                                 action={setPassword}
@@ -121,6 +121,6 @@ export function SignIn(){
                 </Modal>
 
             </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
+        </SafeAreaView>
     );
 }
