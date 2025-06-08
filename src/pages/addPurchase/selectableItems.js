@@ -10,7 +10,7 @@ export const listPurchaseTypes = [
 ];
 
 
-export const listMethoodPayment = [
+export const listMethodPayment = [
     {
         label: "Cartão",
         value: "card"
@@ -24,3 +24,14 @@ export const listMethoodPayment = [
         value: "money"
     },
 ];
+
+
+export function listItems(items){
+
+    return items.map((item) => {
+        return {
+            label: item.name,
+            value: item.id
+        }
+    });
+}

@@ -20,12 +20,11 @@ export function InputText({label, placeholder, value, action, keyboardType, coin
         }
 
         setMaskedValue(value);
-
     }, []);
     
 
     function handlerValue(inputValue){
-
+       
         if(coin){
             const onlyNumber = inputValue.replace(/\D/g, "");
             const price = onlyNumber/100;
@@ -36,11 +35,12 @@ export function InputText({label, placeholder, value, action, keyboardType, coin
         }
         
         action(inputValue);
+        setMaskedValue(inputValue);
     }
 
 
     return(
-        <View>
+        <View style={styles.container}>
             <CustomText style={[defaultPageStyle.text, styles.text]}>
                 {label}
             </CustomText>

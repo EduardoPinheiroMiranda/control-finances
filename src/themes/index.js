@@ -14,6 +14,7 @@ export const colorPattern = {
 
     white_900: "#F1F1F1",
     white_800: "#FAFAFA",
+    white_700: "#FFFFFF",
 
     green_900: "#18A91D",
     

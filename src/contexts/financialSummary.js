@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import { ExternalCalls } from "../services/externalCalls";
 import { AuthContext } from "./auth";
 
@@ -14,7 +14,27 @@ export function FinancialSummaryProvider({children}){
     const [invoice, setInvoice] = useState({});
     const [cards, setCards] = useState([]);
     const [movements, setMovements] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [loadData, setLoadData] = useState(false);
+
+
+    useEffect(() => {
+
+        async function startData(){
+
+            const response = await externalCalls.GET("/category/listCategories/", false, null);
+
+            if(response.statusCode === 401){
+                await signOut();
+            }
+
+            setCategories(response.response);
+
+            await getData();
+        }
+        startData();
+        
+    }, [])
 
 
     async function getData(){
@@ -22,12 +42,10 @@ export function FinancialSummaryProvider({children}){
         setLoadData(true);
 
         const response = await externalCalls.GET("/user/generalSummary", true, null);
-        
 
         if(response.statusCode === 401){
             await signOut();
         }
-
 
         setApplications(response.response.applications || {});
         setInvoice(response.response.invoice || {});
@@ -44,6 +62,7 @@ export function FinancialSummaryProvider({children}){
             invoice,
             cards,
             movements,
+            categories,
             loadData
         }}>
             {children}

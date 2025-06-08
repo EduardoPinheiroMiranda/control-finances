@@ -1,22 +1,37 @@
 import React, { useState } from "react";
-import { View, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, TouchableWithoutFeedback, Keyboard, Text, TextInput } from "react-native";
+import { View, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, TouchableWithoutFeedback, Keyboard, Text, TextInput, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
-import { listMethoodPayment, listPurchaseTypes } from "./selectableItems";
+import { listItems, listMethodPayment, listPurchaseTypes } from "./selectableItems";
+import { FinancialSummaryContext } from "../../contexts/financialSummary";
 
 // components
 import { InputText } from "../../components/InputText";
 import { SelectorBox } from "../../components/SelectorBox";
+import { CalendarModal } from "../../components/CalendarModal";
+import { CustomText } from "../../components/CustomText";
+import { Button } from "../../components/Button";
+import { useContext } from "react";
 
 
 export function AddPurchase(){
 
+    const { cards, categories } = useContext(FinancialSummaryContext);
+    const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState(null);
     const [typePurchase, setTypePurchase] = useState(null);
     const [methodPayment, setMethodPayment] = useState(null);
+    const [installments, setInstallments] = useState(1);
+    const [selectCard, setSelectCard] = useState(null);
+    const [selectCategory, setSelectCategory] = useState(null);
     const [price, setPrice] = useState(0);
-    const [DatePurchase, setDatePurchase] = useState(null);
+    const [datePurchase, setDatePurchase] = useState(null);
     const [description, setDescription] = useState(null);
+
+
+    async function handlerForm(){
+        console.log("enviar dados");
+    }
     
     
     return(
@@ -50,17 +65,65 @@ export function AddPurchase(){
                                 title="Selecione qual a forma de pagamento"
                                 value={methodPayment}
                                 action={setMethodPayment}
-                                items={listMethoodPayment}
+                                items={listMethodPayment}
                             />
 
-                            <InputText
-                                label="Valor da compra"
-                                value={price}
-                                placeholder=""
-                                action={setPrice}
-                                keyboardType="numeric"
-                                coin={true}
+                            <View style={styles.valueAndInstallments}>
+                                <InputText
+                                    label="Valor da compra"
+                                    value={price}
+                                    placeholder=""
+                                    action={setPrice}
+                                    keyboardType="numeric"
+                                    coin={true}
+                                />
+
+                                <InputText
+                                    label="Quantidade de parcelas"
+                                    value={installments}
+                                    placeholder="Ex.: 12"
+                                    action={setInstallments}
+                                    keyboardType="numeric"
+                                />                                
+                            </View>
+                            
+
+                            {methodPayment !== "card" ? 
+                                <InputText
+                                    label="Dia do vencimento"
+                                    value={price}
+                                    placeholder="Ex.: 10"
+                                    action={setPrice}
+                                    keyboardType="numeric"
+                                />
+                                :
+                                <SelectorBox
+                                    title="Selecionar cartão"
+                                    value={selectCard}
+                                    items={listItems(cards)}
+                                    action={setSelectCard}
+                                />
+                            }
+
+                            <SelectorBox
+                                title="Selecionar uma categoria"
+                                value={selectCategory}
+                                items={listItems(categories)}
+                                action={setSelectCategory}
                             />
+                            
+                            <View>
+                                <CustomText style={styles.label}>Quando foi feita a compra - (opcional)</CustomText>
+                                <TouchableOpacity 
+                                    style={styles.sectionDatePurchase}
+                                    activeOpacity={1}
+                                    onPress={() => setVisible(true)}
+                                >
+                                    <CustomText style={!datePurchase? styles.textExample : styles.text}>
+                                        {!datePurchase ? "Ex.: 01/01/2025" : datePurchase}
+                                    </CustomText>
+                                </TouchableOpacity>
+                            </View>
 
                             <InputText
                                 label="Adicione uma descrição - (opcional)"
@@ -70,8 +133,14 @@ export function AddPurchase(){
                                 multiline={true}
                             />
 
+
+                            <View style={styles.sectionButton}>
+                                <Button title="Salvar compra" action={handlerForm}/>
+                            </View>
+
                         </View>
                     </ScrollView>
+                    <CalendarModal visible={visible} action={() => setVisible(false)}/>
                 </KeyboardAvoidingView>
             </SafeAreaView>
         </TouchableWithoutFeedback>
