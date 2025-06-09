@@ -9,15 +9,22 @@ export const styles = StyleSheet.create({
     },
 
     close: {
-        height: "50%",
+        flex: 1,
     },
 
     sectionCalendar: {
-        flex: 1,
+        flex: 2.5,
         backgroundColor: colorPattern.white_700,
         paddingTop: 20,
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
-        elevation: 5
+        elevation: 5,
     },
+
+    sectionButton: {
+        flex: 1,
+        justifyContent: "flex-end",
+        alignItems: "center",
+        marginBottom: 20
+    }
 })

@@ -49,7 +49,7 @@ export function InputText({label, placeholder, value, action, keyboardType, coin
                 style={styles.input}
                 placeholder={placeholder}
                 placeholderTextColor={colorPattern.gray_300}
-                value={maskedValue}
+                value={String(maskedValue || "")}
                 onChangeText={(value) => handlerValue(value)}
                 keyboardType={keyboardType}
                 multiline={multiline}

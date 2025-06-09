@@ -7,7 +7,8 @@ import { styles } from "./styles";
 import { CustomText } from "../CustomText";
 
 
-export function SelectorBox({title, value, action, items}){
+export function SelectorBox({title, value, action, items, placeholder}){
+
 
 
     return(
@@ -18,10 +19,7 @@ export function SelectorBox({title, value, action, items}){
                     value={value}
                     onValueChange={(value) => action(value)}
                     items={items}
-                    placeholder={{
-                        label: "Selecione um item", 
-                        value: null
-                    }}
+                    placeholder={placeholder ? {label: "Selecione um item", value: null} : {}}
                     style={styles.picker}
                 />
             </View>

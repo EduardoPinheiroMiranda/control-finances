@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaView, KeyboardAvoidingView, Platform, TouchableOpacity, View, ScrollView } from "react-native";
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { listPurchaseTypes, listMethodPayment, listItems } from "./selectableItems";
 import { format } from "date-fns";
 import { FinancialSummaryContext } from "../../contexts/financialSummary";
+import { validations } from "./validations";
 
 // components
 import { InputText } from "../../components/InputText";
@@ -12,27 +13,87 @@ import { SelectorBox } from "../../components/SelectorBox";
 import { CustomText } from "../../components/CustomText";
 import { Button } from "../../components/Button";
 import { CalendarModal } from "../../components/CalendarModal";
+import { PopUp } from "../../components/PopUp";
+import { ExternalCalls } from "../../services/externalCalls";
 
 
 export function AddPurchase(){
 
     const { cards, categories } = useContext(FinancialSummaryContext);
     const [visible, setVisible] = useState(false);
-    const [title, setTitle] = useState(null);
-    const [typePurchase, setTypePurchase] = useState(null);
-    const [methodPayment, setMethodPayment] = useState(null);
-    const [installments, setInstallments] = useState("1");
+    const [name, setName] = useState(null);
+    const [typePurchase, setTypePurchase] = useState("fixedExpense");
+    const [methodPayment, setMethodPayment] = useState("card");
+    const [installments, setInstallments] = useState(1);
     const [selectCard, setSelectCard] = useState(null);
     const [selectCategory, setSelectCategory] = useState(null);
     const [price, setPrice] = useState(0);
+    const [dueDay, setDueDay] = useState(null);
     const [datePurchase, setDatePurchase] = useState(null);
     const [description, setDescription] = useState(null);
 
+    // states from popUp
+    const [titleNotification, setTitleNotification] = useState("");
+    const [descriptionNotification, setDescriptionNotification] = useState("");
+    const [openNotification, setOpenNotification] = useState(false);
+    const [buttons, setButtons] = useState([]);
+
     const placeholder = !datePurchase ? "Ex.: 01/01/2025" : format(new Date(datePurchase), "dd/MM/yyyy");
-    
+    const externalCall = new ExternalCalls();
+
+    useEffect(() => {
+        setSelectCard(cards[0].id);
+        setSelectCategory(categories[0].id);
+    }, [])
+
 
     async function handlerForm(){
-        console.log(datePurchase);
+        
+        const result = validations(
+            name, typePurchase, methodPayment, price,
+            installments, selectCard, dueDay, selectCategory
+        );
+        
+        if(result){
+            setTitleNotification(result.title);
+            setDescriptionNotification(result.description);
+            setOpenNotification(result.openNotification);
+            return;
+        }
+
+        const body = {
+            name: name,
+            typeInvoice: typePurchase,
+            paymentMethod: methodPayment,
+            value: price,
+            totalInstallments: installments,
+            description: description,
+            dueDay: dueDay,
+            categoryId: selectCategory,
+            cardId: typePurchase === "card" ? typePurchase : null,
+            purchseDate: datePurchase
+        }
+
+        const response = await externalCall.POST("/shopping/registerShopping", true, body);
+
+        if(response.statusCode === 401){
+            setTitleNotification("Sessão expirada");
+            setDescriptionNotification("Por segurança, refaça seu login para usar a aplicação novamente.");
+            setOpenNotification(true);
+            return;
+        }
+
+        if(response.statusCode !== 201){
+            setTitleNotification("Erro ao adicionar a compra");
+            setDescriptionNotification(response.msg);
+            setOpenNotification(result.openNotification);
+            return;
+        }
+
+        setTitleNotification("Sucesso!!");
+        setDescriptionNotification("Compra adicionada.");
+        setOpenNotification(result.openNotification);
+        return;
     }
     
     
@@ -50,9 +111,9 @@ export function AddPurchase(){
                     <View style={styles.scrollView}>
                         <InputText
                             label="Titulo da compra"
-                            value={title}
+                            value={name}
                             placeholder="EX.: compra no mercado"
-                            action={setTitle}
+                            action={setName}
                         />
             
                         <SelectorBox
@@ -91,9 +152,9 @@ export function AddPurchase(){
                         {methodPayment !== "card" ? 
                             <InputText
                                 label="Dia do vencimento"
-                                value={price}
+                                value={dueDay}
                                 placeholder="Ex.: 10"
-                                action={setPrice}
+                                action={setDueDay}
                                 keyboardType="numeric"
                             />
                             :
@@ -146,6 +207,21 @@ export function AddPurchase(){
                     visible={visible} 
                     action={setDatePurchase}
                     hiderCalendar={() => setVisible(false)}
+                    clear={() => {
+                        setDatePurchase(null);
+                        setVisible(false);
+                    }}
+                />
+
+                <PopUp
+                    title={titleNotification}
+                    type=""
+                    description={descriptionNotification}
+                    openModal={openNotification}
+                    buttons={[{
+                        title: "Ok",
+                        action: () => setOpenNotification(false)
+                    }]}
                 />
             </KeyboardAvoidingView>
         </SafeAreaView>

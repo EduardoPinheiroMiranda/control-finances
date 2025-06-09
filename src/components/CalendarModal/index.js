@@ -4,8 +4,11 @@ import { Calendar } from "react-native-calendars";
 import { styles } from "./styles";
 import { colorPattern } from "../../themes";
 
+// components
+import { Button } from "../../components/Button";
 
-export function CalendarModal({visible, action, hiderCalendar}){
+
+export function CalendarModal({visible, action, hiderCalendar, clear}){
 
     const [makedDates, setMarkedDates] = useState({});
     
@@ -23,16 +26,12 @@ export function CalendarModal({visible, action, hiderCalendar}){
     }
 
     return(
-        <Modal
-            transparent={true}
-            animationType="slide"
-            visible={visible}
-        >
+        <Modal transparent={true} animationType="slide" visible={visible}>
             <View style={styles.modal}>
 
                 <TouchableOpacity 
                     style={styles.close}
-                    onPress={action}
+                    onPress={hiderCalendar}
                 />
 
                 <View style={styles.sectionCalendar}>
@@ -43,10 +42,13 @@ export function CalendarModal({visible, action, hiderCalendar}){
                             backgroundColor: colorPattern.blue_300,
                         }}
                     />
+
+                    <View style={styles.sectionButton}>
+                        <Button title="Limpar" action={clear}/>
+                    </View>
                 </View>
                 
             </View>
-            
         </Modal>
     );
 }
