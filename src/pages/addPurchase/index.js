@@ -15,11 +15,13 @@ import { Button } from "../../components/Button";
 import { CalendarModal } from "../../components/CalendarModal";
 import { PopUp } from "../../components/PopUp";
 import { ExternalCalls } from "../../services/externalCalls";
+import { AuthContext } from "../../contexts/auth";
 
 
 export function AddPurchase(){
 
     const { cards, categories } = useContext(FinancialSummaryContext);
+    const { signOut } = useContext(AuthContext);
     const [visible, setVisible] = useState(false);
     const [name, setName] = useState(null);
     const [typePurchase, setTypePurchase] = useState("fixedExpense");
@@ -47,20 +49,8 @@ export function AddPurchase(){
     }, [])
 
 
-    async function handlerForm(){
-        
-        const result = validations(
-            name, typePurchase, methodPayment, price,
-            installments, selectCard, dueDay, selectCategory
-        );
-        
-        if(result){
-            setTitleNotification(result.title);
-            setDescriptionNotification(result.description);
-            setOpenNotification(result.openNotification);
-            return;
-        }
-
+    async function sendForm(){
+    
         const body = {
             name: name,
             typeInvoice: typePurchase,
@@ -68,31 +58,78 @@ export function AddPurchase(){
             value: price,
             totalInstallments: installments,
             description: description,
-            dueDay: dueDay,
+            dueDay: dueDay || 0,
             categoryId: selectCategory,
-            cardId: typePurchase === "card" ? typePurchase : null,
-            purchseDate: datePurchase
+            cardId: methodPayment === "card" ? selectCard : null,
+            purchaseDate: datePurchase
         }
 
         const response = await externalCall.POST("/shopping/registerShopping", true, body);
 
         if(response.statusCode === 401){
             setTitleNotification("Sessão expirada");
-            setDescriptionNotification("Por segurança, refaça seu login para usar a aplicação novamente.");
+            setDescriptionNotification("Verifique todos os dados antes de enviá-los, e garanta que está tudo certo.");
+                setButtons([{
+                title: "Ok",
+                action: () => {
+                    setOpenNotification(false);
+                    signOut()
+                }
+            }])
             setOpenNotification(true);
             return;
         }
 
         if(response.statusCode !== 201){
-            setTitleNotification("Erro ao adicionar a compra");
+            setTitleNotification("Ops...");
             setDescriptionNotification(response.msg);
+            setButtons([{
+                title: "Ok",
+                action: () => setOpenNotification(false)
+            }])
             setOpenNotification(result.openNotification);
             return;
         }
 
         setTitleNotification("Sucesso!!");
         setDescriptionNotification("Compra adicionada.");
+        setButtons([{
+            title: "Ok",
+            action: () => setOpenNotification(false)
+        }])
         setOpenNotification(result.openNotification);
+    }
+
+    async function handlerForm(){
+        
+        const result = validations(
+            name, typePurchase, methodPayment, price, installments,
+            selectCard, dueDay, selectCategory, setOpenNotification
+        );
+        
+        if(result){
+            setTitleNotification(result.title);
+            setDescriptionNotification(result.description);
+            setButtons(result.buttons);
+            setOpenNotification(result.openNotification);
+            return;
+        }
+
+
+        setTitleNotification("Atenção");
+        setDescriptionNotification("Verifique todos os dados antes de enviá-los, e garanta que está tudo certo.");
+            setButtons([
+                {
+                    title: "Revisar",
+                    action: () => setOpenNotification(false)
+                },
+                {
+                    title: "Continuar",
+                    action: sendForm
+                }
+            ])
+        setOpenNotification(true);
+        
         return;
     }
     
@@ -218,10 +255,7 @@ export function AddPurchase(){
                     type=""
                     description={descriptionNotification}
                     openModal={openNotification}
-                    buttons={[{
-                        title: "Ok",
-                        action: () => setOpenNotification(false)
-                    }]}
+                    buttons={buttons}
                 />
             </KeyboardAvoidingView>
         </SafeAreaView>

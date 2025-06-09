@@ -10,6 +10,10 @@ export function validations(
             return{
                 title: "Dados inválidos",
                 description: "Preencha todos os campos que não são opcionais.",
+                buttons: [{
+                    title: "Ok",
+                    action: () => setOpenNotification(false)
+                }],
                 openNotification: true
             };
         }
@@ -20,6 +24,10 @@ export function validations(
             return{
                 title: "Dados inválidos",
                 description: "Preencha todos os campos que não são opcionais.",
+                buttons: [{
+                    title: "Ok",
+                    action: () => setOpenNotification(false)
+                }],
                 openNotification: true
             }
         }
@@ -30,6 +38,10 @@ export function validations(
         return{
             title: "Dados inválidos",
             description: "O valor da compra não pode ser inferior a 0.",
+            buttons: [{
+                title: "Ok",
+                action: () => setOpenNotification(false)
+            }],
             openNotification: true
         }
     }
@@ -38,14 +50,22 @@ export function validations(
         return{
             title: "Dados inválidos",
             description: "Cada compra deve ter no mínimo uma parcela.",
+            buttons: [{
+                title: "Ok",
+                action: () => setOpenNotification(false)
+            }],
             openNotification: true
         }
     }
 
-    if(dueDay <= 0 || dueDay > 31){
+    if( dueDay && dueDay <= 0 || dueDay > 31){
         return{
             title: "Dados inválidos",
             description: "Dia do vencimento invalido",
+            buttons: [{
+                title: "Ok",
+                action: () => setOpenNotification(false)
+            }],
             openNotification: true
         }
     }
