@@ -1,15 +1,17 @@
 import React from "react";
-import { View, ActivityIndicator, StyleSheet } from "react-native";
+import { View, ActivityIndicator, StyleSheet, Modal } from "react-native";
 import { colorPattern } from "../../themes";
 
 
-export function Spinner({size, color}){
+export function Spinner({showSpinner, size, color}){
 
     
     return(
-        <View style={styles.conteiner}>
-            <ActivityIndicator size={size} color={color ? color : colorPattern.blue_300}/>
-        </View>
+        <Modal transparent={true} animationType="fade" visible={showSpinner}>
+            <View style={styles.conteiner}>
+                <ActivityIndicator size={size} color={color ? color : colorPattern.blue_300}/>
+            </View>
+        </Modal>
     );
 }
 

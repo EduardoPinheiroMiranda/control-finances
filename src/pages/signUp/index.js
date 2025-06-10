@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { styles } from "./styles";
 import { AuthContext } from "../../contexts/auth";
+import { checkCallAnswers } from "../../services/checkCallAnswers";
 
 // icons
 import SignUpIcon from "../../assets/svg/signUpIcon.svg"
@@ -29,7 +30,8 @@ export function SignUp(){
     const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [openModal, setOpenModal] = useState(false);
+    const [buttons, setButtons] = useState([]);
+    const [showSpinner, setShowSpinner] = useState(false);
     
 
     async function handlerForms(){
@@ -38,34 +40,43 @@ export function SignUp(){
             setTitle("Dados invalidos");
             setDescription("É necessário preencher todos os campos.");
             setVisible(true);
+            setButtons([{
+                title: "Ok",
+                action: () => setVisible(false)
+            }])
             return;
         }
 
         if(password !== confirmPassword){
             setTitle("Dados invalidos");
             setDescription("As senhas devem ser iguais.");
+            setButtons([{
+                title: "Ok",
+                action: () => setVisible(false)
+            }])
             setVisible(true);
             return;
         }
 
 
-
-        setOpenModal(true);
+        setShowSpinner(true);
         const response = await signUp({name, email, password});
+        const messageContent = checkCallAnswers({response, closePopUp: setVisible});
+        setShowSpinner(false);
 
 
-        if(response.statusCode !== 201){
-            setOpenModal(false);
+        const successButtons = [{
+            title: "Ok",
+            action: () => {
+                setVisible(false);
+                navigation.goBack();
+            }
+        }];
 
-            setTitle("Erro no cadastro");
-            setDescription(response.msg);
-            setVisible(true);
-        }
 
-        setOpenModal(false);
-
-        setTitle("Sucesso !");
-        setDescription("Usuário cadastrado com sucesso!!");
+        setTitle(messageContent.title);
+        setDescription(messageContent.description);
+        setButtons(response.statusCode !== 201 ? messageContent.buttons : successButtons);
         setVisible(true);
     }
 
@@ -131,15 +142,11 @@ export function SignUp(){
                     title={title}
                     type={""}
                     description={description}
-                    buttons={[{
-                        title: "Ok",
-                        action: () => setVisible(false)
-                    }]}
+                    buttons={buttons}
                 />
 
-                <Modal transparent={true} animationType="fade" visible={openModal}>
-                    <Spinner size={40}/>
-                </Modal>
+                
+                <Spinner showSpinner={showSpinner} size={40}/>
             </KeyboardAvoidingView>
         </SafeAreaView>
     );

@@ -1,72 +1,90 @@
 
-   
-export function validations(
-    name, typePurchase, methodPayment, price, installments,
-    selectCard, dueDay, selectCategory, setOpenNotification
-){
 
-    if(methodPayment === "card"){
-        if(!name || !typePurchase || !installments || !selectCard || !selectCategory){
+export function validations(params){
+
+    const buttonsDefault = [{
+        title: "Ok",
+        action: () => params.closePopUp(false)
+    }];
+
+
+    if(params.methodPayment === "card"){
+        if(
+            !params.name || !params.typePurchase || !params.installments ||
+            !params.selectCard || !params.selectCategory
+        ){
             return{
                 title: "Dados inválidos",
                 description: "Preencha todos os campos que não são opcionais.",
-                buttons: [{
-                    title: "Ok",
-                    action: () => setOpenNotification(false)
-                }],
-                openNotification: true
+                buttons: buttonsDefault,
             };
         }
     }
 
-    if(methodPayment !== "card"){
-        if(!name || !typePurchase || !methodPayment || !installments || !dueDay){
+    if(params.methodPayment !== "card"){
+        if(
+            !params.name || !params.typePurchase || !params.methodPayment ||
+            !params.installments || !params.dueDay
+        ){
             return{
                 title: "Dados inválidos",
                 description: "Preencha todos os campos que não são opcionais.",
-                buttons: [{
-                    title: "Ok",
-                    action: () => setOpenNotification(false)
-                }],
-                openNotification: true
-            }
+                buttons: buttonsDefault,
+            };
         }
     }
     
 
-    if(price <= 0){
+    if(params.price <= 0){
         return{
             title: "Dados inválidos",
             description: "O valor da compra não pode ser inferior a 0.",
-            buttons: [{
-                title: "Ok",
-                action: () => setOpenNotification(false)
-            }],
-            openNotification: true
-        }
+            buttons: buttonsDefault,
+        };
     }
 
-    if(installments <= 0){
+    if(params.installments <= 0){
         return{
             title: "Dados inválidos",
             description: "Cada compra deve ter no mínimo uma parcela.",
-            buttons: [{
-                title: "Ok",
-                action: () => setOpenNotification(false)
-            }],
-            openNotification: true
-        }
+            buttons: buttonsDefault,
+        };
     }
 
-    if( dueDay && dueDay <= 0 || dueDay > 31){
-        return{
-            title: "Dados inválidos",
-            description: "Dia do vencimento invalido",
-            buttons: [{
-                title: "Ok",
-                action: () => setOpenNotification(false)
-            }],
-            openNotification: true
+    if(params.methodPayment !== "card"){
+        if( params.dueDay && params.dueDay <= 0 || params.dueDay > 31){
+            return{
+                title: "Dados inválidos",
+                description: "Dia do vencimento invalido",
+                buttons: buttonsDefault,
+            };
         }
     }
+    
+
+    const body = {
+        name: params.name,
+        typeInvoice: params.typePurchase,
+        paymentMethod: params.methodPayment,
+        value: params.price,
+        totalInstallments: params.installments,
+        description: params.description,
+        dueDay: params.methodPayment === "card" ? null : params.dueDay,
+        categoryId: params.selectCategory,
+        cardId: params.methodPayment === "card" ? params.selectCard : null,
+        purchaseDate: params.datePurchase
+    };
+
+
+    return{
+        title: "Atenção",
+        description: "Verifique todos os dados antes de enviá-los, e garanta que está tudo certo.",
+        buttons: [
+            {title: "Revisar", action: () => params.closePopUp(false)},
+            {title: "Continuar", action: () => {
+                params.closePopUp(false);
+                params.execute(body);
+            }}
+        ]
+    };
 }

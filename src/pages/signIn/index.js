@@ -16,6 +16,7 @@ import { Button } from "../../components/Button";
 import { CustomText } from "../../components/CustomText";
 import { PopUp } from "../../components/PopUp";
 import { Spinner } from "../../components/Spinner";
+import { checkCallAnswers } from "../../services/checkCallAnswers";
 
 
 export function SignIn(){
@@ -26,8 +27,9 @@ export function SignIn(){
     const [password, setPassword] = useState("");
     const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState("");
+    const [buttons, setButtons] = useState([]);
     const [description, setDescription] = useState("");
-    const [openModal, setOpenModal] = useState(false);
+    const [showSpinner, setShowSpinner] = useState(false);
 
 
     async function handlerForms(){
@@ -35,24 +37,28 @@ export function SignIn(){
         if(!email || !password){
             setTitle("Dados invalidos");
             setDescription("É necessário preencher todos os campos.");
+            setButtons([{
+                title: "Ok",
+                action: () => setVisible(false)
+            }]);
             setVisible(true);
             return;
         }
 
 
-        setOpenModal(true);
+        setShowSpinner(true);
         const response = await signIn({email, password});
-        
+        const messageContent = checkCallAnswers({response, closePopUp: setVisible});
+        setShowSpinner(false)
         
         if(response.statusCode !== 200){
-            setOpenModal(false);
-
-            setTitle("Erro no login");
-            setDescription(response.msg);
+            setTitle(messageContent.title);
+            setDescription(messageContent.description);
+            setButtons(messageContent.buttons);
             setVisible(true);
         }
 
-        setOpenModal(false);
+        return;
     }
 
 
@@ -110,15 +116,10 @@ export function SignIn(){
                     title={title}
                     type={""}
                     description={description}
-                    buttons={[{
-                        title: "Ok",
-                        action: () => setVisible(false)
-                    }]}
+                    buttons={buttons}
                 />
 
-                <Modal transparent={true} animationType="fade" visible={openModal}>
-                    <Spinner size={40}/>
-                </Modal>
+                <Spinner showSpinner={showSpinner} size={40}/>
 
             </KeyboardAvoidingView>
         </SafeAreaView>

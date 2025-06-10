@@ -5,7 +5,9 @@ import { defaultPageStyle } from "../../themes/stylesDefault";
 import { listPurchaseTypes, listMethodPayment, listItems } from "./selectableItems";
 import { format } from "date-fns";
 import { FinancialSummaryContext } from "../../contexts/financialSummary";
+import { AuthContext } from "../../contexts/auth";
 import { validations } from "./validations";
+import { checkCallAnswers } from "../../services/checkCallAnswers";
 
 // components
 import { InputText } from "../../components/InputText";
@@ -15,13 +17,14 @@ import { Button } from "../../components/Button";
 import { CalendarModal } from "../../components/CalendarModal";
 import { PopUp } from "../../components/PopUp";
 import { ExternalCalls } from "../../services/externalCalls";
-import { AuthContext } from "../../contexts/auth";
+import { Spinner } from "../../components/Spinner";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export function AddPurchase(){
 
-    const { cards, categories } = useContext(FinancialSummaryContext);
     const { signOut } = useContext(AuthContext);
+    const { cards, categories } = useContext(FinancialSummaryContext);
     const [visible, setVisible] = useState(false);
     const [name, setName] = useState(null);
     const [typePurchase, setTypePurchase] = useState("fixedExpense");
@@ -33,6 +36,7 @@ export function AddPurchase(){
     const [dueDay, setDueDay] = useState(null);
     const [datePurchase, setDatePurchase] = useState(null);
     const [description, setDescription] = useState(null);
+    const [showSpinner, setShowSpinner] = useState(false);
 
     // states from popUp
     const [titleNotification, setTitleNotification] = useState("");
@@ -40,8 +44,10 @@ export function AddPurchase(){
     const [openNotification, setOpenNotification] = useState(false);
     const [buttons, setButtons] = useState([]);
 
+
     const placeholder = !datePurchase ? "Ex.: 01/01/2025" : format(new Date(datePurchase), "dd/MM/yyyy");
     const externalCall = new ExternalCalls();
+
 
     useEffect(() => {
         setSelectCard(cards[0].id);
@@ -49,87 +55,39 @@ export function AddPurchase(){
     }, [])
 
 
-    async function sendForm(){
-    
-        const body = {
-            name: name,
-            typeInvoice: typePurchase,
-            paymentMethod: methodPayment,
-            value: price,
-            totalInstallments: installments,
-            description: description,
-            dueDay: dueDay || 0,
-            categoryId: selectCategory,
-            cardId: methodPayment === "card" ? selectCard : null,
-            purchaseDate: datePurchase
-        }
+    async function sendForm(body){
 
+        setShowSpinner(true);
         const response = await externalCall.POST("/shopping/registerShopping", true, body);
+        const messageContent = checkCallAnswers(response, setOpenNotification, signOut);
+        setShowSpinner(false);
 
-        if(response.statusCode === 401){
-            setTitleNotification("Sessão expirada");
-            setDescriptionNotification("Verifique todos os dados antes de enviá-los, e garanta que está tudo certo.");
-                setButtons([{
-                title: "Ok",
-                action: () => {
-                    setOpenNotification(false);
-                    signOut()
-                }
-            }])
-            setOpenNotification(true);
-            return;
-        }
 
-        if(response.statusCode !== 201){
-            setTitleNotification("Ops...");
-            setDescriptionNotification(response.msg);
-            setButtons([{
-                title: "Ok",
-                action: () => setOpenNotification(false)
-            }])
-            setOpenNotification(result.openNotification);
-            return;
-        }
+        setTitleNotification(messageContent.title);
+        setDescriptionNotification(messageContent.description);
+        setButtons(messageContent.buttons);
+        setOpenNotification(true);
 
-        setTitleNotification("Sucesso!!");
-        setDescriptionNotification("Compra adicionada.");
-        setButtons([{
-            title: "Ok",
-            action: () => setOpenNotification(false)
-        }])
-        setOpenNotification(result.openNotification);
+        return;
     }
 
     async function handlerForm(){
+
+        const params = {
+            name, typePurchase, methodPayment, price, installments, selectCard,
+            dueDay, selectCategory, description, datePurchase,
+            closePopUp: setOpenNotification, execute: sendForm
+        };
         
-        const result = validations(
-            name, typePurchase, methodPayment, price, installments,
-            selectCard, dueDay, selectCategory, setOpenNotification
-        );
-        
-        if(result){
-            setTitleNotification(result.title);
-            setDescriptionNotification(result.description);
-            setButtons(result.buttons);
-            setOpenNotification(result.openNotification);
-            return;
-        }
+
+        const result = validations(params);
 
 
-        setTitleNotification("Atenção");
-        setDescriptionNotification("Verifique todos os dados antes de enviá-los, e garanta que está tudo certo.");
-            setButtons([
-                {
-                    title: "Revisar",
-                    action: () => setOpenNotification(false)
-                },
-                {
-                    title: "Continuar",
-                    action: sendForm
-                }
-            ])
+        setTitleNotification(result.title);
+        setDescriptionNotification(result.description);
+        setButtons(result.buttons);
         setOpenNotification(true);
-        
+
         return;
     }
     
@@ -257,6 +215,9 @@ export function AddPurchase(){
                     openModal={openNotification}
                     buttons={buttons}
                 />
+
+                <Spinner showSpinner={showSpinner} size={38}/>
+
             </KeyboardAvoidingView>
         </SafeAreaView>
     );
