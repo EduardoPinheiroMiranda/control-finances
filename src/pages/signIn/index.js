@@ -119,7 +119,7 @@ export function SignIn(){
                     buttons={buttons}
                 />
 
-                <Spinner showSpinner={showSpinner} size={40}/>
+                <Spinner showSpinner={showSpinner} size={38}/>
 
             </KeyboardAvoidingView>
         </SafeAreaView>

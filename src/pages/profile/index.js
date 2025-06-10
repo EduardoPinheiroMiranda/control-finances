@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, SafeAreaView, TouchableOpacity, Image } from "react-native";
+import { View, SafeAreaView, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { colorPattern } from "../../themes";
@@ -7,6 +7,8 @@ import { AuthContext } from "../../contexts/auth";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
 import { ExternalCalls } from "../../services/externalCalls";
+import { useNavigation } from "@react-navigation/native";
+import { checkCallAnswers } from "../../services/checkCallAnswers";
 
 // icon
 import NoPhoto from "../../assets/svg/noPhoto.svg";
@@ -17,7 +19,7 @@ import LockPassword from "../../assets/svg/lock-password.svg";
 // components
 import { CustomText } from "../../components/CustomText";
 import { PopUp } from "../../components/PopUp";
-import { useNavigation } from "@react-navigation/native";
+import { Spinner } from "../../components/Spinner";
 
 
 function SectionData({data}){
@@ -54,6 +56,7 @@ export function Profile(){
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [buttons, setButtons] = useState([]);
+    const [showSpinner, setShowSpinner] = useState(false);
 
 
     useEffect(() => {
@@ -68,7 +71,7 @@ export function Profile(){
         }
         checkImage();
 
-    }, [user])
+    }, [user]);
 
 
     async function logout() {
@@ -105,35 +108,20 @@ export function Profile(){
             
             try{
 
-                const { msg, statusCode } = await externalCalls.PUT(
-                    "/user/updateAvatar",
-                    true,
-                    {avatar: newPath}
-                )
+                setShowSpinner(true);
+                const body = { avatar: newPath };
+                const response = await externalCalls.PUT("/user/updateAvatar", true, body);
+                const messageContent = checkCallAnswers({response, closePopUp: setVisible, signOut});
+                setShowSpinner(false);
 
 
-                if(statusCode === 401){
-                    setLoadData(false);
-                    setTitle("Sessão expirada");
-                    setDescription("Por segurança, refaça seu login para usar a aplicação novamente.");
-                    setButtons([{
-                        title: "ok",
-                        action: () => setVisible(false)
-                    }]);
-                    setVisible(true);
-                    await signOut();
-                }
-
-                if(statusCode !== 200){
-                    setTitle("Ops....");
-                    setDescription(msg);
-                    setButtons([{
-                        title: "ok",
-                        action: () => setVisible(false)
-                    }]);
+                if(response.statusCode !== 200){
+                    setTitle(messageContent.title);
+                    setDescription(messageContent.description);
+                    setButtons(messageContent.buttons);
                     setVisible(true);
                 }
-
+                
 
                 const imageExist = await FileSystem.getInfoAsync(user.avatar);
 
@@ -154,7 +142,7 @@ export function Profile(){
                 setTitle("Ops....");
                 setDescription("Houve um pequeno problema para salvar sua imagem, tente novamente.");
                 setButtons([{
-                    title: "ok",
+                    title: "Ok",
                     action: () => setVisible(false)
                 }]);
                 setVisible(true);
@@ -224,6 +212,9 @@ export function Profile(){
                 description={description}
                 buttons={buttons}
             />
+
+            <Spinner showSpinner={showSpinner} size={38}/>
+            
         </SafeAreaView>
         
     );

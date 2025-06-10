@@ -133,6 +133,7 @@ export function AddPurchase(){
                                 action={setPrice}
                                 keyboardType="numeric"
                                 coin={true}
+                                flex={true}
                             />
             
                             <InputText
@@ -141,6 +142,7 @@ export function AddPurchase(){
                                 placeholder=""
                                 action={setInstallments}
                                 keyboardType="numeric"
+                                flex={true}
                             />                                
                         </View>
                                         

@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
 
     sectionInputs: {

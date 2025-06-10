@@ -11,6 +11,7 @@ import { InputPassword } from "../../components/InputPassword";
 import { Button } from "../../components/Button";
 import { PopUp } from "../../components/PopUp";
 import { Spinner } from "../../components/Spinner";
+import { checkCallAnswers } from "../../services/checkCallAnswers";
 
 
 export function UpdatePassword(){
@@ -27,7 +28,7 @@ export function UpdatePassword(){
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [buttons, setButtons] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [showSpinner, setShowSpinner] = useState(false);
 
 
     async function updateData(){
@@ -36,7 +37,7 @@ export function UpdatePassword(){
             setTitle("Dados invalidos");
             setDescription("Todos os campos devem ser preenchidos.");
             setButtons([{
-                title: "ok",
+                title: "Ok",
                 action: () => {
                     setVisible(false);
                 }
@@ -49,7 +50,7 @@ export function UpdatePassword(){
             setTitle("Dados invalidos");
             setDescription("A senha de confirmação deve ser igual a nova senha.");
             setButtons([{
-                title: "ok",
+                title: "Ok",
                 action: () => {
                     setVisible(false);
                 }
@@ -58,61 +59,33 @@ export function UpdatePassword(){
             return;
         }
 
+        const body = {
+            password: currentPassword,
+            newPassword: newPassword
+        };
         
-        setLoading(true);
-
-        const { statusCode, msg } = await externalCalls.PUT(
-            "/user/updatePassword", 
-            true, 
-            {
-                password: currentPassword,
-                newPassword: newPassword
-            }
-        );
-        
-        
-        if(statusCode === 401){
-            setLoading(false);
-            setTitle("Sessão expirada");
-            setDescription("Por segurança, refaça seu login para usar a aplicação novamente.");
-            setButtons([{
-                title: "ok",
-                action: () => {
-                    setVisible(false);
-                    signOut();
-                }
-            }]);
-            setVisible(true);
-            return;
-        }
-
-        if(statusCode !== 200){
-            setLoading(false);
-            setTitle("Ops...");
-            setDescription(msg);
-            setButtons([{
-                title: "ok",
-                action: () => setVisible(false)
-            }]);
-            setVisible(true);
-            return;
-        }
+        setShowSpinner(true);
+        const response = await externalCalls.PUT("/user/updatePassword", true, body);
+        const messageContent = checkCallAnswers({response, closePopUp: setVisible, signOut});
+        setShowSpinner(false);
 
 
-        setLoading(false);
-
-        setTitle("Sucesso !!");
-        setDescription("Senha atualizada.");
-        setButtons([{
-            title: "ok",
+        const successButtons = [{
+            title: "Ok",
             action: () => {
                 setVisible(false);
                 navigation.goBack();
             }
-        }]);
-        setVisible(true);
+        }]
+        
 
+        setTitle(messageContent.title);
+        setDescription(messageContent.description);
+        setButtons(response.statusCode !== 200 ? messageContent.buttons : successButtons);
+        setVisible(true);
         await getUser();
+
+        return;
     }
 
 
@@ -155,9 +128,7 @@ export function UpdatePassword(){
                     buttons={buttons}
                 />
 
-                <Modal visible={loading} transparent={true} animationType="fade">
-                    <Spinner size={38}/>
-                </Modal>
+                <Spinner showSpinner={showSpinner} size={38}/>
 
             </SafeAreaView>
         </TouchableWithoutFeedback>

@@ -4,7 +4,7 @@ import { colorPattern } from "../../themes";
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1
+        // flex: 1
     },
     text: {
         color: colorPattern.gray_900,

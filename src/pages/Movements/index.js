@@ -4,6 +4,7 @@ import { ListMovements } from "../../components/ListMovements";
 import { styles } from "./styles";
 import { colorPattern } from "../../themes";
 import { FinancialSummaryContext } from "../../contexts/financialSummary";
+import { checkCallAnswers } from "../../services/checkCallAnswers";
 
 // icon
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -25,6 +26,7 @@ export function Movements(){
     const [loadData, setLoadData] = useState(false);
     const [loadPage, setLoadPage] = useState(false);
     const [visible, setVisible] = useState(false);
+    const [buttons, setButtons] = useState([]);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     
@@ -39,16 +41,14 @@ export function Movements(){
     async function searchMovements(body){
 
         const response = await externalCalls.POST("/user/getAllMovements", true, body);
+        const messageContent = checkCallAnswers({response, closePopUp: setVisible, signOut});
         
-        
-        if(response.statusCode === 401){
-            setLoadData(false);
-            setTitle("Sessão expirada");
-            setDescription("Por segurança, refaça seu login para usar a aplicação novamente.");
+        if(response.statusCode !== 200){
+            setTitle(messageContent.title);
+            setDescription(messageContent.description);
+            setButtons(messageContent.buttons);
             setVisible(true);
-            await signOut();
         }
-
         
         return response
     }
@@ -121,23 +121,22 @@ export function Movements(){
 
             <View style={{flex: 1, paddingHorizontal: 20}}>
 
-                {
-                    loadPage ?
-                        <Spinner size={38}/>
-                            :
-                        <FlatList
-                            data={listMovements}
-                            renderItem={({item}) => <ListMovements data={{
-                                ...item,
-                                installment: `${item.total_installments}x`,
-                                purchase_date: item.created_at
-                            }}/>}
-                            keyExtractor={(item) => item.id}
-                            horizontal={false}
-                            showsVerticalScrollIndicator={false}
-                            onEndReached={searchMoreMovements}
-                            ListFooterComponent={()=> loadData && <Spinner size={38} color={colorPattern.blue_900}/>}
-                        />  
+                {loadPage ?
+                    <Spinner size={38}/>
+                        :
+                    <FlatList
+                        data={listMovements}
+                        renderItem={({item}) => <ListMovements data={{
+                            ...item,
+                            installment: `${item.total_installments}x`,
+                            purchase_date: item.created_at
+                        }}/>}
+                        keyExtractor={(item) => item.id}
+                        horizontal={false}
+                        showsVerticalScrollIndicator={false}
+                        onEndReached={searchMoreMovements}
+                        ListFooterComponent={()=> loadData && <Spinner size={38} color={colorPattern.blue_900}/>}
+                    />  
                 }
                     
             </View> 
@@ -148,12 +147,7 @@ export function Movements(){
                 title={title}
                 type={""}
                 description={description}
-                buttons={[
-                    {
-                        title: "ok",
-                        action: () => setVisible(false)
-                    }
-                ]}
+                buttons={buttons}
             />
         </SafeAreaView>
     );

@@ -11,6 +11,7 @@ import { InputText } from "../../components/InputText";
 import { Button } from "../../components/Button";
 import { PopUp } from "../../components/PopUp";
 import { Spinner } from "../../components/Spinner";
+import { checkCallAnswers } from "../../services/checkCallAnswers";
 
 
 export function UpdateProfile(){
@@ -25,7 +26,7 @@ export function UpdateProfile(){
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [buttons, setButtons] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [showSpinner, setShowSpinner] = useState(false);
 
 
     useEffect(() => {
@@ -44,53 +45,29 @@ export function UpdateProfile(){
         }
 
         
-        setLoading(true);
+        setShowSpinner(true);
+        const response = await externalCalls.PUT("/user/updateUser", true, {name, email});
+        const messageContent = checkCallAnswers({response, closePopUp: setVisible});
+        setShowSpinner(false);
 
-            const { statusCode, msg } = await externalCalls.PUT("/user/updateUser", true, {name, email});
-            
-            
-            if(statusCode === 401){
-                setTitle("Sessão expirada");
-                setDescription("Por segurança, refaça seu login para usar a aplicação novamente.");
-                setButtons([{
-                    title: "ok",
-                    action: () => setVisible(false)
-                }]);
-                setVisible(true);
-                setLoading(false);
-                return;
+
+        const successButtons = [{
+            title: "Ok",
+            action: () => {
+                setVisible(false);
+                navigation.goBack();
             }
-
-            if(statusCode !== 200){
-                setTitle("Ops...");
-                setDescription(msg);
-                setButtons([{
-                    title: "ok",
-                    action: () => {
-                        setVisible(false);
-                        signOut();
-                    }
-                }]);
-                setVisible(true);
-                setLoading(false);
-                return;
-            }
+        }]
 
 
-            setTitle("Sucesso !!");
-            setDescription("Dados atualizados.");
-            setButtons([{
-                title: "ok",
-                action: () => {
-                    setVisible(false);
-                    navigation.goBack();
-                }
-            }]);
-            setVisible(true);
-
-            await getUser();
+        setTitle(messageContent.title);
+        setDescription(messageContent.description);
+        setButtons(response.statusCode !== 200 ? messageContent.buttons : successButtons);
+        setVisible(true);
         
-        setLoading(false);
+        await getUser();
+
+        return;
     }
 
 
@@ -128,9 +105,7 @@ export function UpdateProfile(){
                     buttons={buttons}
                 />
 
-                <Modal visible={loading} transparent={true} animationType="fade">
-                    <Spinner size={38}/>
-                </Modal>
+                <Spinner showSpinner={showSpinner} size={38}/>
 
             </SafeAreaView>
         </TouchableWithoutFeedback>

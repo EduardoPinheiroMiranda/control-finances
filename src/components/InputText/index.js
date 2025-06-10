@@ -7,7 +7,7 @@ import { CustomText } from "../CustomText";
 import { formatCurrency } from "../../utils/formatCurrency";
 
 
-export function InputText({label, placeholder, value, action, keyboardType, coin, multiline}){
+export function InputText({flex, label, placeholder, value, action, keyboardType, coin, multiline}){
 
     const [maskedValue, setMaskedValue] = useState("");
     
@@ -40,7 +40,7 @@ export function InputText({label, placeholder, value, action, keyboardType, coin
 
 
     return(
-        <View style={styles.container}>
+        <View style={[styles.container, {...(flex && {flex: 1})}]}>
             <CustomText style={[defaultPageStyle.text, styles.text]}>
                 {label}
             </CustomText>
