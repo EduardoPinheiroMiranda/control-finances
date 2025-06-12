@@ -12,11 +12,7 @@ import { Profile } from "../pages/profile";
 import { UpdateProfile } from "../pages/UpdateProfile";
 import { UpdatePassword } from "../pages/UpdatePassword";
 import { AddPurchase } from "../pages/addPurchase";
-// import { PayInvoice } from "../pages/payInvoice";
-// import { InvoiceSummaray } from "../pages/invoiceSummary";
-// import { ManageExpenses } from "../pages/manageExpenses";
-// import { ControlLimit } from "../pages/controlLimit";
-// import { ManageCards } from "../pages/manageCards";
+import { InvoicesSummary } from "../pages/invoicesSummary";
 
 
 const Stack = createNativeStackNavigator();
@@ -79,32 +75,11 @@ export function AppRoutes(){
                 component={AddPurchase} 
                 options={{title: "Adicionar compra"}}
             />
-            {/* <Stack.Screen 
-                name="payInvoice" 
-                component={PayInvoice} 
-                options={{title: "Pagar fatura"}}
-            />
             <Stack.Screen 
-                name="invoiceSummary" 
-                component={InvoiceSummaray} 
+                name="invoicesSummary" 
+                component={InvoicesSummary} 
                 options={{title: "Resumo de faturas"}}
             />
-            
-            <Stack.Screen 
-                name="manageExpenses" 
-                component={ManageExpenses} 
-                options={{title: "Gerenciar despesas"}}
-            />
-            <Stack.Screen 
-                name="controlLimit" 
-                component={ControlLimit} 
-                options={{title: "controlar limite"}}
-            />
-            <Stack.Screen 
-                name="manageCards"
-                component={ManageCards} 
-                options={{title: "Gerenciar cartões"}}
-            /> */}
         </Stack.Navigator>
     );
 }

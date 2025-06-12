@@ -55,7 +55,7 @@ export function Finances(){
             id: "3",
             icon: <Grafic data={styleIcon}/>,
             label: "Resumo de faturas",
-            nextPage: () => navigator.navigate("invoiceSummary")
+            nextPage: () => navigator.navigate("invoicesSummary")
         },
         {
             id: "4",
