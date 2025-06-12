@@ -66,10 +66,10 @@ export function validations(params){
         name: params.name,
         typeInvoice: params.typePurchase,
         paymentMethod: params.methodPayment,
-        value: params.price,
-        totalInstallments: params.installments,
+        value: Number(params.price),
+        totalInstallments: Number(params.installments),
         description: params.description,
-        dueDay: params.methodPayment === "card" ? null : params.dueDay,
+        dueDay: params.methodPayment === "card" ? null : Number(params.dueDay),
         categoryId: params.selectCategory,
         cardId: params.methodPayment === "card" ? params.selectCard : null,
         purchaseDate: params.datePurchase

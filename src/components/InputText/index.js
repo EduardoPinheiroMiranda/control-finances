@@ -20,7 +20,7 @@ export function InputText({flex, label, placeholder, value, action, keyboardType
         }
 
         setMaskedValue(value);
-    }, []);
+    }, [value]);
     
 
     function handlerValue(inputValue){

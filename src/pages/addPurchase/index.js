@@ -18,13 +18,12 @@ import { CalendarModal } from "../../components/CalendarModal";
 import { PopUp } from "../../components/PopUp";
 import { ExternalCalls } from "../../services/externalCalls";
 import { Spinner } from "../../components/Spinner";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export function AddPurchase(){
 
     const { signOut } = useContext(AuthContext);
-    const { cards, categories } = useContext(FinancialSummaryContext);
+    const { cards, categories, getData } = useContext(FinancialSummaryContext);
     const [visible, setVisible] = useState(false);
     const [name, setName] = useState(null);
     const [typePurchase, setTypePurchase] = useState("fixedExpense");
@@ -55,19 +54,35 @@ export function AddPurchase(){
     }, [])
 
 
+    function resetForm() {
+        setName(null);
+        setTypePurchase("fixedExpense");
+        setMethodPayment("card");
+        setInstallments(1);
+        setSelectCard(cards[0].id);
+        setSelectCategory(categories[0].id);
+        setPrice(0);
+        setDueDay(null);
+        setDatePurchase(null);
+        setDescription(null);
+    }
+
+
     async function sendForm(body){
 
         setShowSpinner(true);
         const response = await externalCall.POST("/shopping/registerShopping", true, body);
-        const messageContent = checkCallAnswers(response, setOpenNotification, signOut);
+        const messageContent = checkCallAnswers({response, closePopUp: setOpenNotification, signOut});
         setShowSpinner(false);
-
 
         setTitleNotification(messageContent.title);
         setDescriptionNotification(messageContent.description);
         setButtons(messageContent.buttons);
         setOpenNotification(true);
 
+        resetForm();
+        await getData();
+        
         return;
     }
 
@@ -79,9 +94,7 @@ export function AddPurchase(){
             closePopUp: setOpenNotification, execute: sendForm
         };
         
-
         const result = validations(params);
-
 
         setTitleNotification(result.title);
         setDescriptionNotification(result.description);

@@ -14,7 +14,7 @@ export function checkCallAnswers({response, closePopUp, signOut}){
         };
     }
 
-    if(response.statusCode !== 201){
+    if(response.statusCode < 200 || response.statusCode > 201){
         return {
             title: "Ops...",
             description: response.msg,

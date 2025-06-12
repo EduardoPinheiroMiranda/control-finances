@@ -37,10 +37,8 @@ export class ExternalCalls{
 
 
             const response = await request.json();
-
-            // console.log(request.status);
-            // console.log(response);
-
+            
+            
             return {
                 statusCode: request.status,
                 response,
