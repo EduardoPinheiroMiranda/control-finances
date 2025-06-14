@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
 
 // component
@@ -7,7 +7,7 @@ import { styles } from "./styles";
 import { colorPattern } from "../../../themes";
 
 
-function LabelInvoice({data, centerItem, index, selectInvoice}){
+function LabelInvoice({data, centerItem, index, selectedInvoice, selectColor}){
 
     const color = useMemo(() => {
 
@@ -26,27 +26,33 @@ function LabelInvoice({data, centerItem, index, selectInvoice}){
     }, [data])
 
 
-    const styleSelector = {...(selectInvoice === index && {
+    const styleSelector = {...(selectedInvoice === index && {
         ...styles.selector,
         backgroundColor: color
     })};
-   
+
 
     return(
-        <TouchableOpacity style={styles.button} onPress={() => centerItem(index)}>
+        <TouchableOpacity 
+            style={styles.button}
+            onPress={() => {
+                selectColor(color);
+                centerItem(index);
+            }
+        }>
             <CustomText style={[styles.label, {color: color}]}>{data.label}</CustomText>
             <View style={styleSelector}/>
         </TouchableOpacity>
     );
 }
 
-export function InvoicesSubtitles({subtitles, selectedInvoice, selectInvoice}){
+export function InvoicesSubtitles({subtitles, invoiceIndex, selectAnInvoice, selectColor}){
 
     const flatListRef = useRef(null);
 
 
     useEffect(() => {
-        subtitles.length > 1 && centerItem(selectedInvoice);
+        subtitles.length > 1 && centerItem(invoiceIndex);
     }, [subtitles]);
 
 
@@ -56,9 +62,8 @@ export function InvoicesSubtitles({subtitles, selectedInvoice, selectInvoice}){
             animated: true,
             viewPosition: 0.5
         });
-        selectInvoice(index);
+        selectAnInvoice(index);
     }
-
 
 
     return(
@@ -69,10 +74,11 @@ export function InvoicesSubtitles({subtitles, selectedInvoice, selectInvoice}){
                 renderItem={({item, index}) => <LabelInvoice
                     data={item}
                     centerItem={() => centerItem(index)}
-                    selectInvoice={selectedInvoice}
+                    selectedInvoice={invoiceIndex}
                     index={index}
+                    selectColor={selectColor}
                 />}
-                keyExtractor={(item) => item.invoice_id}
+                keyExtractor={(item) => String(item.invoice_id)}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 ListHeaderComponent={<View style={styles.View}/>}

@@ -73,7 +73,7 @@ export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
         styleBig ? setStyles(bigStyle) : setStyles(smallStyle);
 
 
-        if(data.percentegeSpent){
+        if(data.percentageSpent){
 
             setDueDate(format(new Date(data.due_date), "dd/MM"));
             SetLimit(data.limit);
@@ -81,9 +81,9 @@ export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
             SetAvailable(data.available)
             
             if(styleBig){
-                setChartData({value: data.percentegeSpent, size: 300, strokeWidth: 20})
+                setChartData({value: data.percentageSpent, size: 300, strokeWidth: 20})
             }else{
-                setChartData({value: data.percentegeSpent, size: 130, strokeWidth: 10})
+                setChartData({value: data.percentageSpent, size: 130, strokeWidth: 10})
             }
         }
 

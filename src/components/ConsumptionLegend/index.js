@@ -1,56 +1,50 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
+import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { formatCurrency } from "../../utils/formatCurrency";
 
 // componets
 import { DisplayMoreDetails } from "../DisplayMoreDetails";
-import { colorPattern } from "../../themes";
 import { CustomText } from "../CustomText";
 
 
-export function ConsumptionLegend(props){
+export function ConsumptionLegend({data, showValue, fontColor, displayMoreDatails, nextPage}){
+
+    let styleLegend = fontColor ? {...styles.legend, color: fontColor} : styles.legend;
+
+
+    const values = [
+        {label: "Limite", value: Number(data.limit)},
+        {label: "Utilizado", value: Number(data.amount)},
+        {label: "Disponivel", value: Number(data.available)},
+    ]
 
 
     return(
         <View style={styles.container}>
-            <View>
-                <View style={styles.sectionLegends}>
-                    <CustomText style={[defaultPageStyle.text, styles.legend]}>Limite:</CustomText>
-                    {
-                        props.showValue ?
-                            <CustomText style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(props.data.limit)}</CustomText>
-                        :
-                            <CustomText style={[defaultPageStyle.text, styles.legend]}>****</CustomText>
-                    }
-                </View>
-
-                <View style={styles.sectionLegends}>
-                    <CustomText style={[defaultPageStyle.text, styles.legend]}>Utilizado:</CustomText>
-                    {
-                        props.showValue ?
-                            <CustomText style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(props.data.amount)}</CustomText>
-                        :
-                            <CustomText style={[defaultPageStyle.text, styles.legend]}>****</CustomText>
-                    }
-                </View>
-
-                <View style={styles.sectionLegends}>
-                    <CustomText style={[defaultPageStyle.text, styles.legend]}>Disponível:</CustomText>
-                    {
-                        props.showValue ?
-                            <CustomText style={[defaultPageStyle.text, styles.legend]}>{formatCurrency(props.data.available)}</CustomText>
-                        :
-                            <CustomText style={[defaultPageStyle.text, styles.legend]}>****</CustomText>
-                    }
-                </View>
+            <View style={styles.description}>
+                {
+                    values.map((item, index) => (
+                        <View key={index} style={styles.sectionLegends}>
+                            <CustomText style={[defaultPageStyle.text, styleLegend]}>{item.label}:</CustomText>
+                            {
+                                showValue ?
+                                    <CustomText style={[defaultPageStyle.text, styleLegend]}>{formatCurrency(item.value)}</CustomText>
+                                :
+                                    <CustomText style={[defaultPageStyle.text, styleLegend]}>****</CustomText>
+                            }
+                        </View>
+                    ))
+                }
             </View>
 
+
             {
-                props.displayMoreDatails && (
+                displayMoreDatails && (
                     <DisplayMoreDetails 
-                        title={props.displayMoreDatails} 
-                        nextPage={props.nextPage}
+                        title={displayMoreDatails} 
+                        nextPage={nextPage}
                     />
                 )
             }
@@ -58,21 +52,3 @@ export function ConsumptionLegend(props){
         </View>
     );
 }
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        gap: 10,
-
-    },
-    sectionLegends: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-    },
-    legend: {
-        fontSize: 16,
-        fontWeight: "regular",
-        color: colorPattern.black_900
-    }
-})
