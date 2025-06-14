@@ -7,16 +7,25 @@ export const styles = StyleSheet.create({
     },
 
     View: {
-        width: 12.5
+        width: 25
     },
 
     button: {
-        borderWidth: 1
+        height: 30,
+        width: 100,
+
+        alignItems: "center",
+        justifyContent: "space-between",
     },
 
     label: {
         fontSize: 16,
         fontWeight: "medium",
-        marginHorizontal: 12.5,
+    },
+
+    selector: {
+        height: 3,
+        width: "50%",
+        borderRadius: 3
     }
 })

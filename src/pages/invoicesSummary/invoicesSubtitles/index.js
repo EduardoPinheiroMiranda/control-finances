@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
 
 // component
@@ -7,7 +7,7 @@ import { styles } from "./styles";
 import { colorPattern } from "../../../themes";
 
 
-function LabelInvoice({data, centerItem, index}){
+function LabelInvoice({data, centerItem, index, selectInvoice}){
 
     const color = useMemo(() => {
 
@@ -25,33 +25,53 @@ function LabelInvoice({data, centerItem, index}){
 
     }, [data])
 
+
+    const styleSelector = {...(selectInvoice === index && {
+        ...styles.selector,
+        backgroundColor: color
+    })};
    
+
     return(
-        <TouchableOpacity onPress={() => centerItem(index)}>
+        <TouchableOpacity style={styles.button} onPress={() => centerItem(index)}>
             <CustomText style={[styles.label, {color: color}]}>{data.label}</CustomText>
+            <View style={styleSelector}/>
         </TouchableOpacity>
     );
 }
 
-export function InvoicesSubtitles({subtitle}){
+export function InvoicesSubtitles({subtitles, selectedInvoice, selectInvoice}){
 
     const flatListRef = useRef(null);
+
+
+    useEffect(() => {
+        subtitles.length > 1 && centerItem(selectedInvoice);
+    }, [subtitles]);
 
 
     function centerItem(index){
         flatListRef.current?.scrollToIndex({
             index,
             animated: true,
-            // viewPosition: 0.1
+            viewPosition: 0.5
         });
+        selectInvoice(index);
     }
+
+
 
     return(
         <View style={styles.container}>
             <FlatList
                 ref={flatListRef}
-                data={subtitle}
-                renderItem={({item, index}) => <LabelInvoice data={item} centerItem={centerItem}/>}
+                data={subtitles}
+                renderItem={({item, index}) => <LabelInvoice
+                    data={item}
+                    centerItem={() => centerItem(index)}
+                    selectInvoice={selectedInvoice}
+                    index={index}
+                />}
                 keyExtractor={(item) => item.invoice_id}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
@@ -59,6 +79,7 @@ export function InvoicesSubtitles({subtitle}){
                 ListFooterComponent={<View style={styles.View}/>}
                 initialNumToRender={30}
                 maxToRenderPerBatch={30}
+                getItemLayout={(__, index) => ({length: 100, offset: 100 * index, index})}
             />
         </View>
     );

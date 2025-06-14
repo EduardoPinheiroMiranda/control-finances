@@ -16,7 +16,9 @@ export function InvoicesSummary(){
 
     const { signOut } = useContext(AuthContext);
     const [invoices, setInvoices] = useState([]);
-    const [subtitle, setSubtitle] = useState([]);
+    const [subtitles, setSubtitles] = useState([]);
+    const [selectInvoice, setSelectInvoice] = useState(null);
+
     const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState("");
     const [buttons, setButtons] = useState([]);
@@ -42,8 +44,13 @@ export function InvoicesSummary(){
                 setVisible(true);
             }
 
+            const invoices = response.response.invoices;
+            const currentInvoice = invoices.find((invoice) => invoice.current === true);
+            const invoiceIndex = invoices.indexOf(currentInvoice);
+
             setInvoices(response.response.invoices);
-            setSubtitle(response.response.subtitle);
+            setSubtitles(response.response.subtitles);
+            setSelectInvoice(invoiceIndex);
         }
         startData();
 
@@ -54,7 +61,11 @@ export function InvoicesSummary(){
         <SafeAreaView style={[defaultPageStyle.page]}>
             
             <View>
-                <InvoicesSubtitles subtitle={subtitle}/>
+                <InvoicesSubtitles
+                    subtitles={subtitles}
+                    selectedInvoice={selectInvoice}
+                    selectInvoice={setSelectInvoice}
+                />
             </View>
             
 
