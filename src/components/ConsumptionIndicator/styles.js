@@ -9,28 +9,12 @@ export const smallStyle = StyleSheet.create({
         fontWeight: "600"
     },
     sectionConsumer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        gap: "5%",
         marginTop: 20,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: 10
+        marginBottom: 10,
     },
-    legends: {
-        justifyContent: "space-between",
-        width: 180,
-        gap: 5,
-    },
-    legendsOfValue: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        gap: 5
-    },
-    valueText: {
-        color: colorPattern.black_900,
-        fontSize: 16,
-        fontWeight: "400"
-    }, 
     sectionButton: {
         display: "none"
     }
@@ -43,25 +27,11 @@ export const bigStyle = StyleSheet.create({
         fontWeight: "400"
     },
     sectionConsumer: {
-        marginTop: 20,
-        justifyContent: "space-between",
-        alignItems: "center"
-    },
-    legends: {
-        width: "100%",
-        justifyContent: "space-between",
-        gap: 8,
-        marginTop: 30,
-    },
-    legendsOfValue: {
-        flexDirection: "row",
-        justifyContent: "space-between",
+        flexDirection: "column",
         alignItems: "center",
-        gap: 5
-    },
-    valueText: {
-        color: colorPattern.black_900,
-        fontSize: 16,
+        gap: 20,
+
+        marginTop: 20,
     },
     sectionButton: {
         marginTop: 50,

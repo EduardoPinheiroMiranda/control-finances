@@ -4,8 +4,7 @@ import { colorPattern } from "../../themes";
 
 export const styles = StyleSheet.create({
     container: {
-        width: "100%",
-        gap: 10
+        gap: 10,
     },
 
     description: {
@@ -20,5 +19,6 @@ export const styles = StyleSheet.create({
     legend: {
         fontSize: 16,
         fontWeight: "regular",
+        color: colorPattern.black_900
     }
 })

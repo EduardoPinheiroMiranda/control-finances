@@ -22,6 +22,15 @@ export const styles = StyleSheet.create({
         marginLeft: 20,
         marginBottom: 20
     },
+    invoiceSummary: {
+        backgroundColor: colorPattern.white_800,
+        width: "90%",
+        borderRadius: 10,
+        elevation: 3,
+        paddingBottom: 30,
+        margin: "auto",
+        marginBottom: 20
+    },
 
     header: {
         flexDirection: "row",

@@ -9,7 +9,7 @@ import { DisplayMoreDetails } from "../DisplayMoreDetails";
 import { CustomText } from "../CustomText";
 
 
-export function ConsumptionLegend({data, showValue, fontColor, displayMoreDatails, nextPage}){
+export function ConsumptionLegend({data, style, showValue, fontColor, displayMoreDatails}){
 
     let styleLegend = fontColor ? {...styles.legend, color: fontColor} : styles.legend;
 
@@ -22,7 +22,7 @@ export function ConsumptionLegend({data, showValue, fontColor, displayMoreDatail
 
 
     return(
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             <View style={styles.description}>
                 {
                     values.map((item, index) => (
@@ -40,14 +40,9 @@ export function ConsumptionLegend({data, showValue, fontColor, displayMoreDatail
             </View>
 
 
-            {
-                displayMoreDatails && (
-                    <DisplayMoreDetails 
-                        title={displayMoreDatails} 
-                        nextPage={nextPage}
-                    />
-                )
-            }
+            {displayMoreDatails && (
+                <DisplayMoreDetails title={displayMoreDatails.title} nextPage={displayMoreDatails.nextPage}/>
+            )}
             
         </View>
     );

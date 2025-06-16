@@ -2,57 +2,14 @@ import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { smallStyle, bigStyle } from "./styles";
-import { formatCurrency } from "../../utils/formatCurrency";
 import { format } from "date-fns";
+import { useNavigation } from "@react-navigation/native";
 
 // components
 import { ExpenseIndicator } from "../ExpenseIndicator";
-import { DisplayMoreDetails } from "../DisplayMoreDetails";
-import { useNavigation } from "@react-navigation/native";
 import { Button } from "../Button";
 import { CustomText } from "../CustomText";
-
-function ShowLegends({data, styles}){
-    return(
-        <View style={styles.legends}>
-            <View style={styles.legendsOfValue}>
-                <CustomText style={styles.valueText}>Limite:</CustomText>
-                <CustomText style={styles.valueText}>{formatCurrency(data.limit)}</CustomText>
-            </View>
-
-            <View style={styles.legendsOfValue}>
-                <CustomText style={styles.valueText}>Utilizado:</CustomText>
-                <CustomText style={styles.valueText}>{formatCurrency(data.amount)}</CustomText>
-            </View>
-
-            <View style={styles.legendsOfValue}>
-                <CustomText style={styles.valueText}>Disponivel:</CustomText>
-                <CustomText style={styles.valueText}>{formatCurrency(data.available)}</CustomText>
-            </View>
-        </View>
-    );
-}
-
-function HideLegends({styles}){
-    return(
-        <View style={styles.legends}>
-            <View style={styles.legendsOfValue}>
-                <CustomText style={styles.valueText}>Limite:</CustomText>
-                <CustomText style={styles.valueText}>****</CustomText>
-            </View>
-
-            <View style={styles.legendsOfValue}>
-                <CustomText style={styles.valueText}>Utilizado:</CustomText>
-                <CustomText style={styles.valueText}>****</CustomText>
-            </View>
-
-            <View style={styles.legendsOfValue}>
-                <CustomText style={styles.valueText}>Disponivel:</CustomText>
-                <CustomText style={styles.valueText}>****</CustomText>
-            </View>
-        </View>
-    );
-}
+import { ConsumptionLegend } from "../ConsumptionLegend";
 
 
 export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
@@ -63,10 +20,6 @@ export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
     const [styles, setStyles] = useState({});
     const [chartData, setChartData] = useState({value: 0, size: 130, strokeWidth: 10});
 
-    const [limit, SetLimit] = useState(0);
-    const [amount, SetAmount] = useState(0);
-    const [available, SetAvailable] = useState(0);
-
 
     useEffect(() => {
         
@@ -76,43 +29,35 @@ export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
         if(data.percentageSpent){
 
             setDueDate(format(new Date(data.due_date), "dd/MM"));
-            SetLimit(data.limit);
-            SetAmount(data.amount);
-            SetAvailable(data.available)
-            
-            if(styleBig){
-                setChartData({value: data.percentageSpent, size: 300, strokeWidth: 20})
-            }else{
-                setChartData({value: data.percentageSpent, size: 130, strokeWidth: 10})
-            }
+
+            const bigGraph = {value: data.percentageSpent, size: 300, strokeWidth: 20};
+            const smallGraph = {value: data.percentageSpent, size: 130, strokeWidth: 10};
+            styleBig ? setChartData(bigGraph) : setChartData(smallGraph);
         }
 
-    }, [data])
+    }, [data]);
 
-   
+
+    const displayMoreDatails = showButton && {
+        title: "Ver mais detalhes",
+        nextPage: () => navigation.navigate("expenseAnalysis")
+    };
+
+
     return(
         <View style={[defaultPageStyle.box]}>
             
             <CustomText style={styles.title}>Vencimento - {dueDate}</CustomText>
 
             <View style={styles.sectionConsumer}>
-                <ExpenseIndicator data={chartData}/>
-                {showValue ? 
-                    <ShowLegends 
-                        styles={styles} 
-                        data={{limit, available, amount}}
-                    /> 
-                    : 
-                    <HideLegends styles={styles}/>
-                }
-            </View>
-
-            {showButton && 
-                <DisplayMoreDetails 
-                    title="Ver mais detalhes" 
-                    nextPage={() => navigation.navigate("expenseAnalysis")}
+                <ExpenseIndicator data={chartData} style={{marginTop: "3%"}}/>
+                <ConsumptionLegend
+                    style={!styleBig ? {flex: 1} : {width: "100%"}}
+                    data={data}
+                    showValue={showValue}
+                    displayMoreDatails={displayMoreDatails}
                 />
-            }
+            </View>
 
             {!showButton && 
                 <View style={styles.sectionButton}>

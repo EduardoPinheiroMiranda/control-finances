@@ -1,17 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, SafeAreaView } from "react-native";
+import { View, SafeAreaView, ScrollView } from "react-native";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { ExternalCalls } from "../../services/externalCalls";
 import { checkCallAnswers } from "../../services/checkCallAnswers";;
 import { AuthContext } from "../../contexts/auth";
+import { colorPattern } from "../../themes";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // component
-import { CustomText } from "../../components/CustomText";
 import { PopUp } from "../../components/PopUp";
 import { Spinner } from "../../components/Spinner";
 import { InvoicesSubtitles } from "./invoicesSubtitles";
 import { WallOfValues } from "./wallOfValues";
-import { colorPattern } from "../../themes";
+import { InvoiceSummary } from "../../components/InvoiceSummary";
+import { styles } from "./styles";
 
 
 export function InvoicesSummary(){
@@ -37,10 +39,21 @@ export function InvoicesSummary(){
         async function startData(){
             
             setShowSpinner(true);
+
+            const invoicesInCache = await AsyncStorage.getItem("userInvoices");
+
+            if(invoicesInCache){
+                const allInvoices = JSON.parse(invoicesInCache);
+                setInvoices(allInvoices.invoices);
+                setSubtitles(allInvoices.subtitles);
+                getCurrentInvoice(allInvoices.invoices);
+                setShowSpinner(false);
+                return;
+            }
+
             const response = await externalCall.GET("/invoice/getAllInvoices", true, null);
             const messageContent = checkCallAnswers({response, closePopUp: setVisible(false), signOut});
-            setShowSpinner(false);
-
+            
             if(response.statusCode !== 200){
                 setTitle(messageContent.title);
                 setDescription(messageContent.description);
@@ -50,17 +63,24 @@ export function InvoicesSummary(){
 
             setInvoices(response.response.invoices);
             setSubtitles(response.response.subtitles);
+            getCurrentInvoice(response.response.invoices);
 
-            const invoices = response.response.invoices;
-            const currentInvoice = invoices.find((invoice) => invoice.current === true);
-            const invoiceIndex = invoices.indexOf(currentInvoice);
+            await AsyncStorage.setItem("userInvoices", JSON.stringify(response.response));
 
-            setInvoiceIndex(invoiceIndex);
-            setSelectedInvoice(currentInvoice);
+            setShowSpinner(false);
         }
         startData();
 
     }, []);
+
+
+    function getCurrentInvoice(invoices){
+        const currentInvoice = invoices.find((invoice) => invoice.current === true);
+        const invoiceIndex = invoices.indexOf(currentInvoice);
+        setInvoiceIndex(invoiceIndex);
+        setSelectedInvoice(currentInvoice);
+        return;
+    }
 
 
     function selectAnInvoice(index){
@@ -72,7 +92,7 @@ export function InvoicesSummary(){
     return(
         <SafeAreaView style={[defaultPageStyle.page]}>
             
-            <View>
+            <View style={styles.container}>
                 <InvoicesSubtitles
                     subtitles={subtitles}
                     invoiceIndex={invoiceIndex}
@@ -81,6 +101,24 @@ export function InvoicesSummary(){
                 />
 
                 <WallOfValues data={selectedInvoice} backgroundColor={accentColor}/>
+
+                <View style={styles.invoiceSummary}>
+                    <ScrollView
+                        horizontal={false}
+                        showsVerticalScrollIndicator={false}
+                    >
+                        <InvoiceSummary
+                            style={{paddingBottom: 30}}
+                            data={{
+                                ...selectedInvoice.installments,
+                                total_extra_expense: selectedInvoice.total_extra_expense,
+                                total_fixed_expense: selectedInvoice.total_fixed_expense
+                            }}
+                        />
+                    </ScrollView>
+                    
+                </View>
+                
             </View>
             
 

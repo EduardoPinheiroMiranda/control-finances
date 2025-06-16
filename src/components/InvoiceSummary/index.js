@@ -2,7 +2,6 @@ import React from "react";
 import { View } from "react-native";
 import { styles } from "./styles";
 import { formatCurrency } from "../../utils/formatCurrency";
-import { defaultPageStyle } from "../../themes/stylesDefault";
 
 // components
 import { ListMovements } from "../../components/ListMovements";
@@ -20,45 +19,54 @@ function ListItems({data, title, total}){
                 <CustomText style={styles.title}>{formatCurrency(total)}</CustomText>
             </View>
 
-            {
-                data.map((movement) => {
-                    return <ListMovements
-                        key={movement.installment_id}
-                        data={{
-                            ...movement,
-                            installment: `${movement.installment_number}/${movement.total_installments}`,
-                            value: movement.installment_value
-                        }}
-                    />
-                })
-            }
-            
+            <View style={{paddingHorizontal: 15}}>
+                {
+                    data.map((movement) => {
+                        return <ListMovements
+                            key={movement.installment_id}
+                            data={{
+                                ...movement,
+                                installment: `${movement.installment_number}/${movement.total_installments}`,
+                                value: movement.installment_value
+                            }}
+                        />
+                    })
+                }
+            </View>
         </View>
     ); 
 }
 
 
-export function InvoiceSummary({data, nextPage}){
+export function InvoiceSummary({data, nextPage, style}){
+    
+    if(!data.total_extra_expense){
+        return;
+    }
 
+    
 
     return(
-        <View style={[defaultPageStyle.box ,styles.container]}>
+        <View style={[styles.container, style]}>
             <ListItems
                 title="Gastos fixos"
                 data={data.fixed_expense}
-                total={data.totalFixedExpense}
+                total={data.total_fixed_expense}
             />
             
             <ListItems
                 title="Gastos extras"
                 data={data.extra_expense}
-                total={data.totalExtraExpense}
+                total={data.total_extra_expense}
             />
 
-            <DisplayMoreDetails 
-                title="Ver mais detalhes"
-                nextPage={nextPage}
-            />
+            {nextPage &&
+                <DisplayMoreDetails 
+                    title="Ver mais detalhes"
+                    nextPage={nextPage}
+                />
+            }
+            
         </View>
     );
 }

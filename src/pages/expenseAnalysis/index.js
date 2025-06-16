@@ -55,11 +55,12 @@ export function ExpenseAnalysis(){
 
                 <View style={styles.sections}>
                     <CustomText style={styles.title}>Resumo de fatura</CustomText>
-                    <InvoiceSummary 
+                    <InvoiceSummary
+                        style={styles.invoiceSummary}
                         data={{
                             ...invoice.installments,
-                            totalFixedExpense: invoice.total_fixed_expense,
-                            totalExtraExpense: invoice.total_extra_expense
+                            total_fixed_expense: invoice.total_fixed_expense,
+                            total_extra_expense: invoice.total_extra_expense
                         }}
                         nextPage={() => console.log("adicionar navegação")}
                     />

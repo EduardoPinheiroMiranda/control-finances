@@ -16,7 +16,6 @@ import { CustomText } from "../CustomText";
 
 export function ListMovements({data}){
 
-
     const stylesIcons = {size: 25, color: colorPattern.black_900};
     const listIcons = [
         {type: "card", icon: <Card data={stylesIcons}/>},

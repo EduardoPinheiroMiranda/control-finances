@@ -34,7 +34,7 @@ function rgbToHex(r, g, b){
 }
   
 
-export function ExpenseIndicator({data}){
+export function ExpenseIndicator({data, style}){
 
     const value = data.value;                       // Valor entre 0 e 100
     const size = data.size;                         // Tamanho do gráfico
@@ -50,7 +50,7 @@ export function ExpenseIndicator({data}){
     const solidColor = interpolateColor(value / 100, gradientColors[0], gradientColors[1]);
 
     return (
-        <View style={[styles.container, { width: size, height: size / 2 }]}>
+        <View style={[styles.container, style, { width: size, height: size / 2 }]}>
             <Svg
                 width={size} 
                 height={size / 2} 
