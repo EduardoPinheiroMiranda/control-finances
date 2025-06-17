@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
 import { defaultPageStyle } from "../../themes/stylesDefault";
+import { styles } from "./styles";
 import { ExternalCalls } from "../../services/externalCalls";
-import { checkCallAnswers } from "../../services/checkCallAnswers";;
+import { checkCallAnswers } from "../../services/checkCallAnswers";
 import { AuthContext } from "../../contexts/auth";
 import { colorPattern } from "../../themes";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { CachingStrategy } from "../../services/cachingStrategy";
 
 // component
 import { PopUp } from "../../components/PopUp";
@@ -13,7 +14,49 @@ import { Spinner } from "../../components/Spinner";
 import { InvoicesSubtitles } from "./invoicesSubtitles";
 import { WallOfValues } from "./wallOfValues";
 import { InvoiceSummary } from "../../components/InvoiceSummary";
-import { styles } from "./styles";
+
+
+function LoadPage({showSpinner}){
+    return(
+        <View>
+            <Spinner showSpinner={showSpinner} size={38}/> 
+        </View>
+    );
+}
+
+function ConstructionPage({
+    subtitles, invoiceIndex, selectedInvoice, selectAnInvoice, setAccentColor, accentColor
+}){
+    return(
+        <View style={styles.container}>
+            <InvoicesSubtitles
+                subtitles={subtitles}
+                invoiceIndex={invoiceIndex}
+                selectAnInvoice={selectAnInvoice}
+                selectColor={setAccentColor}
+            />
+
+            <WallOfValues data={selectedInvoice} backgroundColor={accentColor}/>
+
+            <View style={styles.invoiceSummary}>
+                <ScrollView
+                    horizontal={false}
+                    showsVerticalScrollIndicator={false}
+                >
+                    <InvoiceSummary
+                        style={{paddingBottom: 30}}
+                        data={{
+                            ...selectedInvoice.installments,
+                            total_extra_expense: selectedInvoice.total_extra_expense,
+                            total_fixed_expense: selectedInvoice.total_fixed_expense
+                        }}
+                    />
+                </ScrollView>
+                
+            </View>
+        </View>
+    );
+}
 
 
 export function InvoicesSummary(){
@@ -31,8 +74,8 @@ export function InvoicesSummary(){
     const [description, setDescription] = useState("");
     const [showSpinner, setShowSpinner] = useState(false);
 
-
     const externalCall = new ExternalCalls();
+    const cachingStrategy = new CachingStrategy();
 
     useEffect(() => {
 
@@ -40,8 +83,8 @@ export function InvoicesSummary(){
             
             setShowSpinner(true);
 
-            const invoicesInCache = await AsyncStorage.getItem("userInvoices");
-
+            const invoicesInCache = await cachingStrategy.getItem("userInvoices");
+            
             if(invoicesInCache){
                 const allInvoices = JSON.parse(invoicesInCache);
                 setInvoices(allInvoices.invoices);
@@ -65,7 +108,7 @@ export function InvoicesSummary(){
             setSubtitles(response.response.subtitles);
             getCurrentInvoice(response.response.invoices);
 
-            await AsyncStorage.setItem("userInvoices", JSON.stringify(response.response));
+            await cachingStrategy.addItem("userInvoices", response.response);
 
             setShowSpinner(false);
         }
@@ -91,46 +134,27 @@ export function InvoicesSummary(){
 
     return(
         <SafeAreaView style={[defaultPageStyle.page]}>
-            
-            <View style={styles.container}>
-                <InvoicesSubtitles
-                    subtitles={subtitles}
+
+            {showSpinner ?
+                <LoadPage showSpinner={showSpinner}/>
+            :
+                <ConstructionPage
+                    accentColor={accentColor}
                     invoiceIndex={invoiceIndex}
                     selectAnInvoice={selectAnInvoice}
-                    selectColor={setAccentColor}
+                    selectedInvoice={selectedInvoice}
+                    setAccentColor={setAccentColor}
+                    subtitles={subtitles}
                 />
+            }
 
-                <WallOfValues data={selectedInvoice} backgroundColor={accentColor}/>
-
-                <View style={styles.invoiceSummary}>
-                    <ScrollView
-                        horizontal={false}
-                        showsVerticalScrollIndicator={false}
-                    >
-                        <InvoiceSummary
-                            style={{paddingBottom: 30}}
-                            data={{
-                                ...selectedInvoice.installments,
-                                total_extra_expense: selectedInvoice.total_extra_expense,
-                                total_fixed_expense: selectedInvoice.total_fixed_expense
-                            }}
-                        />
-                    </ScrollView>
-                    
-                </View>
-                
-            </View>
-            
-
-             <PopUp 
+            <PopUp 
                 openModal={visible}
                 title={title}
                 type={""}
                 description={description}
                 buttons={buttons}
             />
-
-            <Spinner showSpinner={showSpinner} size={38}/>
         </SafeAreaView>
     );
 }

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ExternalCalls } from "../services/externalCalls";
+import { CachingStrategy } from "../services/cachingStrategy";
 
 
 export const AuthContext = createContext({});
@@ -14,6 +14,7 @@ export function AuthProvider({children}){
     const [user, setUser] = useState(null);
 
     const externalCalls = new ExternalCalls();
+    const cachingStrategy = new CachingStrategy();
 
 
     useEffect(() => {
@@ -21,7 +22,7 @@ export function AuthProvider({children}){
         async function automaticLogin(){
 
             setLoadingPage(true);
-            const token = await AsyncStorage.getItem("userToken");
+            const token = await cachingStrategy.getItem("userToken");
             
             if(!token){
                 setLoadingPage(false);
@@ -47,7 +48,7 @@ export function AuthProvider({children}){
             return;
         }
         
-        await AsyncStorage.removeItem("userToken");
+        await cachingStrategy.removeItem("userToken");
     }
 
     async function signUp(data){
@@ -81,7 +82,7 @@ export function AuthProvider({children}){
         setUser(response.response);
         setSigned(true);
         setLoading(false);
-        await AsyncStorage.setItem("userToken", response.response.token);
+        await cachingStrategy.addItem("userToken", response.response.token);
     
         
         return {
@@ -91,7 +92,7 @@ export function AuthProvider({children}){
     }
 
     async function signOut(){
-        await AsyncStorage.clear();
+        await cachingStrategy.clear();
         setUser(null);
         setSigned(false);
     }

@@ -1,5 +1,5 @@
 import { API_URL } from "@env";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { CachingStrategy } from "./cachingStrategy";
 
 
 export class ExternalCalls{
@@ -9,10 +9,11 @@ export class ExternalCalls{
 
     async request(method, url, useToken, body){
 
+        const cachingStrategy = new CachingStrategy();
         let token = null;
 
         if(useToken){
-            token = await AsyncStorage.getItem("userToken")
+            token = await cachingStrategy.getItem("userToken");
         }
 
         

@@ -9,9 +9,12 @@ import { ConsumptionIndicator } from "../../components/ConsumptionIndicator";
 import { Summary } from "./Summary";
 import { InvoiceSummary } from "../../components/InvoiceSummary"
 import { CustomText } from "../../components/CustomText";
+import { useNavigation } from "@react-navigation/native";
 
 
 export function ExpenseAnalysis(){
+
+    const navigation = useNavigation();
 
     const { invoice } = useContext(FinancialSummaryContext);
     const [summary, setSummary] = useState({card: 0, invoice: 0, money: 0});
@@ -62,7 +65,7 @@ export function ExpenseAnalysis(){
                             total_fixed_expense: invoice.total_fixed_expense,
                             total_extra_expense: invoice.total_extra_expense
                         }}
-                        nextPage={() => console.log("adicionar navegação")}
+                        nextPage={() => navigation.navigate("invoicesSummary")}
                     />
                 </View>
 

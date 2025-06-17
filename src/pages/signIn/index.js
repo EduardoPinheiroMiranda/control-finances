@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, KeyboardAvoidingView, Pressable, ScrollView, TouchableWithoutFeedback, Keyboard, Platform, Modal, SafeAreaView } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { View, KeyboardAvoidingView, Pressable, ScrollView, Platform, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { styles } from "./styles";

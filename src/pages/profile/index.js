@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, SafeAreaView, TouchableOpacity, Image, ActivityIndicator } from "react-native";
+import { View, SafeAreaView, TouchableOpacity, Image } from "react-native";
 import { styles } from "./styles";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { colorPattern } from "../../themes";

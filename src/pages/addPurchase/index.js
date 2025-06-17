@@ -18,6 +18,8 @@ import { CalendarModal } from "../../components/CalendarModal";
 import { PopUp } from "../../components/PopUp";
 import { ExternalCalls } from "../../services/externalCalls";
 import { Spinner } from "../../components/Spinner";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { CachingStrategy } from "../../services/cachingStrategy";
 
 
 export function AddPurchase(){
@@ -46,6 +48,7 @@ export function AddPurchase(){
 
     const placeholder = !datePurchase ? "Ex.: 01/01/2025" : format(new Date(datePurchase), "dd/MM/yyyy");
     const externalCall = new ExternalCalls();
+    const cachingStrategy = new CachingStrategy();
 
 
     useEffect(() => {
@@ -82,6 +85,7 @@ export function AddPurchase(){
 
         resetForm();
         await getData();
+        await cachingStrategy.resetData();
         
         return;
     }

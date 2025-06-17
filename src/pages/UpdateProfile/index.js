@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Keyboard, Modal, SafeAreaView, TouchableWithoutFeedback, View } from "react-native";
+import { Keyboard, SafeAreaView, TouchableWithoutFeedback, View } from "react-native";
 import { defaultPageStyle } from "../../themes/stylesDefault";
 import { styles } from "./styles";
 import { AuthContext } from "../../contexts/auth";

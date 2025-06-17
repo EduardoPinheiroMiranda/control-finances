@@ -12,6 +12,28 @@ import { DisplayCards } from "./displayCards";
 import { RecentActivity } from "./recentActivity";
 import { Spinner } from "../../components/Spinner";
 
+
+function LoadPage({showSpinner}){
+    return(
+        <Spinner showSpinner={showSpinner} size={38}/>
+    );
+}
+
+function ConstructionPage({components, loadData, getData}){
+    return(
+         <FlatList
+            data={components}
+            renderItem={({item}) => item}
+            keyExtractor={(item, index) => index.toString()}
+            style={styles.scrollView}
+            showsVerticalScrollIndicator={false}
+            ListHeaderComponent={<View style={{height: 30}}/>}
+            refreshing={loadData}
+            onRefresh={getData}
+        />
+    );
+}
+
 export function Home(){
 
     const { getData, applications, invoice, cards, movements } = useContext(FinancialSummaryContext);
@@ -44,17 +66,12 @@ export function Home(){
             <Header/>
 
             {loadData ? 
-                <Spinner size={38}/>
+                <LoadPage showSpinner={loadData}/>
                     :
-                <FlatList
-                    data={components}
-                    renderItem={({item}) => item}
-                    keyExtractor={(item, index) => index.toString()}
-                    style={styles.scrollView}
-                    showsVerticalScrollIndicator={false}
-                    ListHeaderComponent={<View style={{height: 30}}></View>}
-                    refreshing={loadData}
-                    onRefresh={getData}
+                <ConstructionPage
+                    components={components}
+                    getData={getData}
+                    loadData={loadData}
                 />
             }
         </SafeAreaView>

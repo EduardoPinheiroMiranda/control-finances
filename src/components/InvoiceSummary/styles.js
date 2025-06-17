@@ -20,5 +20,10 @@ export const styles = StyleSheet.create({
     title: {
         fontSize: 16,
         color: colorPattern.black_900
-    }
+    },
+
+    buttonNavigation:{
+        paddingRight: 15,
+        marginTop: 10
+    },
 });

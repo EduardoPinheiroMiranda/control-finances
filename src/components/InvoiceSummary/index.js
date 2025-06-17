@@ -61,10 +61,12 @@ export function InvoiceSummary({data, nextPage, style}){
             />
 
             {nextPage &&
-                <DisplayMoreDetails 
-                    title="Ver mais detalhes"
-                    nextPage={nextPage}
-                />
+                <View style={styles.buttonNavigation}>
+                    <DisplayMoreDetails 
+                        title="Ver mais detalhes"
+                        nextPage={nextPage}
+                    />
+                </View>
             }
             
         </View>
