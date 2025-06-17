@@ -86,10 +86,9 @@ export function InvoicesSummary(){
             const invoicesInCache = await cachingStrategy.getItem("userInvoices");
             
             if(invoicesInCache){
-                const allInvoices = JSON.parse(invoicesInCache);
-                setInvoices(allInvoices.invoices);
-                setSubtitles(allInvoices.subtitles);
-                getCurrentInvoice(allInvoices.invoices);
+                setInvoices(invoicesInCache.invoices);
+                setSubtitles(invoicesInCache.subtitles);
+                getCurrentInvoice(invoicesInCache.invoices);
                 setShowSpinner(false);
                 return;
             }
@@ -124,7 +123,6 @@ export function InvoicesSummary(){
         setSelectedInvoice(currentInvoice);
         return;
     }
-
 
     function selectAnInvoice(index){
         setInvoiceIndex(index);

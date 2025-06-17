@@ -10,12 +10,10 @@ export class CachingStrategy{
     }
 
     async getItem(key){
+
         const resul = await AsyncStorage.getItem(key);
         
-
-        if(!resul){
-            return null;
-        }
+        if(!resul) return null;
 
         return JSON.parse(resul);
     }

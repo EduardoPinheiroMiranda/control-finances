@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Svg, Path, G, Defs, ClipPath, Rect} from "react-native-svg";
 
 
-export function CheckboxConfirmed({data}){
+export function CheckboxSelected({data}){
 
 
     return(
@@ -18,8 +18,8 @@ export function CheckboxConfirmed({data}){
                 <G clip-path="url(#clip0_231_1148)">
                     <Path 
                         d="M22.5 0.625H7.5C3.70304 0.625 0.625 3.70304 0.625 7.5V22.5C0.625 26.297 3.70304 29.375 7.5 29.375H22.5C26.297 29.375 29.375 26.297 29.375 22.5V7.5C29.375 3.70304 26.297 0.625 22.5 0.625Z" 
-                        fill="#18A91D" 
-                        stroke="#18A91D" 
+                        fill="#1F8FFF" 
+                        stroke="#1F8FFF" 
                         stroke-width="1.5"
                     />
                     <Path 

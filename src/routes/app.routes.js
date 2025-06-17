@@ -13,6 +13,7 @@ import { UpdateProfile } from "../pages/UpdateProfile";
 import { UpdatePassword } from "../pages/UpdatePassword";
 import { AddPurchase } from "../pages/addPurchase";
 import { InvoicesSummary } from "../pages/invoicesSummary";
+import { PayInvoice } from "../pages/payInvoice";
 
 
 const Stack = createNativeStackNavigator();
@@ -79,6 +80,11 @@ export function AppRoutes(){
                 name="invoicesSummary" 
                 component={InvoicesSummary} 
                 options={{title: "Resumo de faturas"}}
+            />
+            <Stack.Screen 
+                name="payInvoice" 
+                component={PayInvoice} 
+                options={{title: "Pagar fatura"}}
             />
         </Stack.Navigator>
     );
