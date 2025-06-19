@@ -113,7 +113,7 @@ export function SignIn(){
                 <PopUp 
                     openModal={visible}
                     title={title}
-                    type={""}
+                    type=""
                     description={description}
                     buttons={buttons}
                 />

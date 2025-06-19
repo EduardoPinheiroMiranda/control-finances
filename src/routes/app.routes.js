@@ -14,6 +14,7 @@ import { UpdatePassword } from "../pages/UpdatePassword";
 import { AddPurchase } from "../pages/addPurchase";
 import { InvoicesSummary } from "../pages/invoicesSummary";
 import { PayInvoice } from "../pages/payInvoice";
+import { ControlLimit } from "../pages/controlLimit";
 
 
 const Stack = createNativeStackNavigator();
@@ -85,6 +86,11 @@ export function AppRoutes(){
                 name="payInvoice" 
                 component={PayInvoice} 
                 options={{title: "Pagar fatura"}}
+            />
+            <Stack.Screen 
+                name="controlLimit" 
+                component={ControlLimit} 
+                options={{title: "Controlar limite"}}
             />
         </Stack.Navigator>
     );
