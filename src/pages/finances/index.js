@@ -79,7 +79,7 @@ export function Finances(){
             id: "7",
             icon: <CardEdit data={styleIcon}/>,
             label: "Gerenciar cartões",
-            nextPage: () => navigator.navigate("manageCards")
+            nextPage: () => navigator.navigate("cardsManagement")
         },
     ]
 

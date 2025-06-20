@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { colorPattern } from "../themes";
 import { Platform } from "react-native";
 
-
 // pages
 import { TabRoutes } from "./tab.routes";
 import { Movements } from "../pages/Movements";
@@ -15,6 +14,7 @@ import { AddPurchase } from "../pages/addPurchase";
 import { InvoicesSummary } from "../pages/invoicesSummary";
 import { PayInvoice } from "../pages/payInvoice";
 import { ControlLimit } from "../pages/controlLimit";
+import { CardsManagement } from "../pages/cardsManagement";
 
 
 const Stack = createNativeStackNavigator();
@@ -91,6 +91,11 @@ export function AppRoutes(){
                 name="controlLimit" 
                 component={ControlLimit} 
                 options={{title: "Controlar limite"}}
+            />
+            <Stack.Screen 
+                name="cardsManagement" 
+                component={CardsManagement} 
+                options={{title: "Gerenciar cartões"}}
             />
         </Stack.Navigator>
     );
