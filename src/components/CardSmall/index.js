@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from "react-native";
 import { styles } from "./styles";
-import { defaultPageStyle } from "../../themes/stylesDefault";
 import { formatCurrency } from "../../utils/formatCurrency";
 
 // icon
@@ -14,10 +13,10 @@ import { format } from "date-fns";
 
 export function CardSmall({data, showValue}){
 
-    const colorFont = data.color_font;
-    const colorBackground = data.color_card;
+    const colorFont = data.colorFont;
+    const colorBackground = data.colorCard;
     const cardName = data.name;
-    const expired = format(new Date().setDate(data.due_day), "dd/MM");
+    const expired = format(new Date().setDate(data.dueDay), "dd/MM");
     const valueUsed = 1000;
 
 

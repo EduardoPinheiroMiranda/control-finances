@@ -128,8 +128,8 @@ export function Movements(){
                         data={listMovements}
                         renderItem={({item}) => <ListMovements data={{
                             ...item,
-                            installment: `${item.total_installments}x`,
-                            purchase_date: item.created_at
+                            installment: `${item.totalInstallments}x`,
+                            purchaseDate: item.createdAt
                         }}/>}
                         keyExtractor={(item) => item.id}
                         horizontal={false}

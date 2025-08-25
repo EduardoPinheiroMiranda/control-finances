@@ -18,7 +18,6 @@ import { CalendarModal } from "../../components/CalendarModal";
 import { PopUp } from "../../components/PopUp";
 import { ExternalCalls } from "../../services/externalCalls";
 import { Spinner } from "../../components/Spinner";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CachingStrategy } from "../../services/cachingStrategy";
 
 
@@ -28,8 +27,8 @@ export function AddPurchase(){
     const { cards, categories, getData } = useContext(FinancialSummaryContext);
     const [visible, setVisible] = useState(false);
     const [name, setName] = useState(null);
-    const [typePurchase, setTypePurchase] = useState("fixedExpense");
-    const [methodPayment, setMethodPayment] = useState("card");
+    const [typePurchase, setTypePurchase] = useState("FIXED_EXPENSE");
+    const [methodPayment, setMethodPayment] = useState("CARD");
     const [installments, setInstallments] = useState(1);
     const [selectCard, setSelectCard] = useState(null);
     const [selectCategory, setSelectCategory] = useState(null);
@@ -52,15 +51,16 @@ export function AddPurchase(){
 
 
     useEffect(() => {
-        setSelectCard(cards[0].id);
+
+        cards.length > 0 && setSelectCard(cards[0].id);
         setSelectCategory(categories[0].id);
     }, [])
 
 
     function resetForm() {
         setName(null);
-        setTypePurchase("fixedExpense");
-        setMethodPayment("card");
+        setTypePurchase("EXTRA_EXPENSE");
+        setMethodPayment("MONEY");
         setInstallments(1);
         setSelectCard(cards[0].id);
         setSelectCategory(categories[0].id);
@@ -139,7 +139,7 @@ export function AddPurchase(){
                             title="Selecione qual a forma de pagamento"
                             value={methodPayment}
                             action={setMethodPayment}
-                            items={listMethodPayment}
+                            items={listMethodPayment(cards.length)}
                         />
             
                         <View style={styles.valueAndInstallments}>

@@ -18,12 +18,12 @@ export function ListMovements({data}){
 
     const stylesIcons = {size: 25, color: colorPattern.black_900};
     const listIcons = [
-        {type: "card", icon: <Card data={stylesIcons}/>},
-        {type: "invoice", icon: <Invoice data={stylesIcons}/>},
-        {type: "money", icon: <Money data={stylesIcons}/>},
+        {type: "CARD", icon: <Card data={stylesIcons}/>},
+        {type: "INVOICE", icon: <Invoice data={stylesIcons}/>},
+        {type: "MONEY", icon: <Money data={stylesIcons}/>},
     ];
 
-    const icon = listIcons.find((icon) => icon.type === data.payment_method)
+    const icon = listIcons.find((icon) => icon.type === data.paymentMethod)
 
 
     return(
@@ -40,7 +40,7 @@ export function ListMovements({data}){
                 <View style={styles.description}>
                     <CustomText style={styles.name} numberOfLines={1}>{data.name}</CustomText>
                     <CustomText style={styles.dueDate}>
-                        {format(new Date(data.purchase_date), "dd/MM/yyyy")}
+                        {format(new Date(data.purchaseDate), "dd/MM/yyyy")}
                     </CustomText>
                 </View>
 

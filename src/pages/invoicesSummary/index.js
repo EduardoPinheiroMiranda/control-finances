@@ -47,8 +47,8 @@ function ConstructionPage({
                         style={{paddingBottom: 30}}
                         data={{
                             ...selectedInvoice.installments,
-                            total_extra_expense: selectedInvoice.total_extra_expense,
-                            total_fixed_expense: selectedInvoice.total_fixed_expense
+                            totalExtraExpense: selectedInvoice.totalExtraExpense,
+                            totalFixedExpense: selectedInvoice.totalFixedExpense
                         }}
                     />
                 </ScrollView>

@@ -23,11 +23,11 @@ function ListItems({data, title, total}){
                 {
                     data.map((movement) => {
                         return <ListMovements
-                            key={movement.installment_id}
+                            key={movement.installmentId}
                             data={{
                                 ...movement,
-                                installment: `${movement.installment_number}/${movement.total_installments}`,
-                                value: movement.installment_value
+                                installment: `${movement.installmentNumber}/${movement.totalInstallments}`,
+                                value: movement.installmentValue
                             }}
                         />
                     })
@@ -40,25 +40,29 @@ function ListItems({data, title, total}){
 
 export function InvoiceSummary({data, nextPage, style}){
     
-    if(!data.total_extra_expense){
+    if(!data.totalExtraExpense){
         return;
     }
-
     
 
     return(
         <View style={[styles.container, style]}>
-            <ListItems
-                title="Gastos fixos"
-                data={data.fixed_expense}
-                total={data.total_fixed_expense}
-            />
+            {data.totalFixedExpense > 0 && (
+                <ListItems
+                    title="Gastos fixos"
+                    data={data.fixedExpense}
+                    total={data.totalFixedExpense}
+                />
+            )}
             
-            <ListItems
-                title="Gastos extras"
-                data={data.extra_expense}
-                total={data.total_extra_expense}
-            />
+            {data.totalExtraExpense > 0 && (
+                <ListItems
+                    title="Gastos extras"
+                    data={data.extraExpense}
+                    total={data.totalExtraExpense}
+                />
+            )}
+            
 
             {nextPage &&
                 <View style={styles.buttonNavigation}>

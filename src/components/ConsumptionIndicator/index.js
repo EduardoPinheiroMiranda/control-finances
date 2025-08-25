@@ -28,7 +28,7 @@ export function ConsumptionIndicator({data, styleBig, showValue, showButton}){
 
         if(data.percentageSpent){
 
-            setDueDate(format(new Date(data.due_date), "dd/MM"));
+            setDueDate(format(new Date(data.dueDate), "dd/MM"));
 
             const bigGraph = {value: data.percentageSpent, size: 300, strokeWidth: 20};
             const smallGraph = {value: data.percentageSpent, size: 130, strokeWidth: 10};

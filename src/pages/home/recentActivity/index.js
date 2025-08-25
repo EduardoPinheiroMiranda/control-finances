@@ -22,8 +22,8 @@ export function RecentActivity({data}){
             <ListMovements 
                 data={{
                     ...data[i], 
-                    installment: `${data[i].total_installments}x`,
-                    purchase_date: data[i].created_at
+                    installment: `${data[i].totalInstallments}x`,
+                    purchaseDate: data[i].createdAt
                 }} 
                 key={data[i].id}
             />

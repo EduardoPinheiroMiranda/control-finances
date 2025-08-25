@@ -1,30 +1,30 @@
 export const listPurchaseTypes = [
     {
         label: "Definir compra como gasto fixo",
-        value: "fixedExpense"
+        value: "FIXED_EXPENSE"
     },
     {
         label: "Definir compra como gasto extra",
-        value: "extraExpense"
+        value: "EXTRA_EXPENSE"
     }
 ];
 
 
-export const listMethodPayment = [
-    {
-        label: "Cartão",
-        value: "card"
-    },
-    {
-        label: "Boleto",
-        value: "invoice"
-    },
-    {
-        label: "Dinheiro",
-        value: "money"
-    },
-];
+export function listMethodPayment(hasCard){
 
+    if(!hasCard){
+        return [
+            {label: "Boleto", value: "INVOICE"},
+            {label: "Dinheiro", value: "MONEY"}
+        ]
+    }
+
+    return [
+        {label: "Cartão", value: "CARD"},
+        {label: "Boleto", value: "INVOICE"},
+        {label: "Dinheiro", value: "MONEY"},
+    ]
+}
 
 export function listItems(items){
 

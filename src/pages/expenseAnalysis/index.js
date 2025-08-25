@@ -23,9 +23,9 @@ export function ExpenseAnalysis(){
     useEffect(() => {
 
         setSummary({
-            card: invoice.total_card,
-            invoice: invoice.total_invoice,
-            money: invoice.total_money
+            card: invoice.totalCard,
+            invoice: invoice.totalInvoice,
+            money: invoice.totalMoney
         });
 
     }, [invoice]);
@@ -62,8 +62,8 @@ export function ExpenseAnalysis(){
                         style={styles.invoiceSummary}
                         data={{
                             ...invoice.installments,
-                            total_fixed_expense: invoice.total_fixed_expense,
-                            total_extra_expense: invoice.total_extra_expense
+                            totalFixedExpense: invoice.totalFixedExpense,
+                            totalExtraExpense: invoice.totalExtraExpense
                         }}
                         nextPage={() => navigation.navigate("invoicesSummary")}
                     />

@@ -78,7 +78,7 @@ export function InvoicesSubtitles({subtitles, invoiceIndex, selectAnInvoice, sel
                     index={index}
                     selectColor={selectColor}
                 />}
-                keyExtractor={(item) => String(item.invoice_id)}
+                keyExtractor={(item) => String(item.invoiceId)}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 ListHeaderComponent={<View style={styles.View}/>}

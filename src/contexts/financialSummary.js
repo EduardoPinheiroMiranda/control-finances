@@ -22,7 +22,7 @@ export function FinancialSummaryProvider({children}){
 
         async function startData(){
 
-            const response = await externalCalls.GET("/category/listCategories/", false, null);
+            const response = await externalCalls.GET("/category/listCategories", false, null);
 
             if(response.statusCode === 401){
                 await signOut();
