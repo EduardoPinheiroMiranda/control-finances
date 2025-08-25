@@ -5,7 +5,7 @@ import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
 // components
-import { CardSmall } from "../../../components/CardSmall";
+import { Card } from "../../../components/Card";
 import { DisplayMoreDetails } from "../../../components/DisplayMoreDetails";
 import { CustomText } from "../../../components/CustomText";
 
@@ -25,7 +25,7 @@ export function DisplayCards({cards, showValue}){
             <FlatList
                 style={styles.flatList}
                 data={cards}
-                renderItem={({item}) => <CardSmall data={item} showValue={showValue}/>}
+                renderItem={({item}) => <Card data={item} showValue={showValue}/>}
                 keyExtractor={(item) => item.id}
                 showsHorizontalScrollIndicator={false}
                 horizontal={true}
@@ -36,7 +36,7 @@ export function DisplayCards({cards, showValue}){
 
             <DisplayMoreDetails
                 title="Ver mais detalhes"
-                nextPage={() => alert("ainda vai funcionar :-)")}
+                nextPage={() => navigation.navigate("cardsManagement")}
             />            
         </View>
     );
