@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "control-finances",
-    "slug": "control-finances",
+    "name": "control-finance",
+    "slug": "control-finance",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/images/icon.png",
+    "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./src/assets/images/splash-icon.png",
+      "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,23 +17,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./src/assets/images/favicon.png"
-    },
-    "plugins": [
-      ["expo-font", {
-        "fonts": [
-          "node_modules/@expo-google-fonts/inter/Roboto_900Black.ttf"
-        ]
-      }],
-
-      ["expo-image-picker", {
-        "photosPermission": "Este aplicativo precisa de acesso à sua galeria para acessar suas fotos."
-      }]
-    ]
+      "favicon": "./assets/images/favicon.png"
+    }
   }
 }
