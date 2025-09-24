@@ -1,11 +1,10 @@
 import { Container, Header, Form } from "./styles";
-
+import { useState } from "react";
 // components
-import { Input } from "@/components/input";
-
+import { Input } from "@/components/Input";
+import { PasswordInput } from "@/components/PasswordInput";
 // icons
 import IconSignIn from "../../../assets/svgs/icon-signIn.svg";
-import { useState } from "react";
 
 
 export function SignIn(){
@@ -27,6 +26,13 @@ export function SignIn(){
 					keyboardType="text"
 					value={email}
 					callback={setEmail}
+				/>
+
+				<PasswordInput
+					label="Informe sua senha"
+					placeholder="Digite sua senha aqui"
+					value={password}
+					callback={setPassword}
 				/>
 			</Form>
 		</Container>
