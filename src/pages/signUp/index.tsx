@@ -2,14 +2,14 @@ import { Container, Header, Form, ButtonSection, CreateAccount } from "./styles"
 import { useState } from "react";
 import { TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 // icons
-import IconSignIn from "../../../assets/svgs/icon-signIn.svg";
+import IconSignUp from "../../../assets/svgs/icon-signUp.svg";
 // components
 import { Input } from "@/components/Input";
 import { PasswordInput } from "@/components/PasswordInput";
 import { CustumButton } from "@/components/CustomButton";
 
 
-export function SignIn(){
+export function SignUp(){
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -29,21 +29,36 @@ export function SignIn(){
 					showsVerticalScrollIndicator={false}
 				>
 					<Header>
-						<IconSignIn/>
+						<IconSignUp/>
 					</Header>
 
 					<Form>
 						<Input
+							label="Nome completo"
+							placeholder="Ex.: João da Silva"
+							keyboardType="text"
+							value={email}
+							callback={setEmail}
+						/>
+
+						<Input
 							label="informe seu e-mail"
-							placeholder="E-mail"
+							placeholder="Ex.: joaodasilva@exemple.com"
 							keyboardType="text"
 							value={email}
 							callback={setEmail}
 						/>
 
 						<PasswordInput
-							label="Informe sua senha"
+							label="Senha"
 							placeholder="Digite sua senha aqui"
+							value={password}
+							callback={setPassword}
+						/>
+
+						<PasswordInput
+							label="Confirmar senha"
+							placeholder="Digite novamente a sua senha aqui"
 							value={password}
 							callback={setPassword}
 						/>
@@ -56,7 +71,7 @@ export function SignIn(){
 
 						<TouchableOpacity activeOpacity={0.5}>
 							<CreateAccount>
-							Criar uma conta
+								Já tenho uma conta
 							</CreateAccount>
 						</TouchableOpacity>
 					</ButtonSection>

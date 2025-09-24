@@ -22,32 +22,32 @@ export const Header = styled.View`
     background: ${({theme}: ThemeType) => theme.colors.PRIMARY};
 
     width: 100vw;
-    height: ${height < 1000 ? "350px" : "500px"};
+    height: ${height < 1000 ? "200px" : "350px"};
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    border-radius:  0 0 40% 40%;
+    border-radius:  0 0 50% 50%;
 `;
 
 export const Form = styled.View`
-    margin: 50px 20px 0 20px;
-    
+    margin: ${height < 1000 ? "30px 20px 0 20px" : "50px 0 40px 0"};
+
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 `;
 
 export const ButtonSection = styled.View`
-    width: 100%;
-    margin: 50px 0 40px 0;
+    flex: 1;
+    margin: ${height < 1000 ? "40px 0 40px 0" : "100px 0 40px 0"};
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 30px;
 `;
 
 export const CreateAccount = styled(CustomText)`

@@ -10,7 +10,6 @@ interface ThemeType {
 export const Container = styled.View`
     display: flex;
     gap: 5px;
-    margin-top: 25px;
 `;
 
 export const Text = styled(CustomText)`

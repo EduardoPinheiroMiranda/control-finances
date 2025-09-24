@@ -10,9 +10,9 @@ import {
 } from "@expo-google-fonts/roboto";
 import { ActivityIndicator } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { SignIn } from "./pages/signIn";
 import { ThemeProvider } from "styled-components/native";
 import light from "./theme/light";
+import { SignUp } from "./pages/signUp";
 
 
 export default function App() {
@@ -40,7 +40,7 @@ export default function App() {
 					style="auto"
 					translucent={true}
 				/>
-				<SignIn/>
+				<SignUp/>
 			</NavigationContainer>
 		</ThemeProvider>
 	);
