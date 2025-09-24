@@ -3,15 +3,17 @@ import "styled-components";
 
 type ThemeType = {
   colors: {
-    pageBackground: string,
 
-    defaultFontColor: string,
-    labelColor: string,
+    PRIMARY: string,
+    SECONDARY: string,
 
-    primary: string,
-    secondary: string,
-    
-    inputBorder: string
+    BACKGROUND: string,
+
+    FONT_COLOR_PRIMARY: string,
+    FONT_COLOR_SECONDARY: string
+    FONT_COLOR_THIRD: string,
+
+    INPUT_BORDER: string,
   }
 };
 

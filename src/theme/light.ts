@@ -1,14 +1,16 @@
 export default {
 	colors: {
-		pageBackground: "#FAFAFA",
 
-		defaultFontColor: "#2B2F33",
-		labelColor: "#4F6780",
+		PRIMARY: "#ADDDFF",
+		SECONDARY: "#1F8FFF",
 
-		primary: "#ADDDFF",
-		secondary: "#1F8FFF",
+		BACKGROUND: "#FAFAFA",
 
-		inputBorder: "#D3D3D3"
+		FONT_COLOR_PRIMARY: "#2B2F33",
+		FONT_COLOR_SECONDARY: "#FAFAFA",
+		FONT_COLOR_THIRD: "#4F6780",
+
+		INPUT_BORDER: "#D4D4D4",
 	}
 };
 

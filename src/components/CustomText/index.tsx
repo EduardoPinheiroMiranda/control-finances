@@ -3,13 +3,13 @@ import { DefaultTheme } from "styled-components";
 import styled from "styled-components/native";
 
 
-interface CustonTextProps extends TextProps{
+interface PropsTypes extends TextProps{
     children: React.ReactNode;
     styles?: StyleProp<TextStyle>
 }
 
 
-export function CustomText({children, styles, ...rest}: CustonTextProps){
+export function CustomText({children, styles, ...rest}: PropsTypes){
 
 	return(
 		<Text style={styles} {...rest}>
@@ -24,6 +24,6 @@ interface ThemeType {
 }
 
 const Text = styled.Text`
-	color: ${({theme}: ThemeType) => theme.colors.defaultFontColor};
+	color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_PRIMARY};
     font-family: "Roboto_400Regular";
 `;

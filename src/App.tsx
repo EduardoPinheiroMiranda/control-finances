@@ -8,7 +8,8 @@ import {
 	Roboto_800ExtraBold,
 	Roboto_900Black
 } from "@expo-google-fonts/roboto";
-import { ActivityIndicator, StatusBar } from "react-native";
+import { ActivityIndicator } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { SignIn } from "./pages/signIn";
 import { ThemeProvider } from "styled-components/native";
 import light from "./theme/light";
@@ -34,7 +35,11 @@ export default function App() {
 	return (
 		<ThemeProvider theme={light}>
 			<NavigationContainer>
-				<StatusBar hidden={true}/>
+				<StatusBar
+					backgroundColor={light.colors.PRIMARY}
+					style="auto"
+					translucent={true}
+				/>
 				<SignIn/>
 			</NavigationContainer>
 		</ThemeProvider>
