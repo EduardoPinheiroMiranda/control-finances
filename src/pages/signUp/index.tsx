@@ -1,6 +1,7 @@
 import { Container, Header, Form, ButtonSection, CreateAccount } from "./styles";
 import { useState } from "react";
 import { TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 // icons
 import IconSignUp from "../../../assets/svgs/icon-signUp.svg";
 // components
@@ -13,6 +14,8 @@ export function SignUp(){
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+
+	const navigation = useNavigation();
 
 
 	return(
@@ -69,7 +72,10 @@ export function SignUp(){
 					<ButtonSection>
 						<CustumButton title="Entrar"/>
 
-						<TouchableOpacity activeOpacity={0.5}>
+						<TouchableOpacity
+							activeOpacity={0.5}
+							onPress={() => navigation.goBack()}
+						>
 							<CreateAccount>
 								Já tenho uma conta
 							</CreateAccount>

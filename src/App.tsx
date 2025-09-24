@@ -1,18 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { 
-	useFonts,
-	Roboto_400Regular,
-	Roboto_500Medium,
-	Roboto_600SemiBold,
-	Roboto_700Bold,
-	Roboto_800ExtraBold,
-	Roboto_900Black
-} from "@expo-google-fonts/roboto";
+import { useFonts, Roboto_400Regular, Roboto_500Medium, Roboto_600SemiBold, Roboto_700Bold, Roboto_800ExtraBold, Roboto_900Black } from "@expo-google-fonts/roboto";
 import { ActivityIndicator } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components/native";
 import light from "./theme/light";
-import { SignUp } from "./pages/signUp";
+import { Routes } from "./routes";
 
 
 export default function App() {
@@ -40,7 +32,7 @@ export default function App() {
 					style="auto"
 					translucent={true}
 				/>
-				<SignUp/>
+				<Routes/>
 			</NavigationContainer>
 		</ThemeProvider>
 	);

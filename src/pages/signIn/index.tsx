@@ -7,9 +7,14 @@ import IconSignIn from "../../../assets/svgs/icon-signIn.svg";
 import { Input } from "@/components/Input";
 import { PasswordInput } from "@/components/PasswordInput";
 import { CustumButton } from "@/components/CustomButton";
+import { StackScreenProps } from "@react-navigation/stack";
+import { StackParamList } from "@/@types/auth.routes";
 
 
-export function SignIn(){
+type SignInScreenProps = StackScreenProps<StackParamList, "signIn">
+
+
+export function SignIn({navigation}: SignInScreenProps){
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -54,9 +59,12 @@ export function SignIn(){
 					<ButtonSection>
 						<CustumButton title="Entrar"/>
 
-						<TouchableOpacity activeOpacity={0.5}>
+						<TouchableOpacity
+							activeOpacity={0.5}
+							onPress={() => navigation.navigate("signUp")}
+						>
 							<CreateAccount>
-							Criar uma conta
+								Criar uma conta
 							</CreateAccount>
 						</TouchableOpacity>
 					</ButtonSection>
