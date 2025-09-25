@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components/native";
 import light from "./theme/light";
 import { Routes } from "./routes";
+import { AuthProvider } from "./contexts/Auth.context";
 
 
 export default function App() {
@@ -27,12 +28,14 @@ export default function App() {
 	return (
 		<ThemeProvider theme={light}>
 			<NavigationContainer>
-				<StatusBar
-					backgroundColor={light.colors.PRIMARY}
-					style="auto"
-					translucent={true}
-				/>
-				<Routes/>
+				<AuthProvider>
+					<StatusBar
+						backgroundColor={light.colors.PRIMARY}
+						style="auto"
+						translucent={true}
+					/>
+					<Routes/>
+				</AuthProvider>
 			</NavigationContainer>
 		</ThemeProvider>
 	);
