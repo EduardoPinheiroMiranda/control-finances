@@ -1,8 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { StackParamList } from "@/@types/auth.routes";
 // pages
-import { SignIn } from "@/pages/signIn";
-import { SignUp } from "@/pages/signUp";
+import { SignIn } from "@/pages/SignIn";
+import { SignUp } from "@/pages/SignUp";
 import { Platform } from "react-native";
 
 
