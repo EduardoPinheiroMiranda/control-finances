@@ -1,19 +1,24 @@
-import { DefaultTheme } from "styled-components";
-import styled from "styled-components/native";
+import { Modal } from "react-native";
+import { Container, Loading } from "./styles";
 
 
-export function Spinner(){
-
-	return( <Loading/> );
+interface PropsTypes {
+    visible: boolean
 }
 
 
-interface ThemeType {
-    theme: DefaultTheme
+export function Spinner({visible}: PropsTypes){
+
+	return(
+		<Modal transparent={true} visible={visible} animationType="slide">
+			<Container>
+				<Loading/>
+			</Container>
+		</Modal>
+	);
 }
 
 
-const Loading = styled.ActivityIndicator`
-    background-color: ${({theme}: ThemeType) => theme.colors.PRIMARY};
-    size: 24px;
-`;
+
+
+

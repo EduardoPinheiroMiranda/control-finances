@@ -3,7 +3,7 @@ import { CustomText } from "../CustomText";
 import { DefaultTheme } from "styled-components";
 
 
-interface ThemeType {
+type ThemeType = {
     theme: DefaultTheme
 }
 

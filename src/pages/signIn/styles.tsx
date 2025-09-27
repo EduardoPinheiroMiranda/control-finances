@@ -8,14 +8,14 @@ import { Dimensions } from "react-native";
 const { height } = Dimensions.get("screen");
 
 
-interface ThemeType {
+type ThemeType = {
     theme: DefaultTheme
 }
 
 
 export const Container = styled(SafeAreaView)`
     flex: 1;
-    background: ${({theme}: ThemeType) => theme.colors.BACKGROUND};
+    background: ${({theme}: ThemeType) => theme.colors.BACKGROUND_PRIMARY};
 `;
 
 export const Header = styled.View`

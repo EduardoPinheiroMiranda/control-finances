@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { View } from "react-native";
 import { AuthRoutes } from "./auth.routes";
+import { AuthContext } from "@/contexts/Auth.context";
+import { Spinner } from "@/components/Spinner";
 
 
 export function Routes(){
 
-	const [loadedData, setLoadedData] = useState(false);
-	const [loggedInUser, setLoggedInUser] = useState(false);
+	const authContext = useContext(AuthContext);
 
 
-	return(!loggedInUser ? <AuthRoutes/> : <View/>);
+	if(authContext?.loadingPage){
+		return(
+			<Spinner visible={authContext.loadingPage}/>
+		);
+	}
+
+
+	return(
+		!authContext?.loggedInUser ? <AuthRoutes/> : <View/>
+	);
 }
