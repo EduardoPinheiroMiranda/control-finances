@@ -32,6 +32,7 @@ export function SignIn({navigation}: SignInScreenProps){
 		if(!email || !password){
 			setOpenPopUp(true);
 			setAlertData({
+				alert: false,
 				title: "Atenção",
 				message: "Preencha todos os campos.",
 				buttons: [{
@@ -51,6 +52,7 @@ export function SignIn({navigation}: SignInScreenProps){
 		if(response){
 			setOpenPopUp(true);
 			setAlertData({
+				alert: true,
 				title: "Atenção",
 				message: response,
 				buttons: [{

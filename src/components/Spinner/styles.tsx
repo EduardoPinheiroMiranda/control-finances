@@ -8,7 +8,7 @@ type ThemeType = {
 
 
 export const Container = styled.View`
-    background-color: #0000;
+    background: transparent;
 
     flex: 1;
     
@@ -17,7 +17,7 @@ export const Container = styled.View`
     align-items: center;
 `;
 
-export const Loading = styled.ActivityIndicator`
-    color: ${({theme}: ThemeType) => theme.colors.PRIMARY};
-    size: 40px;
-`;
+export const Loading = styled.ActivityIndicator.attrs(({theme}: ThemeType) => ({
+	color: theme.colors.SECONDARY,
+	size: 40,
+}))``;

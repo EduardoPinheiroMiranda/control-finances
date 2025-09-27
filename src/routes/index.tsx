@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { AuthRoutes } from "./auth.routes";
 import { AuthContext } from "@/contexts/Auth.context";
 import { Spinner } from "@/components/Spinner";
+import { DrawerNavigation } from "./drawer.routes";
 
 
 export function Routes(){
@@ -12,12 +13,14 @@ export function Routes(){
 
 	if(authContext?.loadingPage){
 		return(
-			<Spinner visible={authContext.loadingPage}/>
+			<View>
+				<Spinner visible={true}/>
+			</View>
 		);
 	}
-
+	
 
 	return(
-		!authContext?.loggedInUser ? <AuthRoutes/> : <View/>
+		authContext?.loggedInUser ? <DrawerNavigation/> : <AuthRoutes/>
 	);
 }

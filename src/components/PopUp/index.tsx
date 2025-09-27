@@ -3,6 +3,7 @@ import { Body, Container, Title, Message, ButtonSection, AlertIcon, TextTitle, T
 
 
 export const AlertDefault = {
+	alert: false,
 	title: "",
 	message: "",
 	buttons: [{
@@ -15,6 +16,7 @@ export const AlertDefault = {
 export interface PropsTypes {
     visible: boolean,
     data: {
+		alert: boolean,
         title: string,
         message: string,
 		buttons: {
@@ -31,8 +33,8 @@ export function PopUp({visible, data}: PropsTypes){
 		<Modal transparent={true} visible={visible} animationType="slide">
 			<Container>
 				<Body>
-					<Title>
-						<AlertIcon/>
+					<Title alert={data.alert}>
+						{data.alert && <AlertIcon/>}
 						<TextTitle>{data.title}</TextTitle>
 					</Title>
 

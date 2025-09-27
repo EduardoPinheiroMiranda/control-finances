@@ -30,7 +30,9 @@ export const Body = styled.View`
 `;
 
 export const Title = styled.View`
-    background-color: ${({theme}: ThemeType) => theme.colors.ALERT};
+    background-color: ${({theme, alert}:{theme: DefaultTheme, alert: boolean}) => {
+		return alert ? theme.colors.ALERT : theme.colors.SECONDARY;
+	}};
 
     height: 100px;
 

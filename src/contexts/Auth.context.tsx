@@ -1,7 +1,8 @@
-import { AuthContextType, AuthProviderProps, LoginData } from "@/@types/auth.context";
+import { AuthContextType, AuthProviderProps, LoginData, SingUpData } from "@/@types/auth.context";
 import { externalCalls } from "@/services/externalCalls";
 import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import  AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -14,6 +15,44 @@ export function AuthProvider({children}: AuthProviderProps){
 	const [loadingPage, setLoadingPage] = useState(false);
 
 
+	useEffect(() => {
+
+		async function getData(){
+
+			try{
+
+				const getToken = await AsyncStorage.getItem("userToken");
+				if(!getToken){
+					return;
+				}
+
+				
+				setLoadingPage(true);
+				externalCalls.defaults.headers["Authorization"] = `Bearer ${getToken}`;
+				const response = await externalCalls.get("/user/getUserByToken");
+				setUser({
+					id: response.data.id,
+					name: response.data.name,
+					email: response.data.email,
+					avatar: response.data.avatar
+				});
+				setLoggedInUser(true);
+				setLoadingPage(false);
+
+			}catch(err){
+				console.log(err);
+				setLoadingPage(false);
+				setUser({});
+				setLoggedInUser(false);
+				await AsyncStorage.removeItem("userToken");
+			}
+		}
+
+		getData();
+
+	}, []);
+
+
 	async function singIn(body: LoginData): Promise<string | void>{
 
 		try{
@@ -21,6 +60,7 @@ export function AuthProvider({children}: AuthProviderProps){
 			const response = await externalCalls.post("/user/authenticate", body);
 			setUser(response.data);
 			setLoggedInUser(true);
+			await AsyncStorage.setItem("userToken", response.data.token);
 			externalCalls.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
 
 		}catch(err){
@@ -38,12 +78,43 @@ export function AuthProvider({children}: AuthProviderProps){
 	}
 
 
+	async function singUp(body: SingUpData){
+
+		try{
+			
+			const response = await externalCalls.post("/user/userRegister", body);
+			return {
+				statusCode: response.status,
+				msg: response.data.msg
+			};
+
+		}catch(err){
+			console.log(err);
+			if(axios.isAxiosError(err)){
+				if(err.status === 400){
+					return {
+						statusCode: 400,
+						msg: err.response?.data.msg
+					};
+					
+				}
+			}
+			
+			return {
+				statusCode: 500,
+				msg: "Houve um pequeno problema, por favor tente novamente."
+			};
+		}
+	}
+
+
 	return(
 		<AuthContext.Provider value={{
 			loggedInUser,
 			loadingPage,
 			user,
-			singIn
+			singIn,
+			singUp
 		}}>
 			{children}
 		</AuthContext.Provider>
