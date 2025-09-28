@@ -6,11 +6,12 @@ import  AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const userDefault = { id: "", name: "", email: "", avatar: null };
 
 
 export function AuthProvider({children}: AuthProviderProps){
 
-	const [user, setUser] = useState({});
+	const [user, setUser] = useState(userDefault);
 	const [loggedInUser, setLoggedInUser] = useState(false);
 	const [loadingPage, setLoadingPage] = useState(false);
 
@@ -42,7 +43,7 @@ export function AuthProvider({children}: AuthProviderProps){
 			}catch(err){
 				console.log(err);
 				setLoadingPage(false);
-				setUser({});
+				setUser(userDefault);
 				setLoggedInUser(false);
 				await AsyncStorage.removeItem("userToken");
 			}

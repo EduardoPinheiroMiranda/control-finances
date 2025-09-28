@@ -31,8 +31,7 @@ export default function App() {
 				<AuthProvider>
 					<StatusBar
 						backgroundColor={light.colors.PRIMARY}
-						style="auto"
-						translucent={true}
+						style="dark"
 					/>
 					<Routes/>
 				</AuthProvider>

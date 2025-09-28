@@ -1,4 +1,5 @@
 import { TouchableOpacity } from "react-native";
+import Constants from "expo-constants";
 import { Container, Text,  MenuIcon, SectionTitle } from "./styles";
 
 interface PropsTypes{
@@ -7,9 +8,12 @@ interface PropsTypes{
 }
 
 
+const statusBarHeight = Constants.statusBarHeight;
+
+
 export function Header(props: PropsTypes){
 	return(
-		<Container>
+		<Container style={{marginTop: statusBarHeight}}>
 			<SectionTitle>
 				<Text>{props.title}</Text>
 

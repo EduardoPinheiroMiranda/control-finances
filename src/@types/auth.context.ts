@@ -19,7 +19,12 @@ export interface SingUpData {
 export interface AuthContextType {
     loggedInUser: boolean;
     loadingPage: boolean;
-    user: object;
+    user: {
+      id: string,
+      name: string,
+      email: string,
+      avatar: string | null,
+    };
     singIn: (body: LoginData) => Promise<string | void>
     singUp: (body: SingUpData) => Promise<{
       statusCode: number,

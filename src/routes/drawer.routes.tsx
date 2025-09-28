@@ -1,6 +1,7 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DefaultTheme, useTheme } from "styled-components/native";
 import { getHeaderTitle } from "@react-navigation/elements";
+import { DrawerParamList } from "@/@types/drawer.routes";
 // pages
 import { Home } from "@/pages/Home";
 import { Movements } from "@/pages/Movements";
@@ -11,7 +12,7 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { Header } from "@/components/Header";
 
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<DrawerParamList>();
 
 
 export function DrawerNavigation(){
@@ -23,7 +24,10 @@ export function DrawerNavigation(){
 		<Drawer.Navigator 
 			screenOptions={{
 
-				drawerStyle: { paddingTop: 50 },
+				drawerStyle: {
+					paddingTop: 50,
+					width: "70%"
+				},
 
 				drawerActiveTintColor: theme.colors.SECONDARY,
 				drawerInactiveTintColor: theme.colors.FONT_COLOR_PRIMARY,
@@ -33,6 +37,8 @@ export function DrawerNavigation(){
 					marginLeft: 10
 				},
 
+				drawerStatusBarAnimation: "slide",
+
 				
 				header: ({navigation, route, options}) => {
 					const title = getHeaderTitle(options, route.name);
@@ -41,6 +47,7 @@ export function DrawerNavigation(){
 			}}
 		>
 			<Drawer.Screen name="Home" component={Home} options={{
+				headerShown: false,
 				drawerIcon: ({color}) => (
 					<Octicons name="home" size={25} color={color} />
 				)

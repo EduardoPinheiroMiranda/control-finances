@@ -1,13 +1,23 @@
-import { Text } from "react-native";
 import { Container } from "./styles";
+import { HeaderHome } from "./HeaderHome";
+import { useContext } from "react";
+import { AuthContext } from "@/contexts/Auth.context";
+import { DrawerScreenProps } from "@react-navigation/drawer";
+import { DrawerParamList } from "@/@types/drawer.routes";
+import { Balance } from "./Balance";
 
 
-export function Home(){
+type HomeScreenProps = DrawerScreenProps<DrawerParamList, "Home">;
+
+export function Home({navigation}: HomeScreenProps){
+
+	const authContext = useContext(AuthContext);
 
 
 	return(
 		<Container>
-			<Text>home</Text>
+			<HeaderHome name={authContext?.user.name ?? ""} navigation={navigation.openDrawer}/>
+			<Balance/>
 		</Container>
 	);
 }

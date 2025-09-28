@@ -8,16 +8,19 @@ type ThemeType = {
     theme: DefaultTheme
 }
 
-export const Container = styled.View`
+
+export const Container = styled.View.attrs({
+	elevation: 5
+})`
 	background-color: ${({theme}: ThemeType) => theme.colors.PRIMARY};
 
-    height: 80px;
+    height: 60px;
 	width: 100%;
 
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	
-	padding: 0 20px 15px 20px;
+	padding: 0 20px;
 `;
 
 export const SectionTitle = styled.View`
