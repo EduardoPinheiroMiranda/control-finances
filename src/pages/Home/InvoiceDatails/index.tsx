@@ -1,7 +1,8 @@
 import { formatCurrency } from "@/services/formatCurrency";
 import { Container, Header, LabelValues, TextExpired, TextSpent, TextTitle, TextValue, Descriptions, Informations, TextDescription } from "./styles";
-import { Slider } from "../Slider/inde";
+import { Slider } from "./Slider/inde";
 import { View } from "react-native";
+import { DisplayMoreDetails } from "@/components/DisplayMoreDatails";
 
 
 interface PropsTypes {
@@ -49,6 +50,8 @@ export function InvoiceDatails(props: PropsTypes){
 						</TextDescription>
 					</Descriptions>
 				</Informations>
+
+				<DisplayMoreDetails page="InvoiceDetails"/>
 			</View>
 		</Container>
 	);
