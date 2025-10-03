@@ -8,6 +8,8 @@ import { Balance } from "./Balance";
 import { Shortcuts } from "./Shortcuts";
 import { ScrollView } from "react-native";
 import { InvoiceDatails } from "./InvoiceDatails";
+import { ListCards } from "./ListCards";
+import { ListMovements } from "./ListMovements";
 
 
 type HomeScreenProps = DrawerScreenProps<DrawerParamList, "Home">;
@@ -29,6 +31,8 @@ export function Home({navigation}: HomeScreenProps){
 				<Balance showValue={showValues} hideValue={setShowValues}/>
 				<Shortcuts/>
 				<InvoiceDatails spent={80} showValue={showValues}/>
+				<ListCards/>
+				<ListMovements/>
 			</ScrollView>
 		</Container>
 	);
