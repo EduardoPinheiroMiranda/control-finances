@@ -32,7 +32,7 @@ export const SectionLogo = styled.View`
 `;
 
 export const TextNameUser = styled(CustomText)`
-    font-size: 18;
+    font-size: 18px;
     font-weight: 700;
 `;
 

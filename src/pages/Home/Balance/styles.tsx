@@ -11,10 +11,12 @@ export const Container = styled.View`
     background-color: ${({theme}: ThemeType) => theme.colors.PRIMARY};
     padding: 20px;
     border-radius: 0 0 20px 20px;
+
+    margin-bottom: 20px;
 `;
 
 export const TextLabel = styled(CustomText)`
-    font-size: 14;
+    font-size: 14px;
     margin-bottom: 10px;
 `;
 

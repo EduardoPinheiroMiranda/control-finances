@@ -1,10 +1,13 @@
 import { Container } from "./styles";
 import { HeaderHome } from "./HeaderHome";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "@/contexts/Auth.context";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import { DrawerParamList } from "@/@types/drawer.routes";
 import { Balance } from "./Balance";
+import { Shortcuts } from "./Shortcuts";
+import { ScrollView } from "react-native";
+import { InvoiceDatails } from "./InvoiceDatails";
 
 
 type HomeScreenProps = DrawerScreenProps<DrawerParamList, "Home">;
@@ -12,12 +15,21 @@ type HomeScreenProps = DrawerScreenProps<DrawerParamList, "Home">;
 export function Home({navigation}: HomeScreenProps){
 
 	const authContext = useContext(AuthContext);
+	const [showValues, setShowValues] = useState(false);
 
 
 	return(
 		<Container>
 			<HeaderHome name={authContext?.user.name ?? ""} navigation={navigation.openDrawer}/>
-			<Balance/>
+			<ScrollView
+				style={{flex: 1}}
+				horizontal={false}
+				showsVerticalScrollIndicator={false}
+			>
+				<Balance showValue={showValues} hideValue={setShowValues}/>
+				<Shortcuts/>
+				<InvoiceDatails spent={80} showValue={showValues}/>
+			</ScrollView>
 		</Container>
 	);
 }
