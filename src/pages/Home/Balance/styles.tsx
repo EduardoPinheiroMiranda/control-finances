@@ -12,7 +12,7 @@ export const Container = styled.View`
     padding: 20px;
     border-radius: 0 0 20px 20px;
 
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 `;
 
 export const TextLabel = styled(CustomText)`

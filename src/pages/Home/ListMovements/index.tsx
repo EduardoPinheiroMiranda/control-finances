@@ -1,6 +1,8 @@
 import { DisplayMoreDetails } from "@/components/DisplayMoreDatails";
 import { Container, Section, TextTitle } from "./styles";
 import { Movement } from "@/components/Movement";
+import { View } from "react-native";
+import { NotFound } from "@/components/NotFound";
 
 const movements = [
 	{
@@ -41,7 +43,7 @@ const movements = [
 		type: "INVOICE",
 		value: 100,
 		dueDate: "2025-10-10",
-		installment: 0
+		installment: 1
 	},
 ];
 
@@ -54,10 +56,14 @@ export function ListMovements(){
 	return(
 		<Container>
 			<TextTitle>Atividades recentes</TextTitle>
+
 			<Section>
-				{RenderMovements}
+				{movements.length === 0 ? <NotFound/> : RenderMovements}
 			</Section>
-			<DisplayMoreDetails page="Movements"/>
+
+			<View style={{marginRight: 20, marginTop: 30}}>
+				<DisplayMoreDetails page="Movements"/>
+			</View>
 		</Container>
 	);
 }

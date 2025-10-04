@@ -25,7 +25,7 @@ export const Container = styled.View`
     border-bottom-width: 2px;
     border-color: ${({theme}: ThemeType) => theme.colors.BACKGROUND_SECONDARY};
 
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 `;
 
 export const Button = styled.TouchableOpacity.attrs({
