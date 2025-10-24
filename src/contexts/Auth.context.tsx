@@ -1,4 +1,4 @@
-import { AuthContextType, AuthProviderProps, LoginData, SingUpData } from "@/@types/auth.context";
+import { AuthContextType, ContextProviderProps, LoginData, SingUpData } from "@/@types/auth.context";
 import { externalCalls } from "@/services/externalCalls";
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
@@ -9,7 +9,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const userDefault = { id: "", name: "", email: "", avatar: null };
 
 
-export function AuthProvider({children}: AuthProviderProps){
+export function AuthProvider({children}: ContextProviderProps){
 
 	const [user, setUser] = useState(userDefault);
 	const [loggedInUser, setLoggedInUser] = useState(false);

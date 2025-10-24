@@ -8,6 +8,7 @@ import EyeClose from "@/../assets/svgs/eye-close.svg";
 
 interface ProspTypes{
 	showValue: boolean;
+	value: number;
 	hideValue: (showValue: boolean) => void
 }
 
@@ -18,7 +19,7 @@ export function Balance(props: ProspTypes){
 		<Container>
 			<TextLabel>Saldo total</TextLabel>
 			<SectionValues>
-				<TextValue>{props.showValue ? formatCurrency(3600) : "R$ ****"}</TextValue>
+				<TextValue>{props.showValue ? formatCurrency(props.value) : "R$ ****"}</TextValue>
 				<TouchableOpacity activeOpacity={0.7} onPress={() => props.hideValue(!props.showValue)}>
 					{props.showValue ? <EyeOpen/> : <EyeClose/>}
 				</TouchableOpacity>

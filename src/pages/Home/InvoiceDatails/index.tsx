@@ -3,50 +3,58 @@ import { Container, Header, LabelValues, TextExpired, TextSpent, TextTitle, Text
 import { Slider } from "./Slider/inde";
 import { View } from "react-native";
 import { DisplayMoreDetails } from "@/components/DisplayMoreDatails";
+import { Invoice } from "@/@types/user.context";
+import { formatDate } from "date-fns";
 
 
 interface PropsTypes {
     showValue: boolean,
-	spent: number
+	invoice: Invoice
 }
 
 export function InvoiceDatails(props: PropsTypes){
+
+	const percentageSpent = props.invoice.percentageSpent;
+	const progress = percentageSpent > 100 ? 100 : percentageSpent;
+	const amount = props.invoice.amount;
+	const available = props.invoice.available;
+	const limit = props.invoice.limit;
 
 
 	return(
 		<Container>
 			<Header>
 				<TextTitle>Fatura atual</TextTitle>
-				<TextExpired>Vencimento - 10/02</TextExpired>
+				<TextExpired>Vencimento - {formatDate(new Date(props.invoice.dueDate), "dd/MM")}</TextExpired>
 			</Header>
 
 			<View>
 				<LabelValues>
-					<TextValue>{props.showValue ? formatCurrency(3600) : "R$ ****"}</TextValue>
-					<TextSpent>80%</TextSpent>
+					<TextValue>{props.showValue ? formatCurrency(amount) : "R$ ****"}</TextValue>
+					<TextSpent>{percentageSpent}%</TextSpent>
 				</LabelValues>
 
-				<Slider spent={props.spent}/>
+				<Slider spent={progress}/>
 
 				<Informations>
 					<Descriptions>
 						<TextDescription>Disponivel</TextDescription>
 						<TextDescription>
-							{props.showValue ? formatCurrency(3600) : "R$ ****"}
+							{props.showValue ? formatCurrency(available) : "R$ ****"}
 						</TextDescription>
 					</Descriptions>
 
 					<Descriptions>
 						<TextDescription>Utilizado</TextDescription>
 						<TextDescription>
-							{props.showValue ? formatCurrency(3600) : "R$ ****"}
+							{props.showValue ? formatCurrency(amount) : "R$ ****"}
 						</TextDescription>
 					</Descriptions>
 
 					<Descriptions>
 						<TextDescription>Limite</TextDescription>
 						<TextDescription>
-							{props.showValue ? formatCurrency(3600) : "R$ ****"}
+							{props.showValue ? formatCurrency(limit) : "R$ ****"}
 						</TextDescription>
 					</Descriptions>
 				</Informations>

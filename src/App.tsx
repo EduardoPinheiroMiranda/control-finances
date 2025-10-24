@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components/native";
 import light from "./theme/light";
 import { Routes } from "./routes";
 import { AuthProvider } from "./contexts/Auth.context";
+import { UserProvider } from "./contexts/user.context";
 
 
 export default function App() {
@@ -29,11 +30,13 @@ export default function App() {
 		<ThemeProvider theme={light}>
 			<NavigationContainer>
 				<AuthProvider>
-					<StatusBar
-						backgroundColor={light.colors.PRIMARY}
-						style="dark"
-					/>
-					<Routes/>
+					<UserProvider>
+						<StatusBar
+							backgroundColor={light.colors.PRIMARY}
+							style="dark"
+						/>
+						<Routes/>
+					</UserProvider>
 				</AuthProvider>
 			</NavigationContainer>
 		</ThemeProvider>
