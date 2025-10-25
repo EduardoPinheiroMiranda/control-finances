@@ -2,10 +2,16 @@
 
 export interface UserContextType {
     loadingFinancialData: boolean,
-    applications: Application | null,
-    invoice: Invoice | null,
-    cards: Card | null,
-    movements: Movement | null
+    applications: Application | undefined,
+    invoice: Invoice | undefined,
+    cards: Card[] | undefined,
+    movements: Movement[] | undefined,
+    getInitialData: () => Promise<{
+        applications: Application,
+        invoice: Invoice,
+        cards: Card,
+        movements: Movement
+    } | string>
 };
 
 export interface Application {
@@ -77,7 +83,7 @@ export interface Movement {
     id: string,
     name: string,
     type: string,
-    value: string,
+    value: number,
     installment: number,
     createdAt: string,
     userId: string,

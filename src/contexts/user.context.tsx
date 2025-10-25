@@ -1,5 +1,5 @@
 import { ContextProviderProps } from "@/@types/auth.context";
-import { Application, Card, Invoice, Movement, UserContextType } from "@/@types/user.context";
+import { UserContextType } from "@/@types/user.context";
 import { externalCalls } from "@/services/externalCalls";
 import { createContext, useEffect, useState } from "react";
 
@@ -10,22 +10,17 @@ export const UserContext = createContext<UserContextType | undefined>(undefined)
 export function UserProvider({children}: ContextProviderProps){
 
 	const [loadingFinancialData, setLoadingFinancialData] = useState(false);
-	const [applications, setApplications] = useState<Application | null>(null);
-	const [invoice, setInvoice] = useState<Invoice | null>(null);
-	const [cards, setCards] = useState<Card | null>(null);
-	const [movements, setMovements] = useState<Movement | null>(null);
+	const [applications, setApplications] = useState();
+	const [invoice, setInvoice] = useState();
+	const [cards, setCards] = useState();
+	const [movements, setMovements] = useState();
 
 
 	useEffect(() => {
-
-		async function loadData(){
-			setLoadingFinancialData(true);
+		async function startData(){
 			await getInitialData();
-			setLoadingFinancialData(false);
 		}
-		loadData();
-		
-		
+		startData();
 	}, []);
 
 
@@ -33,17 +28,34 @@ export function UserProvider({children}: ContextProviderProps){
 
 		try{
 
+			setLoadingFinancialData(true);
+
 			const request = await externalCalls.get("/user/generalSummary");
 			const response = request.data;
 
-			if (response.applications) setApplications(response.applications);
-			if (response.invoice) setInvoice(response.invoice);
-			if (response.cards) setCards(response.cards);
-			if (response.movements) setMovements(response.movements);
 
-			return;
-            
+			if(request.status !== 200){
+				return "Houve um pequeno problema para carregar os dados, tente novamente mais tarde.";
+			}
+			
+
+			setApplications(response.applications);
+			setInvoice(response.invoice);
+			setCards(response.cards);
+			setMovements(response.movements);
+
+
+			setLoadingFinancialData(false);
+
+			return {
+				applications: response.applications,
+				invoice: response.invoice,
+				cards: response.cards,
+				movements: response.movements
+			};
+
 		}catch{
+			setLoadingFinancialData(false);
 			return "Houve um pequeno problema para carregar os dados, tente novamente mais tarde.";
 		}
 	};
@@ -55,7 +67,8 @@ export function UserProvider({children}: ContextProviderProps){
 			applications,
 			invoice,
 			cards,
-			movements
+			movements,
+			getInitialData
 		}}>
 			{children}
 		</UserContext.Provider>

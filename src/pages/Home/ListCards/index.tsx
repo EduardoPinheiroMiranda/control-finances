@@ -4,51 +4,30 @@ import { Card } from "@/components/Card";
 import { FlatList } from "react-native-gesture-handler";
 import { NotFound } from "@/components/NotFound";
 import { View } from "react-native";
+import { Card as TypeCard} from "@/@types/user.context";
 
 
-const cards = [
-	{
-		id: "1",
-		name: "Mercado Pago",
-		dueDay: 5,
-		spent: 1000,
-		colorFont: "#fafafa",
-		colorCard: "#539EE1"
-	},
-	{
-		id: "2",
-		name: "Mercado Pago",
-		dueDay: 5,
-		spent: 1000,
-		colorFont: "#fafafa",
-		colorCard: "#539EE1"
-	},
-	{
-		id: "3",
-		name: "Mercado Pago",
-		dueDay: 5,
-		spent: 1000,
-		colorFont: "#fafafa",
-		colorCard: "#539EE1"
-	}
-];
+interface PropsTypes{
+	cards: TypeCard[]
+}
 
-export function ListCards(){
+
+export function ListCards(props: PropsTypes){
 
 	return(
 		<Container>
 			<Title>Meus cartões</Title>
 
-			{cards.length === 0 ?
+			{props.cards.length === 0 ?
 				<NotFound/>
 				:
 				<FlatList
 					style={{flex: 1, paddingVertical: 20}}
-					data={cards}
+					data={props.cards}
 					renderItem={({item}) => <Card card={{
 						name: item.name,
 						dueDay: item.dueDay,
-						spent: item.spent,
+						spent: 0,
 						colorFont: item.colorFont,
 						colorBackground: item.colorCard
 					}}/>}

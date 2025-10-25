@@ -14,7 +14,7 @@ interface PropsTypes {
         name: string,
         type: string,
         value: number,
-        dueDate: string,
+        createdAt: string,
         installment: number
     }
 }
@@ -23,7 +23,7 @@ interface PropsTypes {
 export function Movement(props: PropsTypes){
 
 	const value = formatCurrency(props.movement.value);
-	const purchased = format(parseISO(props.movement.dueDate), "dd/MM/yyyy");
+	const purchased = format(parseISO(props.movement.createdAt), "dd/MM/yyyy");
     
 
 	function RenderIcon(typeMovement: string){
