@@ -24,6 +24,7 @@ export function Home({navigation}: HomeScreenProps){
 	const authContext = useContext(AuthContext);
 	const userContext = useContext(UserContext);
 	const [showValues, setShowValues] = useState(true);
+	const [elevation, setElevation] = useState(false);
 
 
 	useEffect(() => {
@@ -50,11 +51,23 @@ export function Home({navigation}: HomeScreenProps){
 
 	return(
 		<Container>
-			<HeaderHome name={authContext?.user.name ?? ""} navigation={navigation.openDrawer}/>
+			<HeaderHome
+				elevation={elevation}
+				name={authContext?.user.name ?? ""}
+				navigation={navigation.openDrawer}
+			/>
 			<ScrollView
 				style={{flex: 1}}
 				horizontal={false}
 				showsVerticalScrollIndicator={false}
+				onScroll={(event) => {
+					const y = event.nativeEvent.contentOffset.y;
+					if (y > 95){
+						setElevation(true);
+					}else{
+						setElevation(false);
+					}
+				}}
 			>
 				<Balance showValue={showValues} value={userContext?.applications?.value ?? 0} hideValue={setShowValues}/>
 				<Shortcuts/>

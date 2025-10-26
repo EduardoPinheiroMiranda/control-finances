@@ -37,7 +37,7 @@ export function DrawerNavigation(){
 					marginLeft: 10
 				},
 
-				drawerStatusBarAnimation: "slide",
+				drawerStatusBarAnimation: "fade",
 
 				
 				header: ({navigation, route, options}) => {

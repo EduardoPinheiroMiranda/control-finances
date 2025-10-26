@@ -21,10 +21,10 @@ export const Container = styled.View`
     align-items: center;
 
     padding: 20px;
+    z-index: 1;
 `;
 
 export const SectionLogo = styled.View`
-    
     display: flex;
     flex-direction: row;
     align-items: center;

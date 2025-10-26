@@ -5,6 +5,7 @@ import Logo from "@/../assets/svgs/logo.svg";
 
 interface PropsTypes {
     name: string,
+	elevation: boolean
     navigation: () => void
 }
 
@@ -13,7 +14,7 @@ export function HeaderHome(props: PropsTypes){
 
 
 	return(
-		<Container>
+		<Container style={{elevation: props.elevation ? 5 : 0}}>
 			<SectionLogo>
 				<Logo/>
 				<TextNameUser>{props.name}</TextNameUser>

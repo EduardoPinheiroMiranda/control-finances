@@ -26,6 +26,7 @@ export const Container = styled.View`
     border-color: ${({theme}: ThemeType) => theme.colors.BACKGROUND_SECONDARY};
 
     margin-bottom: 30px;
+    z-index: 1;
 `;
 
 export const Button = styled.TouchableOpacity.attrs({

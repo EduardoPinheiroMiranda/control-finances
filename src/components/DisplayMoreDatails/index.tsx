@@ -1,22 +1,29 @@
+import { useNavigation } from "@react-navigation/native";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { DrawerParamList } from "@/@types/drawer.routes";
 import { Button, Container, IconArrowRight, TextButton } from "./styles";
 
 
+type NavigationProp = DrawerNavigationProp<DrawerParamList>;
+
 interface PropsTypes {
-    page: string
+  page: keyof DrawerParamList;
 }
 
-export function DisplayMoreDetails(props: PropsTypes){
 
-	function handlerNavigation(page: string){
-		alert("Navegar até a página " + page);
-		return;
+export function DisplayMoreDetails({ page }: PropsTypes) {
+
+	const navigation = useNavigation<NavigationProp>();
+
+	function handleNavigation() {
+		navigation.navigate(page);
 	}
 
-	return(
+	return (
 		<Container>
-			<Button activeOpacity={0.7} onPress={() => handlerNavigation(props.page)}>
+			<Button activeOpacity={0.7} onPress={handleNavigation}>
 				<TextButton>Ver mais detalhes</TextButton>
-				<IconArrowRight/>
+				<IconArrowRight />
 			</Button>
 		</Container>
 	);
