@@ -1,4 +1,5 @@
 export type DrawerParamList = {
     Home: undefined;
-    Movements: undefined
+    Movements: undefined;
+    AddPurchase: undefined;
 }
