@@ -3,14 +3,14 @@ import { CustomText } from "../CustomText";
 import { DefaultTheme } from "styled-components";
 
 
-type ThemeType = {
+type ThemeTypes = {
     theme: DefaultTheme
 }
 
 
 export const Button = styled.TouchableOpacity`
 
-    background-color: ${({theme}: ThemeType) => theme.colors.SECONDARY};
+    background-color: ${({theme}: ThemeTypes) => theme.colors.SECONDARY};
     
     height: 60px;
     width: 300px;
@@ -25,5 +25,5 @@ export const Button = styled.TouchableOpacity`
 
 export const Text = styled(CustomText)`
     font-size: 20px;
-    color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_SECONDARY};
+    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_SECONDARY};
 `;

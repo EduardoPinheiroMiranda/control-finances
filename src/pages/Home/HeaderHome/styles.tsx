@@ -4,13 +4,13 @@ import Feather from "@expo/vector-icons/Feather";
 import { DefaultTheme } from "styled-components";
 
 
-type ThemeType = {
+type ThemeTypes = {
     theme: DefaultTheme
 }
 
 
 export const Container = styled.View`
-    background-color: ${({theme}: ThemeType) => theme.colors.PRIMARY};
+    background-color: ${({theme}: ThemeTypes) => theme.colors.PRIMARY};
     height: 80px;
     width: 100%;
 
@@ -36,7 +36,7 @@ export const TextNameUser = styled(CustomText)`
     font-weight: 700;
 `;
 
-export const MenuIcon = styled(Feather).attrs(({theme}: ThemeType) => ({
+export const MenuIcon = styled(Feather).attrs(({theme}: ThemeTypes) => ({
 	name: "menu",
 	size: 30,
 	color: theme.colors.FONT_COLOR_PRIMARY

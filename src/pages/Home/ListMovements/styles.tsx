@@ -3,7 +3,7 @@ import { DefaultTheme } from "styled-components";
 import styled from "styled-components/native";
 
 
-interface ThemeType {
+interface ThemeTypes {
     theme: DefaultTheme
 }
 
@@ -18,7 +18,7 @@ export const Section = styled.View`
 `;
 
 export const TextTitle = styled(CustomText)`
-    color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_PRIMARY};
+    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
     font-size: 20px;
     font-weight: 500;
 

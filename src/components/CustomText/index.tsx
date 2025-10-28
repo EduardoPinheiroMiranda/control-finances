@@ -19,11 +19,11 @@ export function CustomText({children, styles, ...rest}: PropsTypes){
 }
 
 
-interface ThemeType {
+interface ThemeTypes {
 	theme: DefaultTheme
 }
 
 const Text = styled.Text`
-	color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_PRIMARY};
+	color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
     font-family: "Roboto_400Regular";
 `;

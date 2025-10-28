@@ -14,6 +14,7 @@ export function UserProvider({children}: ContextProviderProps){
 	const [invoice, setInvoice] = useState();
 	const [cards, setCards] = useState();
 	const [movements, setMovements] = useState();
+	const [category, setCategory] = useState();
 
 
 	useEffect(() => {
@@ -30,28 +31,35 @@ export function UserProvider({children}: ContextProviderProps){
 
 			setLoadingFinancialData(true);
 
-			const request = await externalCalls.get("/user/generalSummary");
-			const response = request.data;
+			const [generalSummary, listCategories] = await Promise.all([
+				externalCalls.get("/user/generalSummary"),
+				externalCalls.get("/category/listCategories")
+			]);
+
+			
+			const finances = generalSummary.data;
+			const categories = listCategories.data;
 
 
-			if(request.status !== 200){
+			if(generalSummary.status !== 200 || listCategories.status !== 200){
 				return "Houve um pequeno problema para carregar os dados, tente novamente mais tarde.";
 			}
 			
 
-			setApplications(response.applications);
-			setInvoice(response.invoice);
-			setCards(response.cards);
-			setMovements(response.movements);
+			setApplications(finances.applications);
+			setInvoice(finances.invoice);
+			setCards(finances.cards);
+			setMovements(finances.movements);
+			setCategory(categories);
 
 
 			setLoadingFinancialData(false);
 
 			return {
-				applications: response.applications,
-				invoice: response.invoice,
-				cards: response.cards,
-				movements: response.movements
+				applications: finances.applications,
+				invoice: finances.invoice,
+				cards: finances.cards,
+				movements: finances.movements
 			};
 
 		}catch{
@@ -68,6 +76,7 @@ export function UserProvider({children}: ContextProviderProps){
 			invoice,
 			cards,
 			movements,
+			category,
 			getInitialData
 		}}>
 			{children}

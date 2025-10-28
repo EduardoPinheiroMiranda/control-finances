@@ -3,13 +3,13 @@ import { DefaultTheme } from "styled-components";
 import styled from "styled-components/native";
 
 
-interface ThemeType {
+interface ThemeTypes {
     theme: DefaultTheme
 }
 
 
 export const Container = styled.View`
-    background-color: ${({theme}: ThemeType) => theme.colors.PRIMARY};
+    background-color: ${({theme}: ThemeTypes) => theme.colors.PRIMARY};
     padding: 20px;
     border-radius: 20px;
     margin-bottom: 20px;
@@ -25,12 +25,12 @@ export const Header = styled.View`
 
 export const TextTitle = styled(CustomText)`
     font-size: 20px;
-    color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_PRIMARY};
+    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
 `;
 
 export const TextExpired = styled(CustomText)`
     font-size: 16px;
-    color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_PRIMARY};
+    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
 `;
 
 
@@ -47,12 +47,12 @@ export const LabelValues = styled.View`
 
 export const TextValue = styled(CustomText)`
     font-size: 24px;
-    color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_PRIMARY};
+    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
 `;
 
 export const TextSpent = styled(CustomText)`
     font-size: 32px;
-    color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_PRIMARY};
+    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
 `;
 
 export const Informations = styled.View`
@@ -74,6 +74,6 @@ export const Descriptions = styled.View`
 
 export const TextDescription = styled(CustomText)`
     font-size: 16px;
-    color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_PRIMARY};
+    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
 `;
 

@@ -8,18 +8,18 @@ import { Dimensions } from "react-native";
 const { height } = Dimensions.get("screen");
 
 
-type ThemeType = {
+type ThemeTypes = {
     theme: DefaultTheme
 }
 
 
 export const Container = styled(SafeAreaView)`
     flex: 1;
-    background: ${({theme}: ThemeType) => theme.colors.BACKGROUND_PRIMARY};
+    background: ${({theme}: ThemeTypes) => theme.colors.BACKGROUND_PRIMARY};
 `;
 
 export const Header = styled.View`
-    background: ${({theme}: ThemeType) => theme.colors.PRIMARY};
+    background: ${({theme}: ThemeTypes) => theme.colors.PRIMARY};
 
     width: 100vw;
     height: ${height < 1000 ? "200px" : "350px"};
@@ -52,5 +52,5 @@ export const ButtonSection = styled.View`
 
 export const CreateAccount = styled(CustomText)`
     font-size: 16px;
-    color: ${({theme}: ThemeType) => theme.colors.SECONDARY};
+    color: ${({theme}: ThemeTypes) => theme.colors.SECONDARY};
 `;

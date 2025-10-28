@@ -4,7 +4,7 @@ import { CustomText } from "../CustomText";
 import { DefaultTheme } from "styled-components/native";
 
 
-type ThemeType = {
+type ThemeTypes = {
     theme: DefaultTheme
 }
 
@@ -12,7 +12,7 @@ type ThemeType = {
 export const Container = styled.View.attrs({
 	elevation: 5
 })`
-	background-color: ${({theme}: ThemeType) => theme.colors.PRIMARY};
+	background-color: ${({theme}: ThemeTypes) => theme.colors.PRIMARY};
 
     height: 60px;
 	width: 100%;
@@ -33,10 +33,10 @@ export const SectionTitle = styled.View`
 
 export const Text = styled(CustomText)`
     font-size: 20px;
-	color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_PRIMARY};
+	color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
 `;
 
-export const MenuIcon = styled(Feather).attrs(({theme}: ThemeType) => ({
+export const MenuIcon = styled(Feather).attrs(({theme}: ThemeTypes) => ({
 	name: "menu",
 	size: 30,
 	color: theme.colors.FONT_COLOR_PRIMARY

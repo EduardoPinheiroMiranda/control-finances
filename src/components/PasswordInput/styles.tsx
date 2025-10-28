@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import { CustomText } from "../CustomText";
 
 
-type ThemeType = {
+type ThemeTypes = {
     theme: DefaultTheme
 }
 
@@ -13,7 +13,7 @@ export const Container = styled.View`
 `;
 
 export const Text = styled(CustomText)`
-    color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_THIRD};
+    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_THIRD};
     font-size: 14px;
 `;
 
@@ -21,9 +21,9 @@ export const TextInput = styled.TextInput`
     width: 100%;
     height: 60px;
 
-    color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_PRIMARY};
+    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
 
-    border: 1px solid ${({theme}: ThemeType) => theme.colors.INPUT_BORDER};
+    border: 1px solid ${({theme}: ThemeTypes) => theme.colors.INPUT_BORDER};
     border-radius: 10px;
 
     padding: 15px 20px;

@@ -6,14 +6,14 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Feather from "@expo/vector-icons/Feather";
 
 
-interface ThemeType {
+interface ThemeTypes {
     theme: DefaultTheme
 }
 
 
 export const Container = styled.View`
 
-    background-color: ${({theme}: ThemeType) => theme.colors.BACKGROUND_PRIMARY};
+    background-color: ${({theme}: ThemeTypes) => theme.colors.BACKGROUND_PRIMARY};
 
     display: flex;
     flex-direction: row;
@@ -23,7 +23,7 @@ export const Container = styled.View`
     padding: 20px 0;
     border-top-width: 2px;
     border-bottom-width: 2px;
-    border-color: ${({theme}: ThemeType) => theme.colors.BACKGROUND_SECONDARY};
+    border-color: ${({theme}: ThemeTypes) => theme.colors.BACKGROUND_SECONDARY};
 
     margin-bottom: 30px;
     z-index: 1;
@@ -39,7 +39,7 @@ export const Button = styled.TouchableOpacity.attrs({
 `;
 
 export const SectionIcon = styled.View`
-    background-color: ${({theme}: ThemeType) => theme.colors.PRIMARY};
+    background-color: ${({theme}: ThemeTypes) => theme.colors.PRIMARY};
 
     width: 50px;
     height: 50px;
@@ -52,25 +52,25 @@ export const SectionIcon = styled.View`
 `;
 
 export const TextButton = styled(CustomText)`
-    color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_PRIMARY};
+    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
     font-size: 14px;
     width: 80px;
     text-align: center;
 `;
 
-export const IconBag = styled(Feather).attrs(({theme}: ThemeType) => ({
+export const IconBag = styled(Feather).attrs(({theme}: ThemeTypes) => ({
 	name: "shopping-bag",
 	size: 30,
 	color: theme.colors.FONT_COLOR_PRIMARY
 }))``;
 
-export const IconDollar = styled(Feather).attrs(({theme}: ThemeType) => ({
+export const IconDollar = styled(Feather).attrs(({theme}: ThemeTypes) => ({
 	name: "dollar-sign",
 	size: 30,
 	color: theme.colors.FONT_COLOR_PRIMARY
 }))``;
 
-export const IconInvoice = styled(MaterialCommunityIcons).attrs(({theme}: ThemeType) => ({
+export const IconInvoice = styled(MaterialCommunityIcons).attrs(({theme}: ThemeTypes) => ({
 	name: "invoice-list-outline",
 	size: 30,
 	color: theme.colors.FONT_COLOR_PRIMARY

@@ -4,7 +4,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { DefaultTheme } from "styled-components";
 
 
-interface ThemeType {
+interface ThemeTypes {
     theme: DefaultTheme
 }
 
@@ -25,10 +25,10 @@ export const Section = styled.View`
 `;
 
 export const Text = styled(CustomText)`
-    color: ${({theme}: ThemeType) => theme.colors.BACKGROUND_THIRD}
+    color: ${({theme}: ThemeTypes) => theme.colors.BACKGROUND_THIRD}
 `;
 
-export const Icon = styled(MaterialIcons).attrs(({theme}: ThemeType) => ({
+export const Icon = styled(MaterialIcons).attrs(({theme}: ThemeTypes) => ({
 	name: "error-outline",
 	size: 20,
 	color: theme.colors.BACKGROUND_THIRD

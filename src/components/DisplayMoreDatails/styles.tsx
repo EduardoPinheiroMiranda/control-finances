@@ -4,7 +4,7 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { DefaultTheme } from "styled-components";
 
 
-interface ThemeType {
+interface ThemeTypes {
     theme: DefaultTheme
 }
 
@@ -26,10 +26,10 @@ export const Button = styled.TouchableOpacity`
 
 export const TextButton = styled(CustomText)`
     font-size: 14px;
-    color: ${({theme}: ThemeType) => theme.colors.SECONDARY};
+    color: ${({theme}: ThemeTypes) => theme.colors.SECONDARY};
 `;
 
-export const IconArrowRight = styled(FontAwesome6).attrs(({theme} : ThemeType) => ({
+export const IconArrowRight = styled(FontAwesome6).attrs(({theme} : ThemeTypes) => ({
 	name: "arrow-right-long",
 	color: theme.colors.SECONDARY,
 	size: 20

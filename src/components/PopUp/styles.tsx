@@ -4,7 +4,7 @@ import Octicons from "@expo/vector-icons/Octicons";
 import { DefaultTheme } from "styled-components";
 
 
-type ThemeType = {
+type ThemeTypes = {
     theme: DefaultTheme
 }
 
@@ -22,7 +22,7 @@ export const Container = styled.View`
 `;
 
 export const Body = styled.View`
-    background-color: ${({theme}: ThemeType) => theme.colors.BACKGROUND_PRIMARY};
+    background-color: ${({theme}: ThemeTypes) => theme.colors.BACKGROUND_PRIMARY};
     width: 372px;
     
     border-radius: 20px;
@@ -49,13 +49,13 @@ export const AlertIcon = styled(Octicons).attrs({name:"alert-fill", size: 50, co
 
 export const TextTitle = styled(CustomText)`
     font-size: 32px;
-    color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_SECONDARY};
+    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_SECONDARY};
     font-weight: bold;
 `;
 
 export const Message = styled.View`
     padding: 20px;
-    border: 1px solid ${({theme}: ThemeType) => theme.colors.BACKGROUND_SECONDARY};
+    border: 1px solid ${({theme}: ThemeTypes) => theme.colors.BACKGROUND_SECONDARY};
     
     display: flex;
     justify-content: center;
@@ -64,7 +64,7 @@ export const Message = styled.View`
 
 export const TextMessage = styled(CustomText)`
     font-size: 16px;
-    color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_PRIMARY};
+    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
 `;
 
 export const ButtonSection = styled.View`
@@ -78,7 +78,7 @@ export const ButtonSection = styled.View`
 `;
 
 export const Button = styled.TouchableOpacity`
-    background-color: ${({theme}: ThemeType) => theme.colors.BACKGROUND_THIRD};
+    background-color: ${({theme}: ThemeTypes) => theme.colors.BACKGROUND_THIRD};
     
     height: 50px;
     width: ${({quantity}: ButtonProps) => quantity === 1 ? "100%" : "50%"};
@@ -106,5 +106,5 @@ export const Button = styled.TouchableOpacity`
 
 export const TextButton = styled(CustomText)`
     font-size: 20px;
-    color: ${({theme}: ThemeType) => theme.colors.FONT_COLOR_THIRD};
+    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_THIRD};
 `;

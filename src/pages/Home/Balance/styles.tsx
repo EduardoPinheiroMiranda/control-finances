@@ -3,14 +3,14 @@ import { DefaultTheme } from "styled-components";
 import styled from "styled-components/native";
 
 
-interface ThemeType {
+interface ThemeTypes {
     theme: DefaultTheme
 }
 
 export const Container = styled.View.attrs({
 	elevation: 5
 })`
-    background-color: ${({theme}: ThemeType) => theme.colors.PRIMARY};
+    background-color: ${({theme}: ThemeTypes) => theme.colors.PRIMARY};
     padding: 20px;
     border-radius: 0 0 20px 20px;
 

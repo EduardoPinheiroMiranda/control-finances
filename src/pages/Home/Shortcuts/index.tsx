@@ -1,20 +1,25 @@
 import { useNavigation } from "@react-navigation/native";
 import { Button, Container, IconBag, IconDollar, IconInvoice, SectionIcon, TextButton } from "./styles";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { DrawerParamList } from "@/@types/drawer.routes";
+
+
+type NavigationProp = DrawerNavigationProp<DrawerParamList>;
 
 
 export function Shortcuts(){
 
-	const navigation = useNavigation();
+	const navigation = useNavigation<NavigationProp>();
 
 
-	function handlerNavigation(page: string){
-		alert("preciso fazer a página ir até: " + page);
+	function handlerNavigation(page: keyof DrawerParamList){
+		navigation.navigate(page);
 		return;
 	}
 
 	return(
 		<Container>
-			<Button onPress={() => handlerNavigation("AddNewPurchase")}>
+			<Button onPress={() => handlerNavigation("AddPurchase")}>
 				<SectionIcon>
 					<IconBag/>
 				</SectionIcon>
