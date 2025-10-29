@@ -109,13 +109,22 @@ export function AuthProvider({children}: ContextProviderProps){
 	}
 
 
+	async function singOut(){
+		await AsyncStorage.removeItem("userToken");
+		setUser(userDefault);
+		setLoggedInUser(false);
+		return;
+	}
+
+
 	return(
 		<AuthContext.Provider value={{
 			loggedInUser,
 			loadingPage,
 			user,
 			singIn,
-			singUp
+			singUp,
+			singOut
 		}}>
 			{children}
 		</AuthContext.Provider>

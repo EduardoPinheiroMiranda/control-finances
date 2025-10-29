@@ -27,5 +27,6 @@ export interface AuthContextType {
   };
   singIn: (body: LoginData) => Promise<string | void>;
   singUp: (body: SingUpData) => Promise<{statusCode: number, msg: string}>;
+  singOut: () => void;
 }
 
