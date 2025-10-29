@@ -19,7 +19,9 @@ export function UserProvider({children}: ContextProviderProps){
 
 	useEffect(() => {
 		async function startData(){
+			setLoadingFinancialData(true);
 			await getInitialData();
+			setLoadingFinancialData(false);
 		}
 		startData();
 	}, []);
@@ -28,8 +30,6 @@ export function UserProvider({children}: ContextProviderProps){
 	async function getInitialData(){
 
 		try{
-
-			setLoadingFinancialData(true);
 
 			const [generalSummary, listCategories] = await Promise.all([
 				externalCalls.get("/user/generalSummary"),
@@ -53,8 +53,6 @@ export function UserProvider({children}: ContextProviderProps){
 			setCategory(categories);
 
 
-			setLoadingFinancialData(false);
-
 			return {
 				applications: finances.applications,
 				invoice: finances.invoice,
@@ -63,7 +61,6 @@ export function UserProvider({children}: ContextProviderProps){
 			};
 
 		}catch{
-			setLoadingFinancialData(false);
 			return "Houve um pequeno problema para carregar os dados, tente novamente mais tarde.";
 		}
 	};

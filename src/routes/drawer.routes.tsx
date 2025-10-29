@@ -35,7 +35,7 @@ export function DrawerNavigation(){
 				drawerInactiveTintColor: theme.colors.FONT_COLOR_PRIMARY,
 				
 				drawerLabelStyle: { 
-					fontSize: 20,
+					fontSize: 16,
 					marginLeft: 10
 				},
 

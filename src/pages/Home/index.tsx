@@ -1,6 +1,6 @@
 import { Container } from "./styles";
 import { useContext, useEffect, useState } from "react";
-import { ScrollView } from "react-native";
+import { RefreshControl, ScrollView } from "react-native";
 import { AuthContext } from "@/contexts/Auth.context";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import { DrawerParamList } from "@/@types/drawer.routes";
@@ -25,6 +25,7 @@ export function Home({navigation}: HomeScreenProps){
 	const userContext = useContext(UserContext);
 	const [showValues, setShowValues] = useState(true);
 	const [elevation, setElevation] = useState(false);
+	const [refreshPage, setRefreshPage] = useState(false);
 
 
 	useEffect(() => {
@@ -60,13 +61,17 @@ export function Home({navigation}: HomeScreenProps){
 				style={{flex: 1}}
 				horizontal={false}
 				showsVerticalScrollIndicator={false}
+				refreshControl={ <RefreshControl
+					refreshing={refreshPage}
+					onRefresh={ async () => {
+						setRefreshPage(true);
+						await userContext.getInitialData();
+						setRefreshPage(false);
+					}}
+				/> }
 				onScroll={(event) => {
 					const y = event.nativeEvent.contentOffset.y;
-					if (y > 95){
-						setElevation(true);
-					}else{
-						setElevation(false);
-					}
+					setElevation(y > 95 ? true : false);
 				}}
 			>
 				<Balance showValue={showValues} value={userContext?.applications?.value ?? 0} hideValue={setShowValues}/>
