@@ -1,6 +1,6 @@
 import { formatCurrency } from "@/services/formatCurrency";
 import { Container, Header, LabelValues, TextExpired, TextSpent, TextTitle, TextValue, Descriptions, Informations, TextDescription } from "./styles";
-import { Slider } from "./Slider/inde";
+import { Slider } from "../../../components/Slider/inde";
 import { View } from "react-native";
 import { DisplayMoreDetails } from "@/components/DisplayMoreDatails";
 import { Invoice } from "@/@types/user.context";

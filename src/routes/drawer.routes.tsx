@@ -12,6 +12,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 // components
 import { Header } from "@/components/Header";
 import { AddPurchase } from "@/pages/AddPurchase";
+import { InvoiceDetails } from "@/pages/InvoiceDetails";
 
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -51,19 +52,25 @@ export function DrawerNavigation(){
 			<Drawer.Screen name="Home" component={Home} options={{
 				headerShown: false,
 				drawerIcon: ({color}) => (
-					<Octicons name="home" size={25} color={color} />
+					<Octicons name="home" size={20} color={color} />
 				)
 			}}/>
 			<Drawer.Screen name="Movements" component={Movements} options={{
 				title: "Movimentos",
 				drawerIcon: ({color}) => (
-					<FontAwesome6 name="arrow-right-arrow-left" size={25} color={color} />
+					<FontAwesome6 name="arrow-right-arrow-left" size={20} color={color} />
+				)
+			}}/>
+			<Drawer.Screen name="InvoiceDetails" component={InvoiceDetails} options={{
+				title: "Detalhes da fatura",
+				drawerIcon: ({color}) => (
+					<Octicons name="graph" size={20} color={color} />
 				)
 			}}/>
 			<Drawer.Screen name="AddPurchase" component={AddPurchase} options={{
 				title: "Adicionar compra",
 				drawerIcon: ({color}) => (
-					<MaterialIcons name="add-shopping-cart" size={25} color={color} />
+					<MaterialIcons name="add-shopping-cart" size={20} color={color} />
 				)
 			}}/>
 		</Drawer.Navigator>
