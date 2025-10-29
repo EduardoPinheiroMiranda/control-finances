@@ -12,6 +12,8 @@ export default {
 		FONT_COLOR_THIRD: "#4F6780",
 
 		INPUT_BORDER: "#D4D4D4",
+		PLACEHOLDER: "#B9B9B9",
+		WHITE: "#FFFFFF",
 
 		ALERT: "#FF4D4D",
 	}

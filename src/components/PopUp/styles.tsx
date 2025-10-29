@@ -60,11 +60,13 @@ export const Message = styled.View`
     display: flex;
     justify-content: center;
     align-items: center;
+
 `;
 
 export const TextMessage = styled(CustomText)`
     font-size: 16px;
     color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
+    text-align: center;
 `;
 
 export const ButtonSection = styled.View`

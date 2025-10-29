@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, TextInput, Text } from "./styles";
 import { formatCurrency } from "@/services/formatCurrency";
 
@@ -7,10 +7,10 @@ interface PropsTypes{
 	label: string;
 	placeholder?: string;
 	keyboardType: string;
-	value: string;
+	value: string | number;
 	coin?: boolean;
 	int?: boolean;
-	callback:  React.Dispatch<React.SetStateAction<string>>;
+	callback: (value: any) => void;
 	style?: object;
 	multiline?: boolean;
 }
@@ -18,30 +18,36 @@ interface PropsTypes{
 
 export function Input(props: PropsTypes){
 
+	const [MaskedValue, setMaskedValue] = useState("");
+
+
+	useEffect(() => {
+
+		if(props.coin && typeof props.value === "number"){
+			setMaskedValue(formatCurrency(props.value));
+			return;
+		}
+
+		setMaskedValue(String(props.value));
+		
+	}, [props.value]);
+
+
 	function handlerValue(value: string){
 
 		if(props.keyboardType === "numeric"){
+
 			const onlyNumbers = value.replace(/\D/g, "");
 			const number = !props.int? (parseFloat(onlyNumbers) / 100) : Number(onlyNumbers);
 			
+			setMaskedValue(props.coin ? formatCurrency(number) : String(number));
+			props.callback(number);
 
-			if(!value){
-				props.callback(props.coin ? formatCurrency(0) : "0");
-				return;
-			}
-
-
-			if(props.coin){
-				props.callback(formatCurrency(number));
-				return;
-			}
-
-
-			props.callback(String(number));
 			return;
 		}
 
 		props.callback(value);
+		setMaskedValue(value);
 		return;
 	}
 	
@@ -51,7 +57,7 @@ export function Input(props: PropsTypes){
 			<TextInput
 				placeholder={props.placeholder ?? ""}
 				keyboardType={props.keyboardType}
-				value={props.value}
+				value={MaskedValue}
 				onChangeText={(value: string) => handlerValue(value)}
 				multiline={props.multiline}
 				numberOfLines={props.multiline? 10 : 1}

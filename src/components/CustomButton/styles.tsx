@@ -4,16 +4,18 @@ import { DefaultTheme } from "styled-components";
 
 
 type ThemeTypes = {
-    theme: DefaultTheme
+    theme: DefaultTheme;
+    alert?: boolean;
+    width?: number;
 }
 
 
 export const Button = styled.TouchableOpacity`
 
-    background-color: ${({theme}: ThemeTypes) => theme.colors.SECONDARY};
+    background-color: ${({theme, alert}: ThemeTypes) => !alert ? theme.colors.SECONDARY : theme.colors.ALERT};
     
     height: 60px;
-    width: 300px;
+    width: ${({width}: ThemeTypes) => width ? `${width}px` : "300px"};
 
     border-radius: 10px;
 

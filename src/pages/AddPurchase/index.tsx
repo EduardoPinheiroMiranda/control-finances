@@ -1,12 +1,19 @@
 import { Input } from "@/components/Input";
-import { ButtonSection, Container, Form, PaymentSection, PriceSection} from "./styles";
+import { ButtonSection, Container, Form, PaymentSection, Placeholder, PriceSection, SelectDate, Text, TextInput} from "./styles";
 import { useContext, useEffect, useState } from "react";
-import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
+import { Keyboard, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import { UserContext } from "@/contexts/user.context";
+import axios from "axios";
+import { externalCalls } from "@/services/externalCalls";
+import { format } from "date-fns";
 
 // components
 import { OptionSelector } from "@/components/OptionSelector";
 import { CustumButton } from "@/components/CustomButton";
+import { TouchableOpacity } from "react-native";
+import { CalendarModule } from "@/components/Calendar";
+import { AlertDefault, PopUp } from "@/components/PopUp";
+import { Spinner } from "@/components/Spinner";
 
 
 export function AddPurchase(){
@@ -15,15 +22,20 @@ export function AddPurchase(){
 	if (!userContext?.cards || !userContext?.category) return;
 
 	const [name, setName] = useState("");
-	const [typeInvoice, setTypesInvoice] = useState("FIXED_EXPENSE");
+	const [typeInvoice, setTypesInvoice] = useState("EXTRA_EXPENSE");
 	const [paymentMethod, setPaymentMethod] = useState("CARD");
-	const [value, setValue] = useState("");
-	const [totalInstallments, setTotalInstallments] = useState("1");
+	const [value, setValue] = useState(0);
+	const [totalInstallments, setTotalInstallments] = useState(1);
 	const [description, setDescription] = useState("");
-	const [dueDay, setDueDay] = useState("");
+	const [dueDay, setDueDay] = useState(0);
 	const [categoryId, setCategoryId] = useState("");
 	const [cardId, setCardId] = useState("");
-	const [purchaseDate, setPurchaseDate] = useState();
+	const [purchaseDate, setPurchaseDate] = useState("");
+
+	const [openCalendar, setOpenCalendar] = useState(false);
+	const [openPopUp, setOpenPopUp] = useState(false);
+	const [popUp, setPopUp] = useState(AlertDefault);
+	const [loading, setLoading] = useState(false);
 
 
 	const optionsInvoices = [
@@ -45,11 +57,86 @@ export function AddPurchase(){
 		return {label: category.name, value: category.id};
 	});
 
+
 	useEffect(() => {
 		setCardId(optionsCard[0].value);
 		setCategoryId(optionsCategories[0].value);
 	}, []);
+
+
+	function resetForm(){
+		setName("");
+		setTypesInvoice("EXTRA_EXPENSE");
+		setPaymentMethod("CARD");
+		setValue(0);
+		setTotalInstallments(1);
+		setDescription("");
+		setDueDay(0);
+		setCategoryId(optionsCategories[0].value);
+		setCardId(optionsCard[0].value);
+		setPurchaseDate("");
+		setOpenPopUp(false);
+		return;
+	}
+
+
+	function constructionPopUp(params: {alert?: boolean, title?: string, msg: string}){
+
+		setPopUp({
+			alert: params.alert ?? true,
+			title: params.title ?? "Atenção",
+			message: params.msg,
+			buttons: [{ title: "Fechar", action: () => setOpenPopUp(false) }]
+		});
+		setOpenPopUp(true);
+
+		return;
+	}
 	
+
+	async function handlerForm(){
+
+		Keyboard.dismiss();
+
+		if(!name) return constructionPopUp({msg: "Você deve colocar um nome para esta compra."});
+		if(!value) return constructionPopUp({msg: "O valor da compra não pode ser zero."});
+		if(totalInstallments === 0) return constructionPopUp({msg: "Não é possível zerar a quantidade de parcelas, o mínimo sempre será 1."});
+		if(paymentMethod !== "CARD" && dueDay < 1 || dueDay > 31) return constructionPopUp({msg: "Verifique o valor da data de pagamento e coloque um dia válido."});
+			
+
+		const constructionBody = {
+			name,
+			typeInvoice,
+			paymentMethod,
+			value: value,
+			totalInstallments: totalInstallments,
+			description: !description ? null : description,
+			dueDay: !dueDay ? null : dueDay,
+			categoryId: categoryId,
+			cardId: paymentMethod !== "CARD" ? null : cardId,
+			purchaseDate: !purchaseDate ? null : purchaseDate
+		};
+
+		
+		try{
+
+			setLoading(true);
+			const request = await externalCalls.post("/shopping/registerShopping", constructionBody);
+			const response = request.data;
+			setLoading(false);
+
+			resetForm();
+			constructionPopUp({alert: false, title: "Sucesso", msg: response.msg});
+			
+			return;
+
+		}catch(err){
+			if(axios.isAxiosError(err)) constructionPopUp({msg: err.response?.data.msg});
+			setLoading(false);
+			return;
+		}
+	}
+
 
 	return(
 		<Container>
@@ -93,20 +180,22 @@ export function AddPurchase(){
 									style={{flex: 1}}
 									label="Valor total da compra"
 									keyboardType="numeric"
-									placeholder="R$ 0,00"
 									value={value}
 									callback={setValue}
 									coin={true}
 								/>
 
-								<Input
-									style={{flex: 1}}
-									label="Quantidade de parcelas"
-									keyboardType="numeric"
-									value={totalInstallments}
-									callback={setTotalInstallments}
-									int={true}
-								/>
+								{typeInvoice === "EXTRA_EXPENSE" && (
+									<Input
+										style={{flex: 1}}
+										label="Quantidade de parcelas"
+										keyboardType="numeric"
+										value={totalInstallments}
+										callback={setTotalInstallments}
+										int={true}
+									/>
+								)}
+								
 							</PriceSection>
 
 							{paymentMethod === "CARD" ?
@@ -120,8 +209,9 @@ export function AddPurchase(){
 								<Input
 									label="Informe o dia em que deve pagar esta conta"
 									keyboardType="numeric"
+									placeholder="Ex.: 10"
 									callback={setDueDay}
-									value={dueDay}
+									value={dueDay === 0 ? "" : dueDay}
 									int={true}
 								/>
 							}
@@ -136,6 +226,17 @@ export function AddPurchase(){
 							options={optionsCategories}
 						/>
 
+						<SelectDate>
+							<Text>Informe quando a compra foi feita - (opcional)</Text>
+							<TouchableOpacity activeOpacity={1} onPress={() => setOpenCalendar(true)}>
+								<TextInput>
+									<Placeholder date={purchaseDate}>
+										{!purchaseDate ? "01/01/2025" : format(purchaseDate, "dd/MM/yyyy")}
+									</Placeholder>
+								</TextInput>
+							</TouchableOpacity>
+						</SelectDate>
+
 						<Input
 							label="Adicione uma descrição - (opcional)"
 							keyboardType="text"
@@ -145,10 +246,17 @@ export function AddPurchase(){
 						/>
 
 						<ButtonSection>
-							<CustumButton title="Salvar compra" action={() => {}}/>
+							<CustumButton title="Salvar compra" action={() => handlerForm()}/>
 						</ButtonSection>
 					</Form>
 				</ScrollView>
+				<CalendarModule
+					visible={openCalendar}
+					callback={setPurchaseDate}
+					closeCalendar={setOpenCalendar}
+				/>
+				<PopUp visible={openPopUp} data={popUp}/>
+				<Spinner visible={loading}/>
 			</KeyboardAvoidingView>
 		</Container>
 	);

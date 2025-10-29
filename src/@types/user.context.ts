@@ -12,7 +12,7 @@ export interface UserContextType {
         invoice: Invoice;
         cards: Card;
         movements: Movement
-    } | string>
+    } | string>;
 };
 
 export interface Application {
@@ -26,9 +26,9 @@ export interface Application {
         colorFont: string;
         colorApplication: string;
         icon: string;
-        createdAt: string
-        updatedAt: string
-        userId: string
+        createdAt: string;
+        updatedAt: string;
+        userId: string;
     }[]
 };
 
@@ -64,7 +64,7 @@ export interface Invoice {
         fixedExpense: Installment[];
         extraExpense: Installment[];
     }
-    percentageSpent: number
+    percentageSpent: number;
 };
 
 export interface Card {
@@ -89,12 +89,12 @@ export interface Movement {
     createdAt: string;
     userId: string;
     shoppingId: string;
-    extractId: string
+    extractId: string;
 }
 
 export interface Category {
-    name: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string
+    name: string;
+    id: string;
+    createdAt: string;
+    updatedAt: string;
 }

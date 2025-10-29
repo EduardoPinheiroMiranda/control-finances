@@ -17,10 +17,13 @@ export const Text = styled(CustomText)`
     font-size: 14px;
 `;
 
-export const TextInput = styled.TextInput`
+export const TextInput = styled.TextInput.attrs(({theme}: ThemeTypes) => ({
+	placeholderTextColor: theme.colors.PLACEHOLDER
+}))`
     min-height: 60px;
 
     color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
+    font-size: 16px;
 
     border: 1px solid ${({theme}: ThemeTypes) => theme.colors.INPUT_BORDER};
     border-radius: 10px;

@@ -29,7 +29,7 @@ export const TextButton = styled(CustomText)`
     color: ${({theme}: ThemeTypes) => theme.colors.SECONDARY};
 `;
 
-export const IconArrowRight = styled(FontAwesome6).attrs(({theme} : ThemeTypes) => ({
+export const IconArrowRight = styled(FontAwesome6).attrs(({theme}: ThemeTypes) => ({
 	name: "arrow-right-long",
 	color: theme.colors.SECONDARY,
 	size: 20
