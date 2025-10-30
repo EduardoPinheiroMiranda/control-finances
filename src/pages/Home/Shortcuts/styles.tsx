@@ -25,7 +25,7 @@ export const Container = styled.View`
     border-bottom-width: 2px;
     border-color: ${({theme}: ThemeTypes) => theme.colors.BACKGROUND_SECONDARY};
 
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     z-index: 1;
 `;
 

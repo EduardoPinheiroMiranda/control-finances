@@ -9,10 +9,9 @@ interface ThemeTypes {
 
 
 export const Container = styled.View`
-    background-color: ${({theme}: ThemeTypes) => theme.colors.PRIMARY};
     padding: 20px;
-    border-radius: 20px;
-    margin-bottom: 20px;
+    border-bottom-width: 2px;
+    border-bottom-color: ${({theme}: ThemeTypes) => theme.colors.BACKGROUND_SECONDARY};
 `;
 
 export const Header = styled.View`
@@ -20,7 +19,6 @@ export const Header = styled.View`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
 `;
 
 export const TextTitle = styled(CustomText)`
@@ -33,47 +31,13 @@ export const TextExpired = styled(CustomText)`
     color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
 `;
 
-
-
-export const SectionValues = styled.View``;
-
-export const LabelValues = styled.View`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-`;
-
 export const TextValue = styled(CustomText)`
     font-size: 24px;
     color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
 `;
 
-export const TextSpent = styled(CustomText)`
-    font-size: 32px;
-    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
-`;
-
-export const Informations = styled.View`
+export const Section = styled.View`
+    margin-top: 30px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    margin: 30px 0;
+    gap: 10px;
 `;
-
-export const Descriptions = styled.View`
-    width: 100px;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-export const TextDescription = styled(CustomText)`
-    font-size: 16px;
-    color: ${({theme}: ThemeTypes) => theme.colors.FONT_COLOR_PRIMARY};
-`;
-

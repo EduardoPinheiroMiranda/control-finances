@@ -1,10 +1,10 @@
 import { formatCurrency } from "@/services/formatCurrency";
-import { Container, Header, LabelValues, TextExpired, TextSpent, TextTitle, TextValue, Descriptions, Informations, TextDescription } from "./styles";
+import { Container, Header, Section, TextExpired, TextTitle, TextValue } from "./styles";
 import { Slider } from "../../../components/Slider/inde";
-import { View } from "react-native";
 import { DisplayMoreDetails } from "@/components/DisplayMoreDatails";
 import { Invoice } from "@/@types/user.context";
 import { formatDate } from "date-fns";
+import { View } from "react-native";
 
 
 interface PropsTypes {
@@ -15,10 +15,7 @@ interface PropsTypes {
 export function InvoiceDatails(props: PropsTypes){
 
 	const percentageSpent = props.invoice.percentageSpent;
-	const progress = percentageSpent > 100 ? 100 : percentageSpent;
 	const amount = props.invoice.amount;
-	const available = props.invoice.available;
-	const limit = props.invoice.limit;
 
 
 	return(
@@ -28,39 +25,13 @@ export function InvoiceDatails(props: PropsTypes){
 				<TextExpired>Vencimento - {formatDate(new Date(props.invoice.dueDate), "dd/MM")}</TextExpired>
 			</Header>
 
-			<View>
-				<LabelValues>
+			<Section>
+				<Slider spent={percentageSpent}/>
+				<View style={{gap: 20}}>
 					<TextValue>{props.showValue ? formatCurrency(amount) : "R$ ****"}</TextValue>
-					<TextSpent>{percentageSpent}%</TextSpent>
-				</LabelValues>
-
-				<Slider spent={progress}/>
-
-				<Informations>
-					<Descriptions>
-						<TextDescription>Disponivel</TextDescription>
-						<TextDescription>
-							{props.showValue ? formatCurrency(available) : "R$ ****"}
-						</TextDescription>
-					</Descriptions>
-
-					<Descriptions>
-						<TextDescription>Utilizado</TextDescription>
-						<TextDescription>
-							{props.showValue ? formatCurrency(amount) : "R$ ****"}
-						</TextDescription>
-					</Descriptions>
-
-					<Descriptions>
-						<TextDescription>Limite</TextDescription>
-						<TextDescription>
-							{props.showValue ? formatCurrency(limit) : "R$ ****"}
-						</TextDescription>
-					</Descriptions>
-				</Informations>
-
-				<DisplayMoreDetails page="InvoiceDetails"/>
-			</View>
+					<DisplayMoreDetails page="InvoiceDetails"/>
+				</View>
+			</Section>
 		</Container>
 	);
 }

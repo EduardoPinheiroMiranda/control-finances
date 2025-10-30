@@ -1,4 +1,4 @@
-import { Container, Marked, Progress } from "./styles";
+import { Background, Container, Marked, Progress, Text } from "./styles";
 
 
 interface PropsTypes {
@@ -8,12 +8,17 @@ interface PropsTypes {
 
 export function Slider(props: PropsTypes){
 
+	const progress = props.spent > 100 ? 100 : props.spent;
+
     
 	return(
 		<Container>
-			<Progress width={props.spent}>
-				<Marked/>
-			</Progress>
+			<Background>
+				<Progress width={progress}>
+					<Marked/>
+				</Progress>
+			</Background>
+			<Text>{props.spent}%</Text>
 		</Container>
 	);
 }
