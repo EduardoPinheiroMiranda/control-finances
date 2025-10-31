@@ -32,7 +32,7 @@ export interface Application {
     }[]
 };
 
-interface Installment {
+export interface Installment {
     installmentId: string;
     installmentNumber: number;
     installmentValue: number;

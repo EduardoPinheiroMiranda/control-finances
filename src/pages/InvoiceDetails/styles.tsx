@@ -10,12 +10,12 @@ interface ThemeTypes {
 export const Container = styled.View`
     flex: 1;
     background-color: ${({theme}: ThemeTypes) => theme.colors.BACKGROUND_PRIMARY};
-    padding: 20px;
 `;
 
 export const DescriptionInvoice =  styled.View`
     display: flex;
     gap: 30px;
+    padding: 20px;
 `;
 
 export const Header = styled.View`

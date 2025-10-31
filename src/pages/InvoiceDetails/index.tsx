@@ -8,6 +8,7 @@ import { formatCurrency } from "@/services/formatCurrency";
 import { Slider } from "@/components/Slider/inde";
 import { Subtitle } from "./Subtitle";
 import { formatDate } from "date-fns";
+import { ListInvoiceItem } from "@/components/ListInvoiceItem";
 
 
 
@@ -53,6 +54,11 @@ export function InvoiceDetails(){
 					<Subtitle data={expenseDetails}/>
 				</DescriptionInvoice>
 
+				<ListInvoiceItem
+					installments={userContext.invoice.installments}
+					totalExtraExpense={userContext.invoice.totalExtraExpense}
+					totalFixedExpense={userContext.invoice.totalFixedExpense}
+				/>
 			</ScrollView>
 		</Container>
 	);

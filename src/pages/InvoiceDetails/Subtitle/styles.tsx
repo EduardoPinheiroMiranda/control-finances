@@ -12,7 +12,7 @@ interface ThemeTypes {
 export const Container = styled.View`
     flex: 1;
     display: flex;
-    gap: 30px;
+    gap: 50px;
 `;
 
 export const SectionSubtitles = styled.View`

@@ -3,4 +3,5 @@ export type DrawerParamList = {
     Movements: undefined;
     AddPurchase: undefined;
     InvoiceDetails: undefined;
+    PayInvoice: undefined;
 }

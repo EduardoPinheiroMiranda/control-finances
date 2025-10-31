@@ -15,7 +15,8 @@ interface PropsTypes {
         type: string,
         value: number,
         createdAt: string,
-        installment: number
+        installment: number,
+		totalInstallment?: number
     }
 }
 
@@ -26,7 +27,7 @@ export function Movement(props: PropsTypes){
 	const purchased = format(parseISO(props.movement.createdAt), "dd/MM/yyyy");
     
 
-	function RenderIcon(typeMovement: string){
+	function renderIcon(typeMovement: string){
 		if(typeMovement === "CARD") return <Card/>;
 		if(typeMovement === "MONEY") return <Money/>;
 		if(typeMovement === "INVOICE") return <Invoice/>;
@@ -35,20 +36,31 @@ export function Movement(props: PropsTypes){
 		return;
 	}
 
+	function renderNumberInstallment(){
+
+		if(props.movement.type !== "DEPOSIT" && props.movement.type !== "WITHDRAW"){
+
+			if(props.movement.totalInstallment){
+				return <TextBottom>{props.movement.installment}/{props.movement.totalInstallment}</TextBottom>;
+			}
+
+			return <TextBottom>{props.movement.installment}x</TextBottom>;
+		}
+	}
+
 
 	return(
 		<Container>
-			{RenderIcon(props.movement.type)}
+			{renderIcon(props.movement.type)}
 			<Description>
 				<Section>
 					<TextTop>{props.movement.name}</TextTop>
 					<TextTop>{value}</TextTop>
 				</Section>
+				
 				<Section>
 					<TextBottom>{purchased}</TextBottom>
-					{props.movement.type !== "DEPOSIT" && props.movement.type !== "WITHDRAW" && (
-						<TextBottom>{props.movement.installment}x</TextBottom>
-					)}
+					{renderNumberInstallment()}
 				</Section>
 			</Description>
 		</Container>

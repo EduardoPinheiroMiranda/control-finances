@@ -2,17 +2,19 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DefaultTheme, useTheme } from "styled-components/native";
 import { getHeaderTitle } from "@react-navigation/elements";
 import { DrawerParamList } from "@/@types/drawer.routes";
-// pages
-import { Home } from "@/pages/Home";
-import { Movements } from "@/pages/Movements";
 // icons
 import Octicons from "@expo/vector-icons/Octicons";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 // components
 import { Header } from "@/components/Header";
+// pages
+import { Home } from "@/pages/Home";
+import { Movements } from "@/pages/Movements";
 import { AddPurchase } from "@/pages/AddPurchase";
 import { InvoiceDetails } from "@/pages/InvoiceDetails";
+import { PayInvoice } from "@/pages/PayInvoice";
 
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -65,6 +67,12 @@ export function DrawerNavigation(){
 				title: "Detalhes da fatura",
 				drawerIcon: ({color}) => (
 					<Octicons name="graph" size={20} color={color} />
+				)
+			}}/>
+			<Drawer.Screen name="PayInvoice" component={PayInvoice} options={{
+				title: "Pagar fatura",
+				drawerIcon: ({color}) => (
+					<MaterialCommunityIcons name="barcode-scan" size={20} color={color} />
 				)
 			}}/>
 			<Drawer.Screen name="AddPurchase" component={AddPurchase} options={{
