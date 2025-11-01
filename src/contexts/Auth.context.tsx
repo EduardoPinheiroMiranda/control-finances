@@ -31,7 +31,7 @@ export function AuthProvider({children}: ContextProviderProps){
 			setLoadingPage(true);
 			axios.defaults.headers["Authorization"] = `Bearer ${userToken}`;
 			const response = await externalCalls.GET("/user/getUserByToken");
-
+	
 
 			if(!response.success){
 				await AsyncStorage.removeItem("userToken");

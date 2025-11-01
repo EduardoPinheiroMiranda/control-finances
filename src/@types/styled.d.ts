@@ -20,8 +20,9 @@ declare module "styled-components" {
       INPUT_BORDER: string;
       PLACEHOLDER: string;
       WHITE: string;
-      
-      ALERT: string
+      CURRENT: string;
+      ALERT: string;
+      PAY: string;
     }
   }
 }

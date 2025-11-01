@@ -1,20 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "./styles";
-import { UserContext } from "@/contexts/user.context";
 import { ExternalCalls } from "@/services/externalCalls";
 import { AlertDefault, PopUp } from "@/components/PopUp";
 import { Spinner } from "@/components/Spinner";
 import { ScrollView } from "react-native";
+import { InvoiceSelector, Subtitles } from "@/components/InvoiceSelector";
+import { Invoice } from "@/@types/user.context";
 
 
 export function InvoiceSummary(){
 
-	const userContext = useContext(UserContext);
-	if(!userContext?.invoice) return;
-
-	const [subtitle, setSubtitle] = useState();
-	const [invoices, setInvocies] = useState();
-	const [selectedInvoice, setSelectedInvoice] = useState(userContext?.invoice);
+	const [subtitle, setSubtitle] = useState<Subtitles[] | undefined>();
+	const [invoices, setInvocies] = useState<Invoice[] | undefined>();
 
 	const [loading, setLoading] = useState(false);
 	const [openPopUp, setOpenPopUp] = useState(false);
@@ -43,7 +40,7 @@ export function InvoiceSummary(){
 
 		getData();
         
-	}, [userContext?.invoice]);
+	}, []);
 
 
 	function constructionPopUp(params: {alert?: boolean, title?: string, msg: string}){
@@ -73,6 +70,7 @@ export function InvoiceSummary(){
 				horizontal={false}
 				showsVerticalScrollIndicator={false}
 			>
+				<InvoiceSelector subtitles={subtitle} invoices={invoices}/>
 
 			</ScrollView>
 			<PopUp visible={openPopUp} data={popUp}/>
