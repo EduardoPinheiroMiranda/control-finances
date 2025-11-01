@@ -11,6 +11,6 @@ export const TextLabel = styled(CustomText)`
     color: ${({color}: {color: string}) => color};
 
     text-align: center;
-    width: 80px;
+    width: 85px;
     height: 20px;
 `;

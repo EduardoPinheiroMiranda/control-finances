@@ -11,13 +11,15 @@ interface ThemeTypes {
 export const Container = styled.View``;
 
 export const Section = styled.View`
-    margin: 20px;
     background-color: ${({color}: {color: string}) => color};
-    border-radius: 20px;
+
+    margin: 20px;
     padding: 20px;
 
     display: flex;
     gap: 20px;
+
+    border-radius: 20px;
 `;
 
 export const TextValue = styled(CustomText)`

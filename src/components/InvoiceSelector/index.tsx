@@ -1,10 +1,9 @@
 import { FlatList } from "react-native";
 import { Container, Description, Line, Section, TextDescription, TextValue } from "./styles";
 import { Label } from "./Label";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Invoice } from "@/@types/user.context";
 import { formatCurrency } from "@/services/formatCurrency";
-import { UserContext } from "@/contexts/user.context";
 import { DefaultTheme, useTheme } from "styled-components";
 
 
@@ -17,8 +16,10 @@ export interface Subtitles {
 
 
 interface PropsTypes {
-    subtitles?: Subtitles[],
-	invoices?: Invoice[],
+    subtitles?: Subtitles[];
+	invoices?: Invoice[];
+	invoice?: Invoice;
+	selectedInvoice: (index: number) => void
 }
 
 
@@ -27,10 +28,7 @@ export function InvoiceSelector(props: PropsTypes){
 	
 	const flatListRef = useRef<FlatList | null>(null);
 	const theme: DefaultTheme = useTheme();
-
-	const userContext = useContext(UserContext);
-	const [selectedInvocie, setSelectedInvoice] = useState(userContext?.invoice);
-	const [indicatorColor, setIndicatorColor] = useState("");
+	const [indicatorColor, setIndicatorColor] = useState(theme.colors.CURRENT);
 
 
 	useEffect(() => {
@@ -56,9 +54,9 @@ export function InvoiceSelector(props: PropsTypes){
 		});
 
 		if(props.invoices){
-			setSelectedInvoice(props.invoices[index]);
 			selectedIndicatorColor(props.invoices[index]);
-		}
+			props.selectedInvoice(index);
+		} 
 	}
     
 
@@ -76,28 +74,28 @@ export function InvoiceSelector(props: PropsTypes){
 				horizontal={true}
 				showsHorizontalScrollIndicator={false}
 				getItemLayout={(__, index) => ({
-					length: 100,
-					offset: 100 * index,
+					length: 105,
+					offset: 105 * index,
 					index: index
 				})}
 				style={{paddingVertical: 20, paddingHorizontal: 20}}
 			/>
 
 			<Section color={indicatorColor}>
-				<TextValue>{formatCurrency(Number(selectedInvocie?.amount))}</TextValue>
-				{selectedInvocie?.limit && (
+				<TextValue>{formatCurrency(Number(props.invoice?.amount))}</TextValue>
+				{props.invoice?.limit && (
 					<Description>
 						<Line>
 							<TextDescription>Limite:</TextDescription>
-							<TextDescription>{formatCurrency(selectedInvocie.limit)}</TextDescription>
+							<TextDescription>{formatCurrency(props.invoice.limit)}</TextDescription>
 						</Line>
 						<Line>
 							<TextDescription>Utilizado:</TextDescription>
-							<TextDescription>{formatCurrency(selectedInvocie.amount)}</TextDescription>
+							<TextDescription>{formatCurrency(props.invoice.amount)}</TextDescription>
 						</Line>
 						<Line>
 							<TextDescription>Disponível:</TextDescription>
-							<TextDescription>{formatCurrency(selectedInvocie.available)}</TextDescription>
+							<TextDescription>{formatCurrency(props.invoice.available)}</TextDescription>
 						</Line>
 					</Description>
 				)}
