@@ -15,6 +15,7 @@ import { Movements } from "@/pages/Movements";
 import { AddPurchase } from "@/pages/AddPurchase";
 import { InvoiceDetails } from "@/pages/InvoiceDetails";
 import { PayInvoice } from "@/pages/PayInvoice";
+import { InvoiceSummary } from "@/pages/InvoiceSummary";
 
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -73,6 +74,12 @@ export function DrawerNavigation(){
 				title: "Pagar fatura",
 				drawerIcon: ({color}) => (
 					<MaterialCommunityIcons name="barcode-scan" size={20} color={color} />
+				)
+			}}/>
+			<Drawer.Screen name="InvoiceSummary" component={InvoiceSummary} options={{
+				title: "Resumo de faturas",
+				drawerIcon: ({color}) => (
+					<MaterialCommunityIcons name="invoice-text-multiple-outline" size={20} color={color} />
 				)
 			}}/>
 			<Drawer.Screen name="AddPurchase" component={AddPurchase} options={{

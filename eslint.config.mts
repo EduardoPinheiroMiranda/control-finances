@@ -8,7 +8,11 @@ export default defineConfig([
 	{ 
 		files: ["**/*.{js,mjs,cjs,ts,tsx,mts,cts}"],
 		plugins: { js }, 
-		extends: ["js/recommended"], 
+		extends: [
+			"js/recommended",
+			"eslint:recommended",
+    		"plugin:@typescript-eslint/recommended",
+		], 
 		languageOptions: { globals: globals.node },
 		rules: {
 	  	"quotes": ["error", "double", { "avoidEscape": true }],

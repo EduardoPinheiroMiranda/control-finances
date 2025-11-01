@@ -1,8 +1,8 @@
 import { AuthContextType, ContextProviderProps, LoginData, SingUpData } from "@/@types/auth.context";
-import { externalCalls } from "@/services/externalCalls";
-import axios from "axios";
+import { ExternalCalls } from "@/services/externalCalls";
 import { createContext, useEffect, useState } from "react";
 import  AsyncStorage from "@react-native-async-storage/async-storage";
+import { axios, registerUnauthorizedHandler } from "@/libs/axios";
 
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -15,97 +15,68 @@ export function AuthProvider({children}: ContextProviderProps){
 	const [loggedInUser, setLoggedInUser] = useState(false);
 	const [loadingPage, setLoadingPage] = useState(false);
 
+	const externalCalls = new ExternalCalls();
+	
 
 	useEffect(() => {
 
 		async function getData(){
 
-			try{
-
-				const getToken = await AsyncStorage.getItem("userToken");
-				if(!getToken){
-					return;
-				}
+			const userToken = await AsyncStorage.getItem("userToken");
+			if(!userToken){
+				return;
+			}
 
 				
-				setLoadingPage(true);
-				externalCalls.defaults.headers["Authorization"] = `Bearer ${getToken}`;
-				const response = await externalCalls.get("/user/getUserByToken");
-				setUser({
-					id: response.data.id,
-					name: response.data.name,
-					email: response.data.email,
-					avatar: response.data.avatar
-				});
-				setLoggedInUser(true);
-				setLoadingPage(false);
+			setLoadingPage(true);
+			axios.defaults.headers["Authorization"] = `Bearer ${userToken}`;
+			const response = await externalCalls.GET("/user/getUserByToken");
 
-			}catch(err){
-				console.log(err);
-				setLoadingPage(false);
+
+			if(!response.success){
+				await AsyncStorage.removeItem("userToken");
 				setUser(userDefault);
 				setLoggedInUser(false);
-				await AsyncStorage.removeItem("userToken");
+				return;
 			}
+
+
+			setUser({
+				id: response.data.id,
+				name: response.data.name,
+				email: response.data.email,
+				avatar: response.data.avatar
+			});
+			setLoggedInUser(true);
+			setLoadingPage(false);
+			return;
 		}
 
 		getData();
-
+		registerUnauthorizedHandler(singOut);
 	}, []);
 
 
 	async function singIn(body: LoginData): Promise<string | void>{
 
-		try{
+		const response = await externalCalls.POST("/user/authenticate", body);
 
-			const response = await externalCalls.post("/user/authenticate", body);
-			setUser(response.data);
-			setLoggedInUser(true);
-			await AsyncStorage.setItem("userToken", response.data.token);
-			externalCalls.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
-
-		}catch(err){
-			
-			if(axios.isAxiosError(err)){
-				if(err.status === 400){
-					return err.response?.data.msg;
-				}
-			}
-			
-			return "Houve um pequeno problema, por favor tente novamente.";
+		if(!response.success){
+			return response.msg;
 		}
+
+
+		setUser(response.data);
+		setLoggedInUser(true);
+		await AsyncStorage.setItem("userToken", response.data.token);
+		axios.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
 
 		return;
 	}
 
 
 	async function singUp(body: SingUpData){
-
-		try{
-			
-			const response = await externalCalls.post("/user/userRegister", body);
-			return {
-				statusCode: response.status,
-				msg: response.data.msg
-			};
-
-		}catch(err){
-			console.log(err);
-			if(axios.isAxiosError(err)){
-				if(err.status === 400){
-					return {
-						statusCode: 400,
-						msg: err.response?.data.msg
-					};
-					
-				}
-			}
-			
-			return {
-				statusCode: 500,
-				msg: "Houve um pequeno problema, por favor tente novamente."
-			};
-		}
+		return await externalCalls.POST("/user/userRegister", body);
 	}
 
 

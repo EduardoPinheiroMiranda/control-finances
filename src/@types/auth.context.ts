@@ -26,7 +26,7 @@ export interface AuthContextType {
     avatar: string | null;
   };
   singIn: (body: LoginData) => Promise<string | void>;
-  singUp: (body: SingUpData) => Promise<{statusCode: number, msg: string}>;
+  singUp: (body: SingUpData) => Promise<{success: boolean, data: any, msg: string}>;
   singOut: () => void;
 }
 

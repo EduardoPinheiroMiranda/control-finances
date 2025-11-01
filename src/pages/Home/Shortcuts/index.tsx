@@ -4,12 +4,12 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { DrawerParamList } from "@/@types/drawer.routes";
 
 
-type NavigationProp = DrawerNavigationProp<DrawerParamList>;
+type NavigationProps = DrawerNavigationProp<DrawerParamList>;
 
 
 export function Shortcuts(){
 
-	const navigation = useNavigation<NavigationProp>();
+	const navigation = useNavigation<NavigationProps>();
 
 
 	function handlerNavigation(page: keyof DrawerParamList){

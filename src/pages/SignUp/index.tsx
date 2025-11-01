@@ -22,9 +22,20 @@ export function SignUp(){
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [alertData, setAlertData] = useState(AlertDefault);
+	const [popUp, setPopUp] = useState(AlertDefault);
 	const [openPopUp, setOpenPopUp] = useState(false);
 	const [loading, setLoading] = useState(false);
+
+
+	function constructionPopUp(params: {alert?: boolean, title?: string, msg: string}){
+		setPopUp({
+			alert: params.alert ?? true,
+			title: params.title ?? "Atenção",
+			message: params.msg,
+			buttons: [{ title: "Fechar", action: () => setOpenPopUp(false) }]
+		});
+		setOpenPopUp(true);
+	}
 
 
 	function resetPage(){
@@ -36,55 +47,25 @@ export function SignUp(){
 		navigation.goBack();
 	}
 
+
 	async function handlerForms(){
 
-		if(!name || !email || !password || !confirmPassword){
-			setOpenPopUp(true);
-			setAlertData({
-				alert: true,
-				title: "Atenção",
-				message: "Preencha todos os campos.",
-				buttons: [{
-					title: "Fechar",
-					action: () => setOpenPopUp(false)
-				}]
-			});
-			return;
-		}
-
-		if(password !== confirmPassword){
-			setOpenPopUp(true);
-			setAlertData({
-				alert: true,
-				title: "Atenção",
-				message: "As senhas devem ser iguais.",
-				buttons: [{
-					title: "Fechar",
-					action: () => setOpenPopUp(false)
-				}]
-			});
-			return;
-		}
-
+		if(!name || !email || !password || !confirmPassword) return constructionPopUp({msg: "Preencha todos os campos."});
+		if(password !== confirmPassword) return constructionPopUp({msg: "As senhas devem ser iguais."});
+		
 
 		setLoading(true);
 		const response = await authContext?.singUp({name, email, password});
 		setLoading(false);
 
 
-		if(response){
-			setOpenPopUp(true);
-			setAlertData({
-				alert: response.statusCode === 201 ? false : true,
-				title: response.statusCode === 201 ? "Sucesso" : "Atenção",
-				message: response.msg,
-				buttons: [{
-					title: "Fechar",
-					action: () => resetPage()
-				}]
-			});
-			return;
-		}
+		if(response) return constructionPopUp({
+			alert: response.success,
+			msg: response.msg,
+			title: response.success ? "Sucesso" : "Atenção",
+		})
+			
+		return;
 	}
 
 
@@ -153,7 +134,7 @@ export function SignUp(){
 					</ButtonSection>
 				</ScrollView>
 			</KeyboardAvoidingView>
-			<PopUp visible={openPopUp} data={alertData}/>
+			<PopUp visible={openPopUp} data={popUp}/>
 			<Spinner visible={loading}/>
 		</Container>
 	);

@@ -3,10 +3,8 @@ import { ButtonSection, Container, Form, PaymentSection, Placeholder, PriceSecti
 import { useContext, useEffect, useState } from "react";
 import { Keyboard, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import { UserContext } from "@/contexts/user.context";
-import axios from "axios";
-import { externalCalls } from "@/services/externalCalls";
+import { ExternalCalls } from "@/services/externalCalls";
 import { format } from "date-fns";
-import { AuthContext } from "@/contexts/Auth.context";
 
 // components
 import { OptionSelector } from "@/components/OptionSelector";
@@ -20,7 +18,6 @@ import { Spinner } from "@/components/Spinner";
 export function AddPurchase(){
 
 	const userContext = useContext(UserContext);
-	const authContext = useContext(AuthContext);
 	if (!userContext?.cards || !userContext?.category) return;
 
 	const [name, setName] = useState("");
@@ -115,32 +112,22 @@ export function AddPurchase(){
 			purchaseDate: !purchaseDate ? null : purchaseDate
 		};
 
+
+		setLoading(true);
+		const externalCalls = new ExternalCalls();
+		const response = await externalCalls.POST("/shopping/registerShopping", constructionBody);
 		
-		try{
 
-			setLoading(true);
-			const request = await externalCalls.post("/shopping/registerShopping", constructionBody);
-			const response = request.data;
-			await userContext?.getInitialData();
-			setLoading(false);
-
-			resetForm();
-			constructionPopUp({alert: false, title: "Sucesso", msg: response.msg});
-			
-			
-			return;
-
-		}catch(err){
-
-			setLoading(false);
-
-			if(axios.isAxiosError(err)){
-				if(err.status === 401) return authContext?.singOut();
-				if(err.status === 500) return constructionPopUp({msg: "Houve um pequeno problema, por favor tente novamente."});;
-				constructionPopUp({msg: err.response?.data.msg});
-				return;
-			}
+		if(!response.success){
+			return constructionPopUp(response.msg);
 		}
+
+		
+		await userContext?.getInitialData();
+		setLoading(false);
+		resetForm();
+		constructionPopUp({alert: false, title: "Sucesso", msg: response.data.msg});
+		return;
 	}
 
 

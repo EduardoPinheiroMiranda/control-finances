@@ -14,6 +14,7 @@ import { Shortcuts } from "./Shortcuts";
 import { InvoiceDatails } from "./InvoiceDatails";
 import { ListCards } from "./ListCards";
 import { ListMovements } from "./ListMovements";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 type HomeScreenProps = DrawerScreenProps<DrawerParamList, "Home">;
@@ -23,7 +24,7 @@ export function Home({navigation}: HomeScreenProps){
 
 	const authContext = useContext(AuthContext);
 	const userContext = useContext(UserContext);
-	const [showValues, setShowValues] = useState(true);
+	const [showValues, setShowValues] = useState(false);
 	const [elevation, setElevation] = useState(false);
 	const [refreshPage, setRefreshPage] = useState(false);
 
@@ -33,14 +34,25 @@ export function Home({navigation}: HomeScreenProps){
 			if(!userContext?.applications || !userContext.invoice){
 				await userContext?.getInitialData();
 			}
+
+			const hidderValue = await AsyncStorage.getItem("showValue");
+			if(hidderValue){
+				setShowValues(hidderValue === "true" ? true : false);
+			}
 		}
 		startData();
 	}, []);
 
 
+	async function handlerHidderValue(){
+		setShowValues(!showValues);
+		await AsyncStorage.setItem("showValue", String(!showValues))
+	}
+
+
 	if (!userContext?.invoice || !userContext.cards || !userContext.movements) return;
 
-
+	
 	if(userContext?.loadingFinancialData){
 		return(
 			<Container>
@@ -74,7 +86,7 @@ export function Home({navigation}: HomeScreenProps){
 					setElevation(y > 95 ? true : false);
 				}}
 			>
-				<Balance showValue={showValues} value={userContext?.applications?.value ?? 0} hideValue={setShowValues}/>
+				<Balance showValue={showValues} value={userContext?.applications?.value ?? 0} hideValue={handlerHidderValue}/>
 				<Shortcuts/>
 				<InvoiceDatails invoice={userContext.invoice} showValue={showValues}/>
 				<ListCards cards={userContext.cards}/>

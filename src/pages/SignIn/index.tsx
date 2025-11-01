@@ -23,45 +23,33 @@ export function SignIn({navigation}: SignInScreenProps){
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [openPopUp, setOpenPopUp] = useState(false);
-	const [alertData, setAlertData] = useState(AlertDefault);
+	const [popUp, setPopUp] = useState(AlertDefault);
 	const [loading, setLoading] = useState(false);
+
+
+	function constructionPopUp(params: {alert?: boolean, title?: string, msg: string}){
+		setPopUp({
+			alert: params.alert ?? true,
+			title: params.title ?? "Atenção",
+			message: params.msg,
+			buttons: [{ title: "Fechar", action: () => setOpenPopUp(false) }]
+		});
+		setOpenPopUp(true);
+	}
 
 
 	async function handlerForm(){
 
-		if(!email || !password){
-			setOpenPopUp(true);
-			setAlertData({
-				alert: false,
-				title: "Atenção",
-				message: "Preencha todos os campos.",
-				buttons: [{
-					title: "Fechar",
-					action: () => setOpenPopUp(false)
-				}]
-			});
-			return;
-		}
-
+		if(!email || !password) return constructionPopUp({msg: "Preencha todos os campos."})
+		
 
 		setLoading(true);
 		const response = await authContext?.singIn({email, password});
 		setLoading(false);
 
 
-		if(response){
-			setOpenPopUp(true);
-			setAlertData({
-				alert: true,
-				title: "Atenção",
-				message: response,
-				buttons: [{
-					title: "Fechar",
-					action: () => setOpenPopUp(false)
-				}]
-			});
-		}
-
+		if(response) return constructionPopUp({msg: response});
+			
 		return;
 	}
 
@@ -116,7 +104,7 @@ export function SignIn({navigation}: SignInScreenProps){
 					</ButtonSection>
 				</ScrollView>
 			</KeyboardAvoidingView>
-			<PopUp visible={openPopUp} data={alertData}/>
+			<PopUp visible={openPopUp} data={popUp}/>
 			<Spinner visible={loading}/>
 		</Container>
 	);

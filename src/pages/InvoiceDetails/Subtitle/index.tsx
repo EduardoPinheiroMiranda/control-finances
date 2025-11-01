@@ -1,6 +1,9 @@
 import { formatCurrency } from "@/services/formatCurrency";
 import { Buttles, Container, LI, TextArea, UL, Text, SectionButton, SectionSubtitles } from "./styles";
 import { CustumButton } from "@/components/CustomButton";
+import { useNavigation } from "@react-navigation/native";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { DrawerParamList } from "@/@types/drawer.routes";
 
 
 interface PropsTypes {
@@ -8,7 +11,13 @@ interface PropsTypes {
 }
 
 
+type NAvigationProps = DrawerNavigationProp<DrawerParamList>;
+
+
 export function Subtitle(props: PropsTypes){
+
+	const navigation = useNavigation<NAvigationProps>();
+
 
 	const renderList = props.data.map((list, index) => {
 		return(
@@ -37,7 +46,7 @@ export function Subtitle(props: PropsTypes){
 			</SectionSubtitles>
 			
 			<SectionButton>
-				<CustumButton title="Pagar fatura" action={() => {}}/>
+				<CustumButton title="Pagar fatura" action={() => navigation.navigate("PayInvoice")}/>
 			</SectionButton>
 		</Container>
 	);

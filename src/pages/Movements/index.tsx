@@ -1,20 +1,16 @@
-import { Container, Spiner } from "./styles";
+import { Container, Spinner } from "./styles";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/contexts/user.context";
 
 // components
 import { Movement } from "@/components/Movement";
 import { FlatList } from "react-native";
-import { externalCalls } from "@/services/externalCalls";
-import axios from "axios";
-import { AuthContext } from "@/contexts/Auth.context";
+import { ExternalCalls } from "@/services/externalCalls";
 
 
 export function Movements(){
 
 	const userContext = useContext(UserContext);
-	const authContext = useContext(AuthContext);
-
 	const [movements, setMovements] = useState(userContext?.movements);
 	const [loading, setLoading] = useState(false);
 	
@@ -33,23 +29,22 @@ export function Movements(){
 
 	async function refresheData(){
 
-		try{
-			
-			setLoading(true);
-			const cursor = movements?.length ?? 0;
-			const request = await externalCalls.get(`/movement/getAllMovements?cursor=${cursor}`);
-			const response = request.data;
-			setMovements(!movements ? response : [...movements, ...response]);
-			setLoading(false);
+		const externalCalls = new ExternalCalls();
 
-		}catch(err){
-			setLoading(false);
-			if(axios.isAxiosError(err)){
-				if(err.status === 401){
-					return authContext?.singOut();
-				}
-			}
+		setLoading(true);
+		const cursor = movements?.length ?? 0;
+		const response = await externalCalls.GET(`/movement/getAllMovements?cursor=${cursor}`);
+		setLoading(false);
+
+		if(!response.success){
+			return;
 		}
+
+
+		setMovements(!movements ? response.data : [...movements, ...response.data]);
+		
+
+		return;
 	}
 
 
@@ -63,7 +58,7 @@ export function Movements(){
 				horizontal={false}
 				showsVerticalScrollIndicator={false}
 				onEndReached={() => refresheData()}
-				ListFooterComponent={() => loading && <Spiner/>}
+				ListFooterComponent={() => loading && <Spinner/>}
 			/>
 		</Container>
 	);

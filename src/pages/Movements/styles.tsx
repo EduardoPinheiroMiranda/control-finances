@@ -12,7 +12,7 @@ export const Container = styled.View`
     flex: 1;
 `;
 
-export const Spiner = styled.ActivityIndicator.attrs(({theme}: ThemeTypes) => ({
+export const Spinner = styled.ActivityIndicator.attrs(({theme}: ThemeTypes) => ({
 	color: theme.colors.SECONDARY,
 	size: 20,
 }))``;

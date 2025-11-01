@@ -4,7 +4,8 @@ import { DrawerParamList } from "@/@types/drawer.routes";
 import { Button, Container, IconArrowRight, TextButton } from "./styles";
 
 
-type NavigationProp = DrawerNavigationProp<DrawerParamList>;
+type NavigationProps = DrawerNavigationProp<DrawerParamList>;
+
 
 interface PropsTypes {
   page: keyof DrawerParamList;
@@ -13,7 +14,7 @@ interface PropsTypes {
 
 export function DisplayMoreDetails({ page }: PropsTypes) {
 
-	const navigation = useNavigation<NavigationProp>();
+	const navigation = useNavigation<NavigationProps>();
 
 	function handleNavigation() {
 		navigation.navigate(page);
