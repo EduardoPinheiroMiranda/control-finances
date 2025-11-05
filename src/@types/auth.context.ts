@@ -16,17 +16,23 @@ export interface SingUpData {
   password: string;
 }
 
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  limit: number;
+  dueDay: number;
+  closeDay: number;
+  avatar: string | null;
+}
+
 export interface AuthContextType {
   loggedInUser: boolean;
   loadingPage: boolean;
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    avatar: string | null;
-  };
+  user: User | null;
   singIn: (body: LoginData) => Promise<string | void>;
   singUp: (body: SingUpData) => Promise<{success: boolean, data: any, msg: string}>;
   singOut: () => void;
+  getData: () => void;
 }
 

@@ -1,4 +1,4 @@
-import { AuthContextType, ContextProviderProps, LoginData, SingUpData } from "@/@types/auth.context";
+import { AuthContextType, ContextProviderProps, LoginData, SingUpData, User } from "@/@types/auth.context";
 import { ExternalCalls } from "@/services/externalCalls";
 import { createContext, useEffect, useState } from "react";
 import  AsyncStorage from "@react-native-async-storage/async-storage";
@@ -6,12 +6,11 @@ import { axios, registerUnauthorizedHandler } from "@/libs/axios";
 
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
-export const userDefault = { id: "", name: "", email: "", avatar: null };
 
 
 export function AuthProvider({children}: ContextProviderProps){
 
-	const [user, setUser] = useState(userDefault);
+	const [user, setUser] = useState<User | null>(null);
 	const [loggedInUser, setLoggedInUser] = useState(false);
 	const [loadingPage, setLoadingPage] = useState(false);
 
@@ -20,41 +19,49 @@ export function AuthProvider({children}: ContextProviderProps){
 
 	useEffect(() => {
 
-		async function getData(){
-
-			const userToken = await AsyncStorage.getItem("userToken");
-			if(!userToken){
-				return;
-			}
-
-				
+		async function startData(){
 			setLoadingPage(true);
-			axios.defaults.headers["Authorization"] = `Bearer ${userToken}`;
-			const response = await externalCalls.GET("/user/getUserByToken");
-	
-
-			if(!response.success){
-				await AsyncStorage.removeItem("userToken");
-				setUser(userDefault);
-				setLoggedInUser(false);
-				return;
-			}
-
-
-			setUser({
-				id: response.data.id,
-				name: response.data.name,
-				email: response.data.email,
-				avatar: response.data.avatar
-			});
-			setLoggedInUser(true);
+			await getData();
 			setLoadingPage(false);
+		}
+		startData();
+		
+		registerUnauthorizedHandler(singOut);
+	}, []);
+
+
+	async function getData(){
+
+		const userToken = await AsyncStorage.getItem("userToken");
+		if(!userToken){
 			return;
 		}
 
-		getData();
-		registerUnauthorizedHandler(singOut);
-	}, []);
+
+		axios.defaults.headers["Authorization"] = `Bearer ${userToken}`;
+		const response = await externalCalls.GET("/user/getUserByToken");
+	
+
+		if(!response.success){
+			await AsyncStorage.removeItem("userToken");
+			setUser(null);
+			setLoggedInUser(false);
+			return;
+		}
+
+
+		setUser({
+			id: response.data.id,
+			name: response.data.name,
+			email: response.data.email,
+			limit: Number(response.data.limit),
+			dueDay: response.data.dueDay,
+			closeDay: response.data.closeDay,
+			avatar: response.data.avatar
+		});
+		setLoggedInUser(true);
+		return;
+	}
 
 
 	async function singIn(body: LoginData): Promise<string | void>{
@@ -82,7 +89,7 @@ export function AuthProvider({children}: ContextProviderProps){
 
 	async function singOut(){
 		await AsyncStorage.removeItem("userToken");
-		setUser(userDefault);
+		setUser(null);
 		setLoggedInUser(false);
 		return;
 	}
@@ -95,7 +102,8 @@ export function AuthProvider({children}: ContextProviderProps){
 			user,
 			singIn,
 			singUp,
-			singOut
+			singOut,
+			getData
 		}}>
 			{children}
 		</AuthContext.Provider>

@@ -1,4 +1,4 @@
-import { axios } from "@/libs/axios"
+import { axios } from "@/libs/axios";
 import { isAxiosError } from "axios";
 
 
@@ -12,14 +12,14 @@ export class ExternalCalls {
 				success: false,
 				data: err.response?.data,
 				msg: err.response?.data.msg,
-			}
+			};
 		}
 		
 		return {
 			success: false,
 			data: {},
 			msg: "Houve um pequeno problema para carregar os dados, tente novamente mais tarde."
-		}
+		};
 	}
 
 	async POST(url: string, body: any){
@@ -32,7 +32,24 @@ export class ExternalCalls {
 				success: true,
 				data: response,
 				msg: ""
-			}
+			};
+
+		}catch(err){
+			return this.errorValidation(err);
+		}
+	}
+
+	async PUT(url: string, body: any){
+		try{
+
+			const request = await axios.put(url, body);
+			const response = request.data;
+
+			return {
+				success: true,
+				data: response,
+				msg: ""
+			};
 
 		}catch(err){
 			return this.errorValidation(err);
@@ -49,7 +66,7 @@ export class ExternalCalls {
 				success: true,
 				data: response,
 				msg: ""
-			}
+			};
 
 		}catch(err){
 			return this.errorValidation(err);

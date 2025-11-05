@@ -63,8 +63,12 @@ export function SignUp(){
 			alert: response.success,
 			msg: response.msg,
 			title: response.success ? "Sucesso" : "Atenção",
-		})
-			
+		});
+
+
+		resetPage();
+
+
 		return;
 	}
 

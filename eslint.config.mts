@@ -4,6 +4,7 @@ import { defineConfig } from "eslint/config";
 
 
 export default defineConfig([
+	tseslint.configs.recommended,
 	{ 
 		files: ["**/*.{js,mjs,cjs,ts,tsx,mts,cts}"],
 		languageOptions: { globals: globals.node },
@@ -14,6 +15,5 @@ export default defineConfig([
 			"@typescript-eslint/no-explicit-any": "off",
 		}
 	},
-	tseslint.configs.recommended,
 ]);
 

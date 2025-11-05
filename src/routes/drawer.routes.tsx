@@ -7,6 +7,7 @@ import Octicons from "@expo/vector-icons/Octicons";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import AntDesign from "@expo/vector-icons/AntDesign";
 // components
 import { Header } from "@/components/Header";
 // pages
@@ -16,6 +17,7 @@ import { AddPurchase } from "@/pages/AddPurchase";
 import { InvoiceDetails } from "@/pages/InvoiceDetails";
 import { PayInvoice } from "@/pages/PayInvoice";
 import { InvoiceSummary } from "@/pages/InvoiceSummary";
+import { LimitControl } from "@/pages/LimitControl";
 
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -86,6 +88,12 @@ export function DrawerNavigation(){
 				title: "Adicionar compra",
 				drawerIcon: ({color}) => (
 					<MaterialIcons name="add-shopping-cart" size={20} color={color} />
+				)
+			}}/>
+			<Drawer.Screen name="LimitControl" component={LimitControl} options={{
+				title: "Controlar limite",
+				drawerIcon: ({color}) => (
+					<AntDesign name="control" size={20} color={color} />
 				)
 			}}/>
 		</Drawer.Navigator>
