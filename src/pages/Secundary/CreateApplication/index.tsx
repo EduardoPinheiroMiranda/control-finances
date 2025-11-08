@@ -1,4 +1,4 @@
-import { Container } from "./styles";
+import { Container,  } from "./styles";
 
 
 export function CreateApplication(){
@@ -6,7 +6,7 @@ export function CreateApplication(){
 
 	return(
 		<Container>
-            
+			
 		</Container>
 	);
 }

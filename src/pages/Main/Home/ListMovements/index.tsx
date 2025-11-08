@@ -1,9 +1,10 @@
-import { DisplayMoreDetails } from "@/components/DisplayMoreDatails";
 import { Container, Section, TextTitle } from "./styles";
-import { Movement } from "@/components/Movement";
 import { View } from "react-native";
-import { NotFound } from "@/components/NotFound";
 import { Movement as TypeMovement } from "@/@types/user.context";
+// compoenets
+import { Movement } from "@/components/Movement";
+import { DisplayMoreDetails } from "@/components/DisplayMoreDatails";
+import { NotFound } from "@/components/NotFound";
 
 
 interface PropsTypes {

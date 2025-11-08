@@ -1,7 +1,6 @@
 import { Container, Spinner } from "./styles";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/contexts/user.context";
-
 // components
 import { Movement } from "@/components/Movement";
 import { FlatList } from "react-native";

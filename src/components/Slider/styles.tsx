@@ -23,7 +23,7 @@ export const Container = styled.View`
 
 export const Background = styled.View`
     height: 10px;
-    width: 85%;
+    width: 83%;
 
     background-color: ${({theme}: ThemeTypes) => theme.colors.INPUT_BORDER};
     border-radius: 10px;
@@ -31,12 +31,14 @@ export const Background = styled.View`
 
 const Progress = styled.View`
     background-color: ${({theme}: ThemeTypes) => theme.colors.SECONDARY};
-    width: ${({width}:{width: number}) => `${width}%`};
+    width: ${({width}:{width: number}) => width};
     height: 10px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+
+    position: relative;
 `;
 
 export const AnimatedProgress = Animated.createAnimatedComponent(Progress);
@@ -46,6 +48,9 @@ export const Marked = styled.View.attrs({elevation: 2})`
     width: 20px;
     height: 20px;
     border-radius: 20px;
+
+    position: absolute;
+    right: -10px;
 `;
 
 export const Text = styled(CustomText)`

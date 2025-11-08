@@ -22,7 +22,7 @@ export function Label(props: PropsTypes){
 
 		if(props.subtitles.current) return theme.colors.CURRENT;
 		if(props.subtitles.pay) return theme.colors.PAY;
-		if(!props.subtitles.current) return theme.colors.SECONDARY;
+		if(!props.subtitles.current) return theme.colors.NEXT_INVOICES;
 		
 	}, [props.subtitles]);
     

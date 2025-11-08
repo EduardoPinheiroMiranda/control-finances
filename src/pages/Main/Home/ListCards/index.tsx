@@ -1,10 +1,11 @@
-import { DisplayMoreDetails } from "@/components/DisplayMoreDatails";
 import { Container, Title } from "./styles";
-import { Card } from "@/components/Card";
 import { FlatList } from "react-native-gesture-handler";
-import { NotFound } from "@/components/NotFound";
 import { View } from "react-native";
 import { Card as TypeCard} from "@/@types/user.context";
+// compoenets
+import { NotFound } from "@/components/NotFound";
+import { Card } from "@/components/Card";
+import { DisplayMoreDetails } from "@/components/DisplayMoreDatails";
 
 
 interface PropsTypes{
@@ -37,7 +38,7 @@ export function ListCards(props: PropsTypes){
 				/>
 			}
 			<View style={{marginRight: 20}}>
-				<DisplayMoreDetails page="ManageCards"/>
+				<DisplayMoreDetails page="CardManagement"/>
 			</View>
 		</Container>
 	);

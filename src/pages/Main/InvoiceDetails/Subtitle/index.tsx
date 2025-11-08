@@ -1,9 +1,10 @@
 import { formatCurrency } from "@/services/formatCurrency";
 import { Buttles, Container, LI, TextArea, UL, Text, SectionButton, SectionSubtitles } from "./styles";
-import { CustumButton } from "@/components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { DrawerParamList } from "@/@types/drawer.routes";
+// components
+import { CustumButton } from "@/components/CustomButton";
 
 
 interface PropsTypes {

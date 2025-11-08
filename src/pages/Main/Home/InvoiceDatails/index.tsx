@@ -1,10 +1,11 @@
 import { formatCurrency } from "@/services/formatCurrency";
 import { Container, Header, Section, TextExpired, TextTitle, TextValue } from "./styles";
-import { Slider } from "../../../components/Slider/inde";
-import { DisplayMoreDetails } from "@/components/DisplayMoreDatails";
 import { Invoice } from "@/@types/user.context";
 import { formatDate } from "date-fns";
 import { View } from "react-native";
+// components
+import { Slider } from "@/components/Slider";
+import { DisplayMoreDetails } from "@/components/DisplayMoreDatails";
 
 
 interface PropsTypes {

@@ -21,6 +21,7 @@ declare module "styled-components" {
       PLACEHOLDER: string;
       WHITE: string;
       CURRENT: string;
+      NEXT_INVOICES: string;
       ALERT: string;
       PAY: string;
     }

@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 // icons
-import IconSignUp from "../../../assets/svgs/icon-signUp.svg";
+import IconSignUp from "@/../assets/svgs/icon-signUp.svg";
 // components
 import { Input } from "@/components/Input";
 import { PasswordInput } from "@/components/PasswordInput";

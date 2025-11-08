@@ -2,6 +2,7 @@ import { Modal } from "react-native";
 import { Container, Section, SectionButton, SectionToClose } from "./styles";
 import { Calendar, DateData } from "react-native-calendars";
 import { Dispatch, SetStateAction, useState } from "react";
+// components
 import { CustumButton } from "../CustomButton";
 
 

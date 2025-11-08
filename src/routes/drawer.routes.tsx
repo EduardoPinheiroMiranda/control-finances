@@ -11,13 +11,14 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 // components
 import { Header } from "@/components/Header";
 // pages
-import { Home } from "@/pages/Home";
-import { Movements } from "@/pages/Movements";
-import { AddPurchase } from "@/pages/AddPurchase";
-import { InvoiceDetails } from "@/pages/InvoiceDetails";
-import { PayInvoice } from "@/pages/PayInvoice";
-import { InvoiceSummary } from "@/pages/InvoiceSummary";
-import { LimitControl } from "@/pages/LimitControl";
+import { Home } from "@/pages/Main/Home";
+import { Movements } from "@/pages/Main/Movements";
+import { AddPurchase } from "@/pages/Main/AddPurchase";
+import { InvoiceDetails } from "@/pages/Main/InvoiceDetails";
+import { PayInvoice } from "@/pages/Main/PayInvoice";
+import { InvoiceSummary } from "@/pages/Main/InvoiceSummary";
+import { LimitControl } from "@/pages/Main/LimitControl";
+import { CardManagement } from "@/pages/Main/CardManagement";
 
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -94,6 +95,12 @@ export function DrawerNavigation(){
 				title: "Controlar limite",
 				drawerIcon: ({color}) => (
 					<AntDesign name="control" size={20} color={color} />
+				)
+			}}/>
+			<Drawer.Screen name="CardManagement" component={CardManagement} options={{
+				title: "Gerenciar cartões",
+				drawerIcon: ({color}) => (
+					<MaterialCommunityIcons name="credit-card-edit-outline" size={20} color={color} />
 				)
 			}}/>
 		</Drawer.Navigator>

@@ -4,7 +4,6 @@ import { Pressable, View } from "react-native";
 // icon
 import EyeClose from "../../../assets/svgs/eye-close.svg";
 import EyeOpen from "../../../assets/svgs/eye-open.svg";
-import {  } from "react-native";
 
 
 interface PropsTypes{

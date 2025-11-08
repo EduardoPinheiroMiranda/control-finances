@@ -3,9 +3,8 @@ import { Container, DescriptionInvoice, Header, SectionValues, TextHeader, TextV
 import { useContext } from "react";
 import { UserContext } from "@/contexts/user.context";
 import { formatCurrency } from "@/services/formatCurrency";
-
 // components
-import { Slider } from "@/components/Slider/inde";
+import { Slider } from "@/components/Slider";
 import { Subtitle } from "./Subtitle";
 import { formatDate } from "date-fns";
 import { ListInvoiceItem } from "@/components/ListInvoiceItem";

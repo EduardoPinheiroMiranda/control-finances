@@ -1,11 +1,12 @@
-import { Input } from "@/components/Input";
 import { Container, Form, SectionButton } from "./styles";
 import { useContext, useState } from "react";
 import { AuthContext } from "@/contexts/Auth.context";
+import { ExternalCalls } from "@/services/externalCalls";
+// components
 import { CustumButton } from "@/components/CustomButton";
 import { AlertDefault, PopUp } from "@/components/PopUp";
 import { Spinner } from "@/components/Spinner";
-import { ExternalCalls } from "@/services/externalCalls";
+import { Input } from "@/components/Input";
 
 
 export function LimitControl(){

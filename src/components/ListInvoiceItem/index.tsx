@@ -1,8 +1,9 @@
 import { Installment } from "@/@types/user.context";
 import { Container, Header, Title } from "./styles";
 import { formatCurrency } from "@/services/formatCurrency";
-import { Movement } from "../Movement";
 import { View } from "react-native";
+// components
+import { Movement } from "../Movement";
 
 
 interface PropsTypes {

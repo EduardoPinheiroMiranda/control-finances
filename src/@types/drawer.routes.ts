@@ -6,4 +6,5 @@ export type DrawerParamList = {
     PayInvoice: undefined;
     InvoiceSummary: undefined;
     LimitControl: undefined;
+    CardManagement: undefined;
 }

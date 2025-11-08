@@ -5,7 +5,7 @@ import { AuthContext } from "@/contexts/Auth.context";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import { DrawerParamList } from "@/@types/drawer.routes";
 import { UserContext } from "@/contexts/user.context";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // components
 import { Spinner } from "@/components/Spinner";
 import { HeaderHome } from "./HeaderHome";
@@ -14,7 +14,6 @@ import { Shortcuts } from "./Shortcuts";
 import { InvoiceDatails } from "./InvoiceDatails";
 import { ListCards } from "./ListCards";
 import { ListMovements } from "./ListMovements";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 type HomeScreenProps = DrawerScreenProps<DrawerParamList, "Home">;
@@ -46,7 +45,7 @@ export function Home({navigation}: HomeScreenProps){
 
 	async function handlerHidderValue(){
 		setShowValues(!showValues);
-		await AsyncStorage.setItem("showValue", String(!showValues))
+		await AsyncStorage.setItem("showValue", String(!showValues));
 	}
 
 
@@ -66,7 +65,7 @@ export function Home({navigation}: HomeScreenProps){
 		<Container>
 			<HeaderHome
 				elevation={elevation}
-				name={authContext?.user.name ?? ""}
+				name={authContext?.user ? authContext?.user.name : ""}
 				navigation={navigation.openDrawer}
 			/>
 			<ScrollView

@@ -42,7 +42,7 @@ export function InvoiceSelector(props: PropsTypes){
 	function selectedIndicatorColor(invoice: Invoice){
 		if(invoice?.pay) return setIndicatorColor(theme.colors.PAY);
 		if(invoice?.current) return setIndicatorColor(theme.colors.CURRENT);
-		if(!invoice?.pay) return setIndicatorColor(theme.colors.SECONDARY);
+		if(!invoice?.pay && !invoice.current) return setIndicatorColor(theme.colors.NEXT_INVOICES);
 	}
 
 

@@ -2,7 +2,7 @@ import { Container, Header, Form, ButtonSection, CreateAccount } from "./styles"
 import { useContext, useState } from "react";
 import { TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 // icons
-import IconSignIn from "../../../assets/svgs/icon-signIn.svg";
+import IconSignIn from "@/../assets/svgs/icon-signIn.svg";
 // components
 import { Input } from "@/components/Input";
 import { PasswordInput } from "@/components/PasswordInput";
@@ -40,7 +40,7 @@ export function SignIn({navigation}: SignInScreenProps){
 
 	async function handlerForm(){
 
-		if(!email || !password) return constructionPopUp({msg: "Preencha todos os campos."})
+		if(!email || !password) return constructionPopUp({msg: "Preencha todos os campos."});
 		
 
 		setLoading(true);
