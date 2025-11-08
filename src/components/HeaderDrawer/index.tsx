@@ -11,7 +11,7 @@ interface PropsTypes{
 const statusBarHeight = Constants.statusBarHeight;
 
 
-export function Header(props: PropsTypes){
+export function HeaderDrawer(props: PropsTypes){
 	return(
 		<Container style={{marginTop: statusBarHeight}}>
 			<SectionTitle>

@@ -8,8 +8,9 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import Ionicons from "@expo/vector-icons/Ionicons";
 // components
-import { Header } from "@/components/Header";
+import { HeaderDrawer } from "@/components/HeaderDrawer";
 // pages
 import { Home } from "@/pages/Main/Home";
 import { Movements } from "@/pages/Main/Movements";
@@ -18,7 +19,9 @@ import { InvoiceDetails } from "@/pages/Main/InvoiceDetails";
 import { PayInvoice } from "@/pages/Main/PayInvoice";
 import { InvoiceSummary } from "@/pages/Main/InvoiceSummary";
 import { LimitControl } from "@/pages/Main/LimitControl";
-import { CardManagement } from "@/pages/Main/CardManagement";
+import { Wallet } from "@/pages/Main/Wallet";
+import { ManageReleases } from "@/pages/Main/ManageReleases";
+import { CardStack } from "./card.stack";
 
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -27,7 +30,6 @@ const Drawer = createDrawerNavigator<DrawerParamList>();
 export function DrawerNavigation(){
 
 	const theme: DefaultTheme = useTheme();
-
 
 	return(
 		<Drawer.Navigator 
@@ -51,7 +53,7 @@ export function DrawerNavigation(){
 				
 				header: ({navigation, route, options}) => {
 					const title = getHeaderTitle(options, route.name);
-					return <Header title={title} navigation={navigation.openDrawer} {...options}/>;
+					return <HeaderDrawer title={title} navigation={navigation.openDrawer} {...options}/>;
 				}
 			}}
 		>
@@ -91,16 +93,29 @@ export function DrawerNavigation(){
 					<MaterialIcons name="add-shopping-cart" size={20} color={color} />
 				)
 			}}/>
+			<Drawer.Screen name="ManageReleases" component={ManageReleases} options={{
+				title: "Gerenciar lançamentos",
+				drawerIcon: ({color}) => (
+					<MaterialCommunityIcons name="shopping-search-outline" size={20} color={color} />
+				)
+			}}/>
 			<Drawer.Screen name="LimitControl" component={LimitControl} options={{
 				title: "Controlar limite",
 				drawerIcon: ({color}) => (
 					<AntDesign name="control" size={20} color={color} />
 				)
 			}}/>
-			<Drawer.Screen name="CardManagement" component={CardManagement} options={{
+			<Drawer.Screen name="CardManagement" component={CardStack} options={{
 				title: "Gerenciar cartões",
+				headerShown: false,
 				drawerIcon: ({color}) => (
 					<MaterialCommunityIcons name="credit-card-edit-outline" size={20} color={color} />
+				)
+			}}/>
+			<Drawer.Screen name="Wallet" component={Wallet} options={{
+				title: "Carteira",
+				drawerIcon: ({color}) => (
+					<Ionicons name="wallet-outline" size={20} color={color} />
 				)
 			}}/>
 		</Drawer.Navigator>
