@@ -25,8 +25,10 @@ type NavigationPropsDrawer = DrawerNavigationProp<DrawerParamList>;
 
 function ButtonCard(props: PropsTypes){
 
+	const navigation = useNavigation<NavigationPropsStack>();
+
 	return(
-		<TouchableOpacity activeOpacity={0.95}>
+		<TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate("CardMenu", props.card)}>
 			<Card card={{
 				name: props.card.name,
 				dueDay: props.card.dueDay,

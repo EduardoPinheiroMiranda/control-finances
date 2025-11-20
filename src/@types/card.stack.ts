@@ -1,4 +1,8 @@
+import { Card } from "./user.context";
+
 export type StackParamsList = {
-    CardManagement: undefined;
+    Index: undefined;
     AddCard: undefined;
+    CardMenu: Card;
+    UpdateCard: Card;
 }

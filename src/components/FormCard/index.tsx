@@ -76,7 +76,7 @@ export function FormCard(props: PropsTypes){
 							label="Cor do cartão - (opcional)"
 							placeholder="Ex.: #FAFAFA"
 							keyboardType="text"
-							value={props.colorBackground}
+							value={props.colorFont}
 							callback={(value) => props.setColorFont(value)}
 							style={{flex: 1}}
 						/>
@@ -93,7 +93,7 @@ export function FormCard(props: PropsTypes){
 				</Section>
 
 				<ButtonSection>
-					<CustumButton title="Adicionar cartão" action={() => props.submitForm()}/>
+					<CustumButton title="Adicionar" action={() => props.submitForm()}/>
 				</ButtonSection>
 			</Form>
 		</Container>
