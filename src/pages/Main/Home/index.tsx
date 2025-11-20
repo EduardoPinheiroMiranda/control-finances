@@ -88,7 +88,7 @@ export function Home({navigation}: HomeScreenProps){
 				<Balance showValue={showValues} value={userContext?.applications?.value ?? 0} hideValue={handlerHidderValue}/>
 				<Shortcuts/>
 				<InvoiceDatails invoice={userContext.invoice} showValue={showValues}/>
-				<ListCards cards={userContext.cards}/>
+				<ListCards cards={userContext.cards} showValues={showValues}/>
 				<ListMovements movements={userContext.movements}/>
 			</ScrollView>
 		</Container>

@@ -11,6 +11,7 @@ interface PropsTypes {
         spent: number,
         colorFont: string,
         colorBackground: string
+		showValue: boolean
     }
 }
 
@@ -31,8 +32,17 @@ export function Card(props: PropsTypes){
 			<Section>
 				<TextExpired style={{color: props.card.colorFont}}>Vencimento</TextExpired>
 				<SectionValues>
-					<TextValue style={{color: props.card.colorFont}}>{expired}</TextValue>
-					<TextValue style={{color: props.card.colorFont}}>{spent}</TextValue>
+					{props.card.dueDay === 0 ?
+						<TextValue style={{color: props.card.colorFont}}>--/--</TextValue>
+						:
+						<TextValue style={{color: props.card.colorFont}}>{expired}</TextValue>
+					}
+
+					{props.card.showValue ?
+						<TextValue style={{color: props.card.colorFont}}>{spent}</TextValue>
+						:
+						<TextValue style={{color: props.card.colorFont}}>R$ ****</TextValue>
+					}
 				</SectionValues>
 			</Section>
 		</Container>

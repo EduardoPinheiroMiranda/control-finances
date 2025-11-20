@@ -9,7 +9,8 @@ import { DisplayMoreDetails } from "@/components/DisplayMoreDatails";
 
 
 interface PropsTypes{
-	cards: TypeCard[]
+	cards: TypeCard[],
+	showValues: boolean
 }
 
 
@@ -30,7 +31,8 @@ export function ListCards(props: PropsTypes){
 						dueDay: item.dueDay,
 						spent: 0,
 						colorFont: item.colorFont,
-						colorBackground: item.colorCard
+						colorBackground: item.colorCard,
+						showValue: props.showValues
 					}}/>}
 					keyExtractor={(item) => item.id}
 					horizontal={true}
