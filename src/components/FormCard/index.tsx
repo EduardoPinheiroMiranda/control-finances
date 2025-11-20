@@ -17,10 +17,11 @@ interface PropsTypes {
 	setColorFont: (value: string) => void;
 	colorBackground: string;
 	setColorBackground: (value: string) => void;
+	submitForm: () => void;
 }
 
 
-export function FormAddCard(props: PropsTypes){
+export function FormCard(props: PropsTypes){
 
 	const theme = useTheme();
 
@@ -84,7 +85,7 @@ export function FormAddCard(props: PropsTypes){
 							label="Cor do cartão - (opcional)"
 							placeholder="Ex.: #1F8FFF"
 							keyboardType="text"
-							value={props.colorFont}
+							value={props.colorBackground}
 							callback={(value) => props.setColorBackground(value)}
 							style={{flex: 1}}
 						/>
@@ -92,7 +93,7 @@ export function FormAddCard(props: PropsTypes){
 				</Section>
 
 				<ButtonSection>
-					<CustumButton title="Adicionar cartão" action={() => {}}/>
+					<CustumButton title="Adicionar cartão" action={() => props.submitForm()}/>
 				</ButtonSection>
 			</Form>
 		</Container>

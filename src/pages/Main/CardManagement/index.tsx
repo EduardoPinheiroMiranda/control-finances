@@ -32,7 +32,8 @@ function ButtonCard(props: PropsTypes){
 				dueDay: props.card.dueDay,
 				spent: 0,
 				colorFont: props.card.colorFont,
-				colorBackground: props.card.colorCard
+				colorBackground: props.card.colorCard,
+				showValue: true
 			}}/>
 		</TouchableOpacity>
 	);
